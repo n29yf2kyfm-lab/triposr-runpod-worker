@@ -6,8 +6,13 @@
   the picture and on its mirror image (so a mirrored picture always reads the
   other way)
 - kind: car, van or motorbike
+- vehicle: whether there is a vehicle in the picture at all (taught on photos
+  of landscapes, animals, food, rooms, people and drawn noise: extra/none.py),
+  so a picture of none is not read as a car
 - match: whether a build is the photo's vehicle (its shape, not its paint),
-  from the two embeddings
+  from the two embeddings; a stand-in (another model's body reshaped to the
+  photo's car) is held to the stand-ins' own threshold, as it is never quite
+  its photo
 
 Each head is a logistic regression (sklearn to train; numpy to run). Its
 weights are kept in heads.json, which any language can read: a score is
@@ -151,7 +156,9 @@ def features(enc, paths_):
 
 
 def read(hs, paint, f):
-    """The three answers on one picture's features F = (embedding, mirrored embedding, histogram)."""
+    """The answers on one picture's features F = (embedding, mirrored embedding, histogram): whether there is a
+    vehicle in it ("yes", "no"), and its kind, side and colour (read whatever the first says: with no vehicle in
+    the picture they are guesses)."""
     e, ef, h = f
 
     def top(head, p, n):
@@ -160,24 +167,41 @@ def read(hs, paint, f):
     (k, kp), = top(kh, kh.proba(e)[0], 1)
     (s, sp), = top(sh, side_proba(sh, e[None], ef[None])[0], 1)
     c3 = top(ch, ch.proba(np.concatenate([e, h]))[0], 3)
-    return {"kind": {"answer": k, "p": kp}, "side": {"answer": s, "p": sp},
+    out = {}
+    if "vehicle" in hs:                       # heads trained before it have no vehicle head
+        (v, vp), = top(hs["vehicle"], hs["vehicle"].proba(e)[0], 1)
+        out["vehicle"] = {"answer": "yes" if v == "vehicle" else "no", "p": vp}
+    return {**out, "kind": {"answer": k, "p": kp}, "side": {"answer": s, "p": sp},
             "colour": {"answer": c3[0][0], "p": c3[0][1], "paint": paint.get(c3[0][0]), "top3": c3}}
 
 
-def judge(hs, th, paint, P, B):
+def no_vehicle(r, th):
+    """A reading (read's) that there is no vehicle in the picture, at least as sure as TH's vehicle threshold."""
+    v = r.get("vehicle")
+    return bool(v) and v["answer"] == "no" and v["p"] >= th.get("vehicle", 0.5)
+
+
+def judge(hs, th, paint, P, B, standin=False):
     """A build's picture against its photo's, from their features: both pictures' answers, the match,
     and what looks wrong. An answer only counts against the build when both readings are at least as
-    sure as TH says (each head's threshold: photos read that surely were right 99 times in 100, held out)."""
+    sure as TH says (each head's threshold: photos read that surely were right 99 times in 100, held out).
+    STANDIN: the build is another model's body reshaped to the photo's car (the machine knows which builds
+    are): its match is held to the stand-ins' threshold, the score below which one good stand-in in ten falls,
+    where a build of the photo's own model is held to its own (one in ten of those)."""
     a, b = read(hs, paint, P), read(hs, paint, B)
     pm = float(hs["match"].proba(pair(P[0], B[0]))[0, 1])
     sure = lambda what: min(a[what]["p"], b[what]["p"]) >= th[what]  # noqa: E731
-    flags = []
+    flags = [f"{w}: no vehicle in the {w}'s picture" for w, r in (("photo", a), ("build", b)) if no_vehicle(r, th)]
+    if flags:                                  # nothing else to compare
+        return {"photo": a, "build": b, "match": round(pm, 3), "flags": flags, "answer": "look"}
     if a["kind"]["answer"] != b["kind"]["answer"] and sure("kind"):
         flags.append(f"kind: the photo shows a {a['kind']['answer']}, the build a {b['kind']['answer']}")
     if a["side"]["answer"] != b["side"]["answer"] and sure("side"):
         flags.append(f"side: the photo's vehicle points {a['side']['answer']}, the build {b['side']['answer']}")
     if not next_shade(paint, a["colour"]["answer"], b["colour"]["answer"]) and sure("colour"):
         flags.append(f"colour: the photo's paint reads {a['colour']['answer']}, the build's {b['colour']['answer']}")
-    if pm < th["match"]:
+    if standin and pm < th.get("match_standin", th["match"]):
+        flags.append(f"shape: a poorer stand-in than nine in ten good ones (match {pm:.2f})")
+    elif not standin and pm < th["match"]:
         flags.append(f"shape: the build may not be the photo's vehicle (match {pm:.2f})")
     return {"photo": a, "build": b, "match": round(pm, 3), "flags": flags, "answer": "look" if flags else "ok"}

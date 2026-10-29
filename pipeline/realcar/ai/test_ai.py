@@ -138,7 +138,8 @@ def test_next_shades():
 
 def test_the_trained_heads_are_whole():
     hs, card = H.load_heads(HEADS)
-    assert set(hs) == {"colour", "side", "kind", "match"}
+    assert set(hs) == {"colour", "side", "kind", "match", "vehicle"}
+    assert hs["vehicle"].classes == ["none", "vehicle"]
     assert hs["side"].classes == ["left", "right"]
     assert set(hs["kind"].classes) == {"car", "van", "motorbike"}
     assert set(hs["colour"].classes) <= set(card["paint"])
@@ -148,8 +149,9 @@ def test_the_trained_heads_are_whole():
     assert hs["match"].W.shape[1] == 2 * w
     assert [e["name"] for e in card["encoders"]] == vision.DEFAULT_ENCODERS
     assert all(e["sha256"] == vision.ENCODERS[e["name"]][3] for e in card["encoders"])
-    assert set(card["thresholds"]) == {"kind", "side", "colour", "match"}
-    for k in ("colour_photo", "side_photo", "kind_photo", "match_pairs"):
+    assert set(card["thresholds"]) == {"kind", "side", "colour", "match", "match_standin", "vehicle"}
+    assert card["thresholds"]["match_standin"] < card["thresholds"]["match"]   # a stand-in is never quite its photo
+    for k in ("colour_photo", "side_photo", "kind_photo", "match_pairs", "vehicle_run", "none_photos"):
         assert k in card["held_out_scores"]
 
 
@@ -163,6 +165,9 @@ def _feats(rng, w):
 
 def test_check_flags_a_build_that_is_not_the_photos_vehicle():
     hs, card = H.load_heads(HEADS)
+    # made-up embeddings are no picture of a vehicle (the vehicle head says so, and the check stops there): the
+    # match alone is tried here
+    hs = {k: v for k, v in hs.items() if k != "vehicle"}
     rng = np.random.default_rng(2)
     w = hs["side"].W.shape[1]
     p, b = _feats(rng, w), _feats(rng, w)
@@ -183,6 +188,42 @@ def test_an_answer_counts_against_a_build_only_when_both_readings_are_sure():
     th = {"kind": 0.9, "side": 1.01, "colour": 1.01, "match": 0.5}
     assert any(f.startswith("kind") for f in H.judge(hs, th, paint, car, van)["flags"])
     assert H.judge(hs, {**th, "kind": 1.01}, paint, car, van)["flags"] == []
+
+
+def _toy_heads(match_bias=0.0, none_bias=-5.0):
+    """Heads on 4 numbers: kind and side and colour from the first ones, a match of MATCH_BIAS, and a vehicle head
+    whose "none" grows with NONE_BIAS."""
+    return {"kind": H.Head(["car", "motorbike", "van"], np.eye(3, 4), np.zeros(3)),
+            "side": H.Head(["left", "right"], [[1, 0, 0, 0]], [0]),
+            "colour": H.Head(["red", "blue"], np.zeros((2, 4 + 1)), [0, 0]),
+            "match": H.Head([0, 1], [[0] * 8], [match_bias]),
+            "vehicle": H.Head(["none", "vehicle"], [[0, 0, 0, 0]], [-none_bias])}
+
+
+def test_a_stand_in_is_held_to_the_stand_ins_threshold_its_own_model_to_its_own():
+    # one threshold for both flagged half the builds the reviewers passed: a stand-in is never quite its photo
+    paint = {"red": "#b3131c", "blue": "#2a5aa6"}
+    f = (np.array([9, 0, 0, 0.]), np.array([9, 0, 0, 0.]), np.ones(1))
+    th = {"kind": 1.01, "side": 1.01, "colour": 1.01, "match": 0.8, "match_standin": 0.2, "vehicle": 0.9}
+    hs = _toy_heads(match_bias=0.0)                     # match 0.5: under the own model's line, over a stand-in's
+    assert any(x.startswith("shape") for x in H.judge(hs, th, paint, f, f)["flags"])
+    assert H.judge(hs, th, paint, f, f, standin=True)["flags"] == []
+    assert any(x.startswith("shape") for x in H.judge(_toy_heads(match_bias=-3.0), th, paint, f, f, standin=True)["flags"])
+
+
+def test_a_picture_with_no_vehicle_is_said_so_and_nothing_else_compared():
+    paint = {"red": "#b3131c", "blue": "#2a5aa6"}
+    f = (np.array([9, 0, 0, 0.]), np.array([9, 0, 0, 0.]), np.ones(1))
+    th = {"kind": 0.5, "side": 0.5, "colour": 1.01, "match": 0.8, "vehicle": 0.9}
+    none = _toy_heads(match_bias=-3.0, none_bias=5.0)    # sure there is no vehicle
+    r = H.read(none, paint, f)
+    assert r["vehicle"]["answer"] == "no" and r["vehicle"]["p"] > 0.99
+    j = H.judge(none, th, paint, f, f)
+    assert j["answer"] == "look" and j["flags"] == ["photo: no vehicle in the photo's picture", "build: no vehicle in the build's picture"]
+    assert H.read(_toy_heads(), paint, f)["vehicle"]["answer"] == "yes"
+    # heads trained before the vehicle head: no vehicle answer, and no flag for it
+    old = {k: v for k, v in _toy_heads().items() if k != "vehicle"}
+    assert "vehicle" not in H.read(old, paint, f) and not H.no_vehicle(H.read(old, paint, f), th)
 
 
 def test_the_threshold_is_where_answers_are_right_99_in_100():
@@ -290,8 +331,8 @@ def test_the_phone_pages_check_is_pythons_at_the_encoders_width(heads_file, tmp_
     w = hs["side"].W.shape[1]
     rng = np.random.default_rng(5)
     feats = [_feats(rng, w) for _ in range(3)]
-    pairs = [(0, 0), (0, 1), (1, 2)]
-    want = [H.judge(hs, card["thresholds"], card["paint"], feats[i], feats[j]) for i, j in pairs]
+    pairs = [(0, 0, False), (0, 1, False), (1, 2, True)]
+    want = [H.judge(hs, card["thresholds"], card["paint"], feats[i], feats[j], standin=st) for i, j, st in pairs]
     f = tmp_path / "in.json"
     f.write_text(json.dumps({"feats": [{"e": e.tolist(), "ef": ef.tolist(), "h": h.tolist()} for e, ef, h in feats],
                              "pairs": pairs, "heads": heads_file}))
@@ -299,7 +340,7 @@ def test_the_phone_pages_check_is_pythons_at_the_encoders_width(heads_file, tmp_
         f"\nconst I = JSON.parse(require('fs').readFileSync({json.dumps(str(f))}));"
         "const J = JSON.parse(require('fs').readFileSync(I.heads)), F = I.feats.map(x => ({e: Float32Array.from(x.e),"
         " ef: Float32Array.from(x.ef), h: Float32Array.from(x.h)}));"
-        "console.log(JSON.stringify(I.pairs.map(([i, j]) => judge(J.heads, J.card.thresholds, J.card.paint, F[i], F[j]))));")
+        "console.log(JSON.stringify(I.pairs.map(([i, j, st]) => judge(J.heads, J.card.thresholds, J.card.paint, F[i], F[j], st))));")
     got = json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout)
     for g, p in zip(got, want):
         assert g["match"] is not None and abs(g["match"] - p["match"]) <= 0.0015

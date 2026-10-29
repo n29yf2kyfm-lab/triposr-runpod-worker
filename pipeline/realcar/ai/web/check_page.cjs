@@ -1,6 +1,6 @@
 // check_page.cjs: the phone page's answers on some pictures, from a real browser (Chromium, with Playwright).
 //   node check_page.cjs URL PICTURES.json OUT.json [CDN_DIR]
-// PICTURES.json: {"read": ["pic", ...], "check": [["photo", "build"], ...]}, paths under URL.
+// PICTURES.json: {"read": ["pic", ...], "check": [["photo", "build", standin], ...]}, paths under URL.
 // CDN_DIR: local copies of the page's jsDelivr scripts (served in their place, so no network is needed).
 // Run by check.py, which compares the answers with the Python model's.
 const fs = require("fs");
@@ -40,8 +40,8 @@ const { chromium } = require("playwright");
       res.features[p].prep = { w: q.w, h: q.hh, sum: q.x.reduce((s, v) => s + v, 0), sample: pics.sample.map(i => q.x[i]) };
       res.read[p] = await window.vehicleAI.read(await file(p));
     }
-    for (const [a, b] of pics.check) {
-      const c = { photo: a, build: b, result: await window.vehicleAI.check(await file(a), await file(b)) };
+    for (const [a, b, st] of pics.check) {
+      const c = { photo: a, build: b, standin: !!st, result: await window.vehicleAI.check(await file(a), await file(b), !!st) };
       if (!res.features[a]) c.photo_features = await feats(a);
       if (!res.features[b]) c.build_features = await feats(b);
       res.check.push(c);

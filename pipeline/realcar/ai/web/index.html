@@ -50,6 +50,8 @@ h2 { font: 600 1.35rem/1.1 var(--display); letter-spacing: .02em; margin: 0; tex
 .slot span { padding: 8px; color: var(--muted); font-size: .95rem }
 .slot input { position: absolute; inset: 0; opacity: 0; cursor: pointer }
 .slot:focus-within { outline: 3px solid var(--accent); outline-offset: 2px }
+.tick { display: flex; gap: 10px; align-items: flex-start; font-size: .95rem; color: var(--muted); cursor: pointer }
+.tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--accent) }
 .go { font: 700 1.15rem/1 var(--display); letter-spacing: .04em; padding: 14px; border-radius: 10px; border: 0;
   background: var(--accent); color: var(--surface); cursor: pointer }
 .go:disabled { opacity: .45; cursor: default }
@@ -101,12 +103,12 @@ td, th { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(
 <div class="wrap">
   <header>
     <h1>Vehicle AI</h1>
-    <p class="lede">The trained vehicle model, running on this phone. It reads a photo (car, van or motorbike, the way it points, its paint)
+    <p class="lede">The trained vehicle model, running on this phone. It reads a photo (car, van or motorbike, the way it points, its paint, or that there is no vehicle in it)
       and checks a 3D build against its photo. Your pictures stay on the phone.</p>
   </header>
 
   <section class="status" aria-live="polite">
-    <p id="status">The model (90 MB) downloads the first time you check a picture, then stays on this phone.</p>
+    <p id="status">The model downloads the first time you check a picture, then stays on this phone.</p>
     <button class="go" id="load" type="button">Get the model</button>
     <div class="bar" id="bar" hidden><i id="barfill"></i></div>
   </section>
@@ -122,6 +124,8 @@ td, th { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(
     <label class="slot" id="slot-b" hidden><span>Choose the build's picture</span>
       <input id="file-b" type="file" accept="image/*" aria-label="Picture of the build"></label>
   </section>
+  <label class="tick" id="standin-box" hidden><input id="standin" type="checkbox">
+    <span>The build is a stand-in: another model's body reshaped to this car (its shape is held to a stand-in's line)</span></label>
   <button class="go" id="run" type="button" disabled>Read the photo</button>
   <p class="error" id="error" hidden></p>
 
@@ -136,12 +140,14 @@ td, th { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(
     <ul>
       <li>It is a second opinion, not a review. The shape check sees whether a build looks like the photo's model; it doesn't see a wrong
         door count, a roof colour or a broken part.</li>
-      <li>It can't tell a vehicle from no vehicle: a wheel close-up still gets a kind, a side and a colour.</li>
-      <li>Side is the way a side or three-quarter view points. A photo from straight ahead or behind has no answer worth reading.
-        On the phone it reads side a little worse than the full model on a computer (91 photos in 100 against 95): the phone's copy
-        of the image model is the 90 MB one.</li>
+      <li>The shape check is weakest on stand-ins (another model's body reshaped to the car). Held to a stand-in's own line, it flags few
+        good ones, but it misses most of those whose era or style is wrong: the right kind of body with the wrong look.</li>
+      <li>It tells a vehicle from no vehicle (a landscape, an animal, a plate of food, noise). Part of a vehicle (an engine bay) or a drawing
+        of one counts as a vehicle.</li>
+      <li>Side is the way a side or three-quarter view points. A photo from straight ahead or behind has no answer worth reading.</li>
       <li>Colours it confuses most: silver with white, grey with dark grey.</li>
-      <li>It learned from one run of 936 vehicles, labelled by agents with checked items. A label is sometimes wrong, and so is an answer.</li>
+      <li>It learned from one run of 936 vehicles, labelled by agents with checked items, and from CC-licensed Flickr photos. A label is
+        sometimes wrong, and so is an answer.</li>
     </ul>
   </details>
   <p class="credit" id="credit"></p>
@@ -348,18 +354,25 @@ function read(hs, paint, f) {
   const [s] = best(hs.side, ps, 1);
   const x = new Float32Array(f.e.length + f.h.length); x.set(f.e); x.set(f.h, f.e.length);
   const c3 = best(hs.colour, proba(hs.colour, x), 3);
-  return { kind: { answer: k[0], p: k[1] }, side: { answer: s[0], p: s[1] },
+  const out = {};
+  if (hs.vehicle) { const [v] = best(hs.vehicle, proba(hs.vehicle, f.e), 1); out.vehicle = { answer: v[0] === "vehicle" ? "yes" : "no", p: v[1] }; }
+  return { ...out, kind: { answer: k[0], p: k[1] }, side: { answer: s[0], p: s[1] },
            colour: { answer: c3[0][0], p: c3[0][1], paint: paint[c3[0][0]] || null, top3: c3 } };
 }
-function judge(hs, th, paint, P, B) {
+// heads.no_vehicle: a reading that there is no vehicle in the picture, at least as sure as the threshold
+const noVehicle = (r, th) => !!r.vehicle && r.vehicle.answer === "no" && r.vehicle.p >= (th.vehicle ?? 0.5);
+function judge(hs, th, paint, P, B, standin = false) {
   const a = read(hs, paint, P), b = read(hs, paint, B);
   const n = P.e.length, x = new Float32Array(2 * n);       // heads.pair: the product, then the difference
   for (let i = 0; i < n; i++) { x[i] = P.e[i] * B.e[i]; x[n + i] = Math.abs(P.e[i] - B.e[i]); }
-  const pm = proba(hs.match, x)[1], sure = w => Math.min(a[w].p, b[w].p) >= th[w], flags = [];
+  const pm = proba(hs.match, x)[1], sure = w => Math.min(a[w].p, b[w].p) >= th[w];
+  const flags = [["photo", a], ["build", b]].filter(([, r]) => noVehicle(r, th)).map(([w]) => `${w}: no vehicle in the ${w}'s picture`);
+  if (flags.length) return { photo: a, build: b, match: r3(pm), flags, answer: "look" };
   if (a.kind.answer !== b.kind.answer && sure("kind")) flags.push(`kind: the photo shows a ${a.kind.answer}, the build a ${b.kind.answer}`);
   if (a.side.answer !== b.side.answer && sure("side")) flags.push(`side: the photo's vehicle points ${a.side.answer}, the build ${b.side.answer}`);
   if (!nextShade(paint, a.colour.answer, b.colour.answer) && sure("colour")) flags.push(`colour: the photo's paint reads ${a.colour.answer}, the build's ${b.colour.answer}`);
-  if (pm < th.match) flags.push(`shape: the build may not be the photo's vehicle (match ${pm.toFixed(2)})`);
+  if (standin && pm < (th.match_standin ?? th.match)) flags.push(`shape: a poorer stand-in than nine in ten good ones (match ${pm.toFixed(2)})`);
+  else if (!standin && pm < th.match) flags.push(`shape: the build may not be the photo's vehicle (match ${pm.toFixed(2)})`);
   return { photo: a, build: b, match: r3(pm), flags, answer: flags.length ? "look" : "ok" };
 }
 
@@ -489,6 +502,9 @@ function sureNote(what, p) {
   return t != null && t <= 1 && p >= t ? `<span class="sure">sure</span>` : "";
 }
 function readRows(r) {
+  if (r.vehicle && r.vehicle.answer === "no")
+    return `<div class="rows"><div class="row"><span class="label">Vehicle</span><div><div class="answer">none in this picture</div>
+      <div class="p"><span class="num">${pct(r.vehicle.p)}</span> ${sureNote("vehicle", r.vehicle.p)} &middot; no kind, side or paint to read</div></div></div></div>`;
   const arrow = r.side.answer === "left" ? "&larr;" : "&rarr;";
   const top3 = r.colour.top3.map(([c, p]) => `<div><span>${esc(c)}</span><b><i style="width:${pct(p)}"></i></b><span class="num">${pct(p)}</span></div>`).join("");
   return `<div class="rows">
@@ -507,8 +523,8 @@ function thumbs(urls) { return `<div class="thumbs">${urls.map(u => `<img alt=""
 function showRead(r, urls, tag) {
   $("sheet").innerHTML = `<header><h2>The photo</h2><span class="tag">${esc(tag)}</span></header>${urls ? thumbs(urls) : ""}${readRows(r)}`;
 }
-function showCheck(c, urls, tag) {
-  const th = CARD ? CARD.thresholds.match : 0.5;
+function showCheck(c, urls, tag, standin = false) {
+  const T = CARD ? CARD.thresholds : { match: 0.5 }, th = standin ? (T.match_standin ?? T.match) : T.match;
   const flags = c.flags.length ? `<ul class="flags">${c.flags.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : `<p>Nothing looks wrong.</p>`;
   $("sheet").innerHTML = `<header><h2>The build against its photo</h2><span class="tag">${esc(tag)}</span></header>${urls ? thumbs(urls) : ""}
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="plate">${c.answer === "ok" ? "OK" : "LOOK"}</span>
@@ -516,8 +532,8 @@ function showCheck(c, urls, tag) {
     ${flags}
     <div><span class="label">Match</span> <span class="num">${pct(c.match)}</span>
       <div class="meter" role="img" aria-label="Match ${pct(c.match)}, flagged below ${pct(th)}"><i style="width:${pct(c.match)}"></i><s style="left:${pct(th)}"></s></div>
-      <div class="p">Flagged below the line (${pct(th)}): where one in ten builds of the photo's own model fall.</div></div>
-    ${compare(c.photo, c.build)}`;
+      <div class="p">Flagged below the line (${pct(th)}): ${standin ? "where one in ten good stand-ins fall (a stand-in is another model reshaped, never quite its photo)" : "where one in ten builds of the photo's own model fall"}.</div></div>
+    ${noVehicle(c.photo, T) || noVehicle(c.build, T) ? "" : compare(c.photo, c.build)}`;
 }
 function scores() {
   const s = CARD.held_out_scores, f = CARD.reviewers_wrong_shape_builds;
@@ -532,14 +548,16 @@ function scores() {
     ${row("Paint", `${s.colour_photo.n} photos`, pct(s.colour_photo.right), common(s.colour_photo), `${pct(s.colour_photo.right_or_next_shade)} its colour or the next shade`)}
     ${row("Paint", `${s.colour_build.n} builds`, pct(s.colour_build.right), common(s.colour_build), `${pct(s.colour_build.right_or_next_shade)} with the next shade`)}
     ${row("Match", `${s.match_pairs.n_own} own pairs, ${s.match_pairs.n_other} others`, s.match_pairs.auc.toFixed(2), "0.50", "the chance a build scores higher with its own photo than with another vehicle's (1 is never wrong)")}
-    ${row("Shape check", `${f.own_model_vs_standin.n_standin} stand-ins`, pct(f.own_model_vs_standin.standin_flagged), "", `flagged, against ${pct(f.own_model_vs_standin.own_model_flagged)} of builds of the photo's own model`)}
+    ${s.none_photos ? row("Vehicle", `${s.none_photos.n} photos of no vehicle`, pct(s.none_photos.right), "", "read as none: landscapes, animals, food, rooms, people") : ""}
+    ${s.vehicle_run ? row("Vehicle", `${s.vehicle_run.n} photos and builds`, pct(s.vehicle_run.right), "", "read as a vehicle") : ""}
+    ${row("Shape check", `${f.on_their_builds_now.n_ok} builds the reviewers passed`, pct(f.on_their_builds_now.ok_flagged), f.one_threshold_for_both ? pct(f.one_threshold_for_both.on_their_builds_now.ok_flagged) : "", `flagged (the second figure: with one line for stand-ins and the photo's own model alike); of the ${f.on_their_builds_now.n_wrong_shape} they found the wrong shape, ${Math.round(f.on_their_builds_now.wrong_shape_flagged * f.on_their_builds_now.n_wrong_shape)} flagged`)}
     </tbody></table></div>
     <p>"Sure" means photos read that surely were right 99 times in 100. Trained ${esc(CARD.trained)}.</p>`;
 }
 function setMode(m) {
   mode = m;
   $("mode-read").setAttribute("aria-pressed", m === "read"); $("mode-check").setAttribute("aria-pressed", m === "check");
-  $("slot-b").hidden = m === "read";
+  $("slot-b").hidden = m === "read"; $("standin-box").hidden = m === "read";
   $("slot-a-text").textContent = m === "read" ? "Take or choose a photo of a vehicle" : "Take or choose the vehicle's photo";
   $("run").textContent = m === "read" ? "Read the photo" : "Check the build";
   ready();
@@ -560,7 +578,8 @@ async function run() {
     const urls = [files.a, files.b].filter(Boolean).map(f => URL.createObjectURL(f));
     delete $("sheet").dataset.example;
     if (mode === "read") showRead(read(HEADS, CARD.paint, await features(files.a)), urls.slice(0, 1), "Your photo");
-    else showCheck(judge(HEADS, CARD.thresholds, CARD.paint, await features(files.a), await features(files.b)), urls, "Your pictures");
+    else { const st = $("standin").checked;
+      showCheck(judge(HEADS, CARD.thresholds, CARD.paint, await features(files.a), await features(files.b), st), urls, "Your pictures", st); }
     setStatus("Ready. The model runs on this phone; your pictures don't leave it.", null);
   } catch (e) {
     $("error").textContent = e instanceof Unreadable ? e.message : `It couldn't read that: ${e.message || e}`;
@@ -574,8 +593,10 @@ $("file-a").onchange = e => pick("a", e.target);
 $("file-b").onchange = e => pick("b", e.target);
 $("run").onclick = run;
 $("load").onclick = () => load().catch(() => {});
+{ const mb = Math.round(MODELS.reduce((t, m) => t + (m.size || 0), 0) / 1e6);
+  if (mb && !SESSION) setStatus(`The model (${mb} MB) downloads the first time you check a picture, then stays on this phone.`, null); }
 if (EXAMPLE) {
-  showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example");
+  showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example", !!EXAMPLE.standin);
   $("sheet").dataset.example = "1";
   $("credit").innerHTML = `Example photo: ${esc(EXAMPLE.credit)}. Its build is the car machine's stand-in. `
     + `The model was trained on this pair: it shows what an answer looks like, not how good it is (the scores below are on vehicles it had not seen).`;
@@ -583,7 +604,7 @@ if (EXAMPLE) {
 fetch("heads.json").then(r => r.json()).then(h => {
   if (!CARD) { CARD = h.card; HEADS = h.heads; }
   scores();
-  if (EXAMPLE && $("sheet").dataset.example) showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example");   // its threshold, now known
+  if (EXAMPLE && $("sheet").dataset.example) showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example", !!EXAMPLE.standin);   // its threshold, now known
 }).catch(() => {});
 
 // for the check that this page answers as the Python model does (web/check.py)
@@ -592,5 +613,5 @@ window.vehicleAI = { load, features: async f => { await load(); return features(
   embed: async (x, i = 0) => { await load(); return Array.from(await embedRaw(Float32Array.from(x), i)); },
   models: MODELS.map(m => ({ name: m.name, kind: m.kind, width: m.width })),
   read: async f => { await load(); return read(HEADS, CARD.paint, await features(f)); },
-  check: async (a, b) => { await load(); return judge(HEADS, CARD.thresholds, CARD.paint, await features(a), await features(b)); } };
+  check: async (a, b, standin = false) => { await load(); return judge(HEADS, CARD.thresholds, CARD.paint, await features(a), await features(b), standin); } };
 </script>

@@ -33,13 +33,16 @@ import vision  # noqa: E402
 
 paths = dataset.paths
 FLIP = {"left": "right", "right": "left"}
-C = {"colour": 100.0, "side": 100.0, "kind": 10.0, "match": 10.0}
+C = {"colour": 100.0, "side": 100.0, "kind": 10.0, "match": 10.0, "vehicle": 10.0}
 FOLDS = 5
 # a build the reviewers found not the photo's vehicle weighs as this many made-up mismatches
 # (tried 0, 1, 3, 10: 10 caught the reviewers' wrong builds best, held out)
 REAL_WRONG = 10
 # the share of builds of the photo's own model the match may flag: its threshold is set by it
 OWN_FLAGGED = 0.1
+# and of the stand-ins with no shape fault found: a stand-in is another model's body reshaped, never quite its
+# photo, so it has its own threshold (one threshold for both flagged half the builds the reviewers passed)
+STANDIN_FLAGGED = 0.1
 # kind, side and colour count against a build only when both readings are this sure: photos read
 # that surely were right this often, held out (for colour: its family or the next shade). The run's
 # own labels, which its builds are made from, are right about 99 times in 100 (their gold checks):
@@ -168,8 +171,10 @@ def pseudo_label(hs, feat, extras):
 
 
 def fit_all(its, feat, rng, extras=()):
-    """The four heads, trained on these vehicles; the colour and kind heads also on EXTRAS (photos from outside
-    the run, at EXTRA_WEIGHT each), their fine colour first guessed by heads trained on the run alone."""
+    """The heads, trained on these vehicles; the colour and kind heads also on EXTRAS (photos from outside
+    the run, at EXTRA_WEIGHT each), their fine colour first guessed by heads trained on the run alone. With
+    pictures of no vehicle among the extras (kind "none": extra/none.py), the vehicle head too: every other
+    picture is a vehicle."""
     if extras:
         extras = pseudo_label(fit_all(its, feat, rng), feat, extras)
     col = [(it["photo"], it["colour"], 1.0) for it in its if it.get("colour")]
@@ -178,7 +183,9 @@ def fit_all(its, feat, rng, extras=()):
     sd = [(it["photo"], it["side"]) for it in its if it.get("side")]
     kd = [(it["photo"], it["kind"], 1.0) for it in its]
     kd += [(it["build"], it["kind"], 1.0) for it in its if it.get("build") and not it.get("build_other_kind")]
-    kd += [(it["photo"], it["kind"], EXTRA_WEIGHT) for it in extras]
+    kd += [(it["photo"], it["kind"], EXTRA_WEIGHT) for it in extras if it["kind"] != "none"]
+    vd = [(it[s], "vehicle") for it in its for s in ("photo", "build") if it.get(s)]
+    vd += [(it["photo"], "none" if it["kind"] == "none" else "vehicle") for it in extras]
     Xm, ym, wm = match_pairs(its, feat, rng)
     for what, n in (("colour", len(col)), ("side", len(sd)), ("kind", len(kd)), ("match", int(ym.sum()))):
         if n < 10:
@@ -186,7 +193,12 @@ def fit_all(its, feat, rng, extras=()):
     Xc = np.hstack([stack(feat, [f for f, _, _ in col], 0), stack(feat, [f for f, _, _ in col], 2)])
     Xs = np.vstack([stack(feat, [f for f, _ in sd], 0), stack(feat, [f for f, _ in sd], 1)])
     ys = [s for _, s in sd] + [FLIP[s] for _, s in sd]
+    vehicle = {}
+    if any(v == "none" for _, v in vd):
+        vehicle["vehicle"] = H.Head.fit(stack(feat, [f for f, _ in vd], 0), [v for _, v in vd], C=C["vehicle"],
+                                        class_weight="balanced")
     return {
+        **vehicle,
         "colour": H.Head.fit(Xc, [c for _, c, _ in col], C=C["colour"], sample_weight=np.array([w for _, _, w in col])),
         "side": H.Head.fit(Xs, ys, C=C["side"]),
         "kind": H.Head.fit(stack(feat, [f for f, _, _ in kd], 0), [k for _, k, _ in kd], C=C["kind"], class_weight="balanced",
@@ -242,6 +254,33 @@ def split_half(ps, rights, halves, pick):
     return out
 
 
+def vehicle_scores(answers):
+    """The vehicle head's held-out scores: the run's photos and builds and the extra vehicle photos read as a
+    vehicle, the pictures of none (extra/none.py: photos by topic, and the pictures drawn there) read as none;
+    and its threshold: the lowest p from which its "no vehicle" answers were right SURE_RIGHT of the time."""
+    xs = [(s, it, a["vehicle"]) for s, it, a in answers if "vehicle" in a]
+    if not xs:
+        return {}, {}
+    truth = lambda s, it: "no" if s == "extra" and it["kind"] == "none" else "yes"  # noqa: E731
+    out = {}
+    for name, pick in (("vehicle_run", lambda s, it: s in ("photo", "build")),
+                       ("vehicle_extra", lambda s, it: s == "extra" and it["kind"] != "none"),
+                       ("none_photos", lambda s, it: s == "extra" and it["kind"] == "none" and it.get("topic") != "made"),
+                       ("none_made", lambda s, it: s == "extra" and it.get("topic") == "made")):
+        sub = [(s, it, v) for s, it, v in xs if pick(s, it)]
+        if sub:
+            want = truth(*sub[0][:2])
+            out[name] = {"n": len(sub), "right": r3(np.mean([v["answer"] == want for _, _, v in sub])),
+                         "mistakes": collections.Counter(it.get("topic") or it.get("kind") or s for s, it, v in sub
+                                                         if v["answer"] != want).most_common(8)}
+    no = [(v["p"], truth(s, it) == "no") for s, it, v in xs if v["answer"] == "no"]
+    t = threshold([p for p, _ in no], [r for _, r in no]) if no else 1.01
+    above = [r for p, r in no if p >= t]
+    out["vehicle_sure"] = {"threshold": r3(t), "no_vehicle_answers_this_sure": r3(len(above) / len(no)) if no else None,
+                           "right_when_this_sure": r3(np.mean(above)) if above else None}
+    return out, {"vehicle": t}
+
+
 def scores(answers, fold_of):
     """Each head's held-out scores on photos and on builds, against always giving the commonest answer,
     and its threshold (tried on the half of the vehicles it was not set on)."""
@@ -280,7 +319,10 @@ def scores(answers, fold_of):
         out[f"{what}_sure"] = {"threshold": r3(th[what]), "photos_this_sure": r3(above.mean()) if ps else None,
                                "right_when_this_sure": r3(np.asarray(rights)[above].mean()) if above.any() else None,
                                "set_on_one_half_tried_on_the_other": split_half(ps, rights, halves, threshold)}
-    ex = [(it, a) for s, it, a in answers if s == "extra"]
+    out_v, th_v = vehicle_scores(answers)
+    out.update(out_v)
+    th.update(th_v)
+    ex = [(it, a) for s, it, a in answers if s == "extra" and it["kind"] != "none"]
     if ex:                      # photos from outside the run: a person's kind and coarse colour, held out the same way
         ks = [it["kind"] for it, _ in ex]
         ck = collections.Counter(ks).most_common(1)[0][0]
@@ -299,25 +341,33 @@ def scores(answers, fold_of):
     return out, th
 
 
-def reviewed(scored, th):
-    """The match's held-out scores on the builds the reviewers judged and on the stand-ins,
-    and how many of each fall below the threshold TH."""
+def reviewed(scored, th, th_standin=None):
+    """The match's held-out scores on the builds the reviewers judged and on the stand-ins, and how many of
+    each are flagged: below TH, a stand-in below TH_STANDIN (its own threshold; TH too when None)."""
+    th_standin = th if th_standin is None else th_standin
+    low = lambda s, it: s < (th_standin if it.get("standin") else th)  # noqa: E731
+
     def block(ok, shape):
-        ok, shape = np.array(ok, float), np.array(shape, float)
-        return {"n_ok": len(ok), "n_wrong_shape": len(shape), "auc": r3(auc(ok, shape)),
-                "wrong_shape_flagged": r3(np.mean(shape < th)) if len(shape) else None,
-                "ok_flagged": r3(np.mean(ok < th)) if len(ok) else None}
+        return {"n_ok": len(ok), "n_wrong_shape": len(shape), "auc": r3(auc([s for s, _ in ok], [s for s, _ in shape])),
+                "wrong_shape_flagged": r3(np.mean([low(s, it) for s, it in shape])) if shape else None,
+                "ok_flagged": r3(np.mean([low(s, it) for s, it in ok])) if ok else None}
     cur = [(s, it) for s, it in scored if it.get("verdict")]
-    ok = [s for s, it in cur if it["verdict"] == "ok"]
+    ok = [(s, it) for s, it in cur if it["verdict"] == "ok"]
     now = [(s, it) for s, it in cur if set(it["faults"]) & dataset.SHAPE_FAULTS]
-    out = {"threshold": r3(th),
-           "on_their_builds_now": block(ok, [s for s, _ in now]),
-           "shape_fault_on_last_verdict": block(ok, [s for s, it in scored if it.get("shape_fault_last")])}
-    own = np.array([s for s, it in scored if not it.get("standin") and not it.get("shape_fault_last")], float)
-    st = np.array([s for s, it in scored if it.get("standin")], float)
-    out["own_model_vs_standin"] = {"n_own_model": len(own), "n_standin": len(st), "auc": r3(auc(own, st)),
-                                   "own_model_flagged": r3(np.mean(own < th)) if len(own) else None,
-                                   "standin_flagged": r3(np.mean(st < th)) if len(st) else None}
+    out = {"threshold": r3(th), "threshold_standin": r3(th_standin),
+           "on_their_builds_now": block(ok, now),
+           "shape_fault_on_last_verdict": block(ok, [(s, it) for s, it in scored if it.get("shape_fault_last")]),
+           "stand_ins_alone": {"now": block([(s, it) for s, it in ok if it.get("standin")],
+                                            [(s, it) for s, it in now if it.get("standin")]),
+                               "last_verdict": block([(s, it) for s, it in ok if it.get("standin")],
+                                                     [(s, it) for s, it in scored if it.get("standin")
+                                                      and it.get("shape_fault_last")])}}
+    own = [(s, it) for s, it in scored if not it.get("standin") and not it.get("shape_fault_last")]
+    st = [(s, it) for s, it in scored if it.get("standin")]
+    out["own_model_vs_standin"] = {"n_own_model": len(own), "n_standin": len(st),
+                                   "auc": r3(auc([s for s, _ in own], [s for s, _ in st])),
+                                   "own_model_flagged": r3(np.mean([low(s, it) for s, it in own])) if own else None,
+                                   "standin_flagged": r3(np.mean([low(s, it) for s, it in st])) if st else None}
     out["on_their_builds_now"]["wrong_shape"] = sorted((r3(s), it["key"]) for s, it in now)
     out["lowest_not_found_wrong"] = sorted((r3(s), it["key"]) for s, it in scored
                                            if not it.get("shape_fault_last") and it.get("verdict") != "bad")[:15]
@@ -358,24 +408,32 @@ def main():
     # the match's threshold: one in ten builds of the photo's own model (not a stand-in, no shape fault) below it
     own = [s for s, (it, _) in zip(pm, scored) if not it.get("standin") and not it.get("shape_fault_last")]
     th["match"] = float(np.quantile(own, OWN_FLAGGED)) if own else 0.5
+    good_st = [s for s, (it, _) in zip(pm, scored) if it.get("standin") and not it.get("shape_fault_last")]
+    th["match_standin"] = float(np.quantile(good_st, STANDIN_FLAGGED)) if good_st else th["match"]
     ps, ys = (np.array([p for p, _ in pairs_]), np.array([y for _, y in pairs_])) if pairs_ else (np.zeros(0), np.zeros(0))
     test["match_pairs"] = {"n_own": int(ys.sum()), "n_other": int((ys == 0).sum()), "auc": r3(auc(ps[ys == 1], ps[ys == 0]))}
-    faults = reviewed(list(zip(pm, [it for it, _ in scored])), th["match"])
+    faults = reviewed(list(zip(pm, [it for it, _ in scored])), th["match"], th["match_standin"])
+    # as it was: one threshold for both
+    faults["one_threshold_for_both"] = {k: reviewed(list(zip(pm, [it for it, _ in scored])), th["match"])[k]
+                                        for k in ("on_their_builds_now", "shape_fault_on_last_verdict")}
     # the same threshold rule, set on one half of the vehicles and tried on the other
     halves = np.array([fold_of[it["key"]] % 2 for it, _ in scored])
     own_of = np.array([not it.get("standin") and not it.get("shape_fault_last") for it, _ in scored])
     st_of = np.array([bool(it.get("standin")) for it, _ in scored])
     pm_ = np.array(pm)
+    good_st_of = st_of & np.array([not it.get("shape_fault_last") for it, _ in scored])
     faults["set_on_one_half_tried_on_the_other"] = [
         {"threshold": r3(t), "own_model_flagged": r3(np.mean(pm_[(halves != h) & own_of] < t)),
-         "standin_flagged": r3(np.mean(pm_[(halves != h) & st_of] < t))}
-        for h in (0, 1) for t in [float(np.quantile(pm_[(halves == h) & own_of], OWN_FLAGGED))]]
+         "threshold_standin": r3(ts), "good_standin_flagged": r3(np.mean(pm_[(halves != h) & good_st_of] < ts))}
+        for h in (0, 1) for t, ts in [(float(np.quantile(pm_[(halves == h) & own_of], OWN_FLAGGED)),
+                                       float(np.quantile(pm_[(halves == h) & good_st_of], STANDIN_FLAGGED)))]]
     faults["standin_share"] = r3(st_of.mean())
     # against the encoder untrained: the photo's and the build's embeddings' cosine, the same threshold rule
     raw = [float(cos(feat[it["photo"]][0], feat[it["build"]][0])) for it, _ in scored]
     raw_th = float(np.quantile([c for c, o in zip(raw, own_of) if o], OWN_FLAGGED))
-    rr = reviewed(list(zip(raw, [it for it, _ in scored])), raw_th)
-    faults["untrained_cosine"] = {"threshold": rr["threshold"],
+    raw_ts = float(np.quantile([c for c, o in zip(raw, good_st_of) if o], STANDIN_FLAGGED))
+    rr = reviewed(list(zip(raw, [it for it, _ in scored])), raw_th, raw_ts)
+    faults["untrained_cosine"] = {"threshold": rr["threshold"], "threshold_standin": rr["threshold_standin"],
                                   "on_their_builds_now": {k: v for k, v in rr["on_their_builds_now"].items()
                                                           if k != "wrong_shape"},
                                   "shape_fault_on_last_verdict": rr["shape_fault_on_last_verdict"],
@@ -383,7 +441,7 @@ def main():
     trained = time.strftime("%Y-%m-%d %H:%M:%S")
     second = {}
     for it, hs in scored:
-        v = H.judge(hs, th, dataset.FAMILY, feat[it["photo"]], feat[it["build"]])
+        v = H.judge(hs, th, dataset.FAMILY, feat[it["photo"]], feat[it["build"]], standin=bool(it.get("standin")))
         second[it["key"]] = {**v, "photo_sha": paths.sha(it["photo"]), "build_sha": paths.sha(it["build"]),
                              "heads": trained, "by": "heads trained without this vehicle",
                              "reviewers": it.get("verdict")}

@@ -2,6 +2,7 @@
 
     python3 pipeline/realcar/ai/predict.py photo PHOTO [PHOTO ...]   # kind, side, colour of each
     python3 pipeline/realcar/ai/predict.py check PHOTO BUILD         # a build's picture against its photo
+    python3 pipeline/realcar/ai/predict.py check PHOTO BUILD --standin   # ... a stand-in's (another model reshaped)
     python3 pipeline/realcar/ai/predict.py key KEY [KEY ...]         # the run's own photo and build ($F1K_HOME)
     python3 pipeline/realcar/ai/predict.py run [--out FILE]          # every build of the run: ai_review.json
 
@@ -10,11 +11,13 @@ on. From Python:
 
     from predict import VehicleAI
     ai = VehicleAI()
-    ai.photo("car.jpg")             # {"kind": {...}, "side": {...}, "colour": {...}}
-    ai.check("car.jpg", "build.png")
+    ai.photo("car.jpg")             # {"vehicle": {...}, "kind": {...}, "side": {...}, "colour": {...}}
+    ai.check("car.jpg", "build.png", standin=False)
 
 A check is a second opinion, not a verdict: it lists what looks wrong
-("flags") and says "look" when there is any, "ok" when there is none. How far
+("flags") and says "look" when there is any, "ok" when there is none. A
+stand-in's shape is held to the stand-ins' own threshold (a stand-in is never
+quite its photo): say which builds are (the run's are known). How far
 each answer can be trusted is in heads.json's card (scores on vehicles the
 model was not trained on) and in README.md.
 
@@ -53,14 +56,14 @@ class VehicleAI:
     def photo(self, path):
         return {"file": path, **H.read(self.heads, self.paint, self.features(path))}
 
-    def check(self, photo, build):
-        return H.judge(self.heads, self.th, self.paint, self.features(photo), self.features(build))
+    def check(self, photo, build, standin=False):
+        return H.judge(self.heads, self.th, self.paint, self.features(photo), self.features(build), standin=standin)
 
 
-def safe(fn, *files):
+def safe(fn, *files, **kw):
     """FN's answer on FILES, or what stopped it: one bad file is reported, not a stop to the rest."""
     try:
-        return fn(*files)
+        return fn(*files, **kw)
     except vision.Unreadable as e:
         return {"file": files[0] if len(files) == 1 else list(files), "error": str(e)}
 
@@ -93,7 +96,8 @@ def run(ai, out_path=None):
         if v.get("heads") == ai.card["trained"] and v.get("photo_sha") == sha_p and v.get("build_sha") == sha_b:
             out[k] = v
         else:
-            out[k] = {**safe(ai.check, ph, pic), "photo_sha": sha_p, "build_sha": sha_b, "heads": ai.card["trained"],
+            out[k] = {**safe(ai.check, ph, pic, standin=r["status"] == "standin"), "photo_sha": sha_p, "build_sha": sha_b,
+                      "heads": ai.card["trained"],
                       "by": "heads in heads.json (this build or photo is newer than their training)"}
         fresh = dataset.fresh(review.get(k), r, ph)
         out[k]["reviewers"] = fresh["verdict"] if fresh else None
@@ -112,6 +116,8 @@ def main():
     ap.add_argument("--encoder", default=None, help="the encoders' .onnx files or names, comma-separated (default: "
                     "the card's, fetched once; see vision.py)")
     ap.add_argument("--out", default=None, help="run: where to write (default $F1K_HOME/ai_review.json)")
+    ap.add_argument("--standin", action="store_true", help="check: the build is a stand-in (another model's body "
+                    "reshaped to the photo's car)")
     a = ap.parse_args()
     if a.what == "check" and len(a.files) != 2:
         raise SystemExit("check takes a photo and a build's picture")
@@ -119,13 +125,15 @@ def main():
     if a.what == "photo":
         out = [safe(ai.photo, f) for f in a.files]
     elif a.what == "check":
-        out = safe(ai.check, *a.files)
+        out = safe(ai.check, *a.files, standin=a.standin)
     elif a.what == "key":
         paths = _review_paths().paths
+        rows, _ = paths.rows()
         out = {}
         for k in a.files:
             ph, pic = paths.photo(k), paths.picture(k)
-            out[k] = safe(ai.check, ph, pic) if ph and pic else {"error": "no photo or no build picture for " + k}
+            st = (rows.get(k) or {}).get("status") == "standin"
+            out[k] = safe(ai.check, ph, pic, standin=st) if ph and pic else {"error": "no photo or no build picture for " + k}
     else:
         out = run(ai, a.out)
     print(json.dumps(out, indent=1))

@@ -67,7 +67,7 @@ def pictures(n):
     rows, _ = paths.rows()
     keys = sorted(k for k, r in rows.items() if r.get("status") in ("built", "standin") and paths.photo(k) and paths.picture(k))
     step = max(1, len(keys) // n)
-    return [(paths.photo(k), paths.picture(k)) for k in keys[::step][:n]]
+    return [(paths.photo(k), paths.picture(k), rows[k]["status"] == "standin") for k in keys[::step][:n]]
 
 
 def cos(a, b):
@@ -105,11 +105,11 @@ def main():
     os.makedirs(work, exist_ok=True)
     try:
         pairs, reads = [], []
-        for i, (ph, bu) in enumerate(pictures(a.n)):
+        for i, (ph, bu, st) in enumerate(pictures(a.n)):
             p, b = f"_check/{i}-photo{os.path.splitext(ph)[1]}", f"_check/{i}-build{os.path.splitext(bu)[1]}"
             shutil.copy2(ph, os.path.join(a.site, p))
             shutil.copy2(bu, os.path.join(a.site, b))
-            pairs.append([p, b])
+            pairs.append([p, b, st])
             reads += [p, b]
         for i, f in enumerate(a.pictures):
             p = f"_check/extra-{i}{os.path.splitext(f)[1]}"
@@ -118,7 +118,7 @@ def main():
         page = open(os.path.join(a.site, "index.html")).read()
         ex = json.loads(page.split("/*EXAMPLE*/", 1)[1].split("/*END*/", 1)[0])
         if ex:
-            pairs.append([ex["photo"], ex["build"]])
+            pairs.append([ex["photo"], ex["build"], bool(ex.get("standin"))])
         srv = serve(a.site)
         with tempfile.TemporaryDirectory() as tmp:
             lst, out = os.path.join(tmp, "pics.json"), os.path.join(tmp, "out.json")
@@ -157,7 +157,7 @@ def main():
         for c in js["check"]:
             P = feats.get(c["photo"]) or tuple(np.asarray(c["photo_features"][k], np.float32) for k in ("e", "ef", "h"))
             B = feats.get(c["build"]) or tuple(np.asarray(c["build_features"][k], np.float32) for k in ("e", "ef", "h"))
-            py = H.judge(hs, card["thresholds"], card["paint"], P, B)
+            py = H.judge(hs, card["thresholds"], card["paint"], P, B, standin=c.get("standin", False))
             if not same_answers(c["result"], py):
                 bad.append(f"{c['photo']}: the page's check {c['result']['answer']} {c['result']['match']}, Python's {py['answer']} {py['match']}")
             # the example's answer was Python's on this machine's numbers, the page's on the browser's: the same

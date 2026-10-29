@@ -122,7 +122,8 @@ def extra_items(folders, min_side=200):
     """Photos from outside the run (FOLDERS, comma-separated, each with files.jsonl, img/, qa.json: see extra/), as items with a
     kind, a coarse colour group and its FAMILIES (None when the picture's paint belies its colour word), a licence
     and an author; no build, side or fine colour.
-    Only pictures qa.py kept (an exterior view of one vehicle). Each picture's licence and author are in
+    Only pictures qa.py kept (an exterior view of one vehicle); from extra/none.py's folder, pictures of no vehicle
+    (kind "none", no colour), those its check found none in. Each picture's licence and author are in
     attrib.json once attrib.py has fetched them (Commons hosts free content only; "pending" until then)."""
     import json
     if "," in folders:
@@ -136,15 +137,16 @@ def extra_items(folders, min_side=200):
             r = json.loads(line)
             p = os.path.join(folder, "img", f"{r['id']}.jpg")
             q = qa.get(str(r["id"]))
-            if not os.path.exists(p) or not q or not q.get("keep") or r["colour"] not in GROUPS:
+            none = r["kind"] == "none"               # a picture of no vehicle (extra/none.py): no colour
+            if not os.path.exists(p) or not q or not q.get("keep") or (r["colour"] not in GROUPS and not none):
                 continue
             if (r.get("w") or 0) < min_side or (r.get("h") or 0) < min_side:
                 continue
             a = attrib.get(r["id"]) or {}
             # a colour word its picture does not bear out (qa.py's paint check) is not a colour example
-            paint_ok = q.get("paint_ok", True)
+            paint_ok = q.get("paint_ok", True) and not none
             out.append({"key": f"extra-{r['id']}", "kind": r["kind"], "photo": p, "group": r["colour"] if paint_ok else None,
-                        "families": GROUPS[r["colour"]] if paint_ok else None,
+                        "families": GROUPS[r["colour"]] if paint_ok else None, "topic": r.get("topic"),
                         "licence": a.get("licence") or r.get("licence") or "pending",
                         "author": a.get("author") or r.get("author"), "page": r.get("page"), "title": r["title"],
                         "source": os.path.basename(os.path.normpath(folder)), "extra": True})

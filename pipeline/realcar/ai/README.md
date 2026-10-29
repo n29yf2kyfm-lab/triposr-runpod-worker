@@ -3,18 +3,20 @@
 A real trained model, not written rules: it learned from the run's own answers
 (1,647 pictures: 936 photos and 711 builds, named by the colour, side and
 review agents, with their hand-checked gold items, and the machine's own record
-of which builds are stand-ins), and from 1,776 CC-licensed Flickr photos whose
-titles name a vehicle and its colour, on top of two image models: SigLIP
-(Google's, trained on 10 billion captioned pictures) and DINOv2 (Meta's,
-trained without captions to tell pictures apart). It answers four questions
-the review agents answer:
+of which builds are stand-ins), from 1,776 CC-licensed Flickr photos whose
+titles name a vehicle and its colour, and from 1,905 pictures of no vehicle
+(1,684 Flickr photos of landscapes, animals, food, rooms, people; 221 drawn:
+noise, plain colours), on top of two image models: SigLIP (Google's, trained on
+10 billion captioned pictures) and DINOv2 (Meta's, trained without captions to
+tell pictures apart). It answers the review agents' questions, and one more:
 
 | Question | Of | Answers |
 |---|---|---|
+| **vehicle** | a photo or a build | yes, no (whether there is a vehicle in it at all) |
 | **kind** | a photo or a build | car, van, motorbike (what the picture shows) |
 | **side** | a photo or a build | left, right (the way the vehicle points) |
 | **colour** | a photo or a build | one of 29 of the review's paint families (gold and lilac had no example), with the paint the machine builds it in |
-| **match** | a build beside its photo | how likely the build is the photo's vehicle (its shape, not its paint) |
+| **match** | a build beside its photo | how likely the build is the photo's vehicle (its shape, not its paint); a stand-in held to the stand-ins' own line |
 
 and `check` puts them together into a second opinion on a build: what looks wrong
 (`flags`), and `look` or `ok`.
@@ -37,6 +39,13 @@ commonest answer would score:
 | colour | 722 photos | 74.8% | 28.7% (white) | 88.6% its family or the next shade (always white: 49.6%); 90.9% in its top 3 |
 | | 711 builds | 90.7% | 28.3% (white) | 95.1% its family or the next shade |
 | match | 650 builds with their own photo, 3,555 with other vehicles' | 0.95 | 0.50 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
+| vehicle | 1,684 photos of no vehicle | 99.9% none | 0% (always "a vehicle") | 2 missed: a family, a sunset; the 221 drawn pictures all none |
+| | 1,647 run photos and builds | 100% a vehicle | | and 98.0% of the 1,776 Flickr vehicle photos (31 cars read as none) |
+
+What counts as a vehicle: part of one too. Of the Flickr photos `qa.py` left out
+(not trained on), an engine bay read as a vehicle 25 times in 25, a drawing of
+a car 7 in 10, a car park 25 in 25; a building photographed under a car's tag
+read as none 25 times in 25.
 
 The next shade is a family within 25 of it in Lab and in its group (white to
 black as one group, the rest by hue), or both dark (L under 32: black, dark
@@ -61,14 +70,27 @@ The match against what the run knows was wrong, beside the encoders untrained
 
 | | AUC | Flagged | Untrained: AUC, flagged |
 |---|---|---|---|
-| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.92 | 10% of own-model builds (the threshold is set so), 78% of stand-ins | 0.86, 58% |
-| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.72 | 8 of the 10, and 47% of the passed builds | 0.65, 5 of the 10 |
-| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.79 | 90% | 0.67, 64% |
+| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.92 | 10% of own-model builds, 13% of stand-ins (each held to its own line) | 0.86 |
+| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.72 | 3 of the 10, and 13% of the passed builds | 0.65, 1 of the 10 |
+| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.79 | 34% | 0.67, 18% |
 
-The shape check is the weak one: it finds most wrong shapes but raises a flag
-on nearly half the builds the reviewers passed, since 64% of the run's builds
-are stand-ins and a stand-in is never quite its photo. Read its `look` as
-"worth a look", not "wrong".
+**Stand-ins have their own line.** A stand-in (64% of the run's builds) is
+another model's body reshaped to the car, never quite its photo: held to the
+line of a build of the photo's own model, 78% of them were flagged, and 47% of
+the builds the reviewers passed. Now a build of the photo's own model is held
+to the line one in ten of those fall below, and a stand-in to the line one in
+ten good stand-ins fall below (set on one half of the vehicles and tried on the
+other: 4% and 14% of own-model builds, 15% and 6% of good stand-ins). Flagged:
+13% of the passed builds. The price: of the 10 builds the reviewers found the
+wrong shape now, 3 are flagged; the single line flagged 8, by flagging half of
+everything (at random, half would flag 5). Among stand-ins alone the score
+ranks good above wrong barely better than a coin (AUC 0.58): the faults it
+misses are the right kind of body with the wrong look (a 1950s Ford Popular
+made from a modern saloon, a Vivaro the wrong van). Neither a body-type head
+(tried: right on 85% of photos, but it caught 1 of the 10) nor the machine's
+record of how far it stretched the donor separated them from good ones; 10
+wrong stand-ins are too few to learn from. More reviewed wrong stand-ins are
+what would teach it. Read a `look` as "worth a look", not "wrong".
 
 The run's labels are the agents' answers checked by gold items, not certain
 truth: a "mistake" is sometimes the label's.
@@ -96,6 +118,11 @@ colour. Wikimedia Commons' colour categories (348,000 photos) were listed but
 could not be fetched from here: its servers refuse three requests in four from
 this machine's address.
 
+Later the same day: the vehicle head (pictures of no vehicle, `extra/none.py`:
+Flickr photos by topic, each held to CLIP against vehicle prompts, and drawn
+noise), and the stand-ins' own line for the shape check (see above). Neither
+moved the other heads' scores.
+
 ## Try it yourself
 
 `try_it.py` checks the model with nothing of this run's: paste it into a Google
@@ -104,23 +131,26 @@ about 5 minutes (720 MB of encoders to download). It downloads the code and
 weights from GitHub at a pinned commit (refusing any file whose SHA-256 is not
 the one it prints), and then:
 
-- checks its 29 Wikimedia test photos were not trained on: each against the
-  looks (`vision.dhash`) of every training picture, published in
-  `train_pictures.json`
+- checks its 29 Wikimedia test photos, and 16 Flickr photos of no vehicle (from
+  further down the set than the training's were taken), were not trained on:
+  each against the looks (`vision.dhash`) of every training picture, published
+  in `train_pictures.json`
 - scores the answers against a person's, strictly (the one answer a person
   gives) and leniently (a fair second: a Multivan is a van but registered as a
   car), beside random guessing and always giving the commonest answer
 - runs the same code with the trained weights swapped for random ones: it falls
   to guessing, so the skill is in the training, not in the code
 - recolours the photos on the spot (red and blue swapped; grey) and sees whether
-  the paint read moves with them
+  the paint read moves with them, and reads random noise (it should be none)
 - shows photos picked at random as it runs, that nobody chose, and asks you what
   you see before it shows the model's answer (`BLIND`)
 
 The mirror is not a check: the side reading averages a picture with its mirror,
 so a mirrored picture always reads the other way.
 
-Its run here (29 October, a new Python environment, about 5 minutes with the
+Its run here: TRY_RESULTS
+
+The v2 model's run (29 October, a new Python environment, about 5 minutes with the
 720 MB download): no test photo within 61 bits of a training picture; kind 29 of
 29 strictly and leniently (always "car": 20); side 29 of 29 (always "left": 19);
 colour 20 of 29 strictly, 22 leniently (always "white": 9), its misses silver
@@ -223,7 +253,9 @@ vehicles (24 pictures and 13 build checks, the page's example among them): every
 answer Python's, each encoder's numbers this machine's (cosine 1.0000), about 8 s a
 picture in a headless browser with no graphics card. The phone's heads score as
 the full model's to a point or two: kind 98.4%, side 100%, colour 72.6% (86.7%
-its family or the next shade), match 0.95 (`web/heads.json`'s card).
+its family or the next shade), match 0.95, no vehicle read as none on all 1,684
+photos of none, the shape check flagging 11% of the builds the reviewers passed
+(`web/heads.json`'s card). A build to check can be marked a stand-in on the page.
 
 To make it again after training:
 

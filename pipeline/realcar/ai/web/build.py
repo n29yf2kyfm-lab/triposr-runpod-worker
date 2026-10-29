@@ -71,18 +71,20 @@ def example(out, key, heads, features=None):
     b = vision.load(build)              # cropped to the vehicle, on white: what the model reads
     b.thumbnail((1280, 1280))
     b.save(os.path.join(out, "example-build.png"))
+    rows, _ = paths.rows()
+    standin = (rows.get(key) or {}).get("status") == "standin"
     ai = predict.VehicleAI(heads=heads)
     files = [os.path.join(out, "example-photo.jpg"), os.path.join(out, "example-build.png")]
     got = dict(np.load(features)) if features else {}
     ids = [paths.sha(f) for f in files]
     if all(i + ":e" in got for i in ids):
         P, B = ((got[i + ":e"], got[i + ":f"], got[i + ":h"]) for i in ids)
-        check = predict.H.judge(ai.heads, ai.th, ai.paint, P, B)
+        check = predict.H.judge(ai.heads, ai.th, ai.paint, P, B, standin=standin)
     else:
-        check = ai.check(*files)
+        check = ai.check(*files, standin=standin)
     p = (paths.load(paths.f("car_photos.json"), {}).get(key) or {}).get("photo") or {}
     credit = ", ".join(x for x in (p.get("file"), p.get("author") and f"by {p['author']}", p.get("licence")) if x)
-    return {"key": key, "photo": "example-photo.jpg", "build": "example-build.png", "check": check,
+    return {"key": key, "photo": "example-photo.jpg", "build": "example-build.png", "check": check, "standin": standin,
             "credit": credit, "page": p.get("page")}
 
 
