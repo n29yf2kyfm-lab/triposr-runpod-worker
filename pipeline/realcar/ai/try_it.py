@@ -14,9 +14,11 @@ What it does, in the open:
 3. Scores the model's answers against answers written by a person looking at each photo: strictly (the
    one answer a person gives) and leniently (also a fair second, e.g. a Multivan is a van, but is
    registered as a car), against random guessing and always giving the commonest answer.
+   Then photos of no vehicle (Flickr, CC-licensed, also never trained on): each should read as none.
 4. Controls: the same photos with the trained weights swapped for random ones (should fall to guessing:
    the skill is in the training, not the code); the photos recoloured on the spot (red and blue swapped:
-   the paint read should move with it; turned grey: a colour should read grey, white, silver or black).
+   the paint read should move with it; turned grey: a colour should read grey, white, silver or black);
+   random noise (should read as no vehicle).
 5. Blind test (BLIND photos): pictures chosen at random when you run it, that nobody picked; you type
    what you see before the model's answer shows. Needs you at the keyboard (Colab or a terminal).
 6. MY_PHOTO: a photo address of your own.
@@ -34,12 +36,12 @@ for mod, pkg in (("numpy", "numpy"), ("PIL", "pillow"), ("onnxruntime", "onnxrun
 import numpy as np
 from PIL import Image
 
-COMMIT = "786b305b4ab2d2927c101389636219c7b8b5f2e8"
+COMMIT = "a5d22269932d085f6ce16dd97adaf37b70cb9b36"
 REPO = f"https://raw.githubusercontent.com/n29yf2kyfm-lab/triposr-runpod-worker/{COMMIT}/pipeline/realcar/ai/"
 FILES = {"vision.py": "5029ec0b2214a6abd7a5d0c2026fff040cf4aa090e0809a8d74404ac39d88416",
-         "heads.py": "5ebed26f65fbf2bdbe6f9aade5e51464d542aeafb35ee1f36d87a283731ecefc",
-         "heads.json": "a27c839c5be3cc3963822703dfc152586d1858cbe04f19b0ecce389f51267d37",
-         "train_pictures.json": "8995a3b9d25602ae55b587e511d5acf4f35b38ccd29f3cb520dca75e560b6d57"}
+         "heads.py": "6f7f1c2ed62dea24b25eaaa55db753d8166028700f80534fb1a96a0edb89d39e",
+         "heads.json": "e986206257e6d212f42cda45c4c853d167dc382c164656a4d71fa0c8a73be533",
+         "train_pictures.json": "6b05cd55cb38623cb0dff69f5fe59d037614016d77dcadea99be5563dc0aad91"}
 UA = {"User-Agent": "vehicle-ai-try-it/2.0 (https://github.com/n29yf2kyfm-lab/triposr-runpod-worker)"}
 HERE = os.path.abspath("vehicle_ai_try")
 os.makedirs(HERE, exist_ok=True)
@@ -118,7 +120,28 @@ TEST = [
     ('porsche taycan', 'car', 'right', 'white|silver', 'd/dc/2020_Porsche_Taycan_4S_79kWh_Front.jpg/1280px-2020_Porsche_Taycan_4S_79kWh_Front.jpg'),
 ]
 
-print(f"\n2. Were the {len(TEST)} test photos trained on? Each against all {len(seen)} training pictures, by looks")
+# photos of no vehicle (Flickr's CC-licensed YFCC100M set, further down it than the training's own were taken):
+# name, the photo, its licence and photographer
+NONE_TEST = [
+    ("dog (2382264174)", "https://farm4.staticflickr.com/3055/2382264174_486d9cb22f.jpg", "CC BY-SA 2.0", "sun dazed"),
+    ("cat (2381091260)", "https://farm4.staticflickr.com/3029/2381091260_14d080e0a4.jpg", "CC BY-SA 2.0", "ImNotQuiteJack"),
+    ("cat (2382002300)", "https://farm3.staticflickr.com/2416/2382002300_0362cd81d1.jpg", "CC BY 2.0", "aturkus"),
+    ("cat (2383450270)", "https://farm4.staticflickr.com/3043/2383450270_fc67a3aff9.jpg", "CC BY 2.0", "allygirl520"),
+    ("mountain (2382720027)", "https://farm3.staticflickr.com/2267/2382720027_913b0f91f1.jpg", "CC BY 2.0", "Kevin Briody"),
+    ("mountain (2384124140)", "https://farm3.staticflickr.com/2383/2384124140_bb65ac93a2.jpg", "CC BY 2.0", "Nicholas_T"),
+    ("food (2381630482)", "https://farm3.staticflickr.com/2349/2381630482_55f9e0a79b.jpg", "CC BY 2.0", "Dan4th"),
+    ("food (2382669699)", "https://farm4.staticflickr.com/3016/2382669699_04ecf1256b.jpg", "CC BY 2.0", "Qtea"),
+    ("food (2382775596)", "https://farm3.staticflickr.com/2184/2382775596_ae18c4108f.jpg", "CC BY 2.0", "thebittenword.com"),
+    ("church (2382731214)", "https://farm3.staticflickr.com/2196/2382731214_acc632c4cd.jpg", "CC BY-SA 2.0", "amandabhslater"),
+    ("church (2382782164)", "https://farm3.staticflickr.com/2353/2382782164_66958c21a6.jpg", "CC BY-SA 2.0", "amandabhslater"),
+    ("flower (2381445787)", "https://farm3.staticflickr.com/2141/2381445787_1883730485.jpg", "CC BY 2.0", "Amani Hasan"),
+    ("flower (2382505744)", "https://farm3.staticflickr.com/2320/2382505744_7c3f89c0e1.jpg", "CC BY-SA 2.0", "CharlesLam"),
+    ("beach (2381246169)", "https://farm3.staticflickr.com/2130/2381246169_b582088ff5.jpg", "CC BY 2.0", "steakpinball"),
+    ("beach (2381340444)", "https://farm4.staticflickr.com/3014/2381340444_d3fc1b972b.jpg", "CC BY 2.0", ".Luc."),
+    ("kitchen (2381135138)", "https://farm3.staticflickr.com/2414/2381135138_0cf9b2d254.jpg", "CC BY 2.0", "Alan Cleaver"),
+]
+
+print(f"\n2. Were the {len(TEST) + len(NONE_TEST)} test photos trained on? Each against all {len(seen)} training pictures, by looks")
 pics = []
 for name, kind, side, colour, path in TEST:
     try:
@@ -129,11 +152,21 @@ for name, kind, side, colour, path in TEST:
     near = min(vision.dhash_bits(vision.dhash(im), s) for s in seen)
     pics.append((name, {"kind": kind, "side": side, "colour": colour}, im, features(im), near))
     time.sleep(1)                  # Wikimedia asks for gentle downloads
+nones = []
+for name, url, licence, author in NONE_TEST:
+    try:
+        im = photo(url)
+    except Exception as e:
+        print(f"   {name:22s} could not download ({e})")
+        continue
+    nones.append((name, im, features(im), min(vision.dhash_bits(vision.dhash(im), s) for s in seen)))
 nearest = min(p[4] for p in pics)
+if nones:
+    nearest = min(nearest, min(p[3] for p in nones))
 print(f"   the nearest any test photo comes to a training picture: {nearest} of 256 bits"
       f" (the same photo resized is under 10; two photos of one car are ~60+)")
 if nearest <= 10:
-    print("   SOME TEST PHOTO WAS TRAINED ON:", [p[0] for p in pics if p[4] <= 10])
+    print("   SOME TEST PHOTO WAS TRAINED ON:", [p[0] for p in pics if p[4] <= 10] + [p[0] for p in nones if p[3] <= 10])
 
 
 def score(heads_):
@@ -167,13 +200,35 @@ for w, (s, l, n, gs, gl) in res.items():
     print(f"   {w:6s}: strictly {s} of {n}, leniently {l} of {n}; random guessing would get about {gs:.0f} and"
           f" {gl:.0f}, always saying {c} {k}")
 
+
+def vehicle_read(heads_):
+    """Of the vehicle photos, how many read as a vehicle; of the photos of none, how many as none."""
+    if "vehicle" not in heads_:
+        return None
+    yes = sum(H.read(heads_, card["paint"], f)["vehicle"]["answer"] == "yes" for _, _, _, f, _ in pics)
+    no = sum(H.read(heads_, card["paint"], f)["vehicle"]["answer"] == "no" for _, _, f, _ in nones)
+    return yes, no
+
+
+vr = vehicle_read(hs)
+if vr and nones:
+    print(f"\n   And {len(nones)} photos of no vehicle, also never trained on:")
+    for name, _, f, _ in nones:
+        v = H.read(hs, card["paint"], f)["vehicle"]
+        print(f"   {name:22s} {'no vehicle' if v['answer'] == 'no' else 'a vehicle (WRONG)'} ({v['p']:.0%})")
+    print(f"   vehicle: the vehicle photos read as one {vr[0]} of {len(pics)}, the photos of none as none {vr[1]} of {len(nones)};"
+          f" always saying vehicle would get {len(pics)} and 0")
+
 print("\n4. Controls")
 rng = np.random.default_rng(1)
 fake = {k: H.Head(h.classes, rng.normal(0, h.W.std(), h.W.shape), rng.normal(0, h.b.std() + 1e-3, h.b.shape))
         for k, h in hs.items()}
 fres, _ = score(fake)
+fv = vehicle_read(fake)
 print("   the same code with the trained weights swapped for random ones:",
-      ", ".join(f"{w} {s} of {n}" for w, (s, l, n, gs, gl) in fres.items()), "(guessing level: the skill is in the training)")
+      ", ".join(f"{w} {s} of {n}" for w, (s, l, n, gs, gl) in fres.items())
+      + (f", vehicle {fv[0]} of {len(pics)} and none {fv[1]} of {len(nones)}" if fv and nones else ""),
+      "(guessing level: the skill is in the training)")
 moved = asked = greyed = grey_asked = 0
 for name, truth, im, f, _ in pics:
     a = H.read(hs, card["paint"], f)["colour"]["answer"]
@@ -196,8 +251,12 @@ print(f"   red and blue swapped, the paint moves with it: {moved} of {asked};"
 print("   (not a check: the side reading averages a picture with its mirror, so a mirror always reads the other way)")
 noise = Image.fromarray(np.random.default_rng(0).integers(0, 256, (300, 450, 3), dtype=np.uint8))
 n = H.read(hs, card["paint"], features(noise))
-print(f"   random noise, no vehicle at all: it still answers {n['kind']['answer']} ({n['kind']['p']:.0%}):"
-      " it cannot tell a vehicle from none (a known limit)")
+if "vehicle" in n:
+    print(f"   random noise, no vehicle at all: it reads {'no vehicle' if n['vehicle']['answer'] == 'no' else 'a vehicle (WRONG)'}"
+          f" ({n['vehicle']['p']:.0%})")
+else:
+    print(f"   random noise, no vehicle at all: it still answers {n['kind']['answer']} ({n['kind']['p']:.0%}):"
+          " it cannot tell a vehicle from none (a known limit)")
 
 
 def ask(prompt):
@@ -247,7 +306,10 @@ elif BLIND:
 if MY_PHOTO:
     try:
         a = H.read(hs, card["paint"], features(photo(MY_PHOTO)))
-        print("\n6. Your photo:", ", ".join(f"{w} {a[w]['answer']} ({a[w]['p']:.0%})" for w in ("kind", "side", "colour")))
+        if a.get("vehicle", {}).get("answer") == "no":
+            print(f"\n6. Your photo: no vehicle in it ({a['vehicle']['p']:.0%})")
+        else:
+            print("\n6. Your photo:", ", ".join(f"{w} {a[w]['answer']} ({a[w]['p']:.0%})" for w in ("kind", "side", "colour")))
     except Exception as e:
         print(f"\n6. Your photo could not be read ({e}): use the address of the picture itself (ending .jpg or .png)")
 
