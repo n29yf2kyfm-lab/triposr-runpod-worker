@@ -25,7 +25,7 @@
 body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); margin: 0 }
 .wrap { max-width: 640px; margin: 0 auto; padding-block: 20px 40px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: grid; gap: 18px }
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px }      /* a wide table scrolls in its box, the page stays the screen's width */
 h1 { font: 700 2.4rem/1 var(--display); letter-spacing: .01em; margin: 0; text-wrap: balance }
 h2 { font: 600 1.35rem/1.1 var(--display); letter-spacing: .02em; margin: 0; text-wrap: balance }
 .lede { margin: 6px 0 0; color: var(--muted); max-width: 60ch }
