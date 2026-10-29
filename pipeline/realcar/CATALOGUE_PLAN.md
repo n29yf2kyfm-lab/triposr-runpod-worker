@@ -29,10 +29,10 @@ when it is uploaded again.
   `image_credit` (author, licence, source page).
 - `parts`: `id`, `car_id` (references `cars`), `make`, `model`, `oem_number`, `part_name`, `part_type`
   (references `part_types`).
-- `part_types`: `id`, `name` (e.g. "disc brake caliper"), `part_image`.
   - Unique on `car_id` and `oem_number`.
   - Indexed on `oem_number`, on make and model, and on `part_name` for word search.
-- Row-level security on both tables: anyone may read and nobody may write. Writing uses the
+- `part_types`: `id`, `name` (e.g. "disc brake caliper"), `part_image`.
+- Row-level security on every table: anyone may read and nobody may write. Writing uses the
   service key, which never goes in a page.
 
 ## Car images
