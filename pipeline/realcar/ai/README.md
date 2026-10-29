@@ -120,7 +120,16 @@ the one it prints), and then:
 The mirror is not a check: the side reading averages a picture with its mirror,
 so a mirrored picture always reads the other way.
 
-Its run here: RUN_RESULTS
+Its run here (29 October, a new Python environment, about 5 minutes with the
+720 MB download): no test photo within 61 bits of a training picture; kind 29 of
+29 strictly and leniently (always "car": 20); side 29 of 29 (always "left": 19);
+colour 20 of 29 strictly, 22 leniently (always "white": 9), its misses silver
+against white or grey and champagne against silver. With random weights: kind 13,
+side 6, colour 1. Red and blue swapped, the paint moved with it on 4 of the 9
+coloured cars (a weakness: a swapped dark blue still reads dark blue); turned
+grey, the colour went on 8 of 9. Random noise still reads as a car (91%): it
+cannot tell a vehicle from no vehicle. (The first model, 28 October: kind 27,
+side 28, colour 20 and 22.)
 
 ## Checked by other AIs
 
