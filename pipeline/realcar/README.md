@@ -180,13 +180,35 @@ something changes or moves, so a still car costs no battery.
 | Report | Flagged parts with notes and **photos from the phone's camera**: each part has Add photo, and the car itself has its own. Photos are shrunk to 1,600 px and kept on that device only (the browser's own database), never sent anywhere. **Share report** opens the phone's share sheet with the text and the photos (mail, WhatsApp ...); where there is none it copies the text. Print or save as PDF prints the report with its photos. |
 | Style | **New wheels**, modelled by the machine in code at the car's own wheel size: 5-spoke, 10-spoke, cross-spoke, turbine, steel, each with its tyre, barrel, brake disc, caliper and wheel nuts; the factory wheel stays in the file, hidden under it. **Rim size** standard, +1 or +2 inch (the tyre gets lower, the wheel stays the same size). **Ride height** -60 to +40 mm (the body and everything on it moves; the wheels stay on the ground). **Wheel offset** -20 to +40 mm. The **Finish Lab** (chrome, gloss, satin, matt, brushed, candy, any colour) works on the new rims and calipers too. The build line and every choice are kept on the device. |
 | Engine | **Lift the engine out**: the bonnet opens and the engine with its gearbox rises clear of the bay on a hoist chain, then swings out over the nose (over the tail on a rear-engined car); Put it back reverses it. Look in the bay; Number every part (the bay's 54 callouts); the engine and gearbox parts by name, each a tap to look at. The card says what the engine is: a representative turbo petrol engine and gearbox, sized to the bay, standing for the family, not this car's own unit. **See it run** opens the running engine below. |
-| Engine → See it run | A four-cylinder petrol engine **modelled here in code and cut open**, running through its four strokes: the pistons ride the crank on a real slider-crank, the rods swing, the camshafts turn at half crank speed and push the valves, the timing chain's sprockets turn with them, and each cylinder fires at the top of its compression stroke. A readout names each cylinder's stroke live (firing order 1-3-4-2). **Run** plays and pauses it with a speed control (slowed so the strokes can be followed). **Systems** lights up the air, fuel, spark, exhaust, cooling or oil path with a line on what it does. **Teardown** strips it down — head and cams up, valves out, pistons and rods apart, crank below. It is a teaching model of how an engine of this kind works, not a scan of the car's own engine. |
+| Engine → See it run | The car's **own engine layout, modelled here in code and cut open**, running through its four strokes: an inline-3 to -6, a V6, V8, V10 or V12 at its bank angle, a flat-4 or flat-6 (boxer), each with its own firing order, its bores sized from the catalogue's litres; an electric car gets its motor (stator, rotor, reduction gear). The pistons ride the crank on a real slider-crank along each bank, the rods swing, the camshafts turn at half crank speed and push the valves, the timing drive turns with them, and each cylinder fires at the top of its compression stroke; a readout names each cylinder's stroke live. **Parts**: each part (cam cover, plugs and coils, manifolds, timing chain or belt, camshafts, head and valves, sump, pistons and rods, crank) comes off and goes back on a tap, the camera stepping back to keep it in view; tap a part on the engine, or its button, for the catalogue's parts for it with their OEM numbers. **Run**, **Systems** (the air, fuel, spark, exhaust, cooling or oil path) and **Teardown** (strips it down in a mechanic's order). Without a parts catalogue (below) it is a petrol four-cylinder teaching model. It is the layout, sizes and timing of the car's engine, not a scan of its castings. |
+| Engine → Its parts | The catalogue's parts for this car's engine, model and year, by system (timing, valvetrain, head, block and crank, oil, cooling, ignition, fuel, intake, exhaust, sensors, belts, mounts), the most fitted first, each with its OEM numbers (one row a part: a switch in 14 paints is one switch). |
 
 The wheel designs, the hoist, the running engine and the report are ours,
 written for this page; nothing is taken from another app. The running engine
 follows the plain physics of a four-stroke engine (the slider-crank, the
 two-to-one cam timing, the firing order), which is public knowledge, not any
 other program.
+
+### The car's own engine, from a parts catalogue: `engines.py`
+
+Give the machine an OEM parts catalogue (CSV, or a zip of CSVs: one row a part
+fitted to a vehicle, with its make, model, trim, year and engine) and each
+car's page gets its own engine:
+
+    python3 pipeline/realcar/engines.py build CATALOGUE.zip     # -> $GLBMACHINE_HOME/engines.json, about 80 s for 1.5 million rows
+    python3 pipeline/realcar/engines.py look porsche 911 2019   # what the page will use
+
+`look` finds the model (a BMW "3 Series" is its 318i, 330e ...; a "Golf GTI"
+the catalogue's GTI), the year's engines, and with a trim the engine the
+catalogue names on that trim (a 911 Turbo S's 3.7, not a Carrera's 3.0). The
+engine's words ("3.0L H6 - Gas", "L84 5.3L Petrol V8", "BATTERY EV") give
+the layout, cylinders, litres and fuel. Its parts are that model's own for that
+year: "3.0L L6 - Gas" is the same words on an M3 and an X5, not the same parts.
+An electric car's list leaves out the fuel, ignition and timing rows a
+catalogue sometimes files under it. The index stays in the machine's home, out
+of git (the catalogue is its owner's); its pictures are not read or fetched.
+With no index, or a car the catalogue does not have, the page shows the
+teaching engine and says so.
 
 ## One request, one page: `glbmachine car` and `/car`
 

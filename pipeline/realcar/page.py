@@ -259,6 +259,34 @@ def procedures(cat, opens, rear_engine=False, electric=False):
     return out
 
 
+PARTS_SHOWN = 15                    # catalogue parts shown per engine system on the page
+
+
+def own_engine(asked, electric):
+    """The car's own engine from the parts catalogue (engines.py's index, when the machine has one): the asked
+    make, model (with its trim first: a Golf GTI's engine before a Golf's) and year. None if not found."""
+    try:
+        import engines
+    except ImportError:
+        return None
+    if not os.path.exists(engines.INDEX) or not asked.get("make"):
+        return None
+    model, trim = asked.get("model_words") or "", asked.get("spec") or ""
+    hit = None
+    for m in ([f"{model} {trim}", trim] if trim else []) + [model]:
+        r = engines.look(asked["make"], m, asked.get("year"), trim=trim or None)
+        # a trim read as a model (a GTI is its own model in the catalogue) only when the model found is in the
+        # words asked: "gti" for a Golf GTI, not "carrera gt" for a 911 Carrera
+        said = set(engines.norm(f"{model} {trim}").split())
+        if r and (m == model or any(set(x.split()) <= said for x in r["matched"]["models"])):
+            hit = r
+            break
+    if not hit or (electric and not hit["spec"].get("electric")):
+        return hit and {**hit, "parts": {}, "note": "the catalogue's engine for this model, but this car is built electric"}
+    hit["parts"] = {k: v[:PARTS_SHOWN] for k, v in hit["parts"].items()}
+    return hit
+
+
 def write(report, out):
     """REPORT: make.build's. Writes the page into OUT; returns its files."""
     t0 = time.time()
@@ -364,12 +392,23 @@ def write(report, out):
     if sheet and os.path.exists(sheet):
         shutil.copyfile(sheet, os.path.join(out, "views.jpg"))
     cat = catalogue(j)
+    own = own_engine(asked, electric)
+    if own:
+        m = own["matched"]
+        ev = bool(own["spec"].get("electric"))
+        notes.append(f"{'Motor' if ev else 'Engine'}: {own['words']}, from the parts catalogue ({own['part_count']} parts "
+                     f"listed for it; {', '.join(m['models'][:3])}{' …' if m['models_n'] > 3 else ''}, "
+                     f"{m['year'] or m['years'] or 'all years'})."
+                     + ("" if ev else " The running engine on the Engine tab is built to it.")
+                     + (f" {own['left_out']} rows of engine parts (fuel, ignition, timing …) the catalogue also "
+                        "lists for it are left out: an electric car has none." if own.get("left_out") else ""))
     cfg = {"title": title, "eyebrow": "ExpertCarCheck GLB machine · built " + time.strftime("%-d %b %Y"),
            "sub": f"{name}" + (f", {colour}" if colour else "") + ".", "swatch": f"rgb({srgb[0]}, {srgb[1]}, {srgb[2]})" if srgb else None,
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear, electric),
-           "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {})},
+           "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {}),
+                      **({"own": own} if own else {})},
            "start": start_finish(asked, finish, srgb),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
