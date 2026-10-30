@@ -1,0 +1,1235 @@
+<title>Engine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One engine, part by part: the 3D engine beside (or above, on a phone) the selected part, the strip-down
+   in workshop order and every part listed with its catalogue numbers. */
+:root {
+  --bg: #e9ecee; --surface: #ffffff; --ink: #14181c; --muted: #58626b; --line: #d3d9de; --chip: #f2f4f6;
+  --accent: #b9411b; --accent-ink: #ffffff; --sel: #1f55c9; --off: #8b949c; --stage: #dfe3e6;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #101418; --surface: #182027; --ink: #e8edf1; --muted: #9ba7b2; --line: #2b3640; --chip: #1f2932;
+  --accent: #f0794f; --accent-ink: #1a0f0a; --sel: #7aa5ff; --off: #6c7882; --stage: #1b232a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #101418; --surface: #182027; --ink: #e8edf1; --muted: #9ba7b2; --line: #2b3640; --chip: #1f2932;
+  --accent: #f0794f; --accent-ink: #1a0f0a; --sel: #7aa5ff; --off: #6c7882; --stage: #1b232a; color-scheme: dark }
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body) }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 16px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) }
+@media (min-width: 900px) { .wrap { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start;
+    grid-template-areas: "head panel" "stage panel" }
+  .head { grid-area: head } .stage { grid-area: stage; position: sticky; top: 12px } .panel { grid-area: panel } }
+/* a phone: the engine stays in sight at the top while the buttons and the list scroll under it */
+@media (max-width: 899px) { .stage { position: sticky; top: 0; z-index: 5; background: var(--bg);
+    padding-block: max(6px, env(safe-area-inset-top, 0px)) 6px }
+  .view { height: 42vh; min-height: 250px }
+  .row.views { flex-wrap: nowrap; overflow-x: auto } .views button { flex: none } }
+h1 { font: 700 2.3rem/1 var(--display); margin: 0; letter-spacing: .01em; text-wrap: balance }
+h2 { font: 600 1.25rem/1.15 var(--display); margin: 0; letter-spacing: .02em }
+.kicker { font: 600 .78rem/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px }
+.lede { margin: 6px 0 0; color: var(--muted); max-width: 62ch }
+.stage { display: grid; gap: 10px; min-width: 0 }
+.view { position: relative; height: min(62vh, 620px); min-height: 320px; border-radius: 12px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 35%, var(--surface), var(--stage)); border: 1px solid var(--line) }
+.view canvas { display: block; width: 100%; height: 100%; touch-action: none }
+.hud { position: absolute; left: 10px; top: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none }
+.hud span { background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1px solid var(--line); border-radius: 6px;
+  padding: 3px 8px; font-size: .85rem; color: var(--muted) }
+.load { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted) }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+button { font: 600 1rem/1 var(--display); letter-spacing: .03em; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); padding: 10px 12px; cursor: pointer; min-height: 42px }
+button:hover { border-color: var(--muted) }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--sel); outline-offset: 2px }
+button.main { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+button:disabled { opacity: .4; cursor: default }
+.views button { font-size: .9rem; padding: 8px 10px; min-height: 36px }
+.panel { display: grid; gap: 14px; min-width: 0 }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; min-width: 0 }
+.label { font: 600 .78rem/1 var(--display); letter-spacing: .09em; text-transform: uppercase; color: var(--muted) }
+.oem { font: 500 .9rem/1.35 var(--mono); overflow-wrap: anywhere }
+.muted { color: var(--muted) }
+.step b { font: 600 1.15rem/1.2 var(--display); letter-spacing: .02em }
+.meter { height: 6px; border-radius: 3px; background: var(--chip); overflow: hidden }
+.meter i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s }
+input[type=range] { width: 100%; accent-color: var(--accent) }
+input[type=search] { width: 100%; font: 16px var(--body); padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--ink) }
+details.group { border-top: 1px solid var(--line); padding-top: 8px }
+details.group > summary { font: 600 1.1rem/1.2 var(--display); letter-spacing: .02em; cursor: pointer; padding: 4px 0;
+  display: flex; justify-content: space-between; gap: 8px }
+details.group > summary span { color: var(--muted); font-family: var(--body); font-weight: 500; font-size: .9rem }
+.part { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; padding: 8px 0;
+  border-bottom: 1px dashed var(--line) }
+.part:last-child { border-bottom: 0 }
+.part .name { cursor: pointer; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px }
+.part .name small { color: var(--muted); text-decoration: none; margin-left: 4px }
+.part .oem { grid-column: 1 / -1; color: var(--muted); font-size: .82rem }
+.part.off .name { color: var(--off); text-decoration: line-through }
+.part button { min-height: 34px; padding: 6px 10px; font-size: .9rem }
+.cat { display: inline-block; font: 600 .7rem/1 var(--display); letter-spacing: .08em; text-transform: uppercase;
+  border-radius: 4px; padding: 3px 5px; border: 1px solid var(--accent); color: var(--accent); margin-left: 6px; vertical-align: 2px }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 4px }
+.note { font-size: .92rem; color: var(--muted); max-width: 66ch; margin: 0 }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <p class="kicker" id="kicker">From your parts catalogue</p>
+    <h1 id="title">Engine</h1>
+    <p class="lede" id="lede"></p>
+  </header>
+  <section class="stage" aria-label="The engine">
+    <div class="view" id="view">
+      <canvas id="c" aria-label="The engine in 3D: drag to turn it, pinch or scroll to zoom, tap a part to pick it"></canvas>
+      <div class="hud"><span id="hudL">Tap a part to pick it</span><span id="hudR"></span></div>
+      <div class="load" id="loading">Building the engine…</div>
+    </div>
+    <div class="row views" role="group" aria-label="Look from">
+      <button type="button" data-view="front">Belt end</button>
+      <button type="button" data-view="intake">Intake side</button>
+      <button type="button" data-view="exhaust">Exhaust side</button>
+      <button type="button" data-view="top">Top</button>
+      <button type="button" data-view="under">Underneath</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="card" id="card" aria-live="polite">
+      <span class="label">Picked</span>
+      <p class="muted" style="margin:0">Tap any part of the engine, or a part's name below. It comes off and goes back on.</p>
+    </div>
+
+    <div class="card step">
+      <span class="label">Strip it down, in workshop order</span>
+      <div id="stepText"><b>Everything is on</b></div>
+      <div class="meter" aria-hidden="true"><i id="stepBar"></i></div>
+      <div class="row">
+        <button type="button" id="back">Put back</button>
+        <button type="button" class="main" id="next">Take off next</button>
+        <button type="button" id="all">Strip it all</button>
+        <button type="button" id="none">Build it all</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <button type="button" id="run" aria-pressed="false">Run it</button>
+        <button type="button" id="xray" aria-pressed="false">X-ray</button>
+        <button type="button" id="cut" aria-pressed="false">Cut in half</button>
+      </div>
+      <label class="label" for="explode">Exploded view</label>
+      <input type="range" id="explode" min="0" max="100" value="0">
+    </div>
+
+    <div class="card">
+      <span class="label">Every part</span>
+      <input type="search" id="find" placeholder="Find a part or an OEM number" aria-label="Find a part or an OEM number">
+      <div id="list"></div>
+    </div>
+
+    <div class="card" id="elsewhereCard" hidden>
+      <span class="label">In your catalogue for this engine, but not on the engine itself</span>
+      <ul class="plain" id="elsewhere"></ul>
+    </div>
+
+    <div class="card">
+      <span class="label">About this engine</span>
+      <p class="note" id="facts"></p>
+      <p class="note" id="honest"></p>
+    </div>
+  </section>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="application/json" id="engine-config">/*CONFIG*/{}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const CFG = JSON.parse(document.getElementById('engine-config').textContent);
+const $ = id => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+
+// ── the engine's figures (metres; x along the crank, the belt end at -x; y up; z across, exhaust at +z) ──
+const D = CFG.dims;
+const N = D.cylinders, B = D.bore, S = D.stroke, LR = D.rod, P = D.pitch, R = S / 2, HC = D.pin_to_crown;
+const FIRE = D.firing;
+const LB = N * P + 0.05, WB = Math.max(0.17, B * 2.39);
+const XF = -LB / 2, XR = LB / 2;
+const YD = R + LR + HC + 0.0005;                 // the deck: a piston at the top of its stroke just under it
+const YB0 = R + 0.034;                           // the bores' bottom, clear of the counterweights' swing
+const GASK = 0.0013, YH0 = YD + GASK, YH1 = YH0 + 0.105;
+const ZV = -0.006;                               // the valves' row, under the camshaft
+const FOLL = YH0 + 0.1225, CAMB = 0.0185, YC = FOLL + CAMB;   // followers' tops; the cam's base circle and axis
+const XT = XF - 0.022, XA = XF - 0.066;           // the timing belt's plane, the accessory belt's
+const YSUMP = -0.06;
+const cxi = i => (i - (N - 1) / 2) * P;
+const jourX = k => (k - N / 2) * P;
+const TAU = Math.PI * 2;
+// each cylinder's power stroke: when the crank is at TDC_i (radians) it is at the top, firing
+const TDC = Array.from({ length: N }, (_, i) => FIRE.indexOf(i + 1) * (4 * Math.PI / N));
+
+// ── materials ──
+const mat = (color, roughness, metalness, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra });
+const M = {
+  iron: mat(0x6c7176, 0.82, 0.45), ironDark: mat(0x45484c, 0.7, 0.55), alu: mat(0xb7bcc1, 0.42, 0.72),
+  aluCast: mat(0xa3a8ad, 0.6, 0.6), steel: mat(0xa4abb2, 0.3, 0.92), forged: mat(0x7b8288, 0.45, 0.85),
+  bolt: mat(0x4a4f55, 0.42, 0.85), zinc: mat(0xbdb8a0, 0.35, 0.85), brass: mat(0xc9a066, 0.28, 0.9, { side: THREE.DoubleSide }),
+  rubber: mat(0x1d1f22, 0.92, 0.0), seal: mat(0x5a2f22, 0.75, 0.0), gasket: mat(0x6e7c86, 0.38, 0.8), fibre: mat(0x7a6650, 0.85, 0.1),
+  plastic: mat(0x26292d, 0.7, 0.05), belt: mat(0x17181a, 0.88, 0.0), chain: mat(0x8d949a, 0.35, 0.9),
+  copper: mat(0xb87333, 0.35, 0.9), filter: mat(0x234f8e, 0.5, 0.25), yellow: mat(0xe2b316, 0.5, 0.05),
+  blackPaint: mat(0x222427, 0.55, 0.3), piston: mat(0xc3c7cb, 0.35, 0.75), turbine: mat(0x5b4a3e, 0.75, 0.55),
+};
+// the big castings and covers: see-through in X-ray
+const SHELL = [M.iron, M.aluCast, M.plastic, M.blackPaint];
+
+// ── geometry helpers ──
+const V2 = (x, y) => new THREE.Vector2(x, y);
+const nonIdx = g => (g.index ? g.toNonIndexed() : g);
+function merge(...gs) {
+  const list = gs.flat().filter(Boolean).map(g => { const n = nonIdx(g); n.clearGroups(); return n; });
+  const m = mergeGeometries(list, false);
+  if (!m) throw new Error('merge failed');
+  return m;
+}
+function cylX(r, len, x0 = 0, y = 0, z = 0, seg = 20, rb = r) {    // from x0 to x0 + len along x
+  const g = new THREE.CylinderGeometry(r, rb, len, seg); g.rotateZ(-Math.PI / 2); g.translate(x0 + len / 2, y, z); return g;
+}
+function cylY(r, len, y0 = 0, x = 0, z = 0, seg = 20, rb = r) {
+  const g = new THREE.CylinderGeometry(r, rb, len, seg); g.translate(x, y0 + len / 2, z); return g;
+}
+function cylZ(r, len, z0 = 0, x = 0, y = 0, seg = 20) {
+  const g = new THREE.CylinderGeometry(r, r, len, seg); g.rotateX(Math.PI / 2); g.translate(x, y, z0 + len / 2); return g;
+}
+function box(w, h, d, x = 0, y = 0, z = 0) { const g = new THREE.BoxGeometry(w, h, d); g.translate(x, y, z); return g; }
+function latheY(pts, seg = 24) { return new THREE.LatheGeometry(pts.map(([r, y]) => V2(Math.max(r, 1e-5), y)), seg); }
+function latheX(pts, seg = 24) { const g = latheY(pts, seg); g.rotateZ(-Math.PI / 2); return g; }
+function torusX(r, tube, x = 0, y = 0, z = 0, arc = TAU) {
+  const g = new THREE.TorusGeometry(r, tube, 8, 36, arc); g.rotateY(Math.PI / 2); g.translate(x, y, z); return g;
+}
+function torusY(r, tube, x = 0, y = 0, z = 0) { const g = new THREE.TorusGeometry(r, tube, 8, 32); g.rotateX(Math.PI / 2); g.translate(x, y, z); return g; }
+// a shape drawn in the world's (z, y) plane, extruded along x from x0
+const dedupe = pts => pts.filter((p, i) => { const q = pts[(i + 1) % pts.length]; return Math.hypot(p[0] - q[0], p[1] - q[1]) > 1e-7; });
+function zyShape(outline, holes = []) {
+  const s = new THREE.Shape(dedupe(outline).map(([z, y]) => V2(-z, y)));
+  for (const h of holes) { const p = new THREE.Path(); p.absarc(-h.z, h.y, h.r, 0, TAU, true); s.holes.push(p); }
+  return s;
+}
+function extrudeX(shape, depth, x0 = 0, curveSegments = 20) {
+  const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: false, curveSegments }); g.rotateY(Math.PI / 2); g.translate(x0, 0, 0); return g;
+}
+// a shape in the world's (x, z) plane, extruded up from y0
+function xzShape(outline, holes = []) {
+  const s = new THREE.Shape(dedupe(outline).map(([x, z]) => V2(x, -z)));
+  for (const h of holes) { const p = new THREE.Path(); p.absarc(h.x, -h.z, h.r, 0, TAU, true); s.holes.push(p); }
+  return s;
+}
+function extrudeY(shape, depth, y0 = 0, opts = {}) {
+  const g = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: false, curveSegments: 20, ...opts }); g.rotateX(-Math.PI / 2); g.translate(0, y0, 0); return g;
+}
+const rect = (a0, b0, a1, b1) => [[a0, b0], [a1, b0], [a1, b1], [a0, b1]];
+function arcPts(cz, cy, r, t0, t1, n = 16) {        // points on a circle in the (z, y) plane, z = cz + r cos t
+  return Array.from({ length: n + 1 }, (_, k) => { const t = t0 + (t1 - t0) * k / n; return [cz + r * Math.cos(t), cy + r * Math.sin(t)]; });
+}
+function rrect(w, h, r, n = 5) {                      // a rounded rectangle about the origin
+  const out = [];
+  for (const [cx, cy, a] of [[w / 2 - r, h / 2 - r, 0], [-w / 2 + r, h / 2 - r, 90], [-w / 2 + r, -h / 2 + r, 180], [w / 2 - r, -h / 2 + r, 270]])
+    for (let k = 0; k <= n; k++) { const t = (a + 90 * k / n) * Math.PI / 180; out.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); }
+  return out;
+}
+class Helix extends THREE.Curve {
+  constructor(r, h, turns) { super(); this.r = r; this.h = h; this.turns = turns; }
+  getPoint(u, out = new THREE.Vector3()) { const a = u * this.turns * TAU; return out.set(this.r * Math.cos(a), this.h * u, this.r * Math.sin(a)); }
+}
+function springG(r, h, wire, turns) { return new THREE.TubeGeometry(new Helix(r, h, turns), Math.ceil(turns * 22), wire / 2, 6, false); }
+function tubeG(points, r, seg = 40, rs = 10) {
+  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p))), seg, r, rs, false);
+}
+// a bolt along +y: its head on y 0..h, its washer under it, its shank down to -len
+function boltG(len, d, head = 6, washer = true) {
+  const hr = d * 0.86, hh = d * 0.65, out = [cylY(hr, hh, 0, 0, 0, head)];
+  if (washer) out.push(cylY(hr * 1.3, d * 0.13, -d * 0.13, 0, 0, 18));
+  out.push(cylY(d / 2, len, -len, 0, 0, 10));
+  return merge(out);
+}
+function nutG(d) { return merge(cylY(d * 0.86, d * 0.8, 0, 0, 0, 6), cylY(d * 1.1, d * 0.12, -d * 0.12, 0, 0, 16)); }
+// a toothed pulley about the x axis: TEETH teeth on radius r, width w, centred on x 0
+function sprocketG(r, teeth, w, holes = 0) {
+  const pts = [];
+  for (let i = 0; i < teeth; i++) {
+    const a = i / teeth * TAU, s = TAU / teeth;
+    for (const [f, rr] of [[0, r * 0.955], [0.22, r], [0.6, r], [0.82, r * 0.955]]) pts.push([rr * Math.cos(a + f * s), rr * Math.sin(a + f * s)]);
+  }
+  const hs = [{ z: 0, y: 0, r: r * 0.16 }];
+  for (let k = 0; k < holes; k++) { const a = k / holes * TAU + 0.3; hs.push({ z: r * 0.56 * Math.cos(a), y: r * 0.56 * Math.sin(a), r: r * 0.17 }); }
+  return merge(extrudeX(zyShape(pts, hs), w, -w / 2, 6), cylX(r * 0.3, w * 1.5, -w * 0.75, 0, 0, 20));
+}
+// a poly-V (ribbed) pulley about x: radius r, RIBS grooves
+function ribbedG(r, w, ribs = 5, hub = 0.4) {
+  const pts = [[r * hub, -w / 2], [r * 1.04, -w / 2]];
+  const step = w / (ribs + 1);
+  for (let k = 0; k < ribs; k++) { const y = -w / 2 + step * (k + 0.5); pts.push([r, y], [r * 0.955, y + step / 2]); }
+  pts.push([r, w / 2 - step / 2], [r * 1.04, w / 2], [r * hub, w / 2]);
+  return latheX(pts, 40);
+}
+function convexHull(pts) {
+  const p = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], up = [];
+  for (const q of p) { while (lo.length >= 2 && cross(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (const q of p.slice().reverse()) { while (up.length >= 2 && cross(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  return lo.slice(0, -1).concat(up.slice(0, -1));
+}
+
+// ── belts and chains: a closed path round pulleys in the (z, y) plane, counter-clockwise; a pulley the belt's
+//    back runs on (a tensioner, an idler) has a negative radius ──
+function beltPath(pulleys) {
+  const n = pulleys.length, leave = [];
+  for (let i = 0; i < n; i++) {
+    const a = pulleys[i], b = pulleys[(i + 1) % n];
+    const dz = b.z - a.z, dy = b.y - a.y, d = Math.hypot(dz, dy), ph = Math.atan2(dy, dz);
+    const c = Math.acos(Math.max(-1, Math.min(1, (a.r - b.r) / d)));
+    let best = null;
+    for (const s of [1, -1]) {
+      const t = ph + s * c, nz = Math.cos(t), ny = Math.sin(t);
+      const p1 = [a.z + a.r * nz, a.y + a.r * ny], p2 = [b.z + b.r * nz, b.y + b.r * ny];
+      if ((p2[0] - p1[0]) * -ny + (p2[1] - p1[1]) * nz > 0) best = t;
+    }
+    leave.push(best);
+  }
+  const pts = [];
+  for (let i = 0; i < n; i++) {
+    const p = pulleys[i]; let a0 = leave[(i - 1 + n) % n], a1 = leave[i];
+    if (p.r > 0) { while (a1 < a0) a1 += TAU; } else { while (a1 > a0) a1 -= TAU; }
+    const steps = Math.max(2, Math.ceil(Math.abs(a1 - a0) / 0.06));
+    for (let k = 0; k <= steps; k++) { const a = a0 + (a1 - a0) * k / steps; pts.push([p.z + p.r * Math.cos(a), p.y + p.r * Math.sin(a)]); }
+  }
+  // evenly spaced
+  const len = [0];
+  for (let i = 1; i <= pts.length; i++) { const a = pts[i - 1], b = pts[i % pts.length]; len.push(len[i - 1] + Math.hypot(b[0] - a[0], b[1] - a[1])); }
+  const total = len[len.length - 1], ds = 0.0025, out = [];
+  let j = 0;
+  for (let s = 0; s < total; s += ds) {
+    while (len[j + 1] < s) j++;
+    const a = pts[j], b = pts[(j + 1) % pts.length], f = (s - len[j]) / Math.max(1e-9, len[j + 1] - len[j]);
+    out.push([a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]);
+  }
+  return { pts: out, total };
+}
+// the belt: a band WIDTH wide and THICK thick on the path's outside, TEETH every pitch on its inside (or ribs)
+function beltG(path, x, width, thick, teeth = 0.0095, ribs = 0) {
+  const P2 = path.pts, n = P2.length, pos = [];
+  const frame = i => {
+    const a = P2[(i - 1 + n) % n], b = P2[(i + 1) % n], tz = b[0] - a[0], ty = b[1] - a[1], l = Math.hypot(tz, ty);
+    return { t: [tz / l, ty / l], o: [ty / l, -tz / l] };   // tangent; outward normal (the loop is counter-clockwise)
+  };
+  const quad = (A, B, C, Dd) => pos.push(...A, ...B, ...C, ...A, ...C, ...Dd);
+  for (let i = 0; i < n; i++) {
+    const i2 = (i + 1) % n, f1 = frame(i), f2 = frame(i2), p1 = P2[i], p2 = P2[i2];
+    const in1 = [p1[0], p1[1]], out1 = [p1[0] + f1.o[0] * thick, p1[1] + f1.o[1] * thick];
+    const in2 = [p2[0], p2[1]], out2 = [p2[0] + f2.o[0] * thick, p2[1] + f2.o[1] * thick];
+    const v = (zy, xx) => [xx, zy[1], zy[0]];
+    const x0 = x - width / 2, x1 = x + width / 2;
+    quad(v(out1, x0), v(out2, x0), v(out2, x1), v(out1, x1));      // back
+    quad(v(in1, x1), v(in2, x1), v(in2, x0), v(in1, x0));          // inside
+    quad(v(in1, x0), v(in2, x0), v(out2, x0), v(out1, x0));        // edges
+    quad(v(out1, x1), v(out2, x1), v(in2, x1), v(in1, x1));
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(new Array(pos.length / 3 * 2).fill(0), 2));
+  g.computeVertexNormals();
+  const parts = [g];
+  if (teeth) {
+    const every = Math.max(1, Math.round(teeth / 0.0025));
+    for (let i = 0; i < n; i += every) {
+      const f = frame(i), p = P2[i], tb = new THREE.BoxGeometry(width, thick * 0.9, teeth * 0.45);
+      tb.rotateX(Math.atan2(-f.t[1], f.t[0]));
+      tb.translate(x, p[1] - f.o[1] * thick * 0.45, p[0] - f.o[0] * thick * 0.45);
+      parts.push(tb);
+    }
+  }
+  for (let k = 0; k < ribs; k++) {
+    const xr = x - width / 2 + width * (k + 0.5) / ribs, rib = [];
+    // a rib: a narrow band on the inside
+    for (let i = 0; i < n; i += 2) {
+      const f = frame(i), p = P2[i], tb = new THREE.BoxGeometry(width / ribs * 0.55, thick * 0.6, 0.0055);
+      tb.rotateX(Math.atan2(-f.t[1], f.t[0]));
+      tb.translate(xr, p[1] - f.o[1] * thick * 0.3, p[0] - f.o[0] * thick * 0.3);
+      rib.push(tb);
+    }
+    parts.push(merge(rib));
+  }
+  return merge(parts);
+}
+function chainG(path, x, pitch = 0.008) {
+  const P2 = path.pts, n = P2.length, every = Math.max(1, Math.round(pitch / 0.0025)), parts = [];
+  for (let i = 0; i < n; i += every) {
+    const a = P2[(i - 1 + n) % n], b = P2[(i + 1) % n], ang = Math.atan2(-(b[1] - a[1]), b[0] - a[0]), p = P2[i];
+    for (const dx of [-0.0045, 0.0045]) { const pl = new THREE.BoxGeometry(0.0012, 0.0065, pitch * 1.25); pl.rotateX(ang); pl.translate(x + dx, p[1], p[0]); parts.push(pl); }
+    parts.push(cylX(0.0022, 0.009, x - 0.0045, p[1], p[0], 8));
+  }
+  return merge(parts);
+}
+
+// ── the parts: each kind (TYPES) and each piece of it; a piece rides on its parent (a valve in the head) ──
+const root = new THREE.Group();
+const TYPES = {}, PIECES = [];
+const GROUPS = ['Belts and timing', 'Cylinder head', 'Valvetrain', 'Fuel and glow plugs', 'Air, turbo and exhaust',
+  'Block and bottom end', 'Pistons and rods', 'Lubrication', 'Cooling', 'Accessories'];
+function kind(key, name, group, dir, dist, cat = null, note = '') {
+  TYPES[key] = { key, name, group, dir: new THREE.Vector3(...dir).normalize(), dist, cat, note, pieces: [], rows: [] };
+}
+function add(key, name, obj, opts = {}) {
+  const t = TYPES[key];
+  if (!t) throw new Error('no kind ' + key);
+  const p = { id: PIECES.length, type: t, name, obj, parent: opts.parent || null, base: new THREE.Vector3(...(opts.pos || [0, 0, 0])),
+    dir: opts.dir ? new THREE.Vector3(...opts.dir).normalize() : t.dir, dist: opts.dist ?? t.dist, off: false, k: 0,
+    anim: opts.anim || null, cur: new THREE.Vector3() };
+  if (p.parent && p.parent.id >= p.id) throw new Error('parent after child');
+  if (opts.rot) obj.rotation.set(...opts.rot);
+  if (opts.quat) obj.quaternion.copy(opts.quat);
+  obj.traverse(o => { o.userData.pid = p.id; });
+  obj.position.copy(p.base);
+  PIECES.push(p); t.pieces.push(p); root.add(obj);
+  return p;
+}
+const mesh = (g, m) => new THREE.Mesh(g, m);
+const group = (...items) => { const g = new THREE.Group(); for (const [geo, m] of items) g.add(mesh(geo, m)); return g; };
+const nth = ['1', '2', '3', '4', '5', '6'];
+const cylName = i => `cylinder ${nth[i]}`;
+
+// what the catalogue calls each kind (its part names), so a part carries the catalogue's OEM numbers
+const CAT = {
+  valve_ex: /exhaust valve$/i, valve_in: /(intake|inlet) valve$/i, spring: /valve spring$/i, keeper: /valve (keeper|cotter|collet)/i,
+  retainer: /valve spring (retainer|cap)/i, stem_seal: /valve stem (seal|oil seal)/i, follower: /camshaft follower|lifter|tappet/i,
+  cam: /^(engine )?camshaft$/i, cam_seal: /camshaft seal/i, cam_gear: /camshaft (gear|sprocket|pulley)/i, cam_cap: /camshaft (bearing )?cap/i,
+  tbelt: /^(engine )?timing belt$/i, tensioner: /timing belt tensioner/i, idler: /timing belt idler|timing belt guide/i,
+  oil_chain: /timing chain$|oil pump chain/i, chain_tens: /chain tensioner/i, head_gasket: /head gasket/i, head_bolt: /head bolt/i,
+  head: /^(engine )?cylinder head$/i, cover_gasket: /(valve|cam(shaft)?|cylinder head) cover gasket/i, cam_cover: /valve cover$|camshaft cover$/i,
+  filler_gasket: /oil filler cap gasket|filler cap seal/i, filler_cap: /oil filler cap$/i, dip_oring: /dipstick tube o-?ring|dipstick tube seal/i,
+  dip_tube: /dipstick tube$/i, dipstick: /dipstick$/i, cooler_gasket: /oil cooler gasket|oil cooler seal/i, oil_cooler: /oil cooler$/i,
+  filter_gasket: /oil filter (gasket|seal)|oil filter housing gasket/i, oil_filter: /^(engine )?oil filter$/i, filter_housing: /oil filter (housing|adapter)/i,
+  coolant_hose: /(radiator )?coolant hose$|radiator hose$/i, hose_adapter: /coolant hose (adapter|flange)|coolant flange|water outlet|thermostat housing/i,
+  water_pump: /water pump$/i, inj_pump: /injector pump|injection pump/i, injector: /fuel injector$|^injector$/i, glow: /glow plug$/i,
+  intake_hose: /intake hose$|turbo(charger)? inlet hose/i, hose_sleeve: /hose sleeve|intake hose (seal|clamp)/i,
+  alternator: /^alternator$/i, alt_pulley: /alternator pulley/i, ribbed: /serpentine belt|accessory drive belt$|v-?ribbed belt|drive belt$/i,
+  acc_tensioner: /(accessory|drive) belt tensioner/i, turbo: /turbocharger$|^turbo$/i, egr_valve: /egr valve$|gas re-?circulation \(egr\) valve$/i,
+  sump_gasket: /oil pan gasket|sump gasket/i, sump: /oil pan$|^sump$/i, drain_plug: /drain plug/i, oil_pump: /^(engine )?oil pump$/i,
+  piston: /^(engine )?piston$/i, ring: /piston ring/i, gpin: /piston pin|wrist pin|gudgeon/i, rod: /connecting rod$/i,
+  rod_shell: /(connecting )?rod bearing/i, main_shell: /main bearing$|crankshaft main bearing/i, thrust: /thrust washer|thrust bearing/i,
+  crank: /^(engine )?crankshaft$/i, crank_seal: /crankshaft (seal|oil seal)|rear main seal/i, damper: /harmonic balancer|crankshaft pulley|vibration damper/i,
+  crank_gear: /crankshaft (gear|sprocket)/i, flywheel: /flywheel|flexplate/i, exh_manifold: /exhaust manifold$/i, exh_gasket: /exhaust manifold gasket/i,
+  intake_manifold: /intake manifold$/i, intake_gasket: /intake manifold gasket/i, glow_bus: /glow plug (bus|harness)/i,
+};
+
+const CHAIN = (CFG.construction || {}).timing === 'chain';
+if (CHAIN) { CAT.tbelt = /^(engine )?timing chain$/i; CAT.tensioner = /timing chain tensioner/i; CAT.idler = /timing chain guide/i; CAT.oil_chain = /oil pump chain/i; }
+// ── build the engine ──
+function build() {
+  const HEAD_W = WB, bores = Array.from({ length: N }, (_, i) => ({ x: cxi(i), z: 0, r: B / 2 + 0.0003 }));
+  const journals = Array.from({ length: N + 1 }, (_, k) => jourX(k));
+
+  // kinds: [key, name, group, off direction, distance]
+  kind('ribbed', 'Accessory belt (ribbed)', 'Accessories', [-1, 0, 0], 0.16);
+  kind('alternator', 'Alternator', 'Accessories', [0, 0, -1], 0.17);
+  kind('alt_pulley', 'Alternator pulley', 'Accessories', [-1, 0, 0], 0.06);
+  kind('acc_tensioner', 'Accessory belt tensioner', 'Accessories', [-1, 0, 0], 0.09);
+  kind('tcover_up', 'Timing belt cover, upper', 'Belts and timing', [-1, 0.25, 0], 0.2);
+  kind('tcover_low', 'Timing belt cover, lower', 'Belts and timing', [-1, -0.2, 0], 0.2);
+  kind('damper_bolt', 'Crank pulley bolt', 'Belts and timing', [-1, 0, 0], 0.05);
+  kind('damper', 'Crank pulley (vibration damper)', 'Belts and timing', [-1, 0, 0], 0.12);
+  const drive = CHAIN ? 'chain' : 'belt';
+  kind('tbelt', `Timing ${drive}`, 'Belts and timing', [-1, 0, 0], 0.13);
+  kind('tensioner', `Timing ${drive} tensioner`, 'Belts and timing', [-1, 0, 0], 0.08);
+  kind('idler', CHAIN ? 'Timing chain guide' : 'Timing belt idler', 'Belts and timing', [-1, 0, 0], 0.08);
+  kind('cam_bolt', 'Camshaft sprocket bolt', 'Belts and timing', [-1, 0, 0], 0.04);
+  kind('cam_gear', 'Camshaft sprocket', 'Belts and timing', [-1, 0, 0], 0.09);
+  kind('pump_gear', 'Injection pump sprocket', 'Belts and timing', [-1, 0, 0], 0.09);
+  kind('crank_gear', 'Crankshaft sprocket', 'Belts and timing', [-1, 0, 0], 0.05);
+  kind('inj_pipe', 'Injector pipe', 'Fuel and glow plugs', [0, 1, 0], 0.17);
+  kind('intake_hose', 'Intake hose', 'Air, turbo and exhaust', [0, 1, 0.3], 0.13);
+  kind('hose_sleeve', 'Intake hose sleeve', 'Air, turbo and exhaust', [0, 1, 0.3], 0.03);
+  kind('turbo', 'Turbo', 'Air, turbo and exhaust', [0, -0.2, 1], 0.13);
+  kind('exh_nut', 'Exhaust manifold nut', 'Air, turbo and exhaust', [0, 0, 1], 0.05);
+  kind('exh_manifold', 'Exhaust manifold', 'Air, turbo and exhaust', [0, 0, 1], 0.14);
+  kind('exh_gasket', 'Exhaust manifold gasket', 'Air, turbo and exhaust', [0, 0, 1], 0.12);
+  kind('egr_valve', 'EGR valve', 'Air, turbo and exhaust', [0, 0.4, -1], 0.1);
+  kind('intake_manifold', 'Intake manifold', 'Air, turbo and exhaust', [0, 0, -1], 0.14);
+  kind('intake_gasket', 'Intake manifold gasket', 'Air, turbo and exhaust', [0, 0, -1], 0.12);
+  kind('cover_nut', 'Cam cover nut', 'Cylinder head', [0, 1, 0], 0.05);
+  kind('filler_cap', 'Oil filler cap', 'Lubrication', [0, 1, 0], 0.08);
+  kind('filler_gasket', 'Oil filler cap seal', 'Lubrication', [0, 1, 0], 0.03);
+  kind('cam_cover', 'Cam cover', 'Cylinder head', [0, 0.7, 1], 0.26);
+  kind('cover_gasket', 'Cam cover gasket', 'Cylinder head', [0, 0.8, 1], 0.2);
+  kind('inj_clamp_bolt', 'Injector clamp bolt', 'Fuel and glow plugs', [0, 1, 0], 0.04);
+  kind('inj_clamp', 'Injector clamp', 'Fuel and glow plugs', [0, 1, 0], 0.06);
+  kind('injector', 'Injector', 'Fuel and glow plugs', [0, 1, 0], 0.12);
+  kind('glow_bus', 'Glow plug bus bar', 'Fuel and glow plugs', [0, 0.3, 1], 0.06);
+  kind('glow', 'Glow plug', 'Fuel and glow plugs', [0, 1, 0], 0.1);
+  kind('coolant_hose', 'Coolant hose', 'Cooling', [1, 0, 0], 0.1);
+  kind('hose_adapter', 'Coolant flange', 'Cooling', [1, 0, 0], 0.11);
+  kind('head_bolt', 'Cylinder head bolt', 'Cylinder head', [0, 1, 0], 0.26);
+  kind('head', 'Cylinder head', 'Cylinder head', [0, 0.75, 1], 0.34);
+  kind('head_gasket', 'Head gasket', 'Cylinder head', [0, 1, 0], 0.16);
+  kind('cap_nut', 'Camshaft bearing cap nut', 'Valvetrain', [0, 1, 0], 0.04);
+  kind('cam_cap', 'Camshaft bearing cap', 'Valvetrain', [0, 1, 0], 0.18);
+  kind('cam_seal', 'Camshaft seal', 'Valvetrain', [-1, 0, 0], 0.06);
+  kind('cam', 'Camshaft', 'Valvetrain', [0, 1, 0], 0.14);
+  kind('follower', 'Cam follower (hydraulic)', 'Valvetrain', [0, 1, 0], 0.12);
+  kind('keeper', 'Valve keeper (collet)', 'Valvetrain', [0, 1, 0], 0.09);
+  kind('retainer', 'Valve spring cap', 'Valvetrain', [0, 1, 0], 0.075);
+  kind('spring', 'Valve spring', 'Valvetrain', [0, 1, 0], 0.05);
+  kind('stem_seal', 'Valve stem seal', 'Valvetrain', [0, 1, 0], 0.03);
+  kind('valve_in', 'Intake valve', 'Valvetrain', [0, -1, 0], 0.14);
+  kind('valve_ex', 'Exhaust valve', 'Valvetrain', [0, -1, 0], 0.14);
+  kind('drain_plug', 'Sump drain plug', 'Lubrication', [0, -1, 0], 0.05);
+  kind('sump_bolt', 'Sump bolt', 'Lubrication', [0, -1, 0], 0.06);
+  kind('sump', 'Sump (oil pan)', 'Lubrication', [0, -0.55, 1], 0.32);
+  kind('sump_gasket', 'Sump gasket', 'Lubrication', [0, -1, 0], 0.12);
+  kind('chain_tens', 'Oil pump chain tensioner', 'Lubrication', [0, -1, 0], 0.07);
+  kind('oil_chain', 'Oil pump chain', 'Lubrication', [0, -1, 0], 0.09);
+  kind('oil_pump', 'Oil pump and pick-up', 'Lubrication', [0, -1, 0], 0.12);
+  kind('rod_bolt', 'Big-end bolt', 'Pistons and rods', [0, -1, 0], 0.04);
+  kind('rod_cap', 'Big-end cap', 'Pistons and rods', [0, -1, 0], 0.09);
+  kind('rod_shell', 'Big-end bearing shell', 'Pistons and rods', [0, -1, 0], 0.03);
+  kind('piston', 'Piston', 'Pistons and rods', [0, 1, 0], 0.42);
+  kind('ring', 'Piston ring', 'Pistons and rods', [0, 1, 0], 0.03);
+  kind('circlip', 'Piston pin circlip', 'Pistons and rods', [0, 0, 1], 0.05);
+  kind('gpin', 'Piston pin', 'Pistons and rods', [0, 0, 1], 0.08);
+  kind('rod', 'Connecting rod', 'Pistons and rods', [0, -1, 0], 0.13);
+  kind('fly_bolt', 'Flywheel bolt', 'Block and bottom end', [1, 0, 0], 0.05);
+  kind('flywheel', 'Flywheel (dual-mass)', 'Block and bottom end', [1, 0, 0], 0.16);
+  kind('oil_filter', 'Oil filter', 'Lubrication', [0, -1, 0], 0.08);
+  kind('filter_gasket', 'Oil filter seal', 'Lubrication', [0, -1, 0], 0.02);
+  kind('oil_cooler', 'Oil cooler', 'Lubrication', [0, -1, 0], 0.05);
+  kind('cooler_gasket', 'Oil cooler gasket', 'Lubrication', [0, -1, 0], 0.025);
+  kind('filter_housing', 'Oil filter housing', 'Lubrication', [0, 0, -1], 0.12);
+  kind('dipstick', 'Dipstick', 'Lubrication', [0, 1, 0], 0.14);
+  kind('dip_tube', 'Dipstick tube', 'Lubrication', [0, 1, 0], 0.1);
+  kind('dip_oring', 'Dipstick tube O-ring', 'Lubrication', [0, 1, 0], 0.02);
+  kind('water_pump', 'Water pump', 'Cooling', [-1, 0, 0], 0.1);
+  kind('inj_pump', 'Injection pump', 'Fuel and glow plugs', [0, 0, -1], 0.16);
+  kind('crank_seal', 'Crankshaft oil seal', 'Block and bottom end', [-1, 0, 0], 0.06);
+  kind('main_bolt', 'Main bearing cap bolt', 'Block and bottom end', [0, -1, 0], 0.05);
+  kind('main_cap', 'Main bearing cap', 'Block and bottom end', [0, -1, 0], 0.12);
+  kind('main_shell', 'Main bearing shell', 'Block and bottom end', [0, -1, 0], 0.03);
+  kind('thrust', 'Crankshaft thrust washer', 'Block and bottom end', [0, -1, 0], 0.08);
+  kind('crank', 'Crankshaft', 'Block and bottom end', [0, -1, -0.3], 0.3);
+  kind('block', 'Cylinder block', 'Block and bottom end', [0, 0, 0], 0);
+
+  // ── the block (stays put) ──
+  {
+    const up = extrudeY(xzShape(rect(XF, -WB / 2, XR, WB / 2), bores), YD - YB0, YB0);
+    const parts = [up];
+    const wz = WB / 2 - 0.004;
+    parts.push(box(LB, YB0 - YSUMP, 0.008, 0, (YB0 + YSUMP) / 2, wz), box(LB, YB0 - YSUMP, 0.008, 0, (YB0 + YSUMP) / 2, -wz));
+    for (const [x0, ex] of [[XF, 0.012], [XR - 0.012, 0.012]])
+      parts.push(extrudeX(zyShape(rect(-WB / 2, YSUMP, WB / 2, YB0), [{ z: 0, y: 0, r: 0.031 }]), ex, x0));
+    for (const x of journals) {   // bulkheads, the upper half of each main bearing
+      const zm = WB / 2 - 0.008;
+      const out = [[zm, 0], [zm, YB0], [-zm, YB0], [-zm, 0], ...arcPts(0, 0, 0.0285, Math.PI, 0, 14)];
+      parts.push(extrudeX(zyShape(out), 0.02, x - 0.01));
+    }
+    // ribs, the water pump's housing, freeze plugs, an engine-number pad
+    for (const s of [-1, 1]) for (let i = 0; i <= N; i++) parts.push(box(0.008, YD - YB0 - 0.02, 0.006, jourX(i), (YD + YB0) / 2, s * (WB / 2 + 0.003)));
+    parts.push(box(0.012, 0.05, 0.05, XF - 0.006, 0.12, 0.07), box(0.06, 0.02, 0.012, XF + 0.06, YD - 0.03, -WB / 2 - 0.006));
+    const plugs = [];
+    for (let i = 0; i < N - 1; i++) plugs.push(cylZ(0.013, 0.004, -WB / 2 - 0.004, (cxi(i) + cxi(i + 1)) / 2, 0.16));
+    add('block', 'Cylinder block', group([merge(parts), M.iron], [merge(plugs), M.steel]));
+  }
+
+  // ── crankshaft, its sprockets and seals ──
+  const crankAnim = p => a => { p.obj.rotation.x = a; };
+  let crank;
+  {
+    const parts = [];
+    for (const x of journals) parts.push(cylX(0.0268, 0.024, x - 0.012, 0, 0, 28));
+    for (let i = 0; i < N; i++) {
+      const a = -TDC[i], pz = R * Math.sin(a), py = R * Math.cos(a), x = cxi(i);
+      parts.push(cylX(0.024, 0.026, x - 0.013, py, pz, 24));
+      for (const side of [-1, 1]) {
+        const wx = x + side * 0.022 - 0.009;
+        const far = [], near = [];
+        const dirA = Math.atan2(py, pz);     // the pin's direction in (z, y)
+        for (let k = 0; k <= 12; k++) { const t = dirA + Math.PI / 2 + Math.PI * k / 12; far.push([0.03 * Math.cos(t), 0.03 * Math.sin(t)]); }
+        for (let k = 0; k <= 12; k++) { const t = dirA - Math.PI / 2 + Math.PI * k / 12; near.push([pz + 0.027 * Math.cos(t), py + 0.027 * Math.sin(t)]); }
+        parts.push(extrudeX(zyShape([...far, ...near]), 0.018, wx));
+        const cw = [[0, 0]];
+        for (let k = 0; k <= 16; k++) { const t = dirA + Math.PI - 1.05 + 2.1 * k / 16; cw.push([0.072 * Math.cos(t), 0.072 * Math.sin(t)]); }
+        parts.push(extrudeX(zyShape(cw), 0.018, wx));
+      }
+    }
+    parts.push(cylX(0.02, jourX(0) - 0.012 - (XA - 0.014), XA - 0.014, 0, 0, 20));      // the nose
+    parts.push(cylX(0.045, 0.012, XR + 0.002, 0, 0, 32), cylX(0.026, XR + 0.002 - jourX(N) - 0.012, jourX(N) + 0.012, 0, 0, 24));
+    // the oil pump's chain sprocket, inside the front wall
+    parts.push(sprocketG(0.025, 20, 0.008).translate(XF + 0.024, 0, 0));
+    crank = add('crank', 'Crankshaft', mesh(merge(parts), M.forged));
+    crank.anim = crankAnim(crank);
+  }
+  const crankGear = add('crank_gear', 'Crankshaft sprocket (timing belt)', mesh(sprocketG(0.032, 19, 0.026).translate(XT, 0, 0), M.steel), { parent: crank });
+  crankGear.anim = crankAnim(crankGear);
+  add('crank_seal', 'Crankshaft oil seal, belt end', mesh(torusX(0.026, 0.005, XF - 0.004), M.rubber), { dir: [-1, 0, 0] });
+  add('crank_seal', 'Crankshaft oil seal, flywheel end', mesh(torusX(0.026, 0.005, XR + 0.002), M.rubber), { dir: [1, 0, 0] });
+  // main caps, their bolts and shells; thrust washers
+  for (let k = 0; k <= N; k++) {
+    const x = journals[k];
+    const out = [[0.048, 0], [0.0285, 0], ...arcPts(0, 0, 0.0285, 0, -Math.PI, 14), [-0.0285, 0], [-0.048, 0], [-0.048, -0.05], [0.048, -0.05]];
+    const cap = add('main_cap', `Main bearing cap ${k + 1}`, mesh(extrudeX(zyShape(out), 0.022, x - 0.011), M.ironDark));
+    for (const z of [-0.036, 0.036]) {
+      const g = boltG(0.075, 0.011, 12, false); g.rotateX(Math.PI);
+      add('main_bolt', `Main bearing cap bolt, cap ${k + 1}`, mesh(g, M.bolt), { parent: cap, pos: [x, -0.05, z] });
+    }
+    const low = new THREE.CylinderGeometry(0.0271, 0.0271, 0.02, 24, 1, true, 0, Math.PI); low.rotateZ(-Math.PI / 2); low.translate(x, 0, 0);
+    add('main_shell', `Main bearing shell ${k + 1}, lower`, mesh(low, M.brass), { parent: cap, dist: 0.02 });
+    const upS = new THREE.CylinderGeometry(0.0271, 0.0271, 0.02, 24, 1, true, Math.PI, Math.PI); upS.rotateZ(-Math.PI / 2); upS.translate(x, 0, 0);
+    add('main_shell', `Main bearing shell ${k + 1}, upper`, mesh(upS, M.brass), { dir: [0, 1, 0], dist: 0.03 });
+    if (k === Math.floor(N / 2)) for (const s of [-1, 1]) {
+      const g = extrudeX(zyShape([...arcPts(0, 0, 0.042, 0, -Math.PI, 16), ...arcPts(0, 0, 0.029, -Math.PI, 0, 16)]), 0.0025, x + s * 0.0125 - 0.00125);
+      add('thrust', `Crankshaft thrust washer, ${s < 0 ? 'belt' : 'flywheel'} side`, mesh(g, M.brass), { parent: cap });
+    }
+  }
+
+  // ── pistons, rods, rings, pins ──
+  const pinY = th => R * Math.cos(th) + Math.sqrt(LR * LR - (R * Math.sin(th)) ** 2);
+  const pistonG = latheY([[0.0001, -0.002], [0.033, -0.002], [0.033, -0.024], [B / 2 - 0.0006, -0.024], [B / 2 - 0.0003, HC - 0.007],
+    [B / 2 - 0.0003, HC], [0.023, HC], [0.016, HC - 0.007], [0.012, HC - 0.013], [0.004, HC - 0.011], [0.0001, HC - 0.0105]], 40);
+  const rodOut = [[0.036, 0], [0.033, 0.02], [0.014, LR - 0.022], ...arcPts(0, LR, 0.0175, -0.95, Math.PI + 0.95, 20),
+    [-0.014, LR - 0.022], [-0.033, 0.02], [-0.036, 0], [-0.0255, 0], ...arcPts(0, 0, 0.0255, Math.PI, 0, 16), [0.0255, 0]];
+  const rodG = extrudeX(zyShape(rodOut, [{ z: 0, y: LR, r: 0.0128 }]), 0.022, -0.011);
+  const capOut = [[0.036, 0], [0.0255, 0], ...arcPts(0, 0, 0.0255, 0, -Math.PI, 16), [-0.0255, 0], [-0.036, 0], ...arcPts(0, 0, 0.036, Math.PI + 0.25, TAU - 0.25, 14)];
+  const capG = extrudeX(zyShape(capOut), 0.022, -0.011);
+  for (let i = 0; i < N; i++) {
+    const x = cxi(i), c = cylName(i);
+    const th = a => a - TDC[i];
+    const pistonPos = (p, a) => p.base.set(x, pinY(th(a)), 0);
+    const rodMove = (p, a) => { const t = th(a); p.base.set(x, R * Math.cos(t), R * Math.sin(t)); p.obj.rotation.x = -Math.asin(R * Math.sin(t) / LR); };
+    const pis = add('piston', `Piston, ${c}`, mesh(pistonG, M.piston)); pis.anim = a => pistonPos(pis, a);
+    const ringsAt = [[HC - 0.006, 0.0011, 'top compression ring'], [HC - 0.0115, 0.0011, 'second compression ring'], [HC - 0.018, 0.0014, 'oil control ring']];
+    for (const [y, tube, nm] of ringsAt) {
+      const r = add('ring', `Piston ring, ${c}: ${nm}`, mesh(torusY(B / 2 - 0.0004, tube, 0, y, 0), M.bolt), { parent: pis, dist: 0.03 + (HC - y) * 2 });
+      r.anim = a => pistonPos(r, a);
+    }
+    const gp = add('gpin', `Piston pin, ${c}`, mesh(cylZ(0.0125, 0.062, -0.031, 0, 0, 20), M.steel), { parent: pis }); gp.anim = a => pistonPos(gp, a);
+    for (const s of [-1, 1]) {
+      const g = new THREE.TorusGeometry(0.0112, 0.0009, 6, 20); g.translate(0, 0, s * 0.0305);
+      const cl = add('circlip', `Piston pin circlip, ${c}`, mesh(g, M.steel), { parent: pis, dir: [0, 0, s] }); cl.anim = a => pistonPos(cl, a);
+    }
+    const rod = add('rod', `Connecting rod, ${c}`, mesh(rodG, M.forged), { parent: pis }); rod.anim = a => rodMove(rod, a);
+    const shU = new THREE.CylinderGeometry(0.0253, 0.0253, 0.019, 24, 1, true, Math.PI, Math.PI); shU.rotateZ(-Math.PI / 2);
+    const su = add('rod_shell', `Big-end bearing shell, ${c}, upper`, mesh(shU, M.brass), { parent: rod, dir: [0, 1, 0], dist: 0.03 }); su.anim = a => rodMove(su, a);
+    const cap = add('rod_cap', `Big-end cap, ${c}`, mesh(capG, M.forged), { parent: rod }); cap.anim = a => rodMove(cap, a);
+    const shL = new THREE.CylinderGeometry(0.0253, 0.0253, 0.019, 24, 1, true, 0, Math.PI); shL.rotateZ(-Math.PI / 2);
+    const sl = add('rod_shell', `Big-end bearing shell, ${c}, lower`, mesh(shL, M.brass), { parent: cap }); sl.anim = a => rodMove(sl, a);
+    for (const z of [-0.0305, 0.0305]) {
+      const g = boltG(0.045, 0.009, 12, false); g.rotateX(Math.PI); g.translate(0, -0.026, z);
+      const b = add('rod_bolt', `Big-end bolt, ${c}`, mesh(g, M.bolt), { parent: cap }); b.anim = a => rodMove(b, a);
+    }
+  }
+
+  // ── flywheel ──
+  {
+    const disc = latheX([[0.03, 0], [0.135, 0], [0.135, 0.012], [0.12, 0.014], [0.12, 0.018], [0.135, 0.02], [0.135, 0.03], [0.03, 0.03]], 64);
+    disc.translate(XR + 0.014, 0, 0);
+    const teeth = [];
+    for (let k = 0; k < 132; k++) { const a = k / 132 * TAU, t = new THREE.BoxGeometry(0.01, 0.007, 0.0045); t.rotateX(a); t.translate(XR + 0.039, 0.1385 * Math.cos(a), 0.1385 * Math.sin(a)); teeth.push(t); }
+    const fly = add('flywheel', 'Flywheel (dual-mass)', group([disc, M.ironDark], [merge(teeth), M.steel]), { parent: crank });
+    fly.anim = crankAnim(fly);
+    for (let k = 0; k < 8; k++) {
+      const a = k / 8 * TAU, g = boltG(0.022, 0.009, 12, false); g.rotateZ(-Math.PI / 2); g.translate(XR + 0.046, 0.026 * Math.cos(a), 0.026 * Math.sin(a));
+      const b = add('fly_bolt', 'Flywheel bolt', mesh(g, M.bolt), { parent: fly }); b.anim = crankAnim(b);
+    }
+  }
+
+  // ── oil pump, its chain and tensioner; sump ──
+  {
+    const pump = add('oil_pump', 'Oil pump and pick-up', group(
+      [merge(box(0.045, 0.04, 0.07, XF + 0.045, -0.118, 0.0), sprocketG(0.03, 24, 0.008).translate(XF + 0.024, -0.118, 0)), M.aluCast],
+      [merge(tubeG([[XF + 0.06, -0.135, 0.02], [XF + 0.1, -0.15, 0.03], [XF + 0.16, -0.153, 0.02]], 0.007, 20, 8),
+        cylY(0.026, 0.004, -0.158, XF + 0.165, 0.02, 24)), M.steel]));
+    const path = beltPath([{ z: 0, y: -0.118, r: 0.03 }, { z: 0.0392, y: -0.058, r: -0.0135 }, { z: 0, y: 0, r: 0.025 }]);
+    add('oil_chain', 'Oil pump chain', mesh(chainG(path, XF + 0.024), M.chain));
+    add('chain_tens', 'Oil pump chain tensioner', mesh(merge(cylX(0.0115, 0.01, XF + 0.019, -0.058, 0.0392, 18), box(0.01, 0.05, 0.012, XF + 0.024, -0.075, 0.056)), M.steel));
+    void pump;
+  }
+  const sumpW = WB + 0.008;
+  const sump = add('sump', 'Sump (oil pan)', mesh(merge(
+    extrudeY(xzShape(rect(XF - 0.004, -sumpW / 2 - 0.012, XR + 0.004, sumpW / 2 + 0.012)), 0.005, YSUMP - 0.0065),
+    extrudeY(xzShape(rrect(LB - 0.01, sumpW, 0.03).map(([a, b]) => [a, b])), YSUMP - 0.0065 - (-0.15), -0.15, { bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.008, bevelSegments: 3 }),
+    extrudeY(xzShape(rrect(LB * 0.5, sumpW * 0.8, 0.025).map(([a, b]) => [a - LB * 0.2, b])), 0.03, -0.18, { bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 3 })
+  ), M.blackPaint));
+  add('drain_plug', 'Sump drain plug', mesh(merge(boltG(0.012, 0.014, 6, true).rotateX(Math.PI).translate(XF + 0.06, -0.195, 0)), M.zinc), { parent: sump });
+  {
+    const ring = [...rect(XF - 0.002, -sumpW / 2 - 0.01, XR + 0.002, sumpW / 2 + 0.01)];
+    const holeShape = xzShape(ring); const inner = new THREE.Path(rect(XF + 0.008, -WB / 2 + 0.008, XR - 0.008, WB / 2 - 0.008).map(([x, z]) => V2(x, -z))); holeShape.holes.push(inner);
+    add('sump_gasket', 'Sump gasket', mesh(extrudeY(holeShape, 0.0015, YSUMP - 0.0015), M.fibre));
+    const pos = [];
+    for (let k = 0; k < 7; k++) { const x = XF + 0.02 + (LB - 0.04) * k / 6; pos.push([x, sumpW / 2 + 0.005], [x, -sumpW / 2 - 0.005]); }
+    pos.push([XF + 0.004, 0.05], [XF + 0.004, -0.05], [XR - 0.004, 0.05], [XR - 0.004, -0.05]);
+    for (const [x, z] of pos) {
+      const gb = boltG(0.02, 0.006, 6, true); gb.rotateX(Math.PI);
+      add('sump_bolt', 'Sump bolt', mesh(gb, M.bolt), { parent: sump, pos: [x, YSUMP - 0.0065, z] });
+    }
+  }
+
+  // ── cylinder head ──
+  let head;
+  {
+    const parts = [];
+    parts.push(extrudeY(xzShape(rect(XF, -HEAD_W / 2, XR, HEAD_W / 2)), 0.058, YH0));             // the deck and ports
+    const wall = xzShape(rect(XF, -HEAD_W / 2, XR, HEAD_W / 2));
+    wall.holes.push(new THREE.Path(rect(XF + 0.009, -HEAD_W / 2 + 0.009, XR - 0.009, HEAD_W / 2 - 0.009).map(([x, z]) => V2(x, -z))));
+    parts.push(extrudeY(wall, YH1 - YH0 - 0.058, YH0 + 0.058));
+    const vx = [];
+    for (let i = 0; i < N; i++) vx.push(cxi(i) - 0.0185, cxi(i) + 0.0185);
+    parts.push(extrudeY(xzShape(rect(XF + 0.012, ZV - 0.025, XR - 0.012, ZV + 0.025), vx.map(x => ({ x, z: ZV, r: 0.0178 }))), YH1 - (YH0 + 0.085), YH0 + 0.085));
+    for (const x of journals) {   // the camshaft's saddles
+      const out = [[ZV + 0.022, YH1], [ZV + 0.022, YC], [ZV + 0.013, YC], ...arcPts(ZV, YC, 0.013, 0, -Math.PI, 12), [ZV - 0.022, YC], [ZV - 0.022, YH1]];
+      parts.push(extrudeX(zyShape(out), 0.018, x - 0.009));
+    }
+    for (const x of journals) for (const z of [-0.062, 0.062]) parts.push(cylY(0.012, 0.017, YH0 + 0.058, x, z, 20));   // head-bolt bosses
+    for (let i = 0; i < N; i++) {      // ports: intake on -z, exhaust on +z
+      parts.push(box(0.034, 0.03, 0.012, cxi(i), YH0 + 0.03, -HEAD_W / 2 - 0.006), box(0.034, 0.03, 0.012, cxi(i), YH0 + 0.035, HEAD_W / 2 + 0.006));
+    }
+    head = add('head', 'Cylinder head', mesh(merge(parts), M.aluCast));
+  }
+  {
+    // head gasket: the bores, the bolts and the water ways
+    const holes = [...bores.map(b => ({ x: b.x, z: 0, r: B / 2 + 0.0015 }))];
+    for (const x of journals) for (const z of [-0.062, 0.062]) holes.push({ x, z, r: 0.0065 });
+    for (let i = 0; i < N; i++) for (const z of [-0.07, 0.07]) holes.push({ x: cxi(i), z, r: 0.004 });
+    add('head_gasket', 'Head gasket (multi-layer steel)', mesh(extrudeY(xzShape(rect(XF + 0.002, -WB / 2 + 0.002, XR - 0.002, WB / 2 - 0.002), holes), GASK, YD), M.gasket));
+  }
+  for (let k = 0; k <= N; k++) for (const z of [-0.062, 0.062]) {
+    const g = boltG(0.165, 0.012, 12, true);
+    add('head_bolt', `Cylinder head bolt, ${z < 0 ? 'intake' : 'exhaust'} side, ${k + 1} of ${N + 1}`, mesh(g, M.bolt), { parent: head, pos: [journals[k], YH0 + 0.075, z] });
+  }
+
+  // ── valvetrain ──
+  const camRotate = (p, a) => { p.obj.rotation.x = a / 2; };
+  // when each valve is open the most (crank radians), and the lobe that does it
+  const NOSE = 1.15, LIFT = 0.0095;
+  const lift = phi => { const f = Math.abs(((phi + Math.PI) % TAU + TAU) % TAU - Math.PI); return f < NOSE ? LIFT * Math.cos(Math.PI / 2 * f / NOSE) ** 2 : 0; };
+  const valves = [];
+  for (let i = 0; i < N; i++) {
+    valves.push({ i, x: cxi(i) - 0.0185, key: 'valve_in', what: 'intake', r: 0.0177, max: TDC[i] + Math.PI * 2 + 1.88 });
+    valves.push({ i, x: cxi(i) + 0.0185, key: 'valve_ex', what: 'exhaust', r: 0.0155, max: TDC[i] + Math.PI * 2 - 1.92 });
+  }
+  for (const v of valves) v.lobe = Math.PI - v.max / 2;   // the lobe's nose, in the camshaft's own turn
+  const liftAt = (v, a) => lift(v.lobe + a / 2 - Math.PI);
+  let cam;
+  {
+    const parts = [cylX(0.012, XR - 0.01 - (XF - 0.04), XF - 0.04, 0, 0, 20)];
+    for (const x of journals) parts.push(cylX(0.013, 0.02, x - 0.01, 0, 0, 24));
+    for (const v of valves) {
+      const pts = [];
+      for (let k = 0; k < 64; k++) { const phi = k / 64 * TAU - Math.PI, a = v.lobe + phi, r = CAMB + lift(phi); pts.push([r * Math.sin(a), r * Math.cos(a)]); }
+      parts.push(extrudeX(zyShape(pts), 0.015, v.x - 0.0075, 4));
+    }
+    cam = add('cam', 'Camshaft', mesh(merge(parts), M.forged), { parent: head, pos: [0, YC, ZV] });
+    cam.anim = a => camRotate(cam, a);
+  }
+  add('cam_seal', 'Camshaft seal', mesh(torusX(0.02, 0.0045, XF - 0.004, YC, ZV), M.rubber), { parent: head });
+  for (let k = 0; k <= N; k++) {
+    const x = journals[k];
+    const out = [[ZV + 0.022, YC], [ZV + 0.013, YC], ...arcPts(ZV, YC, 0.013, 0, Math.PI, 12), [ZV - 0.022, YC], [ZV - 0.022, YC + 0.016], [ZV + 0.022, YC + 0.016]];
+    const capP = add('cam_cap', `Camshaft bearing cap ${k + 1}`, mesh(merge(extrudeX(zyShape(out), 0.018, x - 0.009), box(0.012, 0.004, 0.034, x, YC + 0.018, ZV)), M.aluCast), { parent: head });
+    for (const s of [-1, 1]) add('cap_nut', `Camshaft bearing cap nut, cap ${k + 1}`, mesh(merge(nutG(0.008), cylY(0.004, 0.012, -0.004)), M.bolt), { parent: capP, pos: [x, YC + 0.016, ZV + s * 0.0175] });
+  }
+  const valveG = r => latheY([[0.0001, 0], [r, 0], [r, 0.0016], [r - 0.0022, 0.0038], [0.0055, 0.011], [0.0036, 0.019], [0.0035, 0.0965], [0.0001, 0.0965]], 28);
+  const followerG = merge(latheY([[0.0001, 0.026], [0.0174, 0.026], [0.0174, 0.002], [0.0166, 0], [0.012, 0], [0.012, 0.004], [0.0001, 0.004]], 32));
+  const springBase = YH0 + 0.058, springLen = 0.0315;
+  for (const v of valves) {
+    const c = cylName(v.i), where = `${c}, ${v.what}`;
+    const vp = add(v.key, `${v.what === 'intake' ? 'Intake' : 'Exhaust'} valve, ${c}`, mesh(valveG(v.r), M.steel), { parent: head });
+    vp.anim = a => vp.base.set(v.x, YH0 + 0.0006 - liftAt(v, a), ZV);
+    add('stem_seal', `Valve stem seal, ${where}`, mesh(merge(cylY(0.0062, 0.009, 0), torusY(0.0058, 0.0009, 0, 0.007, 0)), M.seal), { parent: head, pos: [v.x, springBase, ZV] });
+    const sp = add('spring', `Valve spring, ${where}`, mesh(springG(0.0118, springLen, 0.0034, 6.5), M.steel), { parent: head, pos: [v.x, springBase, ZV] });
+    sp.anim = a => { sp.obj.scale.y = (springLen - liftAt(v, a)) / springLen; };
+    const rt = add('retainer', `Valve spring cap, ${where}`, mesh(latheY([[0.004, 0], [0.0145, 0.0006], [0.0145, 0.0026], [0.006, 0.0038], [0.004, 0.0038]], 28), M.steel), { parent: head });
+    rt.anim = a => rt.base.set(v.x, springBase + springLen - liftAt(v, a), ZV);
+    for (const s of [0, 1]) {
+      const g = new THREE.CylinderGeometry(0.0046, 0.0056, 0.0068, 12, 1, false, s * Math.PI + 0.06, Math.PI - 0.12); g.translate(0, 0.0034, 0);
+      const kp = add('keeper', `Valve keeper, ${where}, ${s ? 'second' : 'first'} half`, mesh(g, M.bolt), { parent: head });
+      kp.anim = a => kp.base.set(v.x, YH0 + 0.0885 - liftAt(v, a), ZV);
+    }
+    const fo = add('follower', `Cam follower, ${where}`, mesh(followerG, M.steel), { parent: head });
+    fo.anim = a => fo.base.set(v.x, FOLL - 0.026 - liftAt(v, a), ZV);
+  }
+  // the camshaft's sprocket and bolt
+  const camGear = add('cam_gear', 'Camshaft sprocket', mesh(sprocketG(0.0645, 38, 0.026, 6), M.steel), { parent: head, pos: [XT, YC, ZV] });
+  camGear.anim = a => camRotate(camGear, a);
+  { const g = boltG(0.03, 0.012, 6, true); g.rotateZ(Math.PI / 2); const b = add('cam_bolt', 'Camshaft sprocket bolt', mesh(g, M.bolt), { parent: camGear, pos: [XT - 0.02, YC, ZV] }); b.anim = a => camRotate(b, a); }
+
+  // ── cam cover, its gasket and nuts; the oil filler cap ──
+  {
+    const fp = rrect(LB - 0.012, 0.144, 0.018);
+    const cover = extrudeY(xzShape(fp), 0.056, YH1 + 0.004, { bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.006, bevelSegments: 4 });
+    const ribs = [];
+    for (let k = 0; k < 6; k++) ribs.push(box(0.006, 0.006, 0.11, XF + 0.05 + k * (LB - 0.1) / 5, YH1 + 0.071, 0));
+    const camCover = add('cam_cover', 'Cam cover', group([merge(cover, ...ribs), M.blackPaint]), { parent: head });
+    const fc = add('filler_cap', 'Oil filler cap', mesh(merge(cylY(0.024, 0.018, 0, 0, 0, 24), box(0.032, 0.008, 0.008, 0, 0.022, 0)), M.plastic), { parent: camCover, pos: [0.06, YH1 + 0.068, 0.02] });
+    add('filler_gasket', 'Oil filler cap seal', mesh(torusY(0.0205, 0.0018, 0, 0, 0), M.rubber), { parent: fc, pos: [0.06, YH1 + 0.069, 0.02] });
+    for (const x of [XF + 0.07, 0, XR - 0.07]) for (const z of [-0.052, 0.052])
+      add('cover_nut', 'Cam cover nut', mesh(merge(nutG(0.008), cylY(0.008, 0.002, -0.002, 0, 0, 16)), M.bolt), { parent: camCover, pos: [x, YH1 + 0.068, z] });
+    const outer = xzShape(rrect(LB - 0.012, 0.144, 0.018));
+    outer.holes.push(new THREE.Path(rrect(LB - 0.03, 0.126, 0.01).map(([x, z]) => V2(x, -z))));
+    add('cover_gasket', 'Cam cover gasket', mesh(extrudeY(outer, 0.004, YH1), M.rubber), { parent: head });
+  }
+
+  // ── injectors, clamps, pipes; glow plugs ──
+  const injTop = i => new THREE.Vector3(cxi(i), YH1 + 0.006, -0.085), injTip = i => new THREE.Vector3(cxi(i), YH0 + 0.003, -0.012);
+  for (let i = 0; i < N; i++) {
+    const a = injTip(i), b = injTop(i), len = a.distanceTo(b), dir = b.clone().sub(a).normalize();
+    const g = latheY([[0.0001, 0], [0.0028, 0], [0.0045, 0.004], [0.0045, 0.028], [0.0105, 0.03], [0.0105, len - 0.03], [0.0125, len - 0.028],
+      [0.0125, len - 0.016], [0.008, len - 0.014], [0.008, len], [0.0001, len]], 24);
+    const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+    const spig = cylZ(0.0035, 0.018, -0.026, 0, len - 0.022, 10);
+    add('injector', `Injector, ${cylName(i)}`, group([g, M.steel], [spig, M.zinc]), { parent: head, pos: [a.x, a.y, a.z], quat: q, dir: [0, dir.y, dir.z] });
+    const cl = add('inj_clamp', `Injector clamp, ${cylName(i)}`, mesh(box(0.034, 0.005, 0.016, 0.012, 0.0025, 0), M.forged), { parent: head, pos: [cxi(i), YH1, -0.081] });
+    add('inj_clamp_bolt', `Injector clamp bolt, ${cylName(i)}`, mesh(boltG(0.035, 0.008, 6, true), M.bolt), { parent: cl, pos: [cxi(i) + 0.022, YH1 + 0.005, -0.081] });
+  }
+  const pumpX0 = XF + 0.004, pumpX1 = XF + 0.175, PZ = -0.145, PY = 0.17;
+  const injPump = add('inj_pump', 'Injection pump (distributor type)', group(
+    [merge(cylX(0.042, pumpX1 - pumpX0 - 0.05, pumpX0, PY, PZ, 32), cylX(0.034, 0.05, pumpX1 - 0.05, PY, PZ, 28), box(0.05, 0.02, 0.06, pumpX0 + 0.09, PY + 0.048, PZ),
+      box(0.016, 0.07, 0.07, pumpX0 + 0.008, PY - 0.02, PZ + 0.02)), M.aluCast],
+    [merge(Array.from({ length: N }, (_, k) => { const a = k / N * TAU + 0.4; return cylX(0.005, 0.016, pumpX1, PY + 0.02 * Math.cos(a), PZ + 0.02 * Math.sin(a), 6); })), M.zinc]));
+  const pumpGear = add('pump_gear', 'Injection pump sprocket', mesh(sprocketG(0.0645, 38, 0.026, 4), M.steel), { parent: injPump, pos: [XT, PY, PZ] });
+  pumpGear.anim = a => camRotate(pumpGear, a);
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * TAU + 0.4, s = [pumpX1 + 0.016, PY + 0.02 * Math.cos(a), PZ + 0.02 * Math.sin(a)], top = injTop(i);
+    const pts = [s, [pumpX1 + 0.035 + i * 0.006, PY + 0.06 + i * 0.012, PZ - 0.01], [pumpX1 + 0.03, 0.36, -0.16], [top.x, YH1 + 0.04, -0.125], [top.x, top.y + 0.004, -0.098], [top.x, top.y - 0.004, -0.09]];
+    add('inj_pipe', `Injector pipe, ${cylName(i)}`, group([tubeG(pts, 0.003, 60, 8), M.steel],
+      [merge(cylX(0.006, 0.01, s[0] - 0.005, s[1], s[2], 6), cylZ(0.0058, 0.01, -0.1, top.x, top.y - 0.004, 6)), M.zinc]));
+  }
+  for (let i = 0; i < N; i++) {
+    const x = cxi(i) + 0.022, a = new THREE.Vector3(x, YH0 + 0.004, 0.018), b = new THREE.Vector3(x, YH0 + 0.055, 0.103);
+    const len = a.distanceTo(b), dir = b.clone().sub(a).normalize(), q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+    const g = latheY([[0.0001, 0], [0.0024, 0], [0.0026, 0.024], [0.0045, 0.026], [0.0045, len - 0.02], [0.0065, len - 0.018], [0.0065, len - 0.008],
+      [0.0025, len - 0.006], [0.0025, len + 0.008], [0.0001, len + 0.008]], 18);
+    add('glow', `Glow plug, ${cylName(i)}`, mesh(g, M.zinc), { parent: head, pos: [a.x, a.y, a.z], quat: q, dir: [0, dir.y, dir.z] });
+  }
+  add('glow_bus', 'Glow plug bus bar', mesh(box(cxi(N - 1) - cxi(0) + 0.016, 0.0025, 0.009, (cxi(0) + cxi(N - 1)) / 2 + 0.022, YH0 + 0.063, 0.108), M.copper), { parent: head });
+
+  // ── intake: manifold, EGR valve ──
+  {
+    const im = [cylX(0.03, LB - 0.06, XF + 0.045, YH0 + 0.045, -0.15, 28)];
+    for (let i = 0; i < N; i++) im.push(tubeG([[cxi(i), YH0 + 0.03, -0.1165], [cxi(i), YH0 + 0.034, -0.13], [cxi(i), YH0 + 0.045, -0.145]], 0.016, 12, 14),
+      box(0.042, 0.04, 0.008, cxi(i), YH0 + 0.03, -0.1125));
+    const man = add('intake_manifold', 'Intake manifold', mesh(merge(im), M.aluCast), { parent: head });
+    add('egr_valve', 'EGR valve', group([merge(cylX(0.034, 0.05, XR - 0.012, YH0 + 0.045, -0.15, 24), cylY(0.008, 0.03, YH0 + 0.07, XR + 0.013, -0.15)), M.aluCast],
+      [latheY([[0.0001, 0.02], [0.03, 0.012], [0.03, 0], [0.0001, 0]], 24).translate(XR + 0.013, YH0 + 0.098, -0.15), M.blackPaint]), { parent: man });
+    for (let i = 0; i < N; i++) add('intake_gasket', `Intake manifold gasket, ${cylName(i)}`, mesh(box(0.044, 0.042, 0.0015, cxi(i), YH0 + 0.03, -0.1078), M.fibre), { parent: head });
+  }
+  // ── exhaust: gaskets, manifold, nuts, turbo ──
+  let exh;
+  {
+    const em = [], coll = [0.0, 0.178, YH0 - 0.003];
+    for (let i = 0; i < N; i++) {
+      em.push(tubeG([[cxi(i), YH0 + 0.035, 0.1165], [cxi(i), YH0 + 0.032, 0.137], [cxi(i) * 0.55, YH0 + 0.012, 0.165], [coll[0], coll[2], coll[1]]], 0.0165, 30, 14));
+      em.push(box(0.04, 0.04, 0.008, cxi(i), YH0 + 0.035, 0.1125));
+    }
+    em.push(cylY(0.03, 0.04, YH0 - 0.06, 0, 0.178, 24));
+    exh = add('exh_manifold', 'Exhaust manifold', mesh(merge(em), M.ironDark), { parent: head });
+    for (let i = 0; i < N; i++) {
+      add('exh_gasket', `Exhaust manifold gasket, ${cylName(i)}`, mesh(box(0.042, 0.042, 0.0015, cxi(i), YH0 + 0.035, 0.1078), M.gasket), { parent: head });
+      for (const dx of [-0.016, 0.016]) {
+        const g = nutG(0.008); g.rotateX(Math.PI / 2);
+        add('exh_nut', `Exhaust manifold nut, ${cylName(i)}`, mesh(merge(g, cylZ(0.004, 0.02, -0.012)), M.zinc), { parent: exh, pos: [cxi(i) + dx, YH0 + 0.035 + (dx > 0 ? -0.013 : 0.013), 0.1165] });
+      }
+    }
+    const tx = 0.0, tz = 0.205, ty = YH0 - 0.1;
+    const turbo = [];
+    const th = new THREE.TorusGeometry(0.042, 0.026, 12, 30, TAU * 0.86); th.rotateY(Math.PI / 2); th.translate(tx, ty, tz); turbo.push([th, M.turbine]);
+    turbo.push([merge(cylX(0.03, 0.04, tx - 0.04, ty, tz, 24), cylY(0.022, 0.05, ty + 0.02, tx, 0.178 + 0.01, 20)), M.turbine]);
+    turbo.push([merge(cylX(0.03, 0.048, tx + 0.02, ty, tz, 24)), M.aluCast]);
+    const ch = new THREE.TorusGeometry(0.05, 0.024, 12, 30, TAU * 0.85); ch.rotateY(Math.PI / 2); ch.translate(tx + 0.085, ty, tz);
+    turbo.push([merge(ch, cylX(0.028, 0.04, tx + 0.085, ty, tz, 24), tubeG([[tx + 0.085, ty + 0.06, tz + 0.02], [tx + 0.09, ty + 0.11, tz + 0.05], [tx + 0.09, ty + 0.15, tz + 0.1]], 0.02, 16, 14)), M.alu]);
+    turbo.push([merge(cylY(0.028, 0.03, ty - 0.08, tx + 0.04, tz + 0.06, 24), cylY(0.002, 0.06, ty - 0.05, tx + 0.04, tz + 0.06, 6)), M.blackPaint]);
+    turbo.push([tubeG([[0.0, YD - 0.03, WB / 2 + 0.005], [0.02, ty + 0.06, tz - 0.04], [tx + 0.04, ty + 0.03, tz]], 0.0035, 30, 6), M.steel]);
+    add('turbo', 'Turbo (variable-vane)', group(...turbo), { parent: exh });
+    const hose = add('intake_hose', 'Intake hose', mesh(tubeG([[tx + 0.125, ty, tz], [tx + 0.17, ty + 0.01, tz + 0.01], [tx + 0.21, ty + 0.08, tz + 0.04], [tx + 0.24, ty + 0.16, tz + 0.08]], 0.031, 30, 18), M.rubber));
+    add('hose_sleeve', 'Intake hose sleeve', mesh(merge(torusX(0.033, 0.004, tx + 0.13, ty, tz), torusX(0.033, 0.004, tx + 0.145, ty, tz)), M.steel), { parent: hose });
+  }
+
+  // ── cooling: water pump, the coolant flange and hoses ──
+  add('water_pump', 'Water pump', group([merge(cylX(0.04, 0.012, XF - 0.012, 0.12, 0.07, 28), box(0.02, 0.05, 0.04, XF - 0.006, 0.155, 0.09)), M.aluCast],
+    [sprocketG(0.03, 18, 0.024).translate(XT, 0.12, 0.07), M.steel]));
+  {
+    const fl = add('hose_adapter', 'Coolant flange', mesh(merge(box(0.012, 0.05, 0.05, XR + 0.006, YH0 + 0.05, 0.03), cylX(0.017, 0.03, XR + 0.012, YH0 + 0.06, 0.03, 20), cylX(0.014, 0.025, XR + 0.012, YH0 + 0.035, 0.015, 20)), M.blackPaint), { parent: head });
+    add('coolant_hose', 'Coolant hose, to the radiator (top)', mesh(merge(tubeG([[XR + 0.035, YH0 + 0.06, 0.03], [XR + 0.08, YH0 + 0.06, 0.05], [XR + 0.11, YH0 + 0.02, 0.16], [XR + 0.12, YH0 - 0.04, 0.26]], 0.018, 30, 14),
+      torusX(0.019, 0.003, XR + 0.04, YH0 + 0.06, 0.03)), M.rubber), { parent: fl });
+    add('coolant_hose', 'Coolant hose, to the heater', mesh(merge(tubeG([[XR + 0.035, YH0 + 0.035, 0.015], [XR + 0.07, YH0 + 0.02, -0.02], [XR + 0.09, YH0 + 0.08, -0.1], [XR + 0.1, YH0 + 0.14, -0.15]], 0.012, 30, 12)), M.rubber), { parent: fl });
+  }
+
+  // ── lubrication: oil filter housing, cooler, filter; dipstick ──
+  {
+    const hx = 0.075, hz = -0.15;
+    const hs = add('filter_housing', 'Oil filter housing', mesh(merge(box(0.07, 0.11, 0.05, hx, 0.075, -WB / 2 - 0.025), cylY(0.046, 0.02, 0.0, hx, hz, 28), box(0.05, 0.03, 0.05, hx, 0.03, -0.125)), M.aluCast));
+    add('cooler_gasket', 'Oil cooler gasket', mesh(torusY(0.036, 0.0022, hx, -0.002, hz), M.rubber), { parent: hs });
+    const cooler = [];
+    for (let k = 0; k < 7; k++) cooler.push(cylY(0.045, 0.0028, -0.034 + k * 0.0045, hx, hz, 30));
+    cooler.push(cylY(0.03, 0.034, -0.036, hx, hz, 24));
+    const oc = add('oil_cooler', 'Oil cooler', mesh(merge(cooler), M.alu), { parent: hs });
+    add('filter_gasket', 'Oil filter seal', mesh(torusY(0.031, 0.0022, hx, -0.0385, hz), M.rubber), { parent: oc });
+    add('oil_filter', 'Oil filter', mesh(latheY([[0.0001, -0.142], [0.03, -0.142], [0.038, -0.134], [0.038, -0.045], [0.034, -0.039], [0.0001, -0.039]], 32).translate(hx, 0, hz), M.filter), { parent: oc });
+    const dx = -0.088;
+    const tube = add('dip_tube', 'Dipstick tube', mesh(tubeG([[dx, YSUMP - 0.04, WB / 2 - 0.004], [dx, YSUMP + 0.01, WB / 2 + 0.012], [dx, 0.2, WB / 2 + 0.014], [dx, 0.38, WB / 2 + 0.035], [dx, 0.45, WB / 2 + 0.04]], 0.005, 40, 8), M.steel));
+    add('dip_oring', 'Dipstick tube O-ring', mesh(torusY(0.0062, 0.0015, dx, YSUMP - 0.006, WB / 2 + 0.002), M.rubber), { parent: tube });
+    add('dipstick', 'Dipstick', mesh(merge(new THREE.TorusGeometry(0.014, 0.004, 8, 20).translate(dx, 0.468, WB / 2 + 0.04), cylY(0.0055, 0.012, 0.448, dx, WB / 2 + 0.04, 12)), M.yellow), { parent: tube });
+  }
+
+  // ── timing belt round the crank, water pump, tensioner, camshaft, injection pump and idler; its covers ──
+  const timing = [{ z: 0, y: 0, r: 0.032 }, { z: 0.07, y: 0.12, r: 0.03 }, { z: 0.1, y: 0.28, r: -0.0315 }, { z: ZV, y: YC, r: 0.0645 },
+    { z: PZ, y: PY, r: 0.0645 }, { z: -0.12, y: 0.06, r: -0.0295 }];
+  add('tbelt', CHAIN ? 'Timing chain' : 'Timing belt', CHAIN ? mesh(chainG(beltPath(timing), XT, 0.0095), M.chain) : mesh(beltG(beltPath(timing), XT, 0.025, 0.0035, 0.0095), M.belt));
+  const tens = add('tensioner', CHAIN ? 'Timing chain tensioner' : 'Timing belt tensioner', group([latheX([[0.006, -0.013], [0.028, -0.013], [0.028, 0.013], [0.006, 0.013]], 36).translate(XT, 0.28, 0.1), M.steel],
+    [merge(box(0.008, 0.02, 0.05, XF - 0.004, 0.27, 0.085), cylX(0.01, 0.034, XT - 0.017, 0.28, 0.1, 6)), M.zinc]));
+  void tens;
+  add('idler', CHAIN ? 'Timing chain guide' : 'Timing belt idler', mesh(merge(latheX([[0.006, -0.013], [0.026, -0.013], [0.026, 0.013], [0.006, 0.013]], 36).translate(XT, 0.06, -0.12), cylX(0.009, 0.034, XT - 0.017, 0.06, -0.12, 6)), M.steel));
+  {
+    // a cover's outline: round every pulley with GROW to spare, cut across at CUT (pushed in by INSET for the rim's inside)
+    const cut = 0.2;
+    const hull = (grow, keep, inset = 0) => {
+      const ring = [];
+      for (const p of timing) for (let k = 0; k < 24; k++) { const a = k / 24 * TAU, r = Math.abs(p.r) + grow; ring.push([p.z + r * Math.cos(a), p.y + r * Math.sin(a)]); }
+      const edge = keep(cut + 1) ? cut + inset : cut - inset;
+      return convexHull([...ring.filter(([, y]) => keep(y) && Math.abs(y - cut) > inset), ...ring.filter(([, y]) => !keep(y)).map(([z]) => [z, edge])]);
+    };
+    const coverG = (keep, holes) => {
+      const face = extrudeX(zyShape(hull(0.016, keep), holes), 0.004, XT - 0.026);
+      const rim = zyShape(hull(0.016, keep)); rim.holes.push(new THREE.Path(hull(0.012, keep, 0.004).map(([z, y]) => V2(-z, y))));
+      return merge(face, extrudeX(rim, 0.036, XT - 0.022));
+    };
+    add('tcover_up', 'Timing belt cover, upper', mesh(coverG(y => y >= cut, []), M.plastic));
+    add('tcover_low', 'Timing belt cover, lower', mesh(coverG(y => y <= cut, [{ z: 0, y: 0, r: 0.024 }]), M.plastic));
+  }
+  // ── accessory belt: the crank pulley, alternator, tensioner ──
+  const damper = add('damper', 'Crank pulley (vibration damper)', mesh(ribbedG(0.075, 0.026, 6, 0.25).translate(XA, 0, 0), M.ironDark), { parent: crank });
+  damper.anim = crankAnim(damper);
+  for (let k = 0; k < 4; k++) {
+    const a = k / 4 * TAU + Math.PI / 4, g = boltG(0.03, 0.008, 6, true); g.rotateZ(Math.PI / 2); g.translate(XA - 0.016, 0.032 * Math.cos(a), 0.032 * Math.sin(a));
+    const b = add('damper_bolt', 'Crank pulley bolt', mesh(g, M.bolt), { parent: damper }); b.anim = crankAnim(b);
+  }
+  const AZ = -0.175, AY = 0.0;
+  const alt = add('alternator', 'Alternator', group([merge(cylX(0.058, 0.12, XA + 0.015, AY, AZ, 32), box(0.03, 0.03, 0.03, XA + 0.07, AY + 0.065, AZ + 0.03)), M.alu],
+    [merge(Array.from({ length: 9 }, (_, k) => torusX(0.058, 0.0025, XA + 0.025 + k * 0.012, AY, AZ))), M.aluCast]));
+  const altP = add('alt_pulley', 'Alternator pulley', mesh(ribbedG(0.028, 0.026, 6, 0.3).translate(XA, AY, AZ), M.steel), { parent: alt });
+  altP.anim = a => { altP.obj.rotation.x = a * 2.7; };
+  const accTen = { z: -0.09, y: 0.079, r: -0.0265 };
+  add('acc_tensioner', 'Accessory belt tensioner', mesh(merge(latheX([[0.006, -0.013], [0.022, -0.013], [0.022, 0.013], [0.006, 0.013]], 30).translate(XA, accTen.y, accTen.z), box(0.01, 0.075, 0.016, XA + 0.016, accTen.y - 0.03, accTen.z)), M.steel));
+  add('ribbed', 'Accessory belt (ribbed)', mesh(beltG(beltPath([{ z: 0, y: 0, r: 0.077 }, { ...accTen, r: -0.0265 }, { z: AZ, y: AY, r: 0.0295 }]), XA, 0.022, 0.0035, 0, 6), M.belt));
+}
+
+// ── the scene ──
+const canvas = $('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.localClippingEnabled = true;
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x334455, 0.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(-1, 2, 1.5); scene.add(sun);
+const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = 0.12;
+scene.add(root);
+
+try { build(); } catch (e) { $('loading').textContent = `The engine could not be built: ${e.message}`; throw e; }
+$('loading').hidden = true;
+
+// the catalogue's parts onto the kinds drawn; the rest are listed as elsewhere
+const catRows = [];
+for (const [system, rows] of Object.entries(CFG.parts || {})) for (const r of rows) catRows.push({ system, name: r[0], oem: r[1] });
+const elsewhere = [];
+for (const r of catRows) {
+  // a belt-driven engine's "timing chain" is its oil pump's
+  const key = Object.keys(CAT).find(k => TYPES[k] && CAT[k].test(r.name));
+  if (key) TYPES[key].rows.push(r); else elsewhere.push(r);
+}
+
+// ── moving: every frame, each piece at its place (turning with the crank) plus how far it is off ──
+const box3 = new THREE.Box3();
+let ALPHA = 0.5, RUN = false, EXPLODE = 0, needs = 3;
+const ease = k => k * k * (3 - 2 * k);
+function place() {
+  for (const p of PIECES) {
+    if (p.anim) p.anim(ALPHA);
+    const k = ease(Math.max(p.k, EXPLODE));
+    p.cur.copy(p.dir).multiplyScalar(p.dist * k);
+    if (p.parent) p.cur.add(p.parent.cur);
+    p.obj.position.copy(p.base).add(p.cur);
+  }
+}
+place();
+box3.setFromObject(root);
+const CENTER = box3.getCenter(new THREE.Vector3()), SIZE = box3.getSize(new THREE.Vector3()).length();
+const VIEWS = { front: [-1, 0.35, 0.25], intake: [-0.25, 0.4, -1], exhaust: [0.3, 0.45, 1], top: [-0.05, 1, 0.12], under: [-0.2, -0.9, 0.35] };
+let camTo = null;
+function view(name, now = false) {
+  const d = new THREE.Vector3(...VIEWS[name]).normalize().multiplyScalar(SIZE * 1.25);
+  const to = { p: CENTER.clone().add(d), t: CENTER.clone() };
+  if (now) { camera.position.copy(to.p); controls.target.copy(to.t); controls.update(); }
+  else camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: to.p, t1: to.t, at: performance.now() };
+  needs = 3;
+}
+document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => view(b.dataset.view)));
+view('front', true);
+camera.position.copy(CENTER).add(new THREE.Vector3(-0.85, 0.55, 0.75).normalize().multiplyScalar(SIZE * 1.25)); controls.update();
+
+function resize() {
+  const r = canvas.parentElement.getBoundingClientRect();
+  renderer.setSize(r.width, r.height, false); camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); needs = 3;
+}
+new ResizeObserver(resize).observe(canvas.parentElement); resize();
+controls.addEventListener('change', () => { needs = 2; });
+
+// ── picking a part ──
+let SEL = null;
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+let down = null;
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+  const r = canvas.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObject(root, true).find(h => h.object.visible && !(XRAY && SHELL.includes(h.object.userData.mat0 || h.object.material) && h.object.material.opacity < 1)
+    && (!CUT || h.point.z <= 0.0005));
+  select(hit ? PIECES[hit.object.userData.pid] : null);
+});
+function highlight(p, on) {
+  if (!p) return;
+  p.obj.traverse(o => {
+    if (!o.isMesh) return;
+    if (on) { o.userData.mat0 = o.material; o.material = o.material.clone(); o.material.emissive = new THREE.Color(0x2a5bd7); o.material.emissiveIntensity = 0.55; }
+    else if (o.userData.mat0) { o.material.dispose(); o.material = o.userData.mat0; delete o.userData.mat0; }
+  });
+}
+const oems = t => [...new Set(t.rows.map(r => r.oem).join(', ').split(/,\s*/).filter(Boolean))];
+function select(p) {
+  highlight(SEL, false); SEL = p; highlight(SEL, true); needs = 3;
+  const card = $('card'); card.replaceChildren(el('span', 'Picked', 'label'));
+  if (!p) { card.append(el('p', 'Tap any part of the engine, or a part’s name below. It comes off and goes back on.', 'muted')); $('hudL').textContent = 'Tap a part to pick it'; return; }
+  const t = p.type, n = t.pieces.length;
+  const h = el('h2', p.name); card.append(h);
+  $('hudL').textContent = p.name;
+  const codes = oems(t);
+  if (codes.length) {
+    const c = el('div'); c.append(el('span', 'OEM number' + (codes.length > 1 ? 's' : '') + ' from your catalogue', 'label'), el('div', codes.join(', '), 'oem'));
+    const names = [...new Set(t.rows.map(r => r.name))];
+    c.append(el('div', 'Listed as: ' + names.join('; '), 'muted'));
+    card.append(c);
+  } else card.append(el('p', `Not in your catalogue’s list for this engine: drawn so the engine is whole.${t.note ? ' ' + t.note : ''}`, 'muted'));
+  card.append(el('p', n > 1 ? `${n} of these on the engine.` : 'One on the engine.', 'muted'));
+  const row = el('div', null, 'row');
+  const look = el('button', 'Look at it'); look.type = 'button';
+  look.addEventListener('click', () => { box3.setFromObject(p.obj); const s3 = box3.getSize(new THREE.Vector3()), m = Math.max(0.06, s3.length());
+    box3.expandByVector(new THREE.Vector3(m, m, m).multiplyScalar(0.35)); frame(box3, 1.15); });
+  const one = el('button', p.off ? 'Put it back' : 'Take it off', 'main'); one.type = 'button';
+  one.addEventListener('click', () => { setOff([p], !p.off); select(p); });
+  row.append(one);
+  if (n > 1) {
+    const allOff = t.pieces.every(q => q.off);
+    const b = el('button', allOff ? `Put all ${n} back` : `Take all ${n} off`); b.type = 'button';
+    b.addEventListener('click', () => { setOff(t.pieces, !allOff); select(p); });
+    row.append(b);
+  }
+  row.append(look);
+  card.append(row);
+}
+
+// ── off and on ──
+const anims = new Set();
+let fitWanted = null;
+function setOff(list, off) {
+  for (const p of list) { p.off = off; anims.add(p); }
+  refreshList(); needs = 3;
+  fitWanted = PIECES.some(q => q.off) ? 'out' : 'home';
+}
+const sphere = new THREE.Sphere();
+function fit(how) {
+  if (how === 'home') { const d = camera.position.clone().sub(controls.target).normalize().multiplyScalar(SIZE * 1.25);
+    camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: CENTER.clone().add(d), t1: CENTER.clone(), at: performance.now() }; return; }
+  box3.setFromObject(root);
+  frame(box3, how === 'close' ? 1.25 : 1.06, how === 'out');
+}
+// the camera, from where it looks now, back (or in) until BOX fills the picture with MARGIN to spare
+function frame(bx, margin, onlyOut = false) {
+  const c = bx.getCenter(new THREE.Vector3()), dir = camera.position.clone().sub(controls.target).normalize();
+  const up = camera.up.clone(), right = new THREE.Vector3().crossVectors(up, dir).normalize(), u = new THREE.Vector3().crossVectors(dir, right);
+  const tY = Math.tan(camera.fov * Math.PI / 360), tX = tY * camera.aspect;
+  let need = 0;
+  for (const x of [bx.min.x, bx.max.x]) for (const y of [bx.min.y, bx.max.y]) for (const z of [bx.min.z, bx.max.z]) {
+    const v = new THREE.Vector3(x, y, z).sub(c);
+    const zc = v.dot(dir), dx = Math.abs(v.dot(right)) * margin, dy = Math.abs(v.dot(u)) * margin;
+    need = Math.max(need, zc + dx / tX, zc + dy / tY);
+  }
+  if (onlyOut && need <= camera.position.distanceTo(controls.target) * 1.02) return;
+  camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: c.clone().add(dir.multiplyScalar(need)), t1: c, at: performance.now() };
+  needs = 3;
+}
+
+// ── the strip-down, in workshop order ──
+const STEPS = [
+  ['The accessory belt', ['ribbed']], ['The alternator and its pulley; the belt tensioner', ['alt_pulley', 'alternator', 'acc_tensioner']],
+  ['The timing covers', ['tcover_up', 'tcover_low']], ['The crank pulley and its bolts', ['damper_bolt', 'damper']],
+  [`The timing ${CHAIN ? 'chain' : 'belt'}`, ['tbelt']], ['The tensioner and the idler', ['tensioner', 'idler']],
+  ['The camshaft sprocket', ['cam_bolt', 'cam_gear']], ['The injection pump sprocket', ['pump_gear']],
+  ['The injector pipes', ['inj_pipe']], ['The intake hose', ['hose_sleeve', 'intake_hose']], ['The turbo', ['turbo']],
+  ['The exhaust manifold: its nuts, the manifold, its gaskets', ['exh_nut', 'exh_manifold', 'exh_gasket']],
+  ['The intake manifold and the EGR valve; their gaskets', ['egr_valve', 'intake_manifold', 'intake_gasket']],
+  ['The cam cover: its nuts, the filler cap, the cover and its gasket', ['cover_nut', 'filler_gasket', 'filler_cap', 'cam_cover', 'cover_gasket']],
+  ['The injectors: clamps and injectors', ['inj_clamp_bolt', 'inj_clamp', 'injector']], ['The glow plugs and their bus bar', ['glow_bus', 'glow']],
+  ['The coolant hoses and flange', ['coolant_hose', 'hose_adapter']], ['The cylinder head bolts', ['head_bolt']],
+  ['The cylinder head', ['head']], ['The head gasket', ['head_gasket']],
+  ['On the bench: the camshaft caps and the camshaft, its seal', ['cap_nut', 'cam_cap', 'cam_seal', 'cam']],
+  ['The cam followers', ['follower']], ['The valves: keepers, spring caps, springs, stem seals, valves', ['keeper', 'retainer', 'spring', 'stem_seal', 'valve_in', 'valve_ex']],
+  ['The sump: its bolts and drain plug, the sump, its gasket', ['drain_plug', 'sump_bolt', 'sump', 'sump_gasket']],
+  ['The oil pump, its chain and tensioner', ['chain_tens', 'oil_chain', 'oil_pump']],
+  ['The big-end caps: bolts, caps, lower shells', ['rod_bolt', 'rod_cap']],
+  ['The pistons and rods, out through the top', ['piston']],
+  ['Each piston off its rod: rings, circlips, pins', ['ring', 'circlip', 'gpin', 'rod']],
+  ['The flywheel and its bolts', ['fly_bolt', 'flywheel']],
+  ['The oil filter, cooler and housing', ['oil_filter', 'filter_gasket', 'oil_cooler', 'cooler_gasket', 'filter_housing']],
+  ['The dipstick and its tube', ['dipstick', 'dip_tube', 'dip_oring']], ['The water pump', ['water_pump']], ['The injection pump', ['inj_pump']],
+  ['The crankshaft oil seals', ['crank_seal']], ['The main bearing caps: bolts, caps, lower shells, thrust washers', ['main_bolt', 'main_cap', 'thrust']],
+  ['The crankshaft and its sprocket', ['crank_gear', 'crank']], ['The upper main shells, from the block', ['main_shell', 'rod_shell']],
+].filter(([, keys]) => keys.some(k => TYPES[k] && TYPES[k].pieces.length));
+let STEP = 0;
+const stepPieces = i => STEPS[i][1].flatMap(k => (TYPES[k] ? TYPES[k].pieces : []));
+function showStep() {
+  $('stepText').replaceChildren();
+  const done = STEP === 0 ? null : STEPS[STEP - 1];
+  $('stepText').append(el('b', STEP === 0 ? 'Everything is on' : STEP === STEPS.length ? 'Stripped to the bare block' : `Off: ${done[0]}`));
+  $('stepText').append(el('div', STEP < STEPS.length ? `Next (${STEP + 1} of ${STEPS.length}): ${STEPS[STEP][0]}` : 'Put it back together a step at a time, or all at once.', 'muted'));
+  $('stepBar').style.width = `${Math.round(STEP / STEPS.length * 100)}%`;
+  $('next').disabled = STEP >= STEPS.length; $('back').disabled = STEP <= 0;
+}
+$('next').addEventListener('click', () => { if (STEP < STEPS.length) { setOff(stepPieces(STEP), true); STEP++; showStep(); } });
+$('back').addEventListener('click', () => { if (STEP > 0) { STEP--; setOff(stepPieces(STEP), false); showStep(); } });
+$('all').addEventListener('click', () => { setOff(PIECES.filter(p => p.type.key !== 'block'), true); STEP = STEPS.length; showStep(); });
+$('none').addEventListener('click', () => { setOff(PIECES, false); STEP = 0; showStep(); });
+
+// ── run, X-ray, cut, explode ──
+$('run').addEventListener('click', () => { RUN = !RUN; $('run').setAttribute('aria-pressed', String(RUN)); $('run').textContent = RUN ? 'Stop it' : 'Run it'; needs = 3; });
+let XRAY = false, CUT = false;
+$('xray').addEventListener('click', () => {
+  XRAY = !XRAY; $('xray').setAttribute('aria-pressed', String(XRAY));
+  for (const m of SHELL) { m.transparent = XRAY; m.opacity = XRAY ? 0.2 : 1; m.depthWrite = !XRAY; m.needsUpdate = true; }
+  needs = 3;
+});
+const cutPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0.0005);
+$('cut').addEventListener('click', () => {
+  CUT = !CUT; $('cut').setAttribute('aria-pressed', String(CUT));
+  root.traverse(o => { if (o.isMesh) { o.material.clippingPlanes = CUT ? [cutPlane] : null; o.material.side = CUT ? THREE.DoubleSide : (o.material === M.brass ? THREE.DoubleSide : THREE.FrontSide); o.material.needsUpdate = true; } });
+  for (const m of Object.values(M)) { m.clippingPlanes = CUT ? [cutPlane] : null; m.needsUpdate = true; }
+  needs = 3;
+});
+$('explode').addEventListener('input', e => { EXPLODE = +e.target.value / 100; needs = 3; });
+$('explode').addEventListener('change', () => { place(); fit(EXPLODE > 0 || PIECES.some(q => q.off) ? 'out' : 'home'); });
+
+// ── the list of every part ──
+function refreshList() {
+  document.querySelectorAll('.part').forEach(row => {
+    const t = TYPES[row.dataset.k]; const off = t.pieces.every(p => p.off), some = t.pieces.some(p => p.off);
+    row.classList.toggle('off', off);
+    const b = row.querySelector('button'); b.textContent = off ? 'Put back' : some ? 'Take rest off' : 'Take off';
+  });
+}
+function buildList() {
+  const list = $('list'); list.replaceChildren();
+  for (const g of GROUPS) {
+    const kinds = Object.values(TYPES).filter(t => t.group === g && t.pieces.length);
+    if (!kinds.length) continue;
+    const det = el('details', null, 'group'); det.open = g === 'Valvetrain' || g === 'Cylinder head';
+    const sum = el('summary'); sum.append(el('b', g), el('span', `${kinds.reduce((n, t) => n + t.pieces.length, 0)} pieces`));
+    det.append(sum);
+    for (const t of kinds) {
+      const row = el('div', null, 'part'); row.dataset.k = t.key;
+      row.dataset.find = `${t.name} ${t.rows.map(r => r.name + ' ' + r.oem).join(' ')}`.toLowerCase();
+      const nm = el('span', null, 'name'); nm.append(t.name); nm.append(el('small', `×${t.pieces.length}`));
+      if (t.rows.length) nm.append(el('span', 'In your catalogue', 'cat'));
+      nm.tabIndex = 0; nm.setAttribute('role', 'button');
+      const pick = () => { select(t.pieces[0]); };
+      nm.addEventListener('click', pick); nm.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      const b = el('button', 'Take off'); b.type = 'button';
+      b.addEventListener('click', () => setOff(t.pieces, !t.pieces.every(p => p.off)));
+      row.append(nm, b);
+      const codes = oems(t);
+      if (codes.length) row.append(el('div', codes.join(', '), 'oem'));
+      det.append(row);
+    }
+    list.append(det);
+  }
+  refreshList();
+}
+buildList();
+$('find').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.part').forEach(r => { r.hidden = q && !r.dataset.find.includes(q); });
+  document.querySelectorAll('details.group').forEach(d => { if (q) d.open = [...d.querySelectorAll('.part')].some(r => !r.hidden); });
+});
+if (elsewhere.length) {
+  $('elsewhereCard').hidden = false;
+  for (const r of elsewhere) { const li = el('li'); li.append(r.name + ' '); li.append(el('span', r.oem, 'oem')); $('elsewhere').append(li); }
+}
+
+// ── the words ──
+const yearNote = CFG.year && CFG.asked_year && String(CFG.year) !== String(CFG.asked_year) ? ` (your catalogue lists it to ${CFG.year}; you asked for ${CFG.asked_year})` : CFG.year ? ` (${CFG.year})` : '';
+$('title').textContent = `${CFG.make} ${D.name}`;
+$('kicker').textContent = `From your parts catalogue: ${CFG.make} ${CFG.model}${yearNote}`;
+const pieceCount = PIECES.length - 1, kinds = Object.values(TYPES).filter(t => t.pieces.length && t.key !== 'block').length;
+$('lede').textContent = `${CFG.words[0].toUpperCase()}${CFG.words.slice(1)}${CFG.built_words && !D.known ? ', ' + CFG.built_words : ''}. ${pieceCount} pieces of ${kinds} kinds, each its own part: tap one to take it off and put it back, or strip it down in workshop order. ${catRows.length} of your catalogue’s parts for it are listed.`;
+$('hudR').textContent = `${pieceCount} pieces`;
+$('facts').textContent = D.facts;
+$('honest').textContent = (D.known ? 'Drawn to those published figures.' : 'Drawn from its size.') +
+  ' The castings (block, head, manifolds, housings) are drawn by the machine to fit them, not scanned from this engine: the catalogue lists parts and their numbers, not their shapes. Parts your catalogue lists for this engine carry its OEM numbers; the others are drawn so the engine is whole, and say so.';
+showStep();
+
+// ── the loop ──
+let last = performance.now();
+renderer.setAnimationLoop(now => {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  let moving = false;
+  for (const p of anims) {
+    const want = p.off ? 1 : 0, d = want - p.k;
+    if (Math.abs(d) < 0.002) { p.k = want; anims.delete(p); } else { p.k += Math.sign(d) * Math.min(Math.abs(d), dt * 2.2); moving = true; }
+  }
+  if (RUN) { ALPHA = (ALPHA + dt * 7) % (Math.PI * 4); moving = true; }
+  if (fitWanted && !anims.size) { place(); fit(fitWanted); fitWanted = null; }
+  if (camTo) {
+    const k = Math.min(1, (now - camTo.at) / 600), e = 1 - (1 - k) ** 3;
+    camera.position.lerpVectors(camTo.p0, camTo.p1, e); controls.target.lerpVectors(camTo.t0, camTo.t1, e);
+    if (k >= 1) camTo = null; moving = true;
+  }
+  if (controls.update()) moving = true;
+  if (!moving && needs <= 0) return;
+  if (!moving) needs--;
+  place();
+  renderer.render(scene, camera);
+});
+// for a test to read
+window.__engine = { PIECES, TYPES, STEPS, catRows, elsewhere, select, setOff,
+  look: (p, t) => { camTo = null; camera.position.set(...p); controls.target.set(...t); controls.update(); needs = 3; } };
+</script>

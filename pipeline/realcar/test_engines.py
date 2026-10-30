@@ -169,3 +169,18 @@ def test_an_engine_named_in_the_request_is_the_one_shown(tmp_path):
     assert engines.look("volkswagen", "golf", 2008, idx=idx)["engine"] == "2.0L L4 - Gas"
     # its cams are belt-driven: two belt parts against one chain
     assert r["construction"]["timing"] == "belt"
+
+
+def test_the_engine_page_is_the_engine_asked_for_with_its_figures(tmp_path):
+    import engine_page
+    rows = [{"make": "Volkswagen", "model": "Golf", "engine": "2.0L L4 - Gas", "year": 2008, "name": "Spark Plug", "oem": "P1"},
+            {"make": "Volkswagen", "model": "Golf", "engine": "1.9L L4 - Diesel", "year": 2006, "name": "Engine Valve Spring", "oem": "038-109-623-F"},
+            {"make": "Volkswagen", "model": "Golf", "engine": "1.9L L4 - Diesel", "year": 2006, "name": "Timing Belt", "oem": "038-109-119-P"}]
+    idx = catalogue(tmp_path, rows)
+    cfg = engine_page.config("golf 2008 1.9 tdi", idx)
+    assert (cfg["make"], cfg["engine"], cfg["year"]) == ("Volkswagen", "1.9L L4 - Diesel", "2006")
+    assert cfg["dims"]["name"] == "1.9 TDI" and cfg["dims"]["bore"] == 0.0795 and cfg["dims"]["firing"] == [1, 3, 4, 2]
+    page = open(engine_page.write(cfg, str(tmp_path / "out"))).read()
+    assert "/*CONFIG*/" not in page and "038-109-623-F" in page and "<title>Volkswagen 1.9 TDI engine</title>" in page
+    with pytest.raises(SystemExit):           # a petrol engine: not drawn on this page yet
+        engine_page.config("golf 2008", idx)
