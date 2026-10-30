@@ -272,9 +272,11 @@ def own_engine(asked, electric):
     if not os.path.exists(engines.INDEX) or not asked.get("make"):
         return None
     model, trim = asked.get("model_words") or "", asked.get("spec") or ""
+    # an engine named in the request ("golf 2008 1.9 tdi") picks that engine
+    named = engines.asked_engine(" ".join(str(asked.get(k) or "") for k in ("words", "spec")))
     hit = None
     for m in ([f"{model} {trim}", trim] if trim else []) + [model]:
-        r = engines.look(asked["make"], m, asked.get("year"), trim=trim or None)
+        r = engines.look(asked["make"], m, asked.get("year"), trim=trim or None, engine=named)
         # a trim read as a model (a GTI is its own model in the catalogue) only when the model found is in the
         # words asked: "gti" for a Golf GTI, not "carrera gt" for a 911 Carrera
         said = set(engines.norm(f"{model} {trim}").split())

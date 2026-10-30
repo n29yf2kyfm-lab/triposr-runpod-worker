@@ -345,7 +345,9 @@ def construction(names, sp, make):
     if pushrod:
         ev["valvetrain"] = [f"{make.title()}'s {L}-litre V{sp['cylinders']}: a pushrod engine"]
     belt, chain = has(re.compile(r"timing belt", re.I)), has(re.compile(r"timing chain", re.I))
-    out["timing"] = "belt" if belt and not chain else "chain" if chain or pushrod else None
+    # both listed (a 1.9 TDI's cam belt beside its oil pump's chain): the one with more parts drives the cams
+    out["timing"] = ("belt" if len(belt) > len(chain) else "chain") if belt and chain else \
+        "belt" if belt else "chain" if chain or pushrod else None
     ev["timing"] = (belt if out["timing"] == "belt" else chain)[:3]
     t, sc = has(TURBO), has(SUPER)
     out["induction"] = "turbo" if t else "supercharged" if sc else None
@@ -372,9 +374,30 @@ def built_words(c):
     return ", ".join(x for x in w if x)
 
 
-def look(make, model, year=None, idx=None, trim=None):
+# a request's fuel words: "1.9 tdi", "320d", "2.0 tfsi", "1.0 ecoboost"
+DIESEL_WORDS = re.compile(r"\b(?:diesel|tdi|tdci|cdi|hdi|bluehdi|dci|crdi|crd|jtd|jtdm|multijet|d4d|gtd|tdv6|tdv8|sdv6|"
+                          r"dtec|ddis|[a-z]?\d{3}d)\b")
+PETROL_WORDS = re.compile(r"\b(?:petrol|gas|gasoline|tsi|tfsi|fsi|ecoboost|vtec|gdi|puretech|tce|vti)\b")
+
+
+def asked_engine(text):
+    """The engine a request names, if any: its litres ("1.9") and fuel ("tdi": diesel), {litres, fuel}; or None."""
+    t = (text or "").lower()
+    m = re.search(r"(?<![\d.])(\d\.\d)(?![\d.])", t)
+    fuel = "diesel" if DIESEL_WORDS.search(t) else "petrol" if PETROL_WORDS.search(t) else None
+    return {"litres": float(m.group(1)) if m else None, "fuel": fuel} if m or fuel else None
+
+
+def _fits(e, engine):
+    s = spec(e) or {}
+    return ((engine.get("litres") is None or (s.get("litres") is not None and abs(s["litres"] - engine["litres"]) < 0.05))
+            and (engine.get("fuel") is None or s.get("fuel") == engine["fuel"]))
+
+
+def look(make, model, year=None, idx=None, trim=None, engine=None):
     """MAKE MODEL YEAR's engine from the index: {"engine", "spec", "words", "others", "parts", "matched"}, or None.
-    TRIM ("Turbo S", "GTI") picks, of the year's engines, the one the catalogue names on that trim."""
+    TRIM ("Turbo S", "GTI") picks, of the year's engines, the one the catalogue names on that trim. ENGINE
+    (asked_engine's: "1.9 tdi") picks the one of those litres and fuel, from the nearest year that has it."""
     idx = idx or index()
     mk = MAKE_ALIAS.get(norm(make), norm(make))
     models = idx["vehicles"].get(mk) or {}
@@ -392,6 +415,10 @@ def look(make, model, year=None, idx=None, trim=None):
     want = str(year) if year and str(year) in years else None
     if not want and year and ys:
         want = min(ys, key=lambda y: abs(int(y) - int(year)))
+    if engine and year and ys and not (want and any(_fits(e, engine) for e in years[want])):
+        # the engine asked is not that year's: the nearest year it was in ("golf 2008 1.9 tdi": 2006's)
+        near = sorted((y for y in ys if any(_fits(e, engine) for e in years[y])), key=lambda y: abs(int(y) - int(year)))
+        want = near[0] if near else want
     recent = ys[-RECENT_YEARS:] or list(years)
     pool = years[want] if want else sum((years[y] for y in recent), collections.Counter())
     ranked = [e for e, _ in pool.most_common()]
@@ -417,6 +444,8 @@ def look(make, model, year=None, idx=None, trim=None):
         if score and score.most_common(1)[0][1] > 0:
             by_trim = score.most_common(1)[0][0]
             ranked = [by_trim] + [x for x in ranked if x != by_trim]
+    fit = [x for x in ranked if engine and _fits(x, engine)]
+    ranked = fit + [x for x in ranked if x not in fit]        # the engine named before the trim's
     e = ranked[0]
     info = idx["engines"].get(f"{mk}|{e}") or {}
     sp = info.get("spec") or spec(e)
@@ -429,7 +458,7 @@ def look(make, model, year=None, idx=None, trim=None):
             "others": [{"engine": o, "words": describe(spec(o))} for o in ranked[1:6]],
             "parts": parts, "part_count": count, "left_out": left_out,
             "matched": {"make": mk, "models": ms[:4], "models_n": len(ms), "year": want, "asked_year": year,
-                        "trim": trim if by_trim else None,
+                        "trim": trim if by_trim else None, "engine": engine if fit else None,
                         "years": None if want else f"{recent[0]}-{recent[-1]}" if recent and recent[0].isdigit() else None}}
 
 

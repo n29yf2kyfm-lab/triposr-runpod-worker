@@ -153,3 +153,19 @@ def test_a_timing_belt_a_hybrid_and_an_electric_car():
     assert build_of("toyota", "1.8L L4 - FULL HYBRID EV-GAS (FHEV)", [])["hybrid"]
     assert build_of("tesla", "Electric", []) is None
     assert "twin-turbo" in engines.built_words(build_of("porsche", "3.8L H6 - Gas", ["Turbocharger"]))
+
+
+def test_an_engine_named_in_the_request_is_the_one_shown(tmp_path):
+    # "golf 2008 1.9 tdi": the 1.9 diesel, from the nearest year the catalogue has it, not the year's commonest engine
+    rows = [{"make": "Volkswagen", "model": "Golf", "engine": "2.0L L4 - Gas", "year": y, "name": "Spark Plug", "oem": f"P{y}{i}"}
+            for y in (2006, 2008) for i in range(3)]
+    rows += [{"make": "Volkswagen", "model": "Golf", "engine": "1.9L L4 - Diesel", "year": 2006, "name": n, "oem": n[:3]}
+             for n in ("Timing Belt", "Engine Timing Belt Tensioner", "Engine Timing Chain")]
+    idx = catalogue(tmp_path, rows)
+    assert engines.asked_engine("golf 1.9 tdi") == {"litres": 1.9, "fuel": "diesel"}
+    assert engines.asked_engine("golf 5d") is None and engines.asked_engine("bmw 320d")["fuel"] == "diesel"
+    r = engines.look("volkswagen", "golf", 2008, idx=idx, engine=engines.asked_engine("1.9 tdi"))
+    assert (r["engine"], r["matched"]["year"]) == ("1.9L L4 - Diesel", "2006")
+    assert engines.look("volkswagen", "golf", 2008, idx=idx)["engine"] == "2.0L L4 - Gas"
+    # its cams are belt-driven: two belt parts against one chain
+    assert r["construction"]["timing"] == "belt"

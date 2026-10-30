@@ -670,6 +670,8 @@ function onCar(gltf) {
   runSetup();
   rampSetup();
   redraw();
+  // #engine: straight to the engine on its own, the car put away (a link to show someone the engine)
+  if (location.hash === '#engine') { showTab('engine'); runView(true); }
   // ?debug: the page's state for a test to read
   if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, RUN, RAMP, camera, controls, renderer, scene };
 }
@@ -1716,8 +1718,7 @@ const MPARTS = [
 // a part's name: the timing drive as the catalogue has it, a belt or a chain
 function partName(key) {
   const q = (ESPEC.electric ? MPARTS : EPARTS).find(p => p[0] === key);
-  const t = key === 'chain' && OWN && OWN.parts && OWN.parts.Timing ? OWN.parts.Timing.map(r => r[0]).join(' ') : '';
-  if (/belt/i.test(t) && !/chain/i.test(t)) return 'Timing belt';
+  if (key === 'chain' && BUILT.timing === 'belt') return 'Timing belt';     // engines.construction's: the drive with more parts
   return q ? q[1] : key;
 }
 const PART_OFF = { cover: 0.24, plugs: 0.34, manifolds: 0.16, chain: 0.16, cams: 0.18, head: 0.12, sump: 0.12, pistons: 0.10, crank: 0.12, block: 0,
