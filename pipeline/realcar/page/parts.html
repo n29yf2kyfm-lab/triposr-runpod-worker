@@ -1,0 +1,611 @@
+<title>Parts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One engine, or one car, part by part: the 3D model beside (or above, on a phone) the selected part, the
+   strip-down in workshop order and every part listed with its catalogue numbers. */
+:root {
+  --bg: #e9ecee; --surface: #ffffff; --ink: #14181c; --muted: #58626b; --line: #d3d9de; --chip: #f2f4f6;
+  --accent: #b9411b; --accent-ink: #ffffff; --sel: #1f55c9; --off: #8b949c; --stage: #dfe3e6;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #101418; --surface: #182027; --ink: #e8edf1; --muted: #9ba7b2; --line: #2b3640; --chip: #1f2932;
+  --accent: #f0794f; --accent-ink: #1a0f0a; --sel: #7aa5ff; --off: #6c7882; --stage: #1b232a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #101418; --surface: #182027; --ink: #e8edf1; --muted: #9ba7b2; --line: #2b3640; --chip: #1f2932;
+  --accent: #f0794f; --accent-ink: #1a0f0a; --sel: #7aa5ff; --off: #6c7882; --stage: #1b232a; color-scheme: dark }
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body) }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 16px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) }
+@media (min-width: 900px) { .wrap { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start;
+    grid-template-areas: "head panel" "stage panel" }
+  .head { grid-area: head } .stage { grid-area: stage; position: sticky; top: 12px } .panel { grid-area: panel } }
+/* a phone: the engine stays in sight at the top while the buttons and the list scroll under it */
+@media (max-width: 899px) { .stage { position: sticky; top: 0; z-index: 5; background: var(--bg);
+    padding-block: max(6px, env(safe-area-inset-top, 0px)) 6px }
+  .view { height: 42vh; min-height: 250px }
+  .row.views, .row.systems { flex-wrap: nowrap; overflow-x: auto } .views button, .systems button { flex: none } }
+h1 { font: 700 2.3rem/1 var(--display); margin: 0; letter-spacing: .01em; text-wrap: balance }
+h2 { font: 600 1.25rem/1.15 var(--display); margin: 0; letter-spacing: .02em }
+.kicker { font: 600 .78rem/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px }
+.lede { margin: 6px 0 0; color: var(--muted); max-width: 62ch }
+.stage { display: grid; gap: 10px; min-width: 0 }
+.view { position: relative; height: min(62vh, 620px); min-height: 320px; border-radius: 12px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 35%, var(--surface), var(--stage)); border: 1px solid var(--line) }
+.view canvas { display: block; width: 100%; height: 100%; touch-action: none }
+.hud { position: absolute; left: 10px; top: 10px; right: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none }
+.hud span { background: color-mix(in srgb, var(--surface) 85%, transparent); border: 1px solid var(--line); border-radius: 6px;
+  padding: 3px 8px; font-size: .85rem; color: var(--muted) }
+.load { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted) }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+button { font: 600 1rem/1 var(--display); letter-spacing: .03em; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); padding: 10px 12px; cursor: pointer; min-height: 42px }
+button:hover { border-color: var(--muted) }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--sel); outline-offset: 2px }
+button.main { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+button:disabled { opacity: .4; cursor: default }
+.views button, .systems button { font-size: .9rem; padding: 8px 10px; min-height: 36px }
+.systems { margin-top: 2px }
+.part .name a, .card a { color: var(--sel) }
+.panel { display: grid; gap: 14px; min-width: 0 }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; min-width: 0 }
+.label { font: 600 .78rem/1 var(--display); letter-spacing: .09em; text-transform: uppercase; color: var(--muted) }
+.oem { font: 500 .9rem/1.35 var(--mono); overflow-wrap: anywhere }
+.muted { color: var(--muted) }
+.step b { font: 600 1.15rem/1.2 var(--display); letter-spacing: .02em }
+.meter { height: 6px; border-radius: 3px; background: var(--chip); overflow: hidden }
+.meter i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s }
+input[type=range] { width: 100%; accent-color: var(--accent) }
+input[type=search] { width: 100%; font: 16px var(--body); padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--ink) }
+details.group { border-top: 1px solid var(--line); padding-top: 8px }
+details.group > summary { font: 600 1.1rem/1.2 var(--display); letter-spacing: .02em; cursor: pointer; padding: 4px 0;
+  display: flex; justify-content: space-between; gap: 8px }
+details.group > summary span { color: var(--muted); font-family: var(--body); font-weight: 500; font-size: .9rem }
+.part { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; padding: 8px 0;
+  border-bottom: 1px dashed var(--line) }
+.part:last-child { border-bottom: 0 }
+.part .name { cursor: pointer; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px }
+.part .name small { color: var(--muted); text-decoration: none; margin-left: 4px }
+.part .oem { grid-column: 1 / -1; color: var(--muted); font-size: .82rem }
+.part.off .name { color: var(--off); text-decoration: line-through }
+.part button { min-height: 34px; padding: 6px 10px; font-size: .9rem }
+.cat { display: inline-block; font: 600 .7rem/1 var(--display); letter-spacing: .08em; text-transform: uppercase;
+  border-radius: 4px; padding: 3px 5px; border: 1px solid var(--accent); color: var(--accent); margin-left: 6px; vertical-align: 2px }
+ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 4px }
+.note { font-size: .92rem; color: var(--muted); max-width: 66ch; margin: 0 }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <p class="kicker" id="kicker">From your parts catalogue</p>
+    <h1 id="title">Parts</h1>
+    <p class="lede" id="lede"></p>
+  </header>
+  <section class="stage" id="stage" aria-label="The model">
+    <div class="view" id="view">
+      <canvas id="c" aria-label="The model in 3D: drag to turn it, pinch or scroll to zoom, tap a part to pick it"></canvas>
+      <div class="hud"><span id="hudL">Tap a part to pick it</span><span id="hudR"></span></div>
+      <div class="load" id="loading">Building it…</div>
+    </div>
+    <div class="row systems" id="systems" role="group" aria-label="Which part to show" hidden></div>
+    <div class="row views" id="views" role="group" aria-label="Look from"></div>
+  </section>
+
+  <section class="panel">
+    <div class="card" id="card" aria-live="polite">
+      <span class="label">Picked</span>
+      <p class="muted" style="margin:0" id="intro">Tap any part, or a part's name below. It comes off and goes back on.</p>
+    </div>
+
+    <div class="card step">
+      <span class="label">Strip it down, in workshop order</span>
+      <div id="stepText"><b>Everything is on</b></div>
+      <div class="meter" aria-hidden="true"><i id="stepBar"></i></div>
+      <div class="row">
+        <button type="button" id="back">Put back</button>
+        <button type="button" class="main" id="next">Take off next</button>
+        <button type="button" id="all">Strip it all</button>
+        <button type="button" id="none">Build it all</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" id="tools">
+        <button type="button" id="run" aria-pressed="false">Run it</button>
+        <button type="button" id="xray" aria-pressed="false">X-ray</button>
+        <button type="button" id="cut" aria-pressed="false">Cut in half</button>
+      </div>
+      <label class="label" for="explode">Exploded view</label>
+      <input type="range" id="explode" min="0" max="100" value="0">
+    </div>
+
+    <div class="card">
+      <span class="label">Every part</span>
+      <input type="search" id="find" placeholder="Find a part or an OEM number" aria-label="Find a part or an OEM number">
+      <div id="list"></div>
+    </div>
+
+    <div class="card" id="elsewhereCard" hidden>
+      <span class="label" id="elseLabel">In your catalogue, but not drawn here</span>
+      <ul class="plain" id="elsewhere"></ul>
+    </div>
+
+    <div class="card">
+      <span class="label" id="aboutLabel">About it</span>
+      <p class="note" id="facts"></p>
+      <p class="note" id="honest"></p>
+    </div>
+  </section>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="application/json" id="engine-config">/*CONFIG*/{}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const CFG = JSON.parse(document.getElementById('engine-config').textContent);
+const $ = id => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+
+/*KIT*/
+
+// ── the parts: each kind (TYPES) and each piece of it; a piece rides on its parent (a valve in the head) ──
+const root = new THREE.Group();
+const TYPES = {}, PIECES = [];
+let BUILD = null;
+const sysOf = g => (BUILD && BUILD.systems ? ((BUILD.systems.find(s => s.groups.includes(g)) || {}).key || null) : null);
+// while COLLECT is set, kind() and add() draw into it, not onto the page: a whole engine in the car as one piece
+let COLLECT = null;
+function kind(key, name, group, dir, dist, cat = null, note = '') {
+  const t = { key, name, group, sys: sysOf(group), dir: new THREE.Vector3(...dir).normalize(), dist, cat, note, pieces: [], rows: [] };
+  (COLLECT ? COLLECT.types : TYPES)[key] = t;
+  return t;
+}
+function add(key, name, obj, opts = {}) {
+  const t = (COLLECT ? COLLECT.types : TYPES)[key];
+  if (!t) throw new Error('no kind ' + key);
+  const list = COLLECT ? COLLECT.list : PIECES;
+  const p = { id: list.length, type: t, name, obj, parent: opts.parent || null, base: new THREE.Vector3(...(opts.pos || [0, 0, 0])),
+    dir: opts.dir ? new THREE.Vector3(...opts.dir).normalize() : t.dir, dist: opts.dist ?? t.dist, off: false, k: 0,
+    anim: opts.anim || null, cur: new THREE.Vector3() };
+  if (p.parent && p.parent.id >= p.id) throw new Error('parent after child');
+  if (opts.rot) obj.rotation.set(...opts.rot);
+  if (opts.quat) obj.quaternion.copy(opts.quat);
+  obj.position.copy(p.base);
+  if (COLLECT) { list.push(p); return p; }
+  obj.traverse(o => { o.userData.pid = p.id; if (o.isMesh) o.castShadow = o.receiveShadow = true; });
+  PIECES.push(p); t.pieces.push(p); root.add(obj);
+  return p;
+}
+// what FN draws, put together (each piece at ALPHA), merged into one mesh a material
+function collect(fn, alpha = 0.5) {
+  COLLECT = { types: {}, list: [] };
+  let c;
+  try { fn(); } finally { c = COLLECT; COLLECT = null; }
+  const g = new THREE.Group();
+  for (const p of c.list) { if (p.anim) p.anim(alpha); p.obj.position.copy(p.base); g.add(p.obj); }
+  g.updateMatrixWorld(true);
+  const byMat = new Map();
+  g.traverse(o => {
+    if (!o.isMesh) return;
+    const geo = (o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone()).applyMatrix4(o.matrixWorld);
+    for (const k of Object.keys(geo.attributes)) if (k !== 'position' && k !== 'normal') geo.deleteAttribute(k);
+    geo.clearGroups();
+    if (!byMat.has(o.material)) byMat.set(o.material, []);
+    byMat.get(o.material).push(geo);
+  });
+  const out = new THREE.Group();
+  for (const [m, gs] of byMat) out.add(new THREE.Mesh(mergeGeometries(gs, false), m));
+  return out;
+}
+const mesh = (g, m) => new THREE.Mesh(g, m);
+const group = (...items) => { const g = new THREE.Group(); for (const [geo, m] of items) g.add(mesh(geo, m)); return g; };
+
+/*BUILD*/
+
+// ── the scene ──
+const canvas = $('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+const PHONE = matchMedia('(pointer: coarse)').matches;
+const PR = Math.min(devicePixelRatio || 1, PHONE ? 1.5 : 2);
+renderer.setPixelRatio(PR);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.localClippingEnabled = true;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+scene.add(new THREE.HemisphereLight(0xf2f4f7, 0x2b2723, 0.3));
+// a workshop's light: a big warm key from above the front that throws shadows, a cool light from behind
+const key = new THREE.DirectionalLight(0xfff2e4, 2.7); key.castShadow = true;
+key.shadow.mapSize.set(PHONE ? 1024 : 2048, PHONE ? 1024 : 2048); key.shadow.bias = -0.0003;
+const back = new THREE.DirectionalLight(0xdce6ff, 0.8);
+scene.add(key, key.target, back, back.target);
+const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 80);
+const W0 = BUILD.words ? BUILD.words(null) : {};
+// the picture: rendered, then shaded where parts crowd one another (ambient occlusion), then to the screen
+let composer = null, aoPass = null;
+try {
+  composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
+  composer.setPixelRatio(PR);
+  composer.addPass(new RenderPass(scene, camera));
+  aoPass = new GTAOPass(scene, camera, 1, 1);
+  aoPass.updateGtaoMaterial({ radius: BUILD.ao || 0.045, distanceExponent: 1.4, thickness: (BUILD.ao || 0.045) * 11, scale: 1.1, samples: PHONE ? 8 : 16 });
+  aoPass.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 16 });
+  aoPass.blendIntensity = 0.9;
+  // see-through things (a body drawn for its place, glass) are not surfaces to shade round
+  aoPass.overrideVisibility = function () {
+    const cache = this._visibilityCache;
+    this.scene.traverse(o => { cache.set(o, o.visible); if (o.isPoints || o.isLine || o.userData.noAO || (o.isMesh && o.material.transparent)) o.visible = false; });
+  };
+  composer.addPass(aoPass);
+  composer.addPass(new OutputPass());
+} catch (e) { console.warn('plain rendering:', e); composer = null; aoPass = null; }
+const draw = () => (composer ? composer.render() : renderer.render(scene, camera));
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = 0.12;
+scene.add(root);
+
+try { BUILD.build(); } catch (e) { $('loading').textContent = `It could not be built: ${e.message}`; throw e; }
+$('loading').hidden = true;
+const SHELLS = BUILD.shell || SHELL;
+// things drawn for their place only (a see-through body), each with its own switch
+const EXTRAS = BUILD.extras || [];
+for (const x of EXTRAS) { root.add(x.obj); x.obj.visible = x.on !== false; }
+
+// the catalogue's parts onto the kinds drawn; the rest are listed as elsewhere
+const catRows = [];
+for (const [system, rows] of Object.entries(CFG.parts || {})) for (const r of rows) catRows.push({ system, name: r[0], oem: r[1] });
+const elsewhere = [];
+for (const r of catRows) {
+  // a belt-driven engine's "timing chain" is its oil pump's
+  const key = (BUILD.catRow && BUILD.catRow(r)) || Object.keys(BUILD.cat).find(k => TYPES[k] && BUILD.cat[k].test(r.name));
+  if (key) TYPES[key].rows.push(r); else elsewhere.push(r);
+}
+
+// ── moving: every frame, each piece at its place (turning with the crank) plus how far it is off ──
+const box3 = new THREE.Box3();
+let ALPHA = 0.5, RUN = false, EXPLODE = 0, needs = 3;
+const ease = k => k * k * (3 - 2 * k);
+function place() {
+  for (const p of PIECES) {
+    if (p.anim) p.anim(ALPHA);
+    const k = ease(Math.max(p.k, EXPLODE));
+    p.cur.copy(p.dir).multiplyScalar(p.dist * k);
+    if (p.parent) p.cur.add(p.parent.cur);
+    p.obj.position.copy(p.base).add(p.cur);
+  }
+}
+place();
+box3.setFromObject(root);
+const CENTER = box3.getCenter(new THREE.Vector3()), SIZE = box3.getSize(new THREE.Vector3()).length();
+key.position.copy(CENTER).add(new THREE.Vector3(-0.55, 1.25, 0.7).normalize().multiplyScalar(SIZE * 1.8)); key.target.position.copy(CENTER);
+back.position.copy(CENTER).add(new THREE.Vector3(0.8, 0.45, -0.9).normalize().multiplyScalar(SIZE * 1.8)); back.target.position.copy(CENTER);
+Object.assign(key.shadow.camera, { left: -SIZE * 0.82, right: SIZE * 0.82, top: SIZE * 0.82, bottom: -SIZE * 0.82, near: 0.05, far: SIZE * 4 });
+key.shadow.normalBias = SIZE * 0.0018;
+key.shadow.camera.updateProjectionMatrix();
+// the floor's shadow under it; it goes while a part is lower than the bottom
+const FLOOR_Y = BUILD.floorY ?? box3.min.y - 0.002;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(SIZE * 4, SIZE * 4).rotateX(-Math.PI / 2).translate(CENTER.x, FLOOR_Y, CENTER.z), new THREE.ShadowMaterial({ opacity: 0.2 }));
+floor.receiveShadow = true; scene.add(floor);
+const lowBox = new THREE.Box3();
+const VIEWS = BUILD.views;
+let camTo = null, HOME_D = SIZE * 1.25;
+function view(name, now = false) {
+  const d = new THREE.Vector3(...VIEWS[name][1]).normalize().multiplyScalar(HOME_D);
+  const to = { p: CENTER.clone().add(d), t: CENTER.clone() };
+  if (now) { camera.position.copy(to.p); controls.target.copy(to.t); controls.update(); }
+  else camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: to.p, t1: to.t, at: performance.now() };
+  needs = 3;
+}
+for (const [k, [label]] of Object.entries(VIEWS)) {
+  const b = el('button', label); b.type = 'button'; b.addEventListener('click', () => view(k)); $('views').append(b);
+}
+view(Object.keys(VIEWS)[0], true);
+camera.position.copy(CENTER).add(new THREE.Vector3(...(BUILD.firstDir || [-0.85, 0.55, 0.75])).normalize().multiplyScalar(SIZE * 1.25)); controls.update();
+// a narrow (phone) picture: back off until the whole of it is in it
+function fitAll(margin, only = null) {   // how far back the camera must be for every shown part's outline to be in the picture
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  const right = new THREE.Vector3().crossVectors(camera.up, dir).normalize(), u = new THREE.Vector3().crossVectors(dir, right);
+  const tY = Math.tan(camera.fov * Math.PI / 360), tX = tY * camera.aspect, v = new THREE.Vector3();
+  let need = 0;
+  root.updateMatrixWorld(true);
+  root.traverse(o => {
+    if (!o.isMesh || (only && !only(o))) return;
+    const pa = o.geometry.attributes.position, step = Math.max(1, Math.floor(pa.count / 300));
+    for (let i = 0; i < pa.count; i += step) {
+      v.fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld).sub(controls.target);
+      const zc = v.dot(dir); need = Math.max(need, zc + Math.abs(v.dot(right)) * margin / tX, zc + Math.abs(v.dot(u)) * margin / tY);
+    }
+  });
+  return need;
+}
+resize();
+HOME_D = Math.max(SIZE * (BUILD.homeMin ?? 1.25), fitAll(1.08));
+{ const d = camera.position.clone().sub(CENTER).normalize(); camera.position.copy(CENTER).addScaledVector(d, HOME_D); controls.update(); }
+
+function resize() {
+  const r = canvas.parentElement.getBoundingClientRect();
+  renderer.setSize(r.width, r.height, false); if (composer) composer.setSize(Math.max(1, r.width), Math.max(1, r.height));
+  camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); needs = 3;
+}
+new ResizeObserver(resize).observe(canvas.parentElement); resize();
+controls.addEventListener('change', () => { needs = 2; });
+
+// ── picking a part ──
+let SEL = null;
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+let down = null;
+const shown = o => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+  const r = canvas.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObject(root, true).find(h => h.object.userData.pid != null && shown(h.object)
+    && !(XRAY && SHELLS.includes(h.object.userData.mat0 || h.object.material) && h.object.material.opacity < 1)
+    && (!CUT || cutPlane.distanceToPoint(h.point) >= -0.0005));
+  select(hit ? PIECES[hit.object.userData.pid] : null);
+});
+function highlight(p, on) {
+  if (!p) return;
+  p.obj.traverse(o => {
+    if (!o.isMesh) return;
+    if (on) { o.userData.mat0 = o.material; o.material = o.material.clone(); o.material.onBeforeCompile = o.userData.mat0.onBeforeCompile;
+      o.material.emissive = new THREE.Color(0x2a5bd7); o.material.emissiveIntensity = 0.55; }
+    else if (o.userData.mat0) { o.material.dispose(); o.material = o.userData.mat0; delete o.userData.mat0; }
+  });
+}
+const oems = t => [...new Set(t.rows.map(r => r.oem).join(', ').split(/,\s*/).filter(Boolean))];
+function select(p) {
+  highlight(SEL, false); SEL = p; highlight(SEL, true); needs = 3;
+  const card = $('card'); card.replaceChildren(el('span', 'Picked', 'label'));
+  if (!p) { card.append(el('p', W0.intro || 'Tap any part, or a part’s name below. It comes off and goes back on.', 'muted')); $('hudL').textContent = 'Tap a part to pick it'; return; }
+  const t = p.type, n = t.pieces.length;
+  const h = el('h2', p.name); card.append(h);
+  $('hudL').textContent = p.name;
+  const codes = oems(t);
+  if (codes.length) {
+    const c = el('div'); c.append(el('span', 'OEM number' + (codes.length > 1 ? 's' : '') + ' from your catalogue', 'label'), el('div', codes.join(', '), 'oem'));
+    const names = [...new Set(t.rows.map(r => r.name))];
+    c.append(el('div', 'Listed as: ' + names.join('; '), 'muted'));
+    card.append(c);
+  } else card.append(el('p', `${W0.unlisted || 'Not in your catalogue’s list: drawn so it is whole.'}${t.note ? ' ' + t.note : ''}`, 'muted'));
+  if (t.link) { const a = el('a', t.link[0]); a.href = t.link[1]; a.target = '_blank'; a.rel = 'noopener'; const pp = el('p'); pp.append(a); card.append(pp); }
+  card.append(el('p', n > 1 ? `${n} of these on the ${W0.thing || 'engine'}.` : `One on the ${W0.thing || 'engine'}.`, 'muted'));
+  const row = el('div', null, 'row');
+  const look = el('button', 'Look at it'); look.type = 'button';
+  look.addEventListener('click', () => { box3.setFromObject(p.obj); const s3 = box3.getSize(new THREE.Vector3()), m = Math.max(0.06, s3.length());
+    box3.expandByVector(new THREE.Vector3(m, m, m).multiplyScalar(0.35)); frame(box3, 1.15); });
+  const one = el('button', p.off ? 'Put it back' : 'Take it off', 'main'); one.type = 'button';
+  one.addEventListener('click', () => { setOff([p], !p.off); select(p); });
+  row.append(one);
+  if (n > 1) {
+    const allOff = t.pieces.every(q => q.off);
+    const b = el('button', allOff ? `Put all ${n} back` : `Take all ${n} off`); b.type = 'button';
+    b.addEventListener('click', () => { setOff(t.pieces, !allOff); select(p); });
+    row.append(b);
+  }
+  row.append(look);
+  card.append(row);
+}
+
+// ── off and on ──
+const anims = new Set();
+let fitWanted = null;
+function setOff(list, off) {
+  for (const p of list) { p.off = off; anims.add(p); }
+  refreshList(); needs = 3;
+  fitWanted = PIECES.some(q => q.off) ? 'out' : 'home';
+}
+function fit(how) {
+  if (how === 'home' && SYS === 'all') { const d = camera.position.clone().sub(controls.target).normalize().multiplyScalar(HOME_D);
+    camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: CENTER.clone().add(d), t1: CENTER.clone(), at: performance.now() }; return; }
+  frame(shownBox(), how === 'close' ? 1.25 : 1.06, how === 'out');
+}
+// the box round every part shown
+function shownBox() {
+  const bx = new THREE.Box3();
+  for (const p of PIECES) if (p.obj.visible) bx.expandByObject(p.obj);
+  if (SYS === 'all') for (const x of EXTRAS) if (x.obj.visible) bx.expandByObject(x.obj);
+  return bx.isEmpty() ? box3.setFromObject(root) : bx;
+}
+// the camera, from where it looks now, back (or in) until BOX fills the picture with MARGIN to spare
+function frame(bx, margin, onlyOut = false, now = false) {
+  const c = bx.getCenter(new THREE.Vector3()), dir = camera.position.clone().sub(controls.target).normalize();
+  const up = camera.up.clone(), right = new THREE.Vector3().crossVectors(up, dir).normalize(), u = new THREE.Vector3().crossVectors(dir, right);
+  const tY = Math.tan(camera.fov * Math.PI / 360), tX = tY * camera.aspect;
+  let need = 0;
+  for (const x of [bx.min.x, bx.max.x]) for (const y of [bx.min.y, bx.max.y]) for (const z of [bx.min.z, bx.max.z]) {
+    const v = new THREE.Vector3(x, y, z).sub(c);
+    const zc = v.dot(dir), dx = Math.abs(v.dot(right)) * margin, dy = Math.abs(v.dot(u)) * margin;
+    need = Math.max(need, zc + dx / tX, zc + dy / tY);
+  }
+  if (onlyOut && need <= camera.position.distanceTo(controls.target) * 1.02) return;
+  if (now) { camera.position.copy(c).add(dir.multiplyScalar(need)); controls.target.copy(c); controls.update(); needs = 3; return; }
+  camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: c.clone().add(dir.multiplyScalar(need)), t1: c, at: performance.now() };
+  needs = 3;
+}
+
+// ── the strip-down, in workshop order (of the part of it shown) ──
+const ALL_STEPS = BUILD.steps().filter(([, keys]) => keys.some(k => TYPES[k] && TYPES[k].pieces.length));
+let SYS = 'all', STEPS = ALL_STEPS, STEP = 0;
+// a kind marked ONLY shows with its own part of the car (a door's trim panel would hide the cabin from outside)
+const kindShown = t => (SYS === 'all' ? !t.only : (!t.sys || t.sys === SYS));
+const inSys = p => kindShown(p.type);
+const stepPieces = i => STEPS[i][1].flatMap(k => (TYPES[k] ? TYPES[k].pieces : [])).filter(inSys);
+function showStep() {
+  $('stepText').replaceChildren();
+  const done = STEP === 0 ? null : STEPS[STEP - 1];
+  $('stepText').append(el('b', STEP === 0 ? 'Everything is on' : STEP === STEPS.length ? (W0.bare || 'Stripped right down') : `Off: ${done[0]}`));
+  $('stepText').append(el('div', STEP < STEPS.length ? `Next (${STEP + 1} of ${STEPS.length}): ${STEPS[STEP][0]}` : 'Put it back together a step at a time, or all at once.', 'muted'));
+  $('stepBar').style.width = `${Math.round(STEP / Math.max(1, STEPS.length) * 100)}%`;
+  $('next').disabled = STEP >= STEPS.length; $('back').disabled = STEP <= 0;
+}
+$('next').addEventListener('click', () => { if (STEP < STEPS.length) { setOff(stepPieces(STEP), true); STEP++; showStep(); } });
+$('back').addEventListener('click', () => { if (STEP > 0) { STEP--; setOff(stepPieces(STEP), false); showStep(); } });
+$('all').addEventListener('click', () => { setOff(PIECES.filter(p => !(BUILD.fixed || []).includes(p.type.key) && inSys(p)), true); STEP = STEPS.length; showStep(); });
+$('none').addEventListener('click', () => { setOff(PIECES.filter(inSys), false); STEP = 0; showStep(); });
+
+// ── one part of it at a time (a car's interior, its suspension...) ──
+function setSystem(k) {
+  SYS = k;
+  for (const p of PIECES) p.obj.visible = inSys(p);
+  for (const x of EXTRAS) if (x.sysOnly) x.obj.visible = x.on !== false && SYS === 'all';
+  document.querySelectorAll('#systems button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sys === SYS)));
+  STEPS = ALL_STEPS.filter(s => SYS === 'all' || !s[2] || s[2] === SYS);
+  STEP = 0;
+  while (STEP < STEPS.length && stepPieces(STEP).every(p => p.off)) STEP++;
+  select(null); buildList(); showStep();
+  place(); frame(shownBox(), SYS === 'all' ? 1.04 : 1.12);
+  needs = 3;
+}
+if (BUILD.systems) {
+  $('systems').hidden = false;
+  for (const s of [{ key: 'all', label: W0.all || 'Everything' }, ...BUILD.systems]) {
+    const b = el('button', s.label); b.type = 'button'; b.dataset.sys = s.key; b.setAttribute('aria-pressed', String(s.key === 'all'));
+    b.addEventListener('click', () => setSystem(s.key)); $('systems').append(b);
+  }
+}
+for (const x of EXTRAS) {
+  const b = el('button', x.label); b.type = 'button'; b.setAttribute('aria-pressed', String(x.obj.visible));
+  b.addEventListener('click', () => { x.on = !x.obj.visible; x.obj.visible = x.on; b.setAttribute('aria-pressed', String(x.on)); needs = 3; });
+  $('tools').append(b);
+}
+
+// ── run, X-ray, cut, explode ──
+$('run').addEventListener('click', () => { RUN = !RUN; $('run').setAttribute('aria-pressed', String(RUN)); $('run').textContent = RUN ? 'Stop it' : 'Run it'; needs = 3; });
+let XRAY = false, CUT = false;
+$('xray').addEventListener('click', () => {
+  XRAY = !XRAY; $('xray').setAttribute('aria-pressed', String(XRAY));
+  for (const m of SHELLS) { m.transparent = XRAY || !!m.userData.glass; m.opacity = XRAY ? Math.min(0.2, m.userData.glass || 1) : (m.userData.glass || 1); m.depthWrite = !XRAY && !m.userData.glass; m.needsUpdate = true; }
+  // the see-through shells throw no shadow, and the shading where parts crowd is left out
+  root.traverse(o => { if (o.isMesh && o.userData.pid != null) o.castShadow = !(XRAY && SHELLS.includes(o.userData.mat0 || o.material)); });
+  if (aoPass) aoPass.enabled = !XRAY && !CUT;
+  needs = 3;
+});
+const cutPlane = new THREE.Plane(new THREE.Vector3(...(BUILD.cut || [0, 0, -1])), 0.0005);
+$('cut').addEventListener('click', () => {
+  CUT = !CUT; $('cut').setAttribute('aria-pressed', String(CUT));
+  root.traverse(o => { if (o.isMesh) { o.material.clippingPlanes = CUT ? [cutPlane] : null; o.material.side = CUT ? THREE.DoubleSide : (o.material.userData.side ?? (o.material === M.brass ? THREE.DoubleSide : THREE.FrontSide)); o.material.needsUpdate = true; } });
+  for (const m of Object.values(M)) { m.clippingPlanes = CUT ? [cutPlane] : null; m.clipShadows = CUT; m.needsUpdate = true; }
+  root.traverse(o => { if (o.isMesh) o.material.clipShadows = CUT; });
+  if (aoPass) aoPass.enabled = !XRAY && !CUT;
+  needs = 3;
+});
+$('explode').addEventListener('input', e => { EXPLODE = +e.target.value / 100; needs = 3; });
+$('explode').addEventListener('change', () => { place(); fit(EXPLODE > 0 || PIECES.some(q => q.off) ? 'out' : 'home'); });
+
+// ── the list of every part (of the part of it shown) ──
+function refreshList() {
+  document.querySelectorAll('.part').forEach(row => {
+    const t = TYPES[row.dataset.k]; const off = t.pieces.every(p => p.off), some = t.pieces.some(p => p.off);
+    row.classList.toggle('off', off);
+    const b = row.querySelector('button'); b.textContent = off ? 'Put back' : some ? 'Take rest off' : 'Take off';
+  });
+}
+function buildList() {
+  const list = $('list'); list.replaceChildren();
+  for (const g of BUILD.groups) {
+    const kinds = Object.values(TYPES).filter(t => t.group === g && t.pieces.length && kindShown(t));
+    if (!kinds.length) continue;
+    const det = el('details', null, 'group'); det.open = (BUILD.openGroups || []).includes(g) || SYS !== 'all';
+    const sum = el('summary'); const np = kinds.reduce((n, t) => n + t.pieces.length, 0);
+    sum.append(el('b', g), el('span', `${np} piece${np === 1 ? '' : 's'}`));
+    det.append(sum);
+    for (const t of kinds) {
+      const row = el('div', null, 'part'); row.dataset.k = t.key;
+      row.dataset.find = `${t.name} ${t.rows.map(r => r.name + ' ' + r.oem).join(' ')}`.toLowerCase();
+      const nm = el('span', null, 'name'); nm.append(t.name); nm.append(el('small', `×${t.pieces.length}`));
+      if (t.rows.length) nm.append(el('span', 'In your catalogue', 'cat'));
+      nm.tabIndex = 0; nm.setAttribute('role', 'button');
+      const pick = () => { select(t.pieces[0]); };
+      nm.addEventListener('click', pick); nm.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      const b = el('button', 'Take off'); b.type = 'button';
+      b.addEventListener('click', () => setOff(t.pieces, !t.pieces.every(p => p.off)));
+      row.append(nm, b);
+      const codes = oems(t);
+      if (codes.length) row.append(el('div', codes.join(', '), 'oem'));
+      det.append(row);
+    }
+    list.append(det);
+  }
+  refreshList();
+}
+buildList();
+$('find').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('.part').forEach(r => { r.hidden = q && !r.dataset.find.includes(q); });
+  document.querySelectorAll('details.group').forEach(d => { if (q) d.open = [...d.querySelectorAll('.part')].some(r => !r.hidden); });
+});
+if (elsewhere.length) {
+  $('elsewhereCard').hidden = false;
+  for (const r of elsewhere) { const li = el('li'); li.append(r.name + ' '); li.append(el('span', r.oem, 'oem')); $('elsewhere').append(li); }
+}
+
+// ── the words ──
+{
+  const pieceCount = PIECES.filter(p => !(BUILD.fixed || []).includes(p.type.key)).length;
+  const kinds = Object.values(TYPES).filter(t => t.pieces.length && !(BUILD.fixed || []).includes(t.key)).length;
+  const W = BUILD.words({ pieceCount, kinds, catRows, elsewhere });
+  for (const [id, k] of [['title', 'title'], ['kicker', 'kicker'], ['lede', 'lede'], ['facts', 'facts'], ['honest', 'honest'], ['aboutLabel', 'about'], ['elseLabel', 'elsewhere'], ['intro', 'intro']])
+    if (W[k] != null) $(id).textContent = W[k];
+  $('hudR').textContent = `${pieceCount} pieces`;
+  if (W.stage) { $('stage').setAttribute('aria-label', W.stage); canvas.setAttribute('aria-label', `${W.stage} in 3D: drag to turn it, pinch or scroll to zoom, tap a part to pick it`); }
+}
+for (const p of PIECES) p.obj.visible = inSys(p);
+showStep();
+
+// ── the loop ──
+let last = performance.now();
+renderer.setAnimationLoop(now => {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  let moving = false;
+  for (const p of anims) {
+    const want = p.off ? 1 : 0, d = want - p.k;
+    if (Math.abs(d) < 0.002) { p.k = want; anims.delete(p); } else { p.k += Math.sign(d) * Math.min(Math.abs(d), dt * 2.2); moving = true; }
+  }
+  if (RUN) { ALPHA = (ALPHA + dt * (BUILD.runSpeed || 7)) % (BUILD.runPeriod || Math.PI * 4); moving = true; }
+  if (fitWanted && !anims.size) { place(); fit(fitWanted); fitWanted = null; }
+  if (camTo) {
+    const k = Math.min(1, (now - camTo.at) / 600), e = 1 - (1 - k) ** 3;
+    camera.position.lerpVectors(camTo.p0, camTo.p1, e); controls.target.lerpVectors(camTo.t0, camTo.t1, e);
+    if (k >= 1) camTo = null; moving = true;
+  }
+  if (controls.update()) moving = true;
+  if (!moving && needs <= 0) return;
+  if (!moving) needs--;
+  place();
+  if (EXPLODE > 0 || PIECES.some(q => q.k > 0)) { lowBox.setFromObject(root); floor.visible = lowBox.min.y >= FLOOR_Y - 0.001; } else floor.visible = true;
+  draw();
+});
+// for a test to read
+window.__engine = { PIECES, TYPES, STEPS: ALL_STEPS, catRows, elsewhere, select, setOff, setSystem,
+  cam: () => ({ p: camera.position.toArray(), t: controls.target.toArray(), HOME_D, SIZE, C: CENTER.toArray() }),
+  look: (p, t) => { camTo = null; camera.position.set(...p); controls.target.set(...t); controls.update(); needs = 3; } };
+</script>

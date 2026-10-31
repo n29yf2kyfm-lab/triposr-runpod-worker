@@ -5,7 +5,8 @@ for the engine carry their OEM numbers, and the strip-down runs in workshop orde
 
     python3 pipeline/realcar/engine_page.py "golf 2008 1.9 tdi" OUT_DIR
 
-OUT_DIR gets index.html (page/engine.html with the engine's figures and catalogue parts in it). The engine is
+OUT_DIR gets index.html (page/parts.html with the drawing kit and the engine's build in it, and the engine's
+figures and catalogue parts). The engine is
 the catalogue's (engines.look: make, model, year, and the engine named in the request). Its figures are the
 maker's published ones where known (KNOWN); any other inline engine is drawn from its litres and cylinders.
 The castings are drawn to those figures, not scanned: the catalogue lists parts, not their shapes.
@@ -19,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import engines  # noqa: E402
 
-TEMPLATE = os.path.join(HERE, "page", "engine.html")
+PAGE = os.path.join(HERE, "page")
 
 # engines whose own figures are published (metres): bore, stroke, rod length, bore spacing, piston compression
 # height; the valvetrain, what turns the injection, and what the catalogue cannot say (the turbo)
@@ -96,13 +97,22 @@ def config(request, idx=None):
             "part_count": r["part_count"]}
 
 
+def assemble(cfg, title, builds, chosen):
+    """page/parts.html with the kit, BUILDS (page/*.js files, in order) and CFG in it; CHOSEN names the build shown."""
+    page = open(os.path.join(PAGE, "parts.html")).read()
+    kit = open(os.path.join(PAGE, "kit.js")).read()
+    code = "\n".join(open(os.path.join(PAGE, b)).read() for b in builds) + f"\nBUILD = {chosen};\n"
+    for part in (kit, code):
+        if "</script" in part.lower():
+            raise ValueError("a build file closes its script")
+    page = page.replace("/*KIT*/", kit, 1).replace("/*BUILD*/", code, 1)
+    page = page.replace("/*CONFIG*/{}", json.dumps(cfg).replace("</", "<\\/"), 1)
+    return page.replace("<title>Parts</title>", f"<title>{title}</title>", 1)
+
+
 def write(cfg, out):
     os.makedirs(out, exist_ok=True)
-    page = open(TEMPLATE).read()
-    data = json.dumps(cfg).replace("</", "<\\/")
-    page = page.replace("/*CONFIG*/{}", data, 1)
-    title = f"{cfg['make']} {cfg['dims']['name']} engine"
-    page = page.replace("<title>Engine</title>", f"<title>{title}</title>", 1)
+    page = assemble(cfg, f"{cfg['make']} {cfg['dims']['name']} engine", ["build_engine.js"], "ENGINE")
     path = os.path.join(out, "index.html")
     with open(path, "w") as fh:
         fh.write(page)
