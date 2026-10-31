@@ -164,6 +164,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const CFG = JSON.parse(document.getElementById('engine-config').textContent);
 const $ = id => document.getElementById(id);
@@ -190,15 +194,90 @@ const TDC = Array.from({ length: N }, (_, i) => FIRE.indexOf(i + 1) * (4 * Math.
 
 // ── materials ──
 const mat = (color, roughness, metalness, extra = {}) => new THREE.MeshStandardMaterial({ color, roughness, metalness, ...extra });
+// A real part's surface is not one flat colour. A noise in the part's own space (so it stays put when the part
+// moves) gives a casting its sand grain, mottles its colour and shine, and leaves its machined faces smooth:
+// GRAIN bumps per metre and how steep (DEPTH); MOTTLE patches per metre and how much they shade it (TINT);
+// RUST a colour and how much of it; RMOT how much the patches change the shine; MACH how smooth a face is that
+// looks straight up or down (a machined deck or joint face).
+const SURF_PARS = /* glsl */`
+varying vec3 vSP; varying vec3 vSN; varying vec3 vNM0; varying vec3 vNM1; varying vec3 vNM2;
+uniform vec4 uGrain; uniform vec4 uRust; uniform vec2 uShine;
+float sHash(vec3 p) { p = fract(p * 0.1031); p += dot(p, p.zyx + 31.32); return fract((p.x + p.y) * p.z); }
+float sNoise(vec3 p) {
+  vec3 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(sHash(i), sHash(i + vec3(1, 0, 0)), f.x), mix(sHash(i + vec3(0, 1, 0)), sHash(i + vec3(1, 1, 0)), f.x), f.y),
+             mix(mix(sHash(i + vec3(0, 0, 1)), sHash(i + vec3(1, 0, 1)), f.x), mix(sHash(i + vec3(0, 1, 1)), sHash(i + vec3(1, 1, 1)), f.x), f.y), f.z);
+}
+// three octaves; an octave finer than a pixel fades out, so a far-off casting does not sparkle
+float sFbm(vec3 p, float fw) {
+  float a = 0.5, s = 0.0;
+  for (int k = 0; k < 3; k++) { s += a * clamp(1.4 - fw, 0.0, 1.0) * (sNoise(p) - 0.5); p = p * 2.03 + 17.1; fw *= 2.03; a *= 0.5; }
+  return s * 1.6;
+}
+`;
+const surfaces = [];
+function surf(m, o) {
+  const u = { uGrain: { value: new THREE.Vector4(o.grain || 2000, o.depth || 0, o.mottle || 10, o.tint || 0) },
+    uRust: { value: new THREE.Vector4(...new THREE.Color(o.rust ? o.rust[0] : 0).toArray(), o.rust ? o.rust[1] : 0) },
+    uShine: { value: new THREE.Vector2(o.rmot || 0, o.mach || 0) } };
+  m.userData.surf = u;
+  m.onBeforeCompile = SURF_COMPILE;
+  surfaces.push(m);
+  return m;
+}
+function SURF_COMPILE(shader) {
+  Object.assign(shader.uniforms, this.userData.surf);
+  shader.vertexShader = shader.vertexShader
+    .replace('#include <common>', '#include <common>\nvarying vec3 vSP; varying vec3 vSN; varying vec3 vNM0; varying vec3 vNM1; varying vec3 vNM2;')
+    .replace('#include <begin_vertex>', '#include <begin_vertex>\nvSP = position; vSN = normal; vNM0 = normalMatrix[0]; vNM1 = normalMatrix[1]; vNM2 = normalMatrix[2];');
+  shader.fragmentShader = shader.fragmentShader
+    .replace('#include <common>', '#include <common>\n' + SURF_PARS)
+    .replace('#include <color_fragment>', `#include <color_fragment>
+      vec3 sFw = fwidth(vSP); float sPix = length(sFw);
+      float sMot = sFbm(vSP * uGrain.z + 3.7, sPix * uGrain.z);
+      float sMach = uShine.y * smoothstep(0.93, 0.995, abs(normalize(vSN).y));
+      diffuseColor.rgb *= 1.0 + uGrain.w * sMot * 2.0 * (1.0 - sMach);
+      diffuseColor.rgb = mix(diffuseColor.rgb, uRust.rgb, clamp(uRust.a * (0.6 + sMot * 3.5), 0.0, 1.0) * (1.0 - sMach));`)
+    .replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
+      roughnessFactor = clamp(roughnessFactor * (1.0 - 0.5 * sMach) + uShine.x * sMot * 2.0, 0.06, 1.0);`)
+    .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+      if (uGrain.y > 0.0) {
+        vec3 sP = vSP * uGrain.x; float sF = sPix * uGrain.x, e = 0.3, h0 = sFbm(sP, sF);
+        vec3 g = vec3(sFbm(sP + vec3(e, 0, 0), sF) - h0, sFbm(sP + vec3(0, e, 0), sF) - h0, sFbm(sP + vec3(0, 0, e), sF) - h0) / e;
+        g *= uGrain.y * (1.0 - 0.85 * sMach);
+        vec3 gv = mat3(vNM0, vNM1, vNM2) * g;
+        normal = normalize(normal - (gv - dot(gv, normal) * normal));
+      }`);
+}
 const M = {
-  iron: mat(0x6c7176, 0.82, 0.45), ironDark: mat(0x45484c, 0.7, 0.55), alu: mat(0xb7bcc1, 0.42, 0.72),
-  aluCast: mat(0xa3a8ad, 0.6, 0.6), steel: mat(0xa4abb2, 0.3, 0.92), forged: mat(0x7b8288, 0.45, 0.85),
-  bolt: mat(0x4a4f55, 0.42, 0.85), zinc: mat(0xbdb8a0, 0.35, 0.85), brass: mat(0xc9a066, 0.28, 0.9, { side: THREE.DoubleSide }),
-  rubber: mat(0x1d1f22, 0.92, 0.0), seal: mat(0x5a2f22, 0.75, 0.0), gasket: mat(0x6e7c86, 0.38, 0.8), fibre: mat(0x7a6650, 0.85, 0.1),
-  plastic: mat(0x26292d, 0.7, 0.05), belt: mat(0x17181a, 0.88, 0.0), chain: mat(0x8d949a, 0.35, 0.9),
-  copper: mat(0xb87333, 0.35, 0.9), filter: mat(0x234f8e, 0.5, 0.25), yellow: mat(0xe2b316, 0.5, 0.05),
-  blackPaint: mat(0x222427, 0.55, 0.3), piston: mat(0xc3c7cb, 0.35, 0.75), turbine: mat(0x5b4a3e, 0.75, 0.55),
+  // grey cast iron, bare: the block, its caps
+  iron: surf(mat(0x55585b, 0.76, 0.6), { grain: 1500, depth: 0.32, mottle: 9, tint: 0.2, rust: [0x5b3b27, 0.07], rmot: 0.22, mach: 0.9 }),
+  ironDark: surf(mat(0x3f4245, 0.58, 0.65), { grain: 1700, depth: 0.2, mottle: 12, tint: 0.14, rmot: 0.18, mach: 0.85 }),
+  // wrought or machined aluminium (the alternator's case), sand-cast aluminium (the head, covers, housings)
+  alu: surf(mat(0xc5c8ca, 0.36, 0.88), { grain: 3200, depth: 0.05, mottle: 14, tint: 0.07, rmot: 0.12 }),
+  aluCast: surf(mat(0xadafad, 0.56, 0.78), { grain: 1900, depth: 0.15, mottle: 10, tint: 0.13, rust: [0x6f6a5c, 0.06], rmot: 0.2, mach: 0.85 }),
+  steel: surf(mat(0xaeb3b7, 0.34, 0.95), { grain: 4500, depth: 0.025, mottle: 22, tint: 0.05, rmot: 0.12 }),
+  forged: surf(mat(0x6c7176, 0.4, 0.92), { grain: 2400, depth: 0.1, mottle: 16, tint: 0.14, rmot: 0.22, mach: 0.6 }),
+  bolt: surf(mat(0x3a3d41, 0.42, 0.86), { grain: 5000, depth: 0.04, mottle: 30, tint: 0.1, rmot: 0.15 }),
+  zinc: surf(mat(0xc2bfae, 0.34, 0.88), { grain: 5000, depth: 0.03, mottle: 30, tint: 0.08, rmot: 0.12 }),
+  brass: mat(0xc9a066, 0.28, 0.9, { side: THREE.DoubleSide }),
+  rubber: surf(mat(0x161719, 0.86, 0.0), { grain: 5200, depth: 0.08, mottle: 9, tint: 0.1, rmot: 0.08 }),
+  seal: surf(mat(0x5a2f22, 0.7, 0.0), { grain: 5000, depth: 0.04, mottle: 20, tint: 0.08 }),
+  gasket: surf(mat(0x5c6168, 0.4, 0.82), { grain: 4000, depth: 0.05, mottle: 18, tint: 0.1, rmot: 0.12 }),
+  fibre: surf(mat(0x7a6650, 0.86, 0.05), { grain: 4500, depth: 0.12, mottle: 25, tint: 0.12 }),
+  // black moulded plastic with its fine texture (the timing covers, caps)
+  plastic: surf(mat(0x1c1e21, 0.6, 0.0), { grain: 7000, depth: 0.1, mottle: 6, tint: 0.06, rmot: 0.06 }),
+  belt: surf(mat(0x141517, 0.82, 0.0), { grain: 6000, depth: 0.12, mottle: 10, tint: 0.08 }),
+  chain: mat(0x8d949a, 0.35, 0.9),
+  copper: surf(mat(0x8f5634, 0.5, 0.85), { grain: 4000, depth: 0.02, mottle: 25, tint: 0.12 }),
+  filter: surf(mat(0x1f4d8c, 0.42, 0.3), { grain: 6000, depth: 0.02, mottle: 12, tint: 0.05 }),
+  yellow: mat(0xe2b316, 0.5, 0.05),
+  blackPaint: surf(mat(0x1f2124, 0.5, 0.35), { grain: 3000, depth: 0.05, mottle: 12, tint: 0.08, rmot: 0.1 }),
+  piston: surf(mat(0xc3c7cb, 0.34, 0.78), { grain: 3000, depth: 0.04, mottle: 14, tint: 0.06 }),
+  // hot cast iron, rusted: the exhaust manifold and the turbo's turbine housing
+  rusty: surf(mat(0x433b36, 0.88, 0.5), { grain: 1300, depth: 0.32, mottle: 7, tint: 0.24, rust: [0x5e3f2b, 0.15], rmot: 0.12 }),
 };
+M.turbine = M.rusty;
 // the big castings and covers: see-through in X-ray
 const SHELL = [M.iron, M.aluCast, M.plastic, M.blackPaint];
 
@@ -264,24 +343,100 @@ function springG(r, h, wire, turns) { return new THREE.TubeGeometry(new Helix(r,
 function tubeG(points, r, seg = 40, rs = 10) {
   return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p))), seg, r, rs, false);
 }
+// a rubber hose along a smooth path, its ends closed (an open tube's end shows as a thin ribbon)
+function hoseG(points, r, seg = 40, rs = 18) {
+  const pts = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p))).getPoints(seg).map(v => v.toArray());
+  return sweepG(pts, pts.map(() => r), rs, true);
+}
+// a hexagon prism along y with its top edge chamfered, as a spanner sees a bolt head or nut
+const flat = g => { const n = g.toNonIndexed(); n.computeVertexNormals(); return n; };
+function hexY(r, h, y0 = 0) {
+  return flat(latheY([[0.0001, y0], [r, y0], [r, y0 + h - r * 0.16], [r * 0.84, y0 + h], [0.0001, y0 + h]], 6));
+}
 // a bolt along +y: its head on y 0..h, its washer under it, its shank down to -len
 function boltG(len, d, head = 6, washer = true) {
-  const hr = d * 0.86, hh = d * 0.65, out = [cylY(hr, hh, 0, 0, 0, head)];
-  if (washer) out.push(cylY(hr * 1.3, d * 0.13, -d * 0.13, 0, 0, 18));
+  const hr = d * 0.86, hh = d * 0.65;
+  const out = [head === 6 ? hexY(hr, hh) : flat(latheY([[0.0001, 0], [hr, 0], [hr, hh * 0.8], [hr * 0.8, hh], [0.0001, hh]], 12))];
+  out.push(washer ? cylY(hr * 1.3, d * 0.13, -d * 0.13, 0, 0, 20) : cylY(hr * 1.12, d * 0.1, -d * 0.02, 0, 0, 20));
   out.push(cylY(d / 2, len, -len, 0, 0, 10));
   return merge(out);
 }
-function nutG(d) { return merge(cylY(d * 0.86, d * 0.8, 0, 0, 0, 6), cylY(d * 1.1, d * 0.12, -d * 0.12, 0, 0, 16)); }
-// a toothed pulley about the x axis: TEETH teeth on radius r, width w, centred on x 0
+function nutG(d) { return merge(hexY(d * 0.86, d * 0.8), cylY(d * 1.1, d * 0.12, -d * 0.12, 0, 0, 18)); }
+// a slab in plan from y0 to y1 with every edge rounded by r (and rt top and bottom): its outline a rectangle
+// x0..x1, z0..z1 with corners of radius rc; HOLES ({x, z, r}) through it come out at their size
+function slabY(x0, z0, x1, z1, y0, y1, r, rc = r, holes = [], rt = r, seg = 3) {
+  const w = x1 - x0 - 2 * r, d = z1 - z0 - 2 * r;
+  const pts = rrect(w, d, Math.max(0.0002, rc - r), 4).map(([a, b]) => [a + (x0 + x1) / 2, b + (z0 + z1) / 2]);
+  return extrudeY(xzShape(pts, holes.map(h => ({ ...h, r: h.r + r }))), Math.max(0.0002, y1 - y0 - 2 * rt), y0 + rt,
+    { bevelEnabled: true, bevelThickness: rt, bevelSize: r, bevelSegments: seg, curveSegments: 18 });
+}
+// the same across x: a plate in the (z, y) plane from x0 to x1, its outline z0..z1, y0..y1
+function slabX(x0, x1, z0, z1, y0, y1, r, rc = r, holes = []) {
+  const w = z1 - z0 - 2 * r, h = y1 - y0 - 2 * r;
+  const pts = rrect(w, h, Math.max(0.0002, rc - r), 4).map(([a, b]) => [a + (z0 + z1) / 2, b + (y0 + y1) / 2]);
+  const g = new THREE.ExtrudeGeometry(zyShape(pts, holes.map(o => ({ ...o, r: o.r + r }))),
+    { depth: Math.max(0.0002, x1 - x0 - 2 * r), bevelEnabled: true, bevelThickness: r, bevelSize: r, bevelSegments: 3, curveSegments: 18 });
+  g.rotateY(Math.PI / 2); g.translate(x0 + r, 0, 0); return g;
+}
+// and along z: a pad in the (x, y) plane from z0 to z1
+function slabZ(z0, z1, x0, x1, y0, y1, r, rc = r) {
+  const pts = rrect(x1 - x0 - 2 * r, y1 - y0 - 2 * r, Math.max(0.0002, rc - r), 4);
+  const s = new THREE.Shape(dedupe(pts).map(([a, b]) => V2(a + (x0 + x1) / 2, b + (y0 + y1) / 2)));
+  const g = new THREE.ExtrudeGeometry(s, { depth: Math.max(0.0002, z1 - z0 - 2 * r), bevelEnabled: true, bevelThickness: r, bevelSize: r, bevelSegments: 3, curveSegments: 12 });
+  return g.translate(0, 0, z0 + r);
+}
+// a tube along a path whose thickness changes: rings of RS points round each point of PTS ([x, y, z]), radius RADII[i]
+function sweepG(pts, radii, rs = 16, capped = true) {
+  const P = pts.map(p => new THREE.Vector3(...p)), n = P.length, pos = [], idx = [];
+  let ref = new THREE.Vector3(1, 0, 0);
+  const T = P.map((p, i) => P[Math.min(n - 1, i + 1)].clone().sub(P[Math.max(0, i - 1)]).normalize());
+  if (Math.abs(T[0].dot(ref)) > 0.9) ref = new THREE.Vector3(0, 1, 0);
+  let N0 = new THREE.Vector3().crossVectors(T[0], ref).normalize();
+  for (let i = 0; i < n; i++) {
+    if (i) { const B = new THREE.Vector3().crossVectors(T[i - 1], T[i]); if (B.length() > 1e-6) N0.applyAxisAngle(B.normalize(), Math.acos(Math.min(1, Math.max(-1, T[i - 1].dot(T[i]))))); }
+    const B2 = new THREE.Vector3().crossVectors(T[i], N0).normalize();
+    for (let k = 0; k < rs; k++) { const a = k / rs * TAU, v = N0.clone().multiplyScalar(Math.cos(a)).add(B2.clone().multiplyScalar(Math.sin(a))).multiplyScalar(radii[i]).add(P[i]); pos.push(v.x, v.y, v.z); }
+  }
+  for (let i = 0; i < n - 1; i++) for (let k = 0; k < rs; k++) {
+    const a = i * rs + k, b = i * rs + (k + 1) % rs, c = a + rs, d = b + rs; idx.push(a, c, b, b, c, d);
+  }
+  if (capped) for (const [i, s] of [[0, -1], [n - 1, 1]]) {
+    const c = pos.length / 3; pos.push(...P[i].toArray());
+    for (let k = 0; k < rs; k++) { const a = i * rs + k, b = i * rs + (k + 1) % rs; if (s > 0) idx.push(c, a, b); else idx.push(c, b, a); }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(new Array(pos.length / 3 * 2).fill(0), 2));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+// a turbo's scroll (volute) about the x axis at X: it winds once round, from radius r0 and tube t0 to r1 and t1
+function voluteG(x, y, z, r0, r1, t0, t1, a0 = 0, turn = 0.92, steps = 40) {
+  const pts = [], radii = [];
+  for (let k = 0; k <= steps; k++) {
+    const f = k / steps, a = a0 + f * turn * TAU, rr = r0 + (r1 - r0) * f;
+    pts.push([x, y + rr * Math.sin(a), z + rr * Math.cos(a)]); radii.push(t0 + (t1 - t0) * f);
+  }
+  return sweepG(pts, radii, 18);
+}
+// a toothed pulley about the x axis: TEETH teeth on radius r, width w, centred on x 0; a sintered sprocket's
+// rim, a thinner web with HOLES lightening holes, and its hub
 function sprocketG(r, teeth, w, holes = 0) {
   const pts = [];
   for (let i = 0; i < teeth; i++) {
     const a = i / teeth * TAU, s = TAU / teeth;
-    for (const [f, rr] of [[0, r * 0.955], [0.22, r], [0.6, r], [0.82, r * 0.955]]) pts.push([rr * Math.cos(a + f * s), rr * Math.sin(a + f * s)]);
+    for (const [f, rr] of [[0, r * 0.94], [0.12, r * 0.955], [0.26, r], [0.56, r], [0.7, r * 0.955], [0.84, r * 0.94]]) pts.push([rr * Math.cos(a + f * s), rr * Math.sin(a + f * s)]);
   }
+  if (r < 0.04) {                      // a small one is solid
+    return merge(extrudeX(zyShape(pts, [{ z: 0, y: 0, r: r * 0.24 }]), w, -w / 2, 6), latheX([[r * 0.24, -w * 0.75], [r * 0.42, -w * 0.75], [r * 0.46, -w * 0.6], [r * 0.46, w * 0.6], [r * 0.24, w * 0.6]], 24));
+  }
+  const ring = extrudeX(zyShape(pts, [{ z: 0, y: 0, r: r * 0.8 }]), w, -w / 2, 6);
   const hs = [{ z: 0, y: 0, r: r * 0.16 }];
-  for (let k = 0; k < holes; k++) { const a = k / holes * TAU + 0.3; hs.push({ z: r * 0.56 * Math.cos(a), y: r * 0.56 * Math.sin(a), r: r * 0.17 }); }
-  return merge(extrudeX(zyShape(pts, hs), w, -w / 2, 6), cylX(r * 0.3, w * 1.5, -w * 0.75, 0, 0, 20));
+  for (let k = 0; k < holes; k++) { const a = k / holes * TAU + 0.3; hs.push({ z: r * 0.56 * Math.cos(a), y: r * 0.56 * Math.sin(a), r: r * 0.15 }); }
+  const web = extrudeX(zyShape(arcPts(0, 0, r * 0.81, 0, TAU, 48).slice(0, -1), hs), w * 0.36, -w * 0.18, 16);
+  const hub = latheX([[r * 0.16, -w * 0.72], [r * 0.3, -w * 0.72], [r * 0.33, -w * 0.62], [r * 0.33, w * 0.5], [r * 0.16, w * 0.5]], 32);
+  const lip = latheX([[r * 0.78, -w * 0.5], [r * 0.83, -w * 0.5], [r * 0.83, w * 0.5], [r * 0.78, w * 0.5]], 48);
+  return merge(ring, web, hub, lip);
 }
 // a poly-V (ribbed) pulley about x: radius r, RIBS grooves
 function ribbedG(r, w, ribs = 5, hub = 0.4) {
@@ -289,7 +444,7 @@ function ribbedG(r, w, ribs = 5, hub = 0.4) {
   const step = w / (ribs + 1);
   for (let k = 0; k < ribs; k++) { const y = -w / 2 + step * (k + 0.5); pts.push([r, y], [r * 0.955, y + step / 2]); }
   pts.push([r, w / 2 - step / 2], [r * 1.04, w / 2], [r * hub, w / 2]);
-  return latheX(pts, 40);
+  return latheX(pts, 48);
 }
 function convexHull(pts) {
   const p = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
@@ -408,7 +563,7 @@ function add(key, name, obj, opts = {}) {
   if (p.parent && p.parent.id >= p.id) throw new Error('parent after child');
   if (opts.rot) obj.rotation.set(...opts.rot);
   if (opts.quat) obj.quaternion.copy(opts.quat);
-  obj.traverse(o => { o.userData.pid = p.id; });
+  obj.traverse(o => { o.userData.pid = p.id; if (o.isMesh) o.castShadow = o.receiveShadow = true; });
   obj.position.copy(p.base);
   PIECES.push(p); t.pieces.push(p); root.add(obj);
   return p;
@@ -539,23 +694,40 @@ function build() {
 
   // ── the block (stays put) ──
   {
-    const up = extrudeY(xzShape(rect(XF, -WB / 2, XR, WB / 2), bores), YD - YB0, YB0);
-    const parts = [up];
-    const wz = WB / 2 - 0.004;
-    parts.push(box(LB, YB0 - YSUMP, 0.008, 0, (YB0 + YSUMP) / 2, wz), box(LB, YB0 - YSUMP, 0.008, 0, (YB0 + YSUMP) / 2, -wz));
+    // the bores' part, its edges rounded and the bores' tops chamfered; the deck on top is machined flat
+    const parts = [slabY(XF, -WB / 2, XR, WB / 2, YB0, YD, 0.0025, 0.007, bores)];
+    // the crankcase skirt, a little proud of the bores' part, down to the sump rail
+    const sk = WB / 2 + 0.004;
+    for (const s of [-1, 1]) parts.push(slabY(XF, s * sk - 0.005, XR, s * sk + 0.005, YSUMP + 0.008, YB0 + 0.006, 0.002, 0.004));
     for (const [x0, ex] of [[XF, 0.012], [XR - 0.012, 0.012]])
       parts.push(extrudeX(zyShape(rect(-WB / 2, YSUMP, WB / 2, YB0), [{ z: 0, y: 0, r: 0.031 }]), ex, x0));
+    {   // the sump rail, a flange all round the bottom
+      const rail = xzShape(rrect(LB + 0.004, 2 * sk + 0.02, 0.006));
+      rail.holes.push(new THREE.Path(rect(XF + 0.012, -WB / 2 + 0.006, XR - 0.012, WB / 2 - 0.006).map(([x, z]) => V2(x, -z))));
+      parts.push(extrudeY(rail, 0.012, YSUMP, { curveSegments: 6 }));
+    }
     for (const x of journals) {   // bulkheads, the upper half of each main bearing
       const zm = WB / 2 - 0.008;
       const out = [[zm, 0], [zm, YB0], [-zm, YB0], [-zm, 0], ...arcPts(0, 0, 0.0285, Math.PI, 0, 14)];
       parts.push(extrudeX(zyShape(out), 0.02, x - 0.01));
     }
-    // ribs, the water pump's housing, freeze plugs, an engine-number pad
-    for (const s of [-1, 1]) for (let i = 0; i <= N; i++) parts.push(box(0.008, YD - YB0 - 0.02, 0.006, jourX(i), (YD + YB0) / 2, s * (WB / 2 + 0.003)));
-    parts.push(box(0.012, 0.05, 0.05, XF - 0.006, 0.12, 0.07), box(0.06, 0.02, 0.012, XF + 0.06, YD - 0.03, -WB / 2 - 0.006));
+    // ribs up the bores' part and the skirt at each bulkhead, a raised water jacket line, the water pump's
+    // housing, an engine-number pad
+    for (const s of [-1, 1]) for (let i = 0; i <= N; i++) {
+      const x = jourX(i), z0 = s > 0 ? WB / 2 - 0.002 : -WB / 2 - 0.006;
+      parts.push(slabY(x - 0.0045, z0, x + 0.0045, z0 + 0.008, YB0 + 0.004, YD - 0.012, 0.002));
+      const z1 = s > 0 ? sk + 0.003 : -sk - 0.009;
+      parts.push(slabY(x - 0.005, z1, x + 0.005, z1 + 0.006, YSUMP + 0.012, YB0 + 0.004, 0.002));
+    }
+    for (const s of [-1, 1]) { const z0 = s > 0 ? WB / 2 - 0.002 : -WB / 2 - 0.004; parts.push(slabY(XF + 0.004, z0, XR - 0.004, z0 + 0.006, YD - 0.024, YD - 0.012, 0.0018)); }
+    parts.push(slabX(XF - 0.012, XF + 0.001, 0.045, 0.095, 0.095, 0.145, 0.003, 0.01), slabY(XF + 0.03, -WB / 2 - 0.007, XF + 0.09, -WB / 2 + 0.002, YD - 0.045, YD - 0.026, 0.0015));
+    // core plugs, a cylinder each, both sides
     const plugs = [];
-    for (let i = 0; i < N - 1; i++) plugs.push(cylZ(0.013, 0.004, -WB / 2 - 0.004, (cxi(i) + cxi(i + 1)) / 2, 0.16));
-    add('block', 'Cylinder block', group([merge(parts), M.iron], [merge(plugs), M.steel]));
+    for (let i = 0; i < N; i++) for (const s of [-1, 1]) {
+      const g = latheY([[0.0001, 0], [0.0125, 0], [0.0125, 0.003], [0.0105, 0.0042], [0.0001, 0.0038]], 28); g.rotateX(s * Math.PI / 2);
+      plugs.push(g.translate(cxi(i), 0.155, s * (WB / 2 - 0.001)));
+    }
+    add('block', 'Cylinder block', group([merge(parts), M.iron], [merge(plugs), M.forged]));
   }
 
   // ── crankshaft, its sprockets and seals ──
@@ -672,11 +844,17 @@ function build() {
     void pump;
   }
   const sumpW = WB + 0.008;
-  const sump = add('sump', 'Sump (oil pan)', mesh(merge(
-    extrudeY(xzShape(rect(XF - 0.004, -sumpW / 2 - 0.012, XR + 0.004, sumpW / 2 + 0.012)), 0.005, YSUMP - 0.0065),
-    extrudeY(xzShape(rrect(LB - 0.01, sumpW, 0.03).map(([a, b]) => [a, b])), YSUMP - 0.0065 - (-0.15), -0.15, { bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.008, bevelSegments: 3 }),
-    extrudeY(xzShape(rrect(LB * 0.5, sumpW * 0.8, 0.025).map(([a, b]) => [a - LB * 0.2, b])), 0.03, -0.18, { bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 3 })
-  ), M.blackPaint));
+  // cast aluminium: its flange, the pan, the deeper well the pick-up sits in, ribs down the sides and under it
+  const wx0 = -LB * 0.2 - LB * 0.25 - 0.008, wx1 = -LB * 0.2 + LB * 0.25 + 0.008;
+  const sumpParts = [slabY(XF - 0.004, -sumpW / 2 - 0.012, XR + 0.004, sumpW / 2 + 0.012, YSUMP - 0.0065, YSUMP - 0.0015, 0.0015, 0.008),
+    slabY(XF - 0.002, -sumpW / 2 - 0.004, XR + 0.002, sumpW / 2 + 0.004, -0.157, YSUMP - 0.004, 0.008, 0.03, [], 0.011, 4),
+    slabY(wx0, -sumpW * 0.4 - 0.008, wx1, sumpW * 0.4 + 0.008, -0.193, -0.14, 0.01, 0.03, [], 0.012, 4)];
+  for (let k = 0; k < 7; k++) for (const s of [-1, 1]) {
+    const x = XF + 0.03 + k * (LB - 0.06) / 6, z0 = s > 0 ? sumpW / 2 + 0.002 : -sumpW / 2 - 0.0065;
+    sumpParts.push(slabY(x - 0.004, z0, x + 0.004, z0 + 0.0045, -0.146, YSUMP - 0.012, 0.0012));
+  }
+  for (const z of [-0.05, -0.025, 0.025, 0.05]) sumpParts.push(slabY(wx0 + 0.02, z - 0.003, wx1 - 0.02, z + 0.003, -0.198, -0.188, 0.002));
+  const sump = add('sump', 'Sump (oil pan)', mesh(merge(sumpParts), M.aluCast));
   add('drain_plug', 'Sump drain plug', mesh(merge(boltG(0.012, 0.014, 6, true).rotateX(Math.PI).translate(XF + 0.06, -0.195, 0)), M.zinc), { parent: sump });
   {
     const ring = [...rect(XF - 0.002, -sumpW / 2 - 0.01, XR + 0.002, sumpW / 2 + 0.01)];
@@ -695,10 +873,21 @@ function build() {
   let head;
   {
     const parts = [];
-    parts.push(extrudeY(xzShape(rect(XF, -HEAD_W / 2, XR, HEAD_W / 2)), 0.058, YH0));             // the deck and ports
-    const wall = xzShape(rect(XF, -HEAD_W / 2, XR, HEAD_W / 2));
-    wall.holes.push(new THREE.Path(rect(XF + 0.009, -HEAD_W / 2 + 0.009, XR - 0.009, HEAD_W / 2 - 0.009).map(([x, z]) => V2(x, -z))));
-    parts.push(extrudeY(wall, YH1 - YH0 - 0.058, YH0 + 0.058));
+    parts.push(slabY(XF, -HEAD_W / 2, XR, HEAD_W / 2, YH0, YH0 + 0.058, 0.0022, 0.006));             // the deck and ports
+    const wall = xzShape(rrect(LB, HEAD_W, 0.006));
+    wall.holes.push(new THREE.Path(rrect(LB - 0.018, HEAD_W - 0.018, 0.004).map(([x, z]) => V2(x, -z))));
+    parts.push(extrudeY(wall, YH1 - YH0 - 0.058 - 0.008, YH0 + 0.058, { curveSegments: 6 }));
+    {   // the cover's joint face, a lip proud of the walls, machined flat
+      const bv = 0.0012, lip = xzShape(rrect(LB + 0.006 - 2 * bv, HEAD_W + 0.006 - 2 * bv, 0.009));
+      lip.holes.push(new THREE.Path(rrect(LB - 0.018 + 2 * bv, HEAD_W - 0.018 + 2 * bv, 0.004).map(([x, z]) => V2(x, -z))));
+      parts.push(extrudeY(lip, 0.008 - 2 * bv, YH1 - 0.008 + bv, { bevelEnabled: true, bevelThickness: bv, bevelSize: bv, bevelSegments: 2, curveSegments: 6 }));
+    }
+    // a cast bead along each side between the ports, and the lifting eyes on the ends
+    for (const s of [-1, 1]) parts.push(slabY(XF + 0.006, s * HEAD_W / 2 - 0.004, XR - 0.006, s * HEAD_W / 2 + 0.004, YH0 + 0.062, YH0 + 0.072, 0.0025));
+    for (const [x, z] of [[XF - 0.004, 0.05], [XR + 0.004, -0.05]]) {
+      const eye = zyShape(rrect(0.036, 0.04, 0.012).map(([a, b]) => [a + z, b + YH1 + 0.012]), [{ z, y: YH1 + 0.022, r: 0.007 }]);
+      parts.push(extrudeX(eye, 0.008, x - 0.004, 12));
+    }
     const vx = [];
     for (let i = 0; i < N; i++) vx.push(cxi(i) - 0.0185, cxi(i) + 0.0185);
     parts.push(extrudeY(xzShape(rect(XF + 0.012, ZV - 0.025, XR - 0.012, ZV + 0.025), vx.map(x => ({ x, z: ZV, r: 0.0178 }))), YH1 - (YH0 + 0.085), YH0 + 0.085));
@@ -708,7 +897,8 @@ function build() {
     }
     for (const x of journals) for (const z of [-0.062, 0.062]) parts.push(cylY(0.012, 0.017, YH0 + 0.058, x, z, 20));   // head-bolt bosses
     for (let i = 0; i < N; i++) {      // ports: intake on -z, exhaust on +z
-      parts.push(box(0.034, 0.03, 0.012, cxi(i), YH0 + 0.03, -HEAD_W / 2 - 0.006), box(0.034, 0.03, 0.012, cxi(i), YH0 + 0.035, HEAD_W / 2 + 0.006));
+      parts.push(slabZ(-HEAD_W / 2 - 0.012, -HEAD_W / 2 + 0.002, cxi(i) - 0.019, cxi(i) + 0.019, YH0 + 0.013, YH0 + 0.048, 0.002, 0.007),
+        slabZ(HEAD_W / 2 - 0.002, HEAD_W / 2 + 0.012, cxi(i) - 0.019, cxi(i) + 0.019, YH0 + 0.017, YH0 + 0.053, 0.002, 0.007));
     }
     head = add('head', 'Cylinder head', mesh(merge(parts), M.aluCast));
   }
@@ -782,15 +972,29 @@ function build() {
 
   // ── cam cover, its gasket and nuts; the oil filler cap ──
   {
-    const fp = rrect(LB - 0.012, 0.144, 0.018);
-    const cover = extrudeY(xzShape(fp), 0.056, YH1 + 0.004, { bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.006, bevelSegments: 4 });
-    const ribs = [];
-    for (let k = 0; k < 6; k++) ribs.push(box(0.006, 0.006, 0.11, XF + 0.05 + k * (LB - 0.1) / 5, YH1 + 0.071, 0));
-    const camCover = add('cam_cover', 'Cam cover', group([merge(cover, ...ribs), M.blackPaint]), { parent: head });
-    const fc = add('filler_cap', 'Oil filler cap', mesh(merge(cylY(0.024, 0.018, 0, 0, 0, 24), box(0.032, 0.008, 0.008, 0, 0.022, 0)), M.plastic), { parent: camCover, pos: [0.06, YH1 + 0.068, 0.02] });
-    add('filler_gasket', 'Oil filler cap seal', mesh(torusY(0.0205, 0.0018, 0, 0, 0), M.rubber), { parent: fc, pos: [0.06, YH1 + 0.069, 0.02] });
-    for (const x of [XF + 0.07, 0, XR - 0.07]) for (const z of [-0.052, 0.052])
-      add('cover_nut', 'Cam cover nut', mesh(merge(nutG(0.008), cylY(0.008, 0.002, -0.002, 0, 0, 16)), M.bolt), { parent: camCover, pos: [x, YH1 + 0.068, z] });
+    // cast aluminium: a flange on the gasket, a domed body, two beads along the top carrying the nuts' bosses,
+    // the filler neck at the front and the crankcase breather at the back
+    const CW = 0.144, CL = LB - 0.012, y0 = YH1 + 0.004, NZ = 0.042;
+    const alu = [slabY(-CL / 2, -CW / 2, CL / 2, CW / 2, y0, y0 + 0.007, 0.0015, 0.018),
+      slabY(-CL / 2 + 0.008, -CW / 2 + 0.01, CL / 2 - 0.008, CW / 2 - 0.01, y0 - 0.012, y0 + 0.058, 0.012, 0.024, [], 0.014, 6)];
+    for (const z of [-NZ, NZ]) alu.push(slabY(-CL / 2 + 0.03, z - 0.006, CL / 2 - 0.03, z + 0.006, y0 + 0.05, y0 + 0.062, 0.0035, 0.006));
+    for (const x of [XF + 0.07, 0, XR - 0.07]) for (const z of [-NZ, NZ]) alu.push(latheY([[0.0001, y0 + 0.05], [0.0125, y0 + 0.05], [0.0105, y0 + 0.064], [0.0001, y0 + 0.064]], 24).translate(x, 0, z));
+    // stiffening ribs down the sides
+    for (let k = 0; k < 7; k++) for (const s of [-1, 1]) {
+      const x = -CL / 2 + 0.04 + k * (CL - 0.08) / 6, z0 = s > 0 ? CW / 2 - 0.0125 : -CW / 2 + 0.0075;
+      alu.push(slabY(x - 0.003, z0, x + 0.003, z0 + 0.005, y0 + 0.006, y0 + 0.04, 0.002));
+    }
+    alu.push(latheY([[0.0001, y0 + 0.04], [0.03, y0 + 0.04], [0.03, y0 + 0.056], [0.027, y0 + 0.062], [0.0001, y0 + 0.062]], 32).translate(0.06, 0, 0));
+    const breather = merge(latheY([[0.0001, 0], [0.023, 0], [0.023, 0.005], [0.02, 0.014], [0.012, 0.02], [0.0001, 0.021]], 32).translate(XR - 0.05, y0 + 0.056, 0),
+      cylZ(0.0065, 0.04, -0.06, XR - 0.05, y0 + 0.066, 18), torusX(0.0072, 0.0018, 0, 0, 0).rotateY(Math.PI / 2).translate(XR - 0.05, y0 + 0.066, -0.052));
+    const camCover = add('cam_cover', 'Cam cover', group([merge(alu), M.aluCast], [breather, M.plastic]), { parent: head });
+    const capG = [latheY([[0.0001, 0], [0.0235, 0], [0.025, 0.003], [0.025, 0.012], [0.0225, 0.0165], [0.0001, 0.0165]], 32)];
+    for (let k = 0; k < 12; k++) { const a = k / 12 * TAU, g = box(0.004, 0.011, 0.003, 0, 0.007, 0); g.rotateY(a); g.translate(0.025 * Math.cos(a), 0, -0.025 * Math.sin(a)); capG.push(g); }
+    capG.push(slabY(-0.017, -0.0035, 0.017, 0.0035, 0.0155, 0.026, 0.0025));
+    const fc = add('filler_cap', 'Oil filler cap', mesh(merge(capG), M.plastic), { parent: camCover, pos: [0.06, y0 + 0.062, 0] });
+    add('filler_gasket', 'Oil filler cap seal', mesh(torusY(0.0222, 0.0018, 0, 0, 0), M.rubber), { parent: fc, pos: [0.06, y0 + 0.0625, 0] });
+    for (const x of [XF + 0.07, 0, XR - 0.07]) for (const z of [-NZ, NZ])
+      add('cover_nut', 'Cam cover nut', mesh(merge(nutG(0.008), cylY(0.0085, 0.002, -0.002, 0, 0, 18)), M.zinc), { parent: camCover, pos: [x, y0 + 0.066, z] });
     const outer = xzShape(rrect(LB - 0.012, 0.144, 0.018));
     outer.holes.push(new THREE.Path(rrect(LB - 0.03, 0.126, 0.01).map(([x, z]) => V2(x, -z))));
     add('cover_gasket', 'Cam cover gasket', mesh(extrudeY(outer, 0.004, YH1), M.rubber), { parent: head });
@@ -809,10 +1013,19 @@ function build() {
     add('inj_clamp_bolt', `Injector clamp bolt, ${cylName(i)}`, mesh(boltG(0.035, 0.008, 6, true), M.bolt), { parent: cl, pos: [cxi(i) + 0.022, YH1 + 0.005, -0.081] });
   }
   const pumpX0 = XF + 0.004, pumpX1 = XF + 0.175, PZ = -0.145, PY = 0.17;
+  // a distributor pump as the catalogue's drawing shows it: its mounting flange, the body, the governor's cover
+  // on top with the throttle lever, the distributor head behind with a delivery valve holder for each
+  // cylinder and the stop solenoid on it
   const injPump = add('inj_pump', 'Injection pump (distributor type)', group(
-    [merge(cylX(0.042, pumpX1 - pumpX0 - 0.05, pumpX0, PY, PZ, 32), cylX(0.034, 0.05, pumpX1 - 0.05, PY, PZ, 28), box(0.05, 0.02, 0.06, pumpX0 + 0.09, PY + 0.048, PZ),
-      box(0.016, 0.07, 0.07, pumpX0 + 0.008, PY - 0.02, PZ + 0.02)), M.aluCast],
-    [merge(Array.from({ length: N }, (_, k) => { const a = k / N * TAU + 0.4; return cylX(0.005, 0.016, pumpX1, PY + 0.02 * Math.cos(a), PZ + 0.02 * Math.sin(a), 6); })), M.zinc]));
+    [merge(slabX(pumpX0, pumpX0 + 0.016, PZ - 0.048, PZ + 0.05, PY - 0.06, PY + 0.045, 0.003, 0.016),
+      latheX([[0.0001, pumpX0 + 0.012], [0.04, pumpX0 + 0.012], [0.043, pumpX0 + 0.02], [0.043, pumpX1 - 0.058], [0.039, pumpX1 - 0.052], [0.035, pumpX1 - 0.05],
+        [0.035, pumpX1 - 0.006], [0.031, pumpX1], [0.0001, pumpX1]], 40).translate(0, PY, PZ),
+      slabY(pumpX0 + 0.03, PZ - 0.032, pumpX1 - 0.062, PZ + 0.032, PY + 0.02, PY + 0.062, 0.007, 0.012),
+      cylY(0.012, 0.016, PY + 0.022, pumpX1 - 0.028, PZ, 24)), M.aluCast],
+    [merge(...Array.from({ length: N }, (_, k) => { const a = k / N * TAU + 0.4; return hexY(0.0068, 0.016).rotateZ(-Math.PI / 2).translate(pumpX1, PY + 0.02 * Math.cos(a), PZ + 0.02 * Math.sin(a)); }),
+      cylY(0.0025, 0.012, PY + 0.062, pumpX0 + 0.07, PZ - 0.02, 8), slabY(pumpX0 + 0.06, PZ - 0.075, pumpX0 + 0.08, PZ - 0.012, PY + 0.066, PY + 0.071, 0.002, 0.008),
+      cylY(0.006, 0.008, PY + 0.062, pumpX1 - 0.078, PZ + 0.014, 12), hexY(0.0075, 0.006, PY + 0.07).translate(pumpX1 - 0.078, 0, PZ + 0.014)), M.zinc],
+    [merge(latheY([[0.0001, 0], [0.0115, 0], [0.0115, 0.02], [0.009, 0.026], [0.0035, 0.028], [0.0035, 0.034], [0.0001, 0.034]], 24).translate(pumpX1 - 0.028, PY + 0.038, PZ)), M.plastic]));
   const pumpGear = add('pump_gear', 'Injection pump sprocket', mesh(sprocketG(0.0645, 38, 0.026, 4), M.steel), { parent: injPump, pos: [XT, PY, PZ] });
   pumpGear.anim = a => camRotate(pumpGear, a);
   for (let i = 0; i < N; i++) {
@@ -832,9 +1045,11 @@ function build() {
 
   // ── intake: manifold, EGR valve ──
   {
-    const im = [cylX(0.03, LB - 0.06, XF + 0.045, YH0 + 0.045, -0.15, 28)];
+    const im = [slabX(XF + 0.045, XR - 0.012, -0.181, -0.119, YH0 + 0.014, YH0 + 0.076, 0.01, 0.024),
+      latheX([[0.0001, XF + 0.012], [0.024, XF + 0.012], [0.027, XF + 0.016], [0.027, XF + 0.02], [0.024, XF + 0.022], [0.024, XF + 0.05], [0.0001, XF + 0.05]], 32).translate(0, YH0 + 0.045, -0.15)];
+    for (let i = 0; i < N - 1; i++) im.push(slabY((cxi(i) + cxi(i + 1)) / 2 - 0.003, -0.176, (cxi(i) + cxi(i + 1)) / 2 + 0.003, -0.124, YH0 + 0.07, YH0 + 0.08, 0.002));
     for (let i = 0; i < N; i++) im.push(tubeG([[cxi(i), YH0 + 0.03, -0.1165], [cxi(i), YH0 + 0.034, -0.13], [cxi(i), YH0 + 0.045, -0.145]], 0.016, 12, 14),
-      box(0.042, 0.04, 0.008, cxi(i), YH0 + 0.03, -0.1125));
+      slabZ(-0.1165, -0.1085, cxi(i) - 0.021, cxi(i) + 0.021, YH0 + 0.01, YH0 + 0.05, 0.0015, 0.008));
     const man = add('intake_manifold', 'Intake manifold', mesh(merge(im), M.aluCast), { parent: head });
     add('egr_valve', 'EGR valve', group([merge(cylX(0.034, 0.05, XR - 0.012, YH0 + 0.045, -0.15, 24), cylY(0.008, 0.03, YH0 + 0.07, XR + 0.013, -0.15)), M.aluCast],
       [latheY([[0.0001, 0.02], [0.03, 0.012], [0.03, 0], [0.0001, 0]], 24).translate(XR + 0.013, YH0 + 0.098, -0.15), M.blackPaint]), { parent: man });
@@ -846,10 +1061,10 @@ function build() {
     const em = [], coll = [0.0, 0.178, YH0 - 0.003];
     for (let i = 0; i < N; i++) {
       em.push(tubeG([[cxi(i), YH0 + 0.035, 0.1165], [cxi(i), YH0 + 0.032, 0.137], [cxi(i) * 0.55, YH0 + 0.012, 0.165], [coll[0], coll[2], coll[1]]], 0.0165, 30, 14));
-      em.push(box(0.04, 0.04, 0.008, cxi(i), YH0 + 0.035, 0.1125));
+      em.push(slabZ(0.1085, 0.1165, cxi(i) - 0.02, cxi(i) + 0.02, YH0 + 0.015, YH0 + 0.055, 0.0015, 0.008));
     }
     em.push(cylY(0.03, 0.04, YH0 - 0.06, 0, 0.178, 24));
-    exh = add('exh_manifold', 'Exhaust manifold', mesh(merge(em), M.ironDark), { parent: head });
+    exh = add('exh_manifold', 'Exhaust manifold', mesh(merge(em), M.rusty), { parent: head });
     for (let i = 0; i < N; i++) {
       add('exh_gasket', `Exhaust manifold gasket, ${cylName(i)}`, mesh(box(0.042, 0.042, 0.0015, cxi(i), YH0 + 0.035, 0.1078), M.gasket), { parent: head });
       for (const dx of [-0.016, 0.016]) {
@@ -859,15 +1074,35 @@ function build() {
     }
     const tx = 0.0, tz = 0.205, ty = YH0 - 0.1;
     const turbo = [];
-    const th = new THREE.TorusGeometry(0.042, 0.026, 12, 30, TAU * 0.86); th.rotateY(Math.PI / 2); th.translate(tx, ty, tz); turbo.push([th, M.turbine]);
-    turbo.push([merge(cylX(0.03, 0.04, tx - 0.04, ty, tz, 24), cylY(0.022, 0.05, ty + 0.02, tx, 0.178 + 0.01, 20)), M.turbine]);
-    turbo.push([merge(cylX(0.03, 0.048, tx + 0.02, ty, tz, 24)), M.aluCast]);
-    const ch = new THREE.TorusGeometry(0.05, 0.024, 12, 30, TAU * 0.85); ch.rotateY(Math.PI / 2); ch.translate(tx + 0.085, ty, tz);
-    turbo.push([merge(ch, cylX(0.028, 0.04, tx + 0.085, ty, tz, 24), tubeG([[tx + 0.085, ty + 0.06, tz + 0.02], [tx + 0.09, ty + 0.11, tz + 0.05], [tx + 0.09, ty + 0.15, tz + 0.1]], 0.02, 16, 14)), M.alu]);
-    turbo.push([merge(cylY(0.028, 0.03, ty - 0.08, tx + 0.04, tz + 0.06, 24), cylY(0.002, 0.06, ty - 0.05, tx + 0.04, tz + 0.06, 6)), M.blackPaint]);
-    turbo.push([tubeG([[0.0, YD - 0.03, WB / 2 + 0.005], [0.02, ty + 0.06, tz - 0.04], [tx + 0.04, ty + 0.03, tz]], 0.0035, 30, 6), M.steel]);
+    // the turbine: its scroll of hot, rusted iron winding in from the manifold above, the flange it hangs from,
+    // its outlet and the outlet's studs
+    const tvx = tx - 0.022, cvx = tx + 0.068;
+    const on = g => g.translate(0, ty, tz);
+    turbo.push([merge(voluteG(tvx, ty, tz, 0.026, 0.036, 0.009, 0.02, Math.PI / 2 - 0.92 * TAU, 0.92),
+      on(latheX([[0.0001, tvx - 0.026], [0.022, tvx - 0.026], [0.03, tvx - 0.018], [0.031, tvx + 0.012], [0.024, tvx + 0.02], [0.0001, tvx + 0.02]], 36)),
+      on(latheX([[0.019, tvx - 0.04], [0.035, tvx - 0.04], [0.035, tvx - 0.033], [0.024, tvx - 0.033], [0.024, tvx - 0.026], [0.019, tvx - 0.026]], 36)),
+      slabY(-0.036, 0.15, 0.03, 0.206, YH0 - 0.066, YH0 - 0.058, 0.002, 0.008)), M.turbine]);
+    turbo.push([merge(...[0, 1, 2].map(k => { const a = k / 3 * TAU + 0.5; return hexY(0.0055, 0.006).rotateZ(Math.PI / 2).translate(tvx - 0.04, ty + 0.029 * Math.cos(a), tz + 0.029 * Math.sin(a)); })), M.zinc]);
+    // the bearing housing between, its oil feed on top and its drain below
+    turbo.push([merge(on(latheX([[0.0001, tvx + 0.02], [0.026, tvx + 0.02], [0.026, tvx + 0.026], [0.018, tvx + 0.031], [0.018, tx + 0.036],
+      [0.027, tx + 0.041], [0.027, tx + 0.046], [0.0001, tx + 0.046]], 32)), cylY(0.0055, 0.012, ty + 0.017, tx + 0.016, tz, 12), hexY(0.007, 0.006, ty + 0.027).translate(tx + 0.016, 0, tz)), M.ironDark]);
+    // the compressor: its back plate, its aluminium scroll winding out to the outlet, its cover and inlet
+    turbo.push([merge(on(latheX([[0.0001, tx + 0.046], [0.05, tx + 0.046], [0.052, tx + 0.05], [0.05, tx + 0.054], [0.0001, tx + 0.054]], 48)),
+      voluteG(cvx, ty, tz, 0.034, 0.05, 0.011, 0.025, Math.PI / 2 + 0.92 * TAU, -0.92),
+      on(latheX([[0.0001, cvx - 0.012], [0.04, cvx - 0.012], [0.04, cvx + 0.004], [0.033, cvx + 0.016], [0.029, cvx + 0.02], [0.0001, cvx + 0.02]], 40)),
+      on(latheX([[0.0245, cvx + 0.02], [0.029, cvx + 0.02], [0.029, tx + 0.118], [0.031, tx + 0.12], [0.031, tx + 0.123], [0.028, tx + 0.125], [0.0245, tx + 0.125]], 40)),
+      sweepG([[cvx, ty + 0.05, tz - 0.004], [cvx, ty + 0.056, tz + 0.03], [cvx + 0.004, ty + 0.1, tz + 0.068], [cvx + 0.006, ty + 0.15, tz + 0.1]], [0.025, 0.023, 0.021, 0.02], 20),
+      new THREE.TorusGeometry(0.0205, 0.0025, 8, 32).rotateX(Math.PI / 2 + 0.57).translate(cvx + 0.006, ty + 0.142, tz + 0.094)), M.aluCast]);
+    // the vane actuator: a vacuum can on a bracket, its rod up to the vanes' lever
+    const ax = tx + 0.03, az = tz + 0.058;
+    turbo.push([merge(latheY([[0.0001, 0], [0.026, 0], [0.028, 0.004], [0.028, 0.009], [0.026, 0.011], [0.026, 0.014], [0.012, 0.022], [0.0001, 0.022]], 36).translate(ax, ty - 0.078, az),
+      cylZ(0.003, 0.016, 0.02, ax + 0.012, ty - 0.07, 8).translate(0, 0, az - 0.02), slabY(ax - 0.008, az - 0.04, ax + 0.008, az - 0.02, ty - 0.058, ty - 0.03, 0.002)), M.blackPaint]);
+    turbo.push([merge(cylY(0.0022, 0.075, ty - 0.058, ax, az, 8), box(0.006, 0.004, 0.03, ax, ty + 0.018, az - 0.014)), M.steel]);
+    // oil feed from the block, oil drain back to the crankcase
+    turbo.push([tubeG([[0.0, YD - 0.03, WB / 2 + 0.005], [0.02, ty + 0.06, tz - 0.04], [tx + 0.016, ty + 0.033, tz]], 0.0035, 30, 8), M.steel]);
+    turbo.push([hoseG([[tx + 0.016, ty - 0.02, tz], [tx + 0.016, ty - 0.06, tz - 0.02], [tx + 0.01, 0.045, WB / 2 + 0.035], [tx + 0.004, 0.025, WB / 2 + 0.009]], 0.0065, 30, 12), M.rubber]);
     add('turbo', 'Turbo (variable-vane)', group(...turbo), { parent: exh });
-    const hose = add('intake_hose', 'Intake hose', mesh(tubeG([[tx + 0.125, ty, tz], [tx + 0.17, ty + 0.01, tz + 0.01], [tx + 0.21, ty + 0.08, tz + 0.04], [tx + 0.24, ty + 0.16, tz + 0.08]], 0.031, 30, 18), M.rubber));
+    const hose = add('intake_hose', 'Intake hose', mesh(hoseG([[tx + 0.125, ty, tz], [tx + 0.17, ty + 0.01, tz + 0.01], [tx + 0.21, ty + 0.08, tz + 0.04], [tx + 0.24, ty + 0.16, tz + 0.08]], 0.031, 30, 18), M.rubber));
     add('hose_sleeve', 'Intake hose sleeve', mesh(merge(torusX(0.033, 0.004, tx + 0.13, ty, tz), torusX(0.033, 0.004, tx + 0.145, ty, tz)), M.steel), { parent: hose });
   }
 
@@ -875,16 +1110,17 @@ function build() {
   add('water_pump', 'Water pump', group([merge(cylX(0.04, 0.012, XF - 0.012, 0.12, 0.07, 28), box(0.02, 0.05, 0.04, XF - 0.006, 0.155, 0.09)), M.aluCast],
     [sprocketG(0.03, 18, 0.024).translate(XT, 0.12, 0.07), M.steel]));
   {
-    const fl = add('hose_adapter', 'Coolant flange', mesh(merge(box(0.012, 0.05, 0.05, XR + 0.006, YH0 + 0.05, 0.03), cylX(0.017, 0.03, XR + 0.012, YH0 + 0.06, 0.03, 20), cylX(0.014, 0.025, XR + 0.012, YH0 + 0.035, 0.015, 20)), M.blackPaint), { parent: head });
-    add('coolant_hose', 'Coolant hose, to the radiator (top)', mesh(merge(tubeG([[XR + 0.035, YH0 + 0.06, 0.03], [XR + 0.08, YH0 + 0.06, 0.05], [XR + 0.11, YH0 + 0.02, 0.16], [XR + 0.12, YH0 - 0.04, 0.26]], 0.018, 30, 14),
+    const fl = add('hose_adapter', 'Coolant flange', mesh(merge(box(0.012, 0.05, 0.05, XR + 0.006, YH0 + 0.05, 0.03), cylX(0.017, 0.03, XR + 0.012, YH0 + 0.06, 0.03, 20), cylX(0.014, 0.025, XR + 0.012, YH0 + 0.035, 0.015, 20)), M.plastic), { parent: head });
+    add('coolant_hose', 'Coolant hose, to the radiator (top)', mesh(merge(hoseG([[XR + 0.035, YH0 + 0.06, 0.03], [XR + 0.08, YH0 + 0.06, 0.05], [XR + 0.11, YH0 + 0.02, 0.16], [XR + 0.12, YH0 - 0.04, 0.26]], 0.018, 30, 14),
       torusX(0.019, 0.003, XR + 0.04, YH0 + 0.06, 0.03)), M.rubber), { parent: fl });
-    add('coolant_hose', 'Coolant hose, to the heater', mesh(merge(tubeG([[XR + 0.035, YH0 + 0.035, 0.015], [XR + 0.07, YH0 + 0.02, -0.02], [XR + 0.09, YH0 + 0.08, -0.1], [XR + 0.1, YH0 + 0.14, -0.15]], 0.012, 30, 12)), M.rubber), { parent: fl });
+    add('coolant_hose', 'Coolant hose, to the heater', mesh(merge(hoseG([[XR + 0.035, YH0 + 0.035, 0.015], [XR + 0.07, YH0 + 0.02, -0.02], [XR + 0.09, YH0 + 0.08, -0.1], [XR + 0.1, YH0 + 0.14, -0.15]], 0.012, 30, 12)), M.rubber), { parent: fl });
   }
 
   // ── lubrication: oil filter housing, cooler, filter; dipstick ──
   {
     const hx = 0.075, hz = -0.15;
-    const hs = add('filter_housing', 'Oil filter housing', mesh(merge(box(0.07, 0.11, 0.05, hx, 0.075, -WB / 2 - 0.025), cylY(0.046, 0.02, 0.0, hx, hz, 28), box(0.05, 0.03, 0.05, hx, 0.03, -0.125)), M.aluCast));
+    const hs = add('filter_housing', 'Oil filter housing', mesh(merge(slabY(hx - 0.035, -WB / 2 - 0.05, hx + 0.035, -WB / 2 + 0.002, 0.02, 0.13, 0.004, 0.014),
+      latheY([[0.0001, 0], [0.046, 0], [0.047, 0.004], [0.047, 0.016], [0.043, 0.02], [0.0001, 0.02]], 40).translate(hx, 0, hz), slabY(hx - 0.026, -0.155, hx + 0.026, -0.1, 0.012, 0.05, 0.005, 0.012)), M.aluCast));
     add('cooler_gasket', 'Oil cooler gasket', mesh(torusY(0.036, 0.0022, hx, -0.002, hz), M.rubber), { parent: hs });
     const cooler = [];
     for (let k = 0; k < 7; k++) cooler.push(cylY(0.045, 0.0028, -0.034 + k * 0.0045, hx, hz, 30));
@@ -902,10 +1138,22 @@ function build() {
   const timing = [{ z: 0, y: 0, r: 0.032 }, { z: 0.07, y: 0.12, r: 0.03 }, { z: 0.1, y: 0.28, r: -0.0315 }, { z: ZV, y: YC, r: 0.0645 },
     { z: PZ, y: PY, r: 0.0645 }, { z: -0.12, y: 0.06, r: -0.0295 }];
   add('tbelt', CHAIN ? 'Timing chain' : 'Timing belt', CHAIN ? mesh(chainG(beltPath(timing), XT, 0.0095), M.chain) : mesh(beltG(beltPath(timing), XT, 0.025, 0.0035, 0.0095), M.belt));
-  const tens = add('tensioner', CHAIN ? 'Timing chain tensioner' : 'Timing belt tensioner', group([latheX([[0.006, -0.013], [0.028, -0.013], [0.028, 0.013], [0.006, 0.013]], 36).translate(XT, 0.28, 0.1), M.steel],
-    [merge(box(0.008, 0.02, 0.05, XF - 0.004, 0.27, 0.085), cylX(0.01, 0.034, XT - 0.017, 0.28, 0.1, 6)), M.zinc]));
-  void tens;
-  add('idler', CHAIN ? 'Timing chain guide' : 'Timing belt idler', mesh(merge(latheX([[0.006, -0.013], [0.026, -0.013], [0.026, 0.013], [0.006, 0.013]], 36).translate(XT, 0.06, -0.12), cylX(0.009, 0.034, XT - 0.017, 0.06, -0.12, 6)), M.steel));
+  // a roller as the catalogue's pictures show them: a pressed steel shell on its bearing, the bearing's seal
+  // showing dark in the middle; the tensioner's eccentric plate with its pointer, and the bolt through it
+  const roller = (r, y, z) => [latheX([[0.012, -0.0095], [0.0195, -0.0095], [0.022, -0.013], [r - 0.0008, -0.013], [r, -0.012], [r, 0.012],
+    [r - 0.0008, 0.013], [0.012, 0.013], [0.012, -0.0095]], 48).translate(XT, y, z),
+    latheX([[0.006, -0.0099], [0.0125, -0.0099], [0.0125, -0.0094], [0.006, -0.0094]], 32).translate(XT, y, z)];
+  {
+    const [shell, race] = roller(0.0285, 0.28, 0.1);
+    const plate = extrudeX(zyShape([...arcPts(0, 0, 0.019, -1.2, Math.PI + 1.2, 20), [0.004, -0.03], [-0.004, -0.03]].map(([z, y]) => [z + 0.1, y + 0.28])), 0.0025, XT - 0.0165, 8);
+    add('tensioner', CHAIN ? 'Timing chain tensioner' : 'Timing belt tensioner', group([shell, M.steel], [race, M.rubber],
+      [merge(plate, box(0.008, 0.02, 0.05, XF - 0.004, 0.27, 0.085)), M.zinc], [merge(hexY(0.0088, 0.008).rotateZ(Math.PI / 2).translate(XT - 0.0145, 0.28, 0.1), cylX(0.005, 0.03, XT - 0.016, 0.28, 0.1, 10)), M.bolt]));
+  }
+  {
+    const [shell, race] = roller(0.026, 0.06, -0.12);
+    add('idler', CHAIN ? 'Timing chain guide' : 'Timing belt idler', group([shell, M.steel], [race, M.rubber],
+      [merge(hexY(0.0085, 0.008).rotateZ(Math.PI / 2).translate(XT - 0.0135, 0.06, -0.12), cylX(0.005, 0.03, XT - 0.016, 0.06, -0.12, 10)), M.bolt]));
+  }
   {
     // a cover's outline: round every pulley with GROW to spare, cut across at CUT (pushed in by INSET for the rim's inside)
     const cut = 0.2;
@@ -915,42 +1163,112 @@ function build() {
       const edge = keep(cut + 1) ? cut + inset : cut - inset;
       return convexHull([...ring.filter(([, y]) => keep(y) && Math.abs(y - cut) > inset), ...ring.filter(([, y]) => !keep(y)).map(([z]) => [z, edge])]);
     };
+    // moulded black plastic: a face with rounded edges, a raised border and stiffening ribs across it
+    const span = (poly, y) => {      // where a level line at Y crosses the outline (z from, z to)
+      const zs = [];
+      for (let i = 0; i < poly.length; i++) {
+        const [z1, y1] = poly[i], [z2, y2] = poly[(i + 1) % poly.length];
+        if ((y1 - y) * (y2 - y) < 0) zs.push(z1 + (z2 - z1) * (y - y1) / (y2 - y1));
+      }
+      return zs.length >= 2 ? [Math.min(...zs), Math.max(...zs)] : null;
+    };
     const coverG = (keep, holes) => {
-      const face = extrudeX(zyShape(hull(0.016, keep), holes), 0.004, XT - 0.026);
+      const bv = 0.0018, x0 = XT - 0.027;
+      const faceS = zyShape(hull(0.016 - bv, keep), holes.map(h => ({ ...h, r: h.r + bv })));
+      const face = new THREE.ExtrudeGeometry(faceS, { depth: 0.005 - 2 * bv, bevelEnabled: true, bevelThickness: bv, bevelSize: bv, bevelSegments: 3, curveSegments: 20 });
+      face.rotateY(Math.PI / 2); face.translate(x0 + bv, 0, 0);
       const rim = zyShape(hull(0.016, keep)); rim.holes.push(new THREE.Path(hull(0.012, keep, 0.004).map(([z, y]) => V2(-z, y))));
-      return merge(face, extrudeX(rim, 0.036, XT - 0.022));
+      const border = zyShape(hull(0.0125, keep, 0.0035)); border.holes.push(new THREE.Path(hull(0.009, keep, 0.0075).map(([z, y]) => V2(-z, y))));
+      const out = [face, extrudeX(rim, 0.036, XT - 0.022), extrudeX(border, 0.0025, x0 - 0.0025, 6)];
+      const inner = hull(0.004, keep, 0.012);
+      const ys = inner.map(([, y]) => y), lo = Math.min(...ys), hi = Math.max(...ys);
+      for (let y = lo + 0.018; y < hi - 0.012; y += 0.026) {
+        if (holes.length && Math.abs(y) < 0.05) continue;
+        const s = span(inner, y);
+        if (s && s[1] - s[0] > 0.02) out.push(slabX(x0 - 0.003, x0 + 0.001, s[0], s[1], y - 0.002, y + 0.002, 0.0012));
+      }
+      return merge(out);
     };
     add('tcover_up', 'Timing belt cover, upper', mesh(coverG(y => y >= cut, []), M.plastic));
     add('tcover_low', 'Timing belt cover, lower', mesh(coverG(y => y <= cut, [{ z: 0, y: 0, r: 0.024 }]), M.plastic));
   }
   // ── accessory belt: the crank pulley, alternator, tensioner ──
-  const damper = add('damper', 'Crank pulley (vibration damper)', mesh(ribbedG(0.075, 0.026, 6, 0.25).translate(XA, 0, 0), M.ironDark), { parent: crank });
+  // the damper: a ribbed outer ring on a rubber ring round its hub
+  const rubberRing = new THREE.RingGeometry(0.044, 0.05, 64); rubberRing.rotateY(-Math.PI / 2); rubberRing.translate(XA - 0.0131, 0, 0);
+  const damperHub = latheX([[0.0001, -0.0145], [0.026, -0.0145], [0.028, -0.0135], [0.028, 0], [0.0001, 0]], 40).translate(XA, 0, 0);
+  const damper = add('damper', 'Crank pulley (vibration damper)', group([merge(ribbedG(0.075, 0.026, 6, 0.25).translate(XA, 0, 0), damperHub), M.ironDark], [rubberRing, M.rubber]), { parent: crank });
   damper.anim = crankAnim(damper);
   for (let k = 0; k < 4; k++) {
     const a = k / 4 * TAU + Math.PI / 4, g = boltG(0.03, 0.008, 6, true); g.rotateZ(Math.PI / 2); g.translate(XA - 0.016, 0.032 * Math.cos(a), 0.032 * Math.sin(a));
     const b = add('damper_bolt', 'Crank pulley bolt', mesh(g, M.bolt), { parent: damper }); b.anim = crankAnim(b);
   }
   const AZ = -0.175, AY = 0.0;
-  const alt = add('alternator', 'Alternator', group([merge(cylX(0.058, 0.12, XA + 0.015, AY, AZ, 32), box(0.03, 0.03, 0.03, XA + 0.07, AY + 0.065, AZ + 0.03)), M.alu],
-    [merge(Array.from({ length: 9 }, (_, k) => torusX(0.058, 0.0025, XA + 0.025 + k * 0.012, AY, AZ))), M.aluCast]));
+  let alt;
+  {
+    // two cast end shields with cooling slots round them, the stator's laminations between, a plastic cap on
+    // the back with the output stud, and the lugs it bolts to the engine by
+    const x0 = XA + 0.015, at = g => g.translate(0, AY, AZ);
+    const shells = [latheX([[0.016, x0], [0.05, x0], [0.057, x0 + 0.003], [0.059, x0 + 0.008], [0.059, x0 + 0.01], [0.05, x0 + 0.01]], 40),
+      latheX([[0.05, x0 + 0.028], [0.059, x0 + 0.028], [0.06, x0 + 0.03], [0.05, x0 + 0.03]], 40),
+      latheX([[0.05, x0 + 0.05], [0.06, x0 + 0.05], [0.059, x0 + 0.052], [0.05, x0 + 0.052]], 40),
+      latheX([[0.05, x0 + 0.078], [0.058, x0 + 0.078], [0.058, x0 + 0.09], [0.052, x0 + 0.095], [0.02, x0 + 0.095]], 40)];
+    for (let k = 0; k < 18; k++) {        // the bars between the slots, front and back
+      const a = k / 18 * TAU;
+      for (const [xa, xb] of [[x0 + 0.01, x0 + 0.028], [x0 + 0.052, x0 + 0.078]]) {
+        const g = box(xb - xa, 0.007, 0.0075); g.translate((xa + xb) / 2, 0.0555, 0); g.rotateX(a); shells.push(g);
+      }
+    }
+    // the lugs: one high, one low, each with its bolt's hole, reaching for the engine
+    for (const [ly, lz] of [[0.048, 0.04], [-0.045, 0.046]]) for (const xl of [x0 + 0.004, x0 + 0.082]) {
+      shells.push(extrudeX(zyShape(rrect(0.05, 0.024, 0.01).map(([a, b]) => [a + lz, b + ly]), [{ z: lz + 0.014, y: ly, r: 0.0055 }]), 0.011, xl, 12));
+    }
+    const core = merge(cylX(0.05, 0.094, x0 + 0.001, 0, 0, 36), ...Array.from({ length: 6 }, (_, k) => torusX(0.0595, 0.0012, x0 + 0.032 + k * 0.0032, 0, 0)));
+    const cap = merge(latheX([[0.0001, x0 + 0.095], [0.044, x0 + 0.095], [0.046, x0 + 0.1], [0.04, x0 + 0.112], [0.0001, x0 + 0.114]], 32),
+      cylX(0.0045, 0.012, x0 + 0.112, 0.018, -0.01, 10));
+    alt = add('alternator', 'Alternator', group([at(merge(shells)), M.aluCast], [at(core), M.ironDark], [at(cap), M.plastic]));
+  }
   const altP = add('alt_pulley', 'Alternator pulley', mesh(ribbedG(0.028, 0.026, 6, 0.3).translate(XA, AY, AZ), M.steel), { parent: alt });
   altP.anim = a => { altP.obj.rotation.x = a * 2.7; };
   const accTen = { z: -0.09, y: 0.079, r: -0.0265 };
-  add('acc_tensioner', 'Accessory belt tensioner', mesh(merge(latheX([[0.006, -0.013], [0.022, -0.013], [0.022, 0.013], [0.006, 0.013]], 30).translate(XA, accTen.y, accTen.z), box(0.01, 0.075, 0.016, XA + 0.016, accTen.y - 0.03, accTen.z)), M.steel));
+  add('acc_tensioner', 'Accessory belt tensioner', mesh(merge(latheX([[0.006, -0.013], [0.022, -0.013], [0.022, 0.013], [0.006, 0.013]], 30).translate(XA, accTen.y, accTen.z), box(0.01, 0.075, 0.016, XA + 0.016, accTen.y - 0.03, accTen.z)), M.forged));
   add('ribbed', 'Accessory belt (ribbed)', mesh(beltG(beltPath([{ z: 0, y: 0, r: 0.077 }, { ...accTen, r: -0.0265 }, { z: AZ, y: AY, r: 0.0295 }]), XA, 0.022, 0.0035, 0, 6), M.belt));
 }
 
 // ── the scene ──
 const canvas = $('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
+const PHONE = matchMedia('(pointer: coarse)').matches;
+const PR = Math.min(devicePixelRatio || 1, PHONE ? 1.5 : 2);
+renderer.setPixelRatio(PR);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.NeutralToneMapping;
 renderer.localClippingEnabled = true;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
-scene.add(new THREE.HemisphereLight(0xffffff, 0x334455, 0.6));
-const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(-1, 2, 1.5); scene.add(sun);
+scene.environmentIntensity = 0.55;
+scene.add(new THREE.HemisphereLight(0xf2f4f7, 0x2b2723, 0.3));
+// a workshop's light: a big warm key from above the belt end that throws shadows, a cool light from behind
+const key = new THREE.DirectionalLight(0xfff2e4, 2.7); key.castShadow = true;
+key.shadow.mapSize.set(PHONE ? 1024 : 2048, PHONE ? 1024 : 2048); key.shadow.bias = -0.0003; key.shadow.normalBias = 0.002;
+Object.assign(key.shadow.camera, { left: -0.9, right: 0.9, top: 0.9, bottom: -0.9, near: 0.05, far: 5 });
+const back = new THREE.DirectionalLight(0xdce6ff, 0.8);
+scene.add(key, key.target, back, back.target);
 const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
+// the picture: rendered, then shaded where parts crowd one another (ambient occlusion), then to the screen
+let composer = null, aoPass = null;
+try {
+  composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
+  composer.setPixelRatio(PR);
+  composer.addPass(new RenderPass(scene, camera));
+  aoPass = new GTAOPass(scene, camera, 1, 1);
+  aoPass.updateGtaoMaterial({ radius: 0.045, distanceExponent: 1.4, thickness: 0.5, scale: 1.1, samples: PHONE ? 8 : 16 });
+  aoPass.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 16 });
+  aoPass.blendIntensity = 0.9;
+  composer.addPass(aoPass);
+  composer.addPass(new OutputPass());
+} catch (e) { console.warn('plain rendering:', e); composer = null; aoPass = null; }
+const draw = () => (composer ? composer.render() : renderer.render(scene, camera));
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true; controls.dampingFactor = 0.12;
 scene.add(root);
@@ -984,10 +1302,18 @@ function place() {
 place();
 box3.setFromObject(root);
 const CENTER = box3.getCenter(new THREE.Vector3()), SIZE = box3.getSize(new THREE.Vector3()).length();
+key.position.copy(CENTER).add(new THREE.Vector3(-0.55, 1.25, 0.7).normalize().multiplyScalar(2)); key.target.position.copy(CENTER);
+back.position.copy(CENTER).add(new THREE.Vector3(0.8, 0.45, -0.9).normalize().multiplyScalar(2)); back.target.position.copy(CENTER);
+key.shadow.camera.updateProjectionMatrix();
+// the floor's shadow under the engine; it goes while a part is lower than the engine's bottom
+const FLOOR_Y = box3.min.y - 0.002;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(4, 4).rotateX(-Math.PI / 2).translate(CENTER.x, FLOOR_Y, CENTER.z), new THREE.ShadowMaterial({ opacity: 0.2 }));
+floor.receiveShadow = true; scene.add(floor);
+const lowBox = new THREE.Box3();
 const VIEWS = { front: [-1, 0.35, 0.25], intake: [-0.25, 0.4, -1], exhaust: [0.3, 0.45, 1], top: [-0.05, 1, 0.12], under: [-0.2, -0.9, 0.35] };
-let camTo = null;
+let camTo = null, HOME_D = SIZE * 1.25;
 function view(name, now = false) {
-  const d = new THREE.Vector3(...VIEWS[name]).normalize().multiplyScalar(SIZE * 1.25);
+  const d = new THREE.Vector3(...VIEWS[name]).normalize().multiplyScalar(HOME_D);
   const to = { p: CENTER.clone().add(d), t: CENTER.clone() };
   if (now) { camera.position.copy(to.p); controls.target.copy(to.t); controls.update(); }
   else camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: to.p, t1: to.t, at: performance.now() };
@@ -996,10 +1322,31 @@ function view(name, now = false) {
 document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => view(b.dataset.view)));
 view('front', true);
 camera.position.copy(CENTER).add(new THREE.Vector3(-0.85, 0.55, 0.75).normalize().multiplyScalar(SIZE * 1.25)); controls.update();
+// a narrow (phone) picture: back off until the whole engine is in it
+function fitAll(margin) {   // how far back the camera must be for every part's outline to be in the picture
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  const right = new THREE.Vector3().crossVectors(camera.up, dir).normalize(), u = new THREE.Vector3().crossVectors(dir, right);
+  const tY = Math.tan(camera.fov * Math.PI / 360), tX = tY * camera.aspect, v = new THREE.Vector3();
+  let need = 0;
+  root.updateMatrixWorld(true);
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    const pa = o.geometry.attributes.position, step = Math.max(1, Math.floor(pa.count / 300));
+    for (let i = 0; i < pa.count; i += step) {
+      v.fromBufferAttribute(pa, i).applyMatrix4(o.matrixWorld).sub(controls.target);
+      const zc = v.dot(dir); need = Math.max(need, zc + Math.abs(v.dot(right)) * margin / tX, zc + Math.abs(v.dot(u)) * margin / tY);
+    }
+  });
+  return need;
+}
+resize();
+HOME_D = Math.max(SIZE * 1.25, fitAll(1.08));
+{ const d = camera.position.clone().sub(CENTER).normalize(); camera.position.copy(CENTER).addScaledVector(d, HOME_D); controls.update(); }
 
 function resize() {
   const r = canvas.parentElement.getBoundingClientRect();
-  renderer.setSize(r.width, r.height, false); camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); needs = 3;
+  renderer.setSize(r.width, r.height, false); if (composer) composer.setSize(Math.max(1, r.width), Math.max(1, r.height));
+  camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); needs = 3;
 }
 new ResizeObserver(resize).observe(canvas.parentElement); resize();
 controls.addEventListener('change', () => { needs = 2; });
@@ -1022,7 +1369,8 @@ function highlight(p, on) {
   if (!p) return;
   p.obj.traverse(o => {
     if (!o.isMesh) return;
-    if (on) { o.userData.mat0 = o.material; o.material = o.material.clone(); o.material.emissive = new THREE.Color(0x2a5bd7); o.material.emissiveIntensity = 0.55; }
+    if (on) { o.userData.mat0 = o.material; o.material = o.material.clone(); o.material.onBeforeCompile = o.userData.mat0.onBeforeCompile;
+      o.material.emissive = new THREE.Color(0x2a5bd7); o.material.emissiveIntensity = 0.55; }
     else if (o.userData.mat0) { o.material.dispose(); o.material = o.userData.mat0; delete o.userData.mat0; }
   });
 }
@@ -1069,13 +1417,13 @@ function setOff(list, off) {
 }
 const sphere = new THREE.Sphere();
 function fit(how) {
-  if (how === 'home') { const d = camera.position.clone().sub(controls.target).normalize().multiplyScalar(SIZE * 1.25);
+  if (how === 'home') { const d = camera.position.clone().sub(controls.target).normalize().multiplyScalar(HOME_D);
     camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: CENTER.clone().add(d), t1: CENTER.clone(), at: performance.now() }; return; }
   box3.setFromObject(root);
   frame(box3, how === 'close' ? 1.25 : 1.06, how === 'out');
 }
 // the camera, from where it looks now, back (or in) until BOX fills the picture with MARGIN to spare
-function frame(bx, margin, onlyOut = false) {
+function frame(bx, margin, onlyOut = false, now = false) {
   const c = bx.getCenter(new THREE.Vector3()), dir = camera.position.clone().sub(controls.target).normalize();
   const up = camera.up.clone(), right = new THREE.Vector3().crossVectors(up, dir).normalize(), u = new THREE.Vector3().crossVectors(dir, right);
   const tY = Math.tan(camera.fov * Math.PI / 360), tX = tY * camera.aspect;
@@ -1086,6 +1434,7 @@ function frame(bx, margin, onlyOut = false) {
     need = Math.max(need, zc + dx / tX, zc + dy / tY);
   }
   if (onlyOut && need <= camera.position.distanceTo(controls.target) * 1.02) return;
+  if (now) { camera.position.copy(c).add(dir.multiplyScalar(need)); controls.target.copy(c); controls.update(); needs = 3; return; }
   camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: c.clone().add(dir.multiplyScalar(need)), t1: c, at: performance.now() };
   needs = 3;
 }
@@ -1137,13 +1486,18 @@ let XRAY = false, CUT = false;
 $('xray').addEventListener('click', () => {
   XRAY = !XRAY; $('xray').setAttribute('aria-pressed', String(XRAY));
   for (const m of SHELL) { m.transparent = XRAY; m.opacity = XRAY ? 0.2 : 1; m.depthWrite = !XRAY; m.needsUpdate = true; }
+  // the see-through shells throw no shadow, and the shading where parts crowd is left out
+  root.traverse(o => { if (o.isMesh) o.castShadow = !(XRAY && SHELL.includes(o.userData.mat0 || o.material)); });
+  if (aoPass) aoPass.enabled = !XRAY && !CUT;
   needs = 3;
 });
 const cutPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0.0005);
 $('cut').addEventListener('click', () => {
   CUT = !CUT; $('cut').setAttribute('aria-pressed', String(CUT));
   root.traverse(o => { if (o.isMesh) { o.material.clippingPlanes = CUT ? [cutPlane] : null; o.material.side = CUT ? THREE.DoubleSide : (o.material === M.brass ? THREE.DoubleSide : THREE.FrontSide); o.material.needsUpdate = true; } });
-  for (const m of Object.values(M)) { m.clippingPlanes = CUT ? [cutPlane] : null; m.needsUpdate = true; }
+  for (const m of Object.values(M)) { m.clippingPlanes = CUT ? [cutPlane] : null; m.clipShadows = CUT; m.needsUpdate = true; }
+  root.traverse(o => { if (o.isMesh) o.material.clipShadows = CUT; });
+  if (aoPass) aoPass.enabled = !XRAY && !CUT;
   needs = 3;
 });
 $('explode').addEventListener('input', e => { EXPLODE = +e.target.value / 100; needs = 3; });
@@ -1204,7 +1558,7 @@ $('lede').textContent = `${CFG.words[0].toUpperCase()}${CFG.words.slice(1)}${CFG
 $('hudR').textContent = `${pieceCount} pieces`;
 $('facts').textContent = D.facts;
 $('honest').textContent = (D.known ? 'Drawn to those published figures.' : 'Drawn from its size.') +
-  ' The castings (block, head, manifolds, housings) are drawn by the machine to fit them, not scanned from this engine: the catalogue lists parts and their numbers, not their shapes. Parts your catalogue lists for this engine carry its OEM numbers; the others are drawn so the engine is whole, and say so.';
+  ' The castings (block, head, manifolds, housings) are drawn by the machine to fit them, not scanned from this engine. The belt rollers, the camshaft sprocket, the alternator, the injection pump and the filler cap are shaped after your catalogue’s own pictures of them. Parts your catalogue lists for this engine carry its OEM numbers; the others are drawn so the engine is whole, and say so.';
 showStep();
 
 // ── the loop ──
@@ -1227,9 +1581,10 @@ renderer.setAnimationLoop(now => {
   if (!moving && needs <= 0) return;
   if (!moving) needs--;
   place();
-  renderer.render(scene, camera);
+  if (EXPLODE > 0 || PIECES.some(q => q.k > 0)) { lowBox.setFromObject(root); floor.visible = lowBox.min.y >= FLOOR_Y - 0.001; } else floor.visible = true;
+  draw();
 });
 // for a test to read
-window.__engine = { PIECES, TYPES, STEPS, catRows, elsewhere, select, setOff,
+window.__engine = { PIECES, TYPES, STEPS, catRows, elsewhere, select, setOff, cam: () => ({ p: camera.position.toArray(), t: controls.target.toArray(), HOME_D, SIZE, C: CENTER.toArray() }),
   look: (p, t) => { camTo = null; camera.position.set(...p); controls.target.set(...t); controls.update(); needs = 3; } };
 </script>
