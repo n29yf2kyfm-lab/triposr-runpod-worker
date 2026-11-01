@@ -184,20 +184,62 @@ def classify(cutout_path):
     return "34", asp
 
 
+ROMAN_OF = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X"}
+
+
+def generation_of(hints):
+    """The generation's number from hints like "Mk4", "Mark 4", "IV" (None without one)."""
+    for h in hints:
+        m = re.fullmatch(r"\s*(?:mk|mark)\s*\.?\s*(\d{1,2})\s*", str(h), re.I)
+        if m:
+            return int(m.group(1))
+        inv = {v: k for k, v in ROMAN_OF.items()}
+        if str(h).strip().upper() in inv:
+            return inv[str(h).strip().upper()]
+    return None
+
+
+def is_generation(title, model, gen):
+    """A file named as generation GEN of MODEL: "Golf IV", "Golf Mk4", "Golf 4", "Mk IV"; not when it names
+    another generation too."""
+    t = re.sub(r"[_]", " ", title)
+    names = lambda n: rf"(?<![A-Za-z0-9])(?:mk\.?\s?{n}|mark\s?{n}|{ROMAN_OF[n]}|{re.escape(model)}\s?{n})(?![A-Za-z0-9])"
+    if not re.search(names(gen), t, re.I if False else 0) and not re.search(rf"(?<![A-Za-z0-9])(?:mk\.?\s?{gen}|{re.escape(model)}\s?{gen})(?![A-Za-z0-9])", t, re.I):
+        return False
+    # another body of the same generation (the Golf IV Variant, an estate; the "Golf IV" Cabriolet, a Mk3's
+    # body; the Bora, a saloon) is not the hatchback's shape
+    if re.search(r"variant|estate|kombi|wagon|cabrio|convertible|bora|jetta|sedan|saloon", t, re.I) and \
+            not re.search(r"variant|estate|kombi|wagon|cabrio|convertible|bora|jetta|sedan|saloon", model, re.I):
+        return False
+    others = [n for n in ROMAN_OF if n != gen and re.search(rf"(?<![A-Za-z0-9])(?:mk\.?\s?{n}|{ROMAN_OF[n]}|{re.escape(model)}\s?{n})(?![A-Za-z0-9])", t)]
+    return not others
+
+
 def find_photos(make, model, hints, out_dir, max_dl=14, session=None):
     """hints: list of extra words (generation, years). Returns a summary dict
     and writes side/front/rear.png + refs.json into out_dir."""
     os.makedirs(out_dir, exist_ok=True)
     Make = make.replace("-", " ").title()
-    queries = [f"{Make} {model} {' '.join(hints[:1])}".strip()]
-    titles = search(queries, limit=40)
-    if len(titles) < 8:
-        titles = search([f"{Make} {model}"], limit=40)
-    # a true side view is the one photo Forge cannot do without, and Commons
-    # file names usually say "side" or "profile" when they have one
-    for t in search([f"{Make} {model} side", f"{Make} {model} profile"], limit=20):
-        if t not in titles:
-            titles.insert(0, t)
+    gen = generation_of(hints)
+    if gen:
+        # a generation asked for ("Mk4"): searched by its names (Golf IV, Golf Mk4), and only photos named as it
+        # are kept; "Golf side" alone brings every generation's (a Mk7's side would make a Mk7)
+        r, short = ROMAN_OF[gen], "VW" if make.lower() == "volkswagen" else Make
+        queries = [f"{Make} {model} {r}", f"{short} {model} {r}", f"{Make} {model} Mk{gen}", f"{short} {model} {gen}"]
+        titles = []
+        for t in search(queries, limit=40) + search([f"{q} side" for q in queries[:2]] + [f"{q} profile" for q in queries[:2]], limit=20):
+            if t not in titles and is_generation(t, model, gen):
+                titles.append(t)
+    else:
+        queries = [f"{Make} {model} {' '.join(hints[:1])}".strip()]
+        titles = search(queries, limit=40)
+        if len(titles) < 8:
+            titles = search([f"{Make} {model}"], limit=40)
+        # a true side view is the one photo Forge cannot do without, and Commons
+        # file names usually say "side" or "profile" when they have one
+        for t in search([f"{Make} {model} side", f"{Make} {model} profile"], limit=20):
+            if t not in titles:
+                titles.insert(0, t)
     cands = [c for c in info(titles) if OK_LICENCE.match(c["licence"] or "") and c["w"] >= 1000
              and 0.9 <= c["w"] / c["h"] <= 3.8 and not bad_name(c["title"], make)]
     # prefer files whose names say which view they are, then the biggest

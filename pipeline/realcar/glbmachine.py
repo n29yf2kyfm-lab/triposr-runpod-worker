@@ -206,6 +206,12 @@ def add_model(src, make, model, years, licence, doors=None, body=None, title=Non
            "desktopGlbUrl": "file://" + dst, "addedFrom": os.path.basename(src), "addedAt": time.strftime("%Y-%m-%d")}
     p = batch.local_catalogue_path()
     cat = _json(p) or {}
+    if slug in cat:
+        # a model added again under the same name replaces the old one: its rig and built car go too, or a
+        # request would be served the old model's cached rig (a Golf added twice built as the first file)
+        for d in (os.path.join(HOME, "rigs", slug), os.path.join(HOME, "view", "cars", slug)):
+            shutil.rmtree(d, ignore_errors=True)
+        _CATALOGUE.clear()
     cat[slug] = rec
     json.dump(cat, open(p + ".tmp", "w"), indent=1)
     os.replace(p + ".tmp", p)
