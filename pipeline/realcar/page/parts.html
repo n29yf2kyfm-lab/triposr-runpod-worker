@@ -275,6 +275,8 @@ $('loading').hidden = true;
 const SHELLS = BUILD.shell || SHELL;
 // things drawn for their place only (a see-through body), each with its own switch
 const EXTRAS = BUILD.extras || [];
+// x.when(system) says in which of a car's systems a thing is shown (none: always)
+const extraShown = x => x.on !== false && (!x.when || x.when(SYS)) && (!x.sysOnly || SYS === 'all');
 for (const x of EXTRAS) { root.add(x.obj); x.obj.visible = x.on !== false; }
 
 // the catalogue's parts onto the kinds drawn; the rest are listed as elsewhere
@@ -476,7 +478,7 @@ $('none').addEventListener('click', () => { setOff(PIECES.filter(inSys), false);
 function setSystem(k) {
   SYS = k;
   for (const p of PIECES) p.obj.visible = inSys(p);
-  for (const x of EXTRAS) if (x.sysOnly) x.obj.visible = x.on !== false && SYS === 'all';
+  for (const x of EXTRAS) { x.obj.visible = extraShown(x); if (x.button) x.button.hidden = !!x.when && !x.when(SYS); }
   document.querySelectorAll('#systems button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sys === SYS)));
   STEPS = ALL_STEPS.filter(s => SYS === 'all' || !s[2] || s[2] === SYS);
   STEP = 0;
@@ -493,10 +495,12 @@ if (BUILD.systems) {
   }
 }
 for (const x of EXTRAS) {
-  const b = el('button', x.label); b.type = 'button'; b.setAttribute('aria-pressed', String(x.obj.visible));
-  b.addEventListener('click', () => { x.on = !x.obj.visible; x.obj.visible = x.on; b.setAttribute('aria-pressed', String(x.on)); needs = 3; });
+  const b = el('button', x.label); b.type = 'button'; b.setAttribute('aria-pressed', String(x.on !== false)); x.button = b;
+  b.addEventListener('click', () => { x.on = x.on === false; x.obj.visible = extraShown(x); b.setAttribute('aria-pressed', String(x.on)); needs = 3; });
   $('tools').append(b);
+  x.obj.visible = extraShown(x); b.hidden = !!x.when && !x.when(SYS);
 }
+if (BUILD.ui) BUILD.ui($('tools'));
 
 // ── run, X-ray, cut, explode ──
 $('run').addEventListener('click', () => { RUN = !RUN; $('run').setAttribute('aria-pressed', String(RUN)); $('run').textContent = RUN ? 'Stop it' : 'Run it'; needs = 3; });
