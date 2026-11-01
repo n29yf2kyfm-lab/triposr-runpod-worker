@@ -77,6 +77,8 @@ svg.callouts g.co.flag circle.tag { stroke: var(--flag); stroke-width: 2; }
   border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; display: grid; gap: 4px; pointer-events: none; }
 .stepbox b { font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
 .stepbox p { margin: 0; font-size: 14px; }
+.stepbox .need, ol.steps .need { margin: 4px 0 0; font: 12px/1.35 var(--mono); color: var(--muted, #667); }
+.stepbox .need b, ol.steps .need b { font: inherit; color: inherit; letter-spacing: 0; text-transform: none; }
 
 /* toolbars: one row each; on a phone they scroll sideways rather than wrap */
 .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -225,7 +227,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
         <canvas id="view" aria-label="3D model of the car. Drag to turn it; tap a part to pick it."></canvas>
         <svg class="callouts" id="callouts" aria-hidden="true"></svg>
         <div class="measure" id="measureLabel" hidden></div>
-        <div class="stepbox" id="stepBox" hidden><b id="stepN"></b><p id="stepText"></p></div>
+        <div class="stepbox" id="stepBox" hidden><b id="stepN"></b><p id="stepText"></p><p class="need" id="stepNeed" hidden></p></div>
         <span class="hint" id="hint" hidden>drag · zoom · click a part</span>
         <div class="status" id="status" role="status">Loading the car…</div>
       </div>
@@ -669,6 +671,7 @@ function onCar(gltf) {
   labSetup(root);
   labRestore();
   bayFit(root);
+  brakesSetup(root);
   panelSetup(root);
   benchSetup();
   styleSetup();
@@ -944,6 +947,15 @@ function pick(ids, add = false) {
 }
 $('clearPick').addEventListener('click', () => pick([]));
 function underPick(o) { for (let p = o; p; p = p.parent) { const id = B.idOf.get(p); if (id && B.picked.has(id)) return true; } return false; }
+// the bodywork (shell, doors, lids, panels, the interior): see-through during a corner job, as a manual's
+// cut-away drawing, so the hub, the strut and the arms stand out solid
+function bodywork(o) {
+  for (let p = o; p; p = p.parent) {
+    const n = p.name || '';
+    if (n === 'body' || n === 'cabin' || /^(bonnet|tailgate|door_[a-z]{2})(_hinge)?$/.test(n) || n.startsWith('panel:')) return true;
+  }
+  return false;
+}
 function refreshLook() {
   redraw();
   const any = B.picked.size > 0;
@@ -957,7 +969,8 @@ function refreshLook() {
       let h = B.hl.get(orig);
       if (!h) { h = orig.clone(); h.emissive = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1f4f86'); h.emissiveIntensity = 0.35; B.hl.set(orig, h); }
       o.material = h;
-    } else o.material = (B.xray && any) ? B.ghost : (B.lift.ghost && !onHoist(o)) ? B.liftGhost : orig;
+    } else o.material = (B.xray && any) ? B.ghost : (B.jobX && bodywork(o)) ? B.ghost
+      : (B.lift.ghost && !onHoist(o)) ? B.liftGhost : orig;
   });
   for (const [id, g] of B.co) g.classList.toggle('on', B.picked.has(id));
 }
@@ -1129,6 +1142,14 @@ function view(name) {
     case 'cabinOut': t.add(new THREE.Vector3(W * .65, -H * .15, 0)); p.copy(t).add(new THREE.Vector3(L * 1.05, L * .75, L * 1.15).multiplyScalar(far)); break;
     case 'hoist': t.add(new THREE.Vector3(0, H * .7, e * L * .55)); p.copy(t).add(new THREE.Vector3(L * 1.1, L * .45, e * L * .55).multiplyScalar(far)); break;
     default:
+      if (name.startsWith('corner:') && S.corner && S.corner[name.slice(7)]) {
+        // a front corner where the car stood on its wheel: the hub, the strut and the arms, from outside and
+        // a little ahead, whatever has come off it
+        const c = S.corner[name.slice(7)].clone(), side = name.endsWith('l') ? 1 : -1;
+        t.copy(c); t.y += H * .12;
+        p.copy(t).add(new THREE.Vector3(side * L * .38, H * .32, L * .26).multiplyScalar(far));
+        break;
+      }
       if (name.startsWith('door:') || name.startsWith('wheel:')) {
         const id = name.replace(':', '_'), n = B.node.get(id);
         if (n) {
@@ -1173,17 +1194,23 @@ function procSetup() {
   startProc(0, false);
 }
 function startProc(i, go = true) {
+  if (B.proc && B.proc.job) jobReset(B.proc);
   stopProc(false);
   B.proc = PROCS[i];
   const ol = $('procSteps');
   ol.replaceChildren();
-  B.proc.steps.forEach((st, k) => { const li = el('li', st.text); li.addEventListener('click', () => goStep(k)); ol.append(li); });
+  B.proc.steps.forEach((st, k) => {
+    const li = el('li', st.text);
+    const nl = needLine(st);
+    if (nl) { const p = el('p', null, 'need'); p.append(el('b', 'Parts (your catalogue): '), nl); li.append(p); }
+    li.addEventListener('click', () => goStep(k)); ol.append(li);
+  });
   $('procScrub').max = String(B.proc.steps.length - 1);
   if (go) goStep(0);
 }
 function goStep(k) {
   if (!B.proc) return;
-  if (B.lift && B.lift.on) liftEngine(false);
+  if (B.lift && B.lift.on && !B.proc.job) liftEngine(false);
   k = Math.max(0, Math.min(B.proc.steps.length - 1, k));
   B.step = k;
   const st = B.proc.steps[k];
@@ -1191,12 +1218,20 @@ function goStep(k) {
   [...$('procSteps').children].forEach((li, i) => { if (i === k) { li.setAttribute('aria-current', 'step'); if (!phone) li.scrollIntoView({ block: 'nearest' }); } else li.removeAttribute('aria-current'); });
   $('stepN').textContent = `${B.proc.title} · step ${k + 1} of ${B.proc.steps.length}`;
   $('stepText').textContent = st.text;
+  const nl = needLine(st);
+  $('stepNeed').hidden = !nl; $('stepNeed').textContent = nl ? 'Parts (your catalogue): ' + nl : '';
   $('stepBox').hidden = false;
+  if (B.proc.job) jobGo(B.proc, k);
+  if (B.proc.job && st.teardown) {                  // the cut-away engine has its own camera
+    $('procPrev').disabled = k === 0; $('procNext').disabled = k === B.proc.steps.length - 1;
+    if (B.timer && k === B.proc.steps.length - 1) playProc(false);
+    return;
+  }
   for (const id of Object.keys(S.actions)) setOpen(id, st.open.includes(id));
   syncAll();
-  setFlip(st.view === 'under');
+  if (!B.proc.job) setFlip(st.view === 'under');
   pick(st.parts);
-  if (st.view === 'part') frameParts(st.parts, 1.1);
+  if (st.view === 'part') frameParts(st.parts, B.proc.job ? 2.4 : 1.1);
   else if (!view(st.view)) frameParts(st.parts, 1.1);
   $('procPrev').disabled = k === 0; $('procNext').disabled = k === B.proc.steps.length - 1;
   if (B.timer && k === B.proc.steps.length - 1) playProc(false);
@@ -1206,10 +1241,11 @@ function playProc(on) {
   $('procPlay').setAttribute('aria-pressed', String(on)); $('procPlay').textContent = on ? 'Pause' : 'Play';
   if (!on) return;
   if (B.step < 0 || B.step >= B.proc.steps.length - 1) goStep(0);
-  B.timer = setInterval(() => goStep(B.step + 1), 6000);
+  B.timer = setInterval(() => goStep(B.step + 1), B.proc.job ? 8000 : 6000);
 }
 function stopProc(clear = true) {
   playProc(false);
+  if (clear && B.proc && B.proc.job) jobReset(B.proc);
   B.step = -1;
   $('stepBox').hidden = true;
   [...$('procSteps').children].forEach(li => li.removeAttribute('aria-current'));
@@ -1715,7 +1751,7 @@ function cabinOut(on) {
 // packed so no two parts land on each other; again puts it back on. "Strip
 // it down" takes everything off in a workshop's order and lifts the engine
 // out; "Build it back" puts it all back ──
-const OFF = { st: new Map(), occ: new Map(), btn: new Map(), box: null, busy: false, stripped: false };
+const OFF = { st: new Map(), occ: new Map(), btn: new Map(), box: null, busy: false, stripped: false, freeze: new Set() };
 B.offD = new Map();
 const isOff = id => !!(OFF.st.get(id) || {}).on;
 function panelSetup(root) {
@@ -1822,6 +1858,7 @@ function takeOff(id, on, opts = {}) {
   if (on) {
     if (st && st.on) return;
     if (B.explode) setExplode(0);
+    if (B.lift && B.lift.set && B.lift.set.has(n)) OFF.freeze.add(n);
     if (!st) {
       S.car.updateMatrixWorld(true);
       const pb = new THREE.Box3().setFromObject(B.node.get(id) || n).applyMatrix4(toCarM());
@@ -1854,7 +1891,14 @@ function stepOff(dt) {
     const v = new THREE.Vector3(st.D.x * f, st.clear * u + (st.D.y - st.clear) * g, st.D.z * f);
     B.offD.set(st.n, carDelta(st.n, v));
     place(st.n);
-    if (st.p === 0 && !st.on) { B.offD.delete(st.n); place(st.n); release(id); OFF.st.delete(id); }
+    if (st.p === 0 && !st.on) {
+      B.offD.delete(st.n); release(id); OFF.st.delete(id);
+      if (OFF.freeze.delete(st.n) && B.lift) {        // back on the engine: it rides with the crane again
+        const L = B.lift, u = ease(L.p / 0.5), f = ease((L.p - 0.45) / 0.55);
+        if (L.up.has(st.n)) B.liftD.set(st.n, L.up.get(st.n).clone().multiplyScalar(u).add(L.out.get(st.n).clone().multiplyScalar(f)));
+      }
+      place(st.n);
+    }
     else if (st.p !== goal) moving = true;
   }
   return moving;
@@ -1874,6 +1918,138 @@ function frameOff(ids) {
   const dist = r / Math.sin(THREE.MathUtils.degToRad(camera.fov) / 2) * (phone ? 1.05 : 0.85);
   moveCam(c.clone().add(new THREE.Vector3(0.55, 0.62, 0.78).normalize().multiplyScalar(dist)), c);
 }
+// ── the front brakes: a vented disc on each front hub and its caliper on a carrier at the back of the disc,
+// modelled here (the car's own file has them inside its wheels), so a brake job takes them off in turn ──
+function brakesSetup(root) {
+  S.corner = {};
+  const byName = new Map();
+  root.traverse(o => { if (o.name && !byName.has(o.name)) byName.set(o.name, o); });
+  const find = id => byName.get(id) || byName.get(loaderName(id));
+  root.updateMatrixWorld(true);
+  const iron = new THREE.MeshStandardMaterial({ color: 0x7d8186, metalness: 0.75, roughness: 0.42 });
+  const face = new THREE.MeshStandardMaterial({ color: 0xa3a7ab, metalness: 0.85, roughness: 0.3 });
+  const hat = new THREE.MeshStandardMaterial({ color: 0x55585c, metalness: 0.5, roughness: 0.6 });
+  const paint = new THREE.MeshStandardMaterial({ color: 0x2b2d30, metalness: 0.35, roughness: 0.55 });
+  for (const c of ['fl', 'fr']) {
+    const w = find('wheel_' + c), kn = find('bay:knuckle_' + c);
+    if (!w || !kn) continue;
+    const wb = new THREE.Box3().setFromObject(w), wc = wb.getCenter(new THREE.Vector3()), ws = wb.getSize(new THREE.Vector3());
+    S.corner[c] = wc.clone();
+    const sx = Math.sign(wc.x - S.car.getWorldPosition(new THREE.Vector3()).x) || 1;   // outboard
+    const r = Math.min(0.142, ws.y * 0.23), t = 0.022;
+    const at = wc.clone(); at.x -= sx * Math.min(0.03, ws.x * 0.15);                    // just inboard of the hub face
+    const disc = new THREE.Group(); disc.name = 'bay:disc_' + c;
+    const ring = new THREE.Mesh(new THREE.CylinderGeometry(r, r, t, 48, 1, true), iron);
+    const f1 = new THREE.Mesh(new THREE.RingGeometry(r * 0.52, r, 48), face), f2 = f1.clone();
+    f1.position.y = t / 2; f1.rotation.x = -Math.PI / 2; f2.position.y = -t / 2; f2.rotation.x = Math.PI / 2;
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.52, r * 0.52, t + 0.03, 32), hat);
+    top.position.y = -sx * 0.012;                                                       // the hat towards the wheel
+    disc.add(ring, f1, f2, top);
+    disc.rotation.z = Math.PI / 2;
+    disc.position.copy(at);
+    // the caliper astride the disc's rim, at the back of it and a little up; its carrier behind it
+    const cal = new THREE.Group(); cal.name = 'bay:caliper_' + c;
+    const a = Math.PI * 0.8;                                                            // towards the rear (-Z), up
+    const cy = at.y + Math.sin(a) * (r - 0.02), cz = at.z + Math.cos(a) * (r - 0.02);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(t + 0.05, 0.11, 0.075), paint);
+    body.position.set(at.x - sx * 0.004, cy, cz);
+    body.rotation.x = a - Math.PI / 2;
+    const piston = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.026, 0.028, 20), paint);
+    piston.rotation.z = Math.PI / 2; piston.position.set(at.x - sx * 0.04, cy, cz);
+    const carrier = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.13, 0.03), iron);
+    carrier.position.set(at.x - sx * 0.03, cy, cz - 0.01); carrier.rotation.x = a - Math.PI / 2;
+    cal.add(body, piston, carrier);
+    for (const g of [disc, cal]) {
+      g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      g.updateMatrixWorld(true);                 // placed in the world's frame, then hung beside the hub carrier
+      kn.parent.attach(g);                       // (each comes off by itself)
+    }
+  }
+}
+// a part shown stripped: its pieces drawn apart along its length (a strut's top mount, spring, bump stop,
+// boot and damper), as a manual's exploded drawing
+const EXP = { id: null, base: new Map(), goal: new Map() };
+function explodePart(id) {
+  if (EXP.id === id) return;
+  for (const [o, p] of EXP.base) EXP.goal.set(o, p.clone());
+  EXP.id = id;
+  const n = id && B.node.get(id);
+  if (!n) return;
+  const kids = n.children.filter(o => o.isMesh || o.children.length);
+  if (kids.length < 2) return;
+  const lb = new THREE.Box3();
+  const cs = kids.map(o => { if (!EXP.base.has(o)) EXP.base.set(o, o.position.clone()); const b = new THREE.Box3().setFromObject(o); lb.union(b); return b.getCenter(new THREE.Vector3()); });
+  const size = lb.getSize(new THREE.Vector3()), mid = lb.getCenter(new THREE.Vector3());
+  const ax = size.y >= size.x && size.y >= size.z ? 'y' : (size.x >= size.z ? 'x' : 'z');
+  const order = cs.map((c, i) => [c[ax], i]).sort((p, q) => p[0] - q[0]).map(p => p[1]);
+  const span = Math.max(size[ax] * 0.9, 0.35);
+  order.forEach((i, rank) => {
+    const o = kids[i];
+    const v = new THREE.Vector3(); v[ax] = (rank - (kids.length - 1) / 2) * span / kids.length;
+    const out = cs[i].clone().sub(mid); out[ax] = 0; v.add(out.multiplyScalar(0.8));
+    const inv = new THREE.Matrix4().copy(o.parent.matrixWorld).invert();
+    const lv = v.clone().applyMatrix4(inv).sub(new THREE.Vector3().applyMatrix4(inv));
+    EXP.goal.set(o, EXP.base.get(o).clone().add(lv));
+  });
+  redraw();
+}
+function stepExplode(dt) {
+  let moving = false;
+  for (const [o, g] of EXP.goal) {
+    const d = g.clone().sub(o.position);
+    if (d.length() < 1e-4) { o.position.copy(g); EXP.goal.delete(o); continue; }
+    o.position.add(d.multiplyScalar(reduced ? 1 : Math.min(1, dt * 4)));
+    moving = true;
+  }
+  return moving;
+}
+// ── workshop jobs (page.py's workshop_jobs): each step leaves the car as the manual has it at that step: the
+// parts of every step so far are off, the crane is up or down, one part may be shown stripped; going back
+// puts them on again ──
+function jobAll(proc) { return [...new Set(proc.steps.flatMap(s => s.off || []))]; }
+function jobState(proc, k) {
+  const offs = new Set(); let hoist = false;
+  proc.steps.slice(0, k + 1).forEach(s => {
+    if (s.reset) { offs.clear(); hoist = false; }
+    (s.off || []).forEach(id => offs.add(id));
+    if (s.hoist !== undefined) hoist = s.hoist;
+  });
+  return { offs, hoist };
+}
+function jobGo(proc, k) {
+  const st = proc.steps[k], { offs, hoist } = jobState(proc, k), all = jobAll(proc);
+  if (proc.xray && !B.jobX) { B.jobX = true; refreshLook(); }
+  for (const id of all.slice().reverse()) if (!offs.has(id) && isOff(id)) takeOff(id, false);
+  const L = B.lift;
+  if (L && L.nodes.length && L.on !== hoist) liftEngine(hoist, true);
+  const later = () => {
+    if (B.proc !== proc || B.step !== k) return;
+    const put = new Map(); proc.steps.forEach(s => (s.off || []).forEach(id => { if (!put.has(id) && s.put) put.set(id, s.put); }));
+    for (const id of all) if (offs.has(id) && !isOff(id)) takeOff(id, true, put.has(id) ? { side: put.get(id) } : {});
+  };
+  // off the hoisted engine only once it is up and out
+  if (hoist && L && L.p < 1 && !reduced) setTimeout(later, (1 - L.p) * 2700 + 150); else later();
+  explodePart(st.explode || null);
+  if (st.teardown) openTeardown();
+}
+function jobReset(proc) {
+  explodePart(null);
+  if (proc.xray && B.jobX) { B.jobX = false; refreshLook(); }
+  for (const id of jobAll(proc).reverse()) if (isOff(id)) takeOff(id, false);
+  if (B.lift && B.lift.on) liftEngine(false, true);
+}
+function openTeardown() {
+  showTab('engine');
+  if (!$('runEngine').getAttribute('aria-pressed') || $('runEngine').getAttribute('aria-pressed') === 'false') $('runEngine').click();
+  const t = document.querySelector('#runMode [data-m="teardown"]');
+  if (t) t.click();
+  const r = $('runStrip');
+  if (r) { r.value = '100'; r.dispatchEvent(new Event('input', { bubbles: true })); }
+}
+function needLine(st) {
+  return (st.need || []).map(([n, o]) => `${n} (${o})`).join(' · ');
+}
+
 // a workshop's order: the bonnet, the front end, the wings, the doors, the back, the wheels, the interior,
 // then the engine out on the crane
 const STRIP_ORDER = ['bonnet', 'panel:grille', 'panel:lamp_front_left', 'panel:lamp_front_right', 'panel:bumper_front',
@@ -1910,6 +2086,7 @@ function stepLift(dt) {
   L.p = reduced ? goal : Math.max(0, Math.min(1, L.p + Math.sign(goal - L.p) * dt / 2.6));
   const u = ease(L.p / 0.5), f = ease((L.p - 0.45) / 0.55);
   for (const n of L.nodes) {
+    if (OFF.freeze.has(n)) continue;                  // taken off the engine: it stays where it was put down
     B.liftD.set(n, L.up.get(n).clone().multiplyScalar(u).add(L.out.get(n).clone().multiplyScalar(f)));
     place(n);
   }
@@ -2746,6 +2923,7 @@ renderer.setAnimationLoop(() => {
   }
   if (S.root && stepLift(Math.min(raw, 0.5))) moving = true;
   if (S.root && stepOff(Math.min(raw, 0.5))) moving = true;
+  if (S.root && stepExplode(Math.min(raw, 0.5))) moving = true;
   if (rampStep(dt)) moving = true;
   if (RUN.on) {
     runUpdate(dt);

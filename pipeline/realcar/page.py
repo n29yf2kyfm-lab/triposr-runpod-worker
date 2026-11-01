@@ -195,6 +195,10 @@ def catalogue(j):
     group("Wheels", [n for n in ("wheel_fl", "wheel_fr", "wheel_rl", "wheel_rr") if n in top])
     bay = [n for n in kids("engine_bay") if not str(n).startswith("bay:engine-bay-structure")]
     group("Engine bay", bay, drill="engine_bay")
+    if "bay:knuckle_fl" in bay and "bay:knuckle_fr" in bay:
+        groups.append({"title": "Front brakes", "drill": None,
+                       "items": [{"id": i, "label": f"{BRAKE_LABEL[i[4:-3]]}, {SIDE[i[-2:]].split()[1]}"}
+                                 for c in ("fl", "fr") for i in BRAKES[c]]})
     under = kids("rear_running_gear") + (["exhaust"] if "exhaust" in top else [])
     group("Under the car", under, drill="rear_running_gear")
     if "cabin" in top:
@@ -333,6 +337,207 @@ def procedures(cat, opens, rear_engine=False, electric=False):
         if len(steps) >= 2:
             out.append({"title": title, "steps": steps})
     return out
+
+
+# ── workshop jobs: a manual's procedures that do the work on the car (take each part off in order, the
+# stands, the crane), each step with the parts it needs from the owner's catalogue and their OEM numbers.
+# No torque figures are made up: a step says where the manufacturer's figure is needed. ──
+BRAKES = {c: [f"bay:disc_{c}", f"bay:caliper_{c}"] for c in ("fl", "fr")}
+BRAKE_LABEL = {"disc": "Brake disc", "caliper": "Brake caliper and carrier"}
+
+
+def _need(rows, pattern, n=4):
+    """Catalogue rows ([name, OEM, ...]) whose names match PATTERN: [[name, OEM], ...]."""
+    rx = re.compile(pattern, re.I)
+    out, seen = [], set()
+    for r in rows or []:
+        if rx.search(r[0]) and r[0] not in seen:
+            seen.add(r[0])
+            out.append([r[0], r[1]])
+        if len(out) >= n:
+            break
+    return out
+
+
+def car_parts(own, asked):
+    """The owner's catalogue rows for this car, all systems together: the engine's (engines.py) and the rest
+    (chassis.py: brakes, suspension, driveshafts ...). {} without the indexes."""
+    rows = {}
+    for k, v in ((own or {}).get("parts") or {}).items():
+        rows.setdefault(k, []).extend(v)
+    try:
+        import chassis
+        if os.path.exists(chassis.INDEX) and asked.get("make"):
+            y = int(asked.get("year") or 0)
+            years = range(y - 3, y + 4) if y else range(1990, 2030)
+            litres = ((own or {}).get("spec") or {}).get("litres")
+            model = (own or {}).get("matched", {}).get("models", [None])[0] or asked.get("model_words") or ""
+            for k, v in chassis.look(asked["make"], model, years, litres).items():
+                rows.setdefault(k, []).extend(v)
+    except Exception:                                   # no chassis index, or one in an older shape: no parts list
+        pass
+    return rows
+
+
+def workshop_jobs(have, opens, rows, fit):
+    """Workshop procedures over this car's own parts (HAVE: the page's part ids): a front corner stripped
+    (each side), the engine and gearbox out, the engine stripped on the bench. Each step: text, view, the
+    parts it works on, what it takes OFF (cumulative through the job), the crane, an exploded part, the
+    catalogue parts it needs. Only steps whose parts this car has are kept."""
+    allr = [r for v in rows.values() for r in v]
+    by = lambda sysname: rows.get(sysname) or []                  # noqa: E731
+    diesel = bool(fit.get("diesel"))
+
+    def st(text, view, parts=(), off=(), need=(), note=None, hoist=None, explode=None, teardown=False,
+           open_=(), keep=False):
+        parts = [p for p in parts if p in have]
+        off = [p for p in off if p in have]
+        d = {"text": text, "view": view, "parts": parts, "off": off, "open": [p for p in open_ if p in opens],
+             "need": [list(x) for x in need]}
+        if note:
+            d["note"] = note
+        if hoist is not None:
+            d["hoist"] = hoist
+        if explode and explode in have:
+            d["explode"] = explode
+        if teardown:
+            d["teardown"] = True
+        if keep:
+            d["keep"] = True
+        return d
+
+    jobs = []
+    for c, side in (("fl", "left"), ("fr", "right")):
+        w, k = f"wheel_{c}", lambda n: f"bay:{n}_{c}"            # noqa: E731
+        steps = [
+            st(f"Front {side}: with the car on its wheels, slacken the wheel bolts and the driveshaft hub bolt "
+               "(it is very tight: a helper holds the brake on). Chock the rear wheels, raise the front and set it "
+               "on axle stands under the sill jacking points. Never work under a car held on a jack alone.",
+               f"corner:{c}", [w], keep=True),
+            st("Take the wheel off.", f"corner:{c}", [w], [w], _need(by("Driveshafts and wheels"), r"wheel|bolt")),
+            st("Brake caliper: unbolt the carrier from the hub carrier and lift the caliper off the disc with its "
+               "pads. Hang it from the spring on wire; never let it hang on its flexible hose.", f"corner:{c}",
+               [BRAKES[c][1]], [BRAKES[c][1]], _need(by("Brakes"), r"caliper|pad|clip|bracket")),
+            st("Brake disc: undo the retaining screw and pull the disc off the hub. Measure its thickness against "
+               "the minimum stamped on it; renew discs in pairs.", f"corner:{c}", [BRAKES[c][0]], [BRAKES[c][0]],
+               _need(by("Brakes"), r"^(?!.*rear).*rotor")),
+            st("Anti-roll bar drop link: hold its ball-pin with a spanner on the flats and undo the nut at the "
+               "strut; free the link.", f"corner:{c}", [k("droplink")], [k("droplink")],
+               _need(by("Suspension and steering"), r"stabili|link|sway")),
+            st("Track rod end: undo its nut, break the taper with a ball-joint splitter and lift the joint out of "
+               "the steering arm. Use a new self-locking nut on refitting.", f"corner:{c}", [k("tre")], [k("tre")],
+               _need(allr, r"tie rod|track rod")),
+            st("Driveshaft: take out the hub bolt slackened earlier and press the shaft back out of the hub. Tie "
+               "it up level: never let it hang from its inner joint. The hub bolt is a stretch bolt: renew it.",
+               f"corner:{c}", [k("ds")], [k("ds")], _need(by("Driveshafts and wheels"), r"axle|drive ?shaft|snap ring|cv")),
+            st("Lower ball joint: undo its bolts to the lower arm and free it from the arm.", f"corner:{c}", [k("bj")],
+               [k("bj")], _need(allr, r"ball joint")),
+            st("Hub carrier: undo the clamp bolt at the foot of the strut, spread the clamp a little and draw the "
+               "carrier down off the strut. Check the wheel bearing turns smoothly, with no play.", f"corner:{c}",
+               [k("knuckle")], [k("knuckle")], _need(allr, r"wheel bearing|wheel hub|knuckle")),
+            st("Strut: support it from below, undo the top mount nuts under the bonnet and lower the strut out "
+               "through the wheel arch.", f"corner:{c}", [k("strut")], [k("strut")],
+               _need(by("Suspension and steering"), r"strut|shock|damper|top mount"), open_=["bonnet"]),
+            st("Strip the strut: compress the spring with spring compressors on opposite coils until the top mount "
+               "is free of load. Only then undo the damper's top nut: a loaded spring can kill. Off come the top "
+               "mount and its bearing, the spring, the bump stop and dust boot, leaving the damper.", "part",
+               [k("strut")], explode=k("strut"), need=_need(by("Suspension and steering"), r"coil spring|bump stop|strut|top mount|dust boot")),
+            st("Lower arm: undo its two mounting bolts to the subframe and take it out. Check both bushes for "
+               "cracks and play.", f"corner:{c}", [k("arm")], [k("arm")],
+               _need(by("Suspension and steering"), r"control arm|bushing")),
+            st("Refitting is the reverse. Tighten every nut and bolt to the manufacturer's figure; tighten the arm's "
+               "and the drop link's bolts with the car's weight on its wheels, so the bushes are not wound up. Have "
+               "the wheel alignment (toe) set after.", f"corner:{c}", [w], keep=True),
+        ]
+        steps[-1]["off"], steps[-1]["reset"] = [], True
+        for x in steps:
+            x["put"] = "front"           # set down ahead of the car, not between the camera and the hub
+        steps = [x for x in steps if x["parts"] or x.get("keep")]
+        if len([x for x in steps if x["off"]]) >= 4:
+            jobs.append({"title": f"Workshop: front {side} brakes and suspension off, strut stripped",
+                         "job": True, "xray": True, "steps": steps})
+
+    fuel = ("Fuel: clamp and disconnect the supply and return pipes at the injection pump and plug them; keep "
+            "diesel off the coolant hoses (it rots rubber)." if diesel else
+            "Fuel: release the pressure, then disconnect the supply pipe at the rail and plug it.")
+    out_steps = [
+        st("Engine and gearbox out, together. Open the bonnet; disconnect the battery's earth lead first, then "
+           "take the battery out.", "bay", ["bay:battery-negative-earth-lead", "bay:battery-assembly"],
+           ["bay:battery-negative-earth-lead", "bay:battery-assembly"], _need(allr, r"battery"), open_=["bonnet"]),
+        st("Bonnet off: mark round the hinges, a helper holds it, undo the hinge bolts and lift it away.", "bay",
+           ["bonnet"], ["bonnet"]),
+        st("Front end off: bumper, grille and headlamps; the front panel (lock carrier) goes to its service "
+           "position.", "front", ["panel:bumper_front", "panel:grille", "panel:lamp_front_left", "panel:lamp_front_right"],
+           ["panel:bumper_front", "panel:grille", "panel:lamp_front_left", "panel:lamp_front_right"],
+           _need(allr, r"^(?!.*switch).*(headl|head lamp)")),
+        st("Drain the coolant from the bottom hose into a tray, then take the radiator hoses and clips off.",
+           "bay", ["bay:radiator-upper-hose", "bay:radiator-lower-hose", "bay:coolant-degas-hose"],
+           ["bay:radiator-upper-hose", "bay:radiator-lower-hose", "bay:coolant-degas-hose",
+            "bay:radiator-upper-engine-hose-clamp", "bay:radiator-upper-radiator-hose-clamp",
+            "bay:radiator-lower-radiator-hose-clamp", "bay:radiator-lower-engine-hose-clamp"],
+           _need(allr, r"coolant hose|radiator hose|radiator cap|cap \(radiators")),
+        st("Air filter box and intake ducting out.", "bay", ["bay:dgea_airbox", "bay:dgea_intake"],
+           ["bay:dgea_airbox"], _need(by("Air and intake"), r"air")),
+        st("Unplug the engine wiring loom at its connectors and lay it over the engine.", "bay", ["bay:dgea_loom"],
+           ["bay:dgea_loom"]),
+        st(fuel, "bay", ["bay:diesel_injection"] if diesel else ["bay:dgea_intake"],
+           need=_need(by("Fuel"), r"fuel filter|seal|line|hose")),
+        st("Exhaust: undo the front pipe from the turbocharger (or manifold) and drop it.", "bay",
+           ["bay:exhaust_front"], ["bay:exhaust_front"], _need(allr, r"exhaust")),
+        st("Driveshafts: unbolt both inner joints from the gearbox flanges and tie the shafts up level.", "bay",
+           ["bay:ds_fl", "bay:ds_fr"], ["bay:ds_fl", "bay:ds_fr"], _need(by("Driveshafts and wheels"), r"axle|cv|drive")),
+        st("Radiator and cooling pack out (the air-conditioning condenser stays connected: do not open its pipes).",
+           "bay", ["bay:radiator-condenser-cooling-pack", "bay:coolant-expansion-reservoir"],
+           ["bay:radiator-condenser-cooling-pack", "bay:coolant-expansion-reservoir"], _need(allr, r"radiator|condenser")),
+        st("Crane on: chain to the engine's lifting eyes and take its weight. Undo the engine and gearbox mounts.",
+           "bay", ["bay:dgea_mount"], ["bay:dgea_mount"]),
+        st("Lift the engine and gearbox out together, steadying them past the body (some workshops lower the "
+           "unit out underneath onto a trolley instead).", "hoist", ["bay:blk"], hoist=True),
+    ]
+    out_steps = [x for x in out_steps if x["parts"] or x.get("hoist")]
+    if "bay:blk" in have and len(out_steps) >= 6:
+        jobs.append({"title": "Workshop: engine and gearbox out", "job": True, "steps": out_steps})
+
+    T = by("Timing") + by("Belts and accessories")
+    bench = [
+        st("Engine out and on the crane (the job before). Gearbox off: support it, undo the bell housing bolts "
+           "and the starter, and draw the box straight off its dowels: never let it hang on the input shaft.",
+           "hoist", ["bay:gearbox-case", "bay:bellhousing"], ["bay:gearbox-case", "bay:bellhousing",
+           "bay:integrated-front-differential", "bay:cv-output-left", "bay:cv-output-right", "bay:mechatronic-cover",
+           "bay:transmission-oil-filter", "bay:transmission-oil-cooler"], hoist=True),
+        st("Turbocharger and charge pipe off; cap every opening against dirt.", "part",
+           ["bay:dgea_turbo", "bay:dgea_chargepipe"], ["bay:dgea_turbo", "bay:dgea_chargepipe"], hoist=True),
+        st("Intake manifold off.", "part", ["bay:dgea_intake"], ["bay:dgea_intake"], hoist=True),
+        st(("Injection pump, its pipes and the injectors off: plug every pipe and port." if diesel else
+            "Ignition coils off."), "part", ["bay:diesel_injection" if diesel else "bay:dgea_coils"],
+           ["bay:diesel_injection" if diesel else "bay:dgea_coils"],
+           _need(by("Fuel") + by("Ignition"), r"inject|glow|coil|plug|nozzle"), hoist=True),
+        st("Crankshaft pulley and the auxiliary belt off.", "part", ["bay:dgea_pulley"], ["bay:dgea_pulley"],
+           _need(by("Belts and accessories"), r"belt|pulley|tensioner"), hoist=True),
+        st("Timing: turn the engine to top dead centre on cylinder 1 and lock the camshaft"
+           + (" and the injection pump sprocket" if diesel else "") + " with the locking tools before the timing "
+           "belt comes off. Then the timing cover, the tensioner and the belt.", "part", ["bay:timing_cover"],
+           ["bay:timing_cover"], _need(T, r"timing|tensioner|idler|sprocket|gear"), hoist=True),
+        st("Thermostat housing and coolant pump off.", "part", ["bay:dgea_thermo", "bay:coolant_pump"],
+           ["bay:dgea_thermo", "bay:coolant_pump"], _need(by("Cooling"), r"pump|thermostat|gasket|seal"), hoist=True),
+        st("Oil filter and filler cap off.", "part", ["bay:dgea_oilfilter", "bay:dgea_filler"],
+           ["bay:dgea_oilfilter", "bay:dgea_filler"], _need(by("Lubrication"), r"filter|gasket|cap"), hoist=True),
+        st("Cam cover off.", "part", ["bay:cam_cover"], ["bay:cam_cover"],
+           _need(by("Cylinder head"), r"(valve|cam|head) cover gasket|cover gasket|hold down"), hoist=True),
+        st("Cylinder head: undo the head bolts in the reverse of their tightening order, a little at a time, and "
+           "lift the head off. The bolts stretch: renew them. Check the head for flatness before refitting.",
+           "part", ["bay:head"], ["bay:head"], _need(by("Cylinder head") + by("Valvetrain"), r"gasket|bolt|valve|seal"),
+           hoist=True),
+        st("Sump off.", "part", ["bay:sump"], ["bay:sump"], _need(by("Lubrication"), r"sump|pan|gasket|pump"),
+           hoist=True),
+        st("The block's insides: pistons, rods, crankshaft and the valves, taken apart on the cut-away engine.",
+           "part", ["bay:blk"], hoist=True, teardown=True,
+           need=_need(by("Block and crank") + by("Valvetrain"), r"piston|ring|bearing|seal|valve|lifter")),
+    ]
+    bench = [x for x in bench if x["parts"]]
+    if "bay:head" in have and len(bench) >= 6:
+        jobs.append({"title": "Workshop: engine stripped on the crane", "job": True, "steps": bench})
+    return jobs
 
 
 PARTS_SHOWN = 15                    # catalogue parts shown per engine system on the page
@@ -488,7 +693,9 @@ def write(report, out):
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, list(paint_names) + (["panel_" + k for k in panel_names(j) if k.startswith(("bumper", "wing"))]
                                                     if paint_names else [])), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
-           "catalogue": cat, "procedures": procedures(cat, opens, rear, electric),
+           "catalogue": cat, "procedures": procedures(cat, opens, rear, electric) + (
+               [] if electric else workshop_jobs({it["id"] for g in cat for it in g["items"]}, opens,
+                                                 car_parts(own, asked), fit)),
            "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {}),
                       **({"own": own} if own else {}), "fit": fit},
            "start": start_finish(asked, finish, srgb),

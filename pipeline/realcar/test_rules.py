@@ -5,6 +5,7 @@ tested against the case that showed it, and the cases it must leave alone.
 """
 import json
 import os
+import re
 import struct
 import sys
 
@@ -663,3 +664,28 @@ def test_web_encode_keeps_materials_apart():
     # gltf-transform's dedup would merge the panels' look-alike materials into one: the page could not find them
     src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "encode.mjs")).read()
     assert "PropertyType.MATERIAL" not in src and "propertyTypes" in src
+
+
+def test_workshop_jobs_follow_the_cars_own_parts_and_make_up_no_figures():
+    import page
+    have = {"wheel_fl", "wheel_fr", "bonnet", "bay:disc_fl", "bay:caliper_fl", "bay:droplink_fl", "bay:tre_fl", "bay:ds_fl",
+            "bay:bj_fl", "bay:knuckle_fl", "bay:strut_fl", "bay:arm_fl", "bay:blk", "bay:head", "bay:cam_cover",
+            "bay:timing_cover", "bay:sump", "bay:dgea_turbo", "bay:dgea_intake", "bay:diesel_injection", "bay:dgea_pulley",
+            "bay:gearbox-case", "bay:battery-assembly", "bay:dgea_airbox", "bay:dgea_loom", "bay:exhaust_front",
+            "bay:dgea_mount", "bay:radiator-upper-hose"}
+    rows = {"Brakes": [["Disc Brake Rotor Front", "1J0-615-301-M", 5], ["Front Pads", "1J0-698-151-K", 4]],
+            "Timing": [["Timing Belt", "038-109-119", 6]]}
+    jobs = page.workshop_jobs(have, ["bonnet"], rows, {"diesel": True})
+    titles = [j["title"] for j in jobs]
+    assert any("front left" in t for t in titles) and not any("front right" in t for t in titles)
+    assert any("engine and gearbox out" in t for t in titles) and any("on the crane" in t for t in titles)
+    for j in jobs:
+        for st in j["steps"]:
+            assert set(st["off"]) <= have and set(st["parts"]) <= have            # only this car's own parts
+            assert not re.search(r"\d\s*Nm\b", st["text"])                        # no made-up torque figures
+    corner = next(j for j in jobs if "front left" in j["title"])
+    disc = next(st for st in corner["steps"] if st["off"] == ["bay:disc_fl"])
+    assert ["Disc Brake Rotor Front", "1J0-615-301-M"] in disc["need"]           # the catalogue's own part and number
+    assert corner["steps"][-1].get("reset")                                      # refitted at the end
+    bench = next(j for j in jobs if "on the crane" in j["title"])
+    assert all(st.get("hoist") for st in bench["steps"]) and bench["steps"][-1].get("teardown")
