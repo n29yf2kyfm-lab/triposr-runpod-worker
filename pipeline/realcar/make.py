@@ -97,6 +97,26 @@ NICKNAMES = [
 ]
 
 
+ROMAN = {"i": 1, "ii": 2, "iii": 3, "iv": 4, "v": 5, "vi": 6, "vii": 7, "viii": 8, "ix": 9, "x": 10}
+ORDINAL = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}
+GEN_WORDS = re.compile(r"\b(?:mk|mark)\s*\.?\s*(1[0-2]|[1-9]|viii|vii|vi|iv|v|ix|x|iii|ii|i)\b|"
+                       r"\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)[\s-]+gen(?:eration)?\b")
+
+
+def _gen_year(make, model, n):
+    """A year squarely in MAKE MODEL's generation N, from the wheelbase table's boxes named "Mk4", "Mk IV" or
+    "fourth generation" (two years after it went on sale, so not the old one's last year); with its years."""
+    ent = wheelbase.table().get(f"{make}|{model}".lower()) or {}
+    roman = next((r for r, v in ROMAN.items() if v == n), "")
+    ordinal = next((o for o, v in ORDINAL.items() if v == n), "")
+    rx = re.compile(rf"\bmk\s*(?:{n}|{roman})\b|\b{ordinal}\s+generation\b", re.I)
+    for b in ent.get("boxes", []):
+        if b.get("years") and (rx.search(b.get("name") or "") or rx.search(b.get("page") or "")):
+            y0, y1 = b["years"][0], b["years"][1] if len(b["years"]) > 1 else b["years"][0]
+            return min(y0 + 2, y1), (y0, y1)
+    return None, None
+
+
 def parse(text):
     t = text.lower()
     want = {"text": text}
@@ -108,6 +128,14 @@ def parse(text):
                 want["nickname_trim"] = m.group(trim).upper().replace(" ", "")
             t = t[:m.start()] + " " + ("" if placed else canon) + " " + t[m.end():]
             placed = True
+    # the generation by its number ("Golf Mark 4", "Mk4", "Mk IV", "fourth generation"): its years are the
+    # wheelbase table's for that generation, looked up once the model is known (_gen_year)
+    m = GEN_WORDS.search(t)
+    if m:
+        n = m.group(1) or m.group(2)
+        want["gen"] = int(n) if n.isdigit() else ROMAN.get(n) or ORDINAL.get(n)
+        want["gen_words"] = m.group(0).strip()
+        t = t[:m.start()] + " " + t[m.end():]
     # a model named like a year is the model: the Peugeot 2008 (and e-2008)
     m = next((m for m in re.finditer(r"\b(19[5-9]\d|20[0-3]\d)\b(?:[\s-]*(?:plate|reg)\b)?", t)
               if not re.search(r"(?:peugeot\s+(?:e-?)?|\be-)$", t[:m.start()])), None)
@@ -543,6 +571,12 @@ def _choose(want, cat, exact, skip):
     report's "error", when there is none)."""
     want = {k: v for k, v in want.items() if k not in ("spec_used", "trim_used")}
     item, others, why = find(want, cat, skip)
+    if want.get("gen") and not want.get("year") and (item or others):
+        # "Golf Mark 4": the model found, its fourth generation's years from the table; then found again for them
+        y, span = _gen_year(*batch.model_of(item or others[0]), want["gen"])
+        if y:
+            want["year"], want["gen_years"] = y, list(span)
+            item, others, why = find(want, cat, skip)
     report = {"asked": want, "match": why,
               "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
     bm = want.get("body_missing")

@@ -548,3 +548,15 @@ def test_trim_in_a_livery_colour_is_black_lamps_glass_and_paint_are_not():
     assert out == ["Material.012", "Material.013", "vehicle_mesh.004"]
     assert mats[0]["pbrMetallicRoughness"]["baseColorFactor"][:3] == [0.035] * 3
     assert mats[4]["pbrMetallicRoughness"]["baseColorFactor"][:3] == [0.002, 0.004, 0.02]
+
+
+def test_generation_words_read_as_that_generations_years():
+    """"Golf Mark 4" is the fourth generation's car, not the newest Golf (it was built as a 2017 Golf)."""
+    import make
+    for text in ("Golf mark 4", "golf mk4 1.9 tdi", "VW Golf Mk IV", "golf fourth generation", "mark 4 golf 5 door"):
+        w = make.parse(text)
+        assert w["gen"] == 4 and "mark" not in w["words"] and "mk" not in w["words"], text
+    assert make.parse("mark 4 golf 5 door")["doors"] == 5
+    assert "gen" not in make.parse("golf 2008")
+    y, span = make._gen_year("volkswagen", "golf", 4)
+    assert span[0] == 1997 and 1997 < y <= 2004
