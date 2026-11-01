@@ -95,13 +95,20 @@ def pick(car, m):
             b0, b1 = c["lo"], c["hi"]
             if max(abs(b0[0]), abs(b1[0])) > .85 * half:
                 continue                            # the doors' line and outward
-            if b0[2] < zr - .15 or b1[2] > zf - .08 or b0[1] < .08:
+            if b0[0] * b1[0] > 0 and min(abs(b0[0]), abs(b1[0])) > .66 * half:
+                continue                            # wholly out by a door: its trims, a pillar's, a rear brake's
+                                                    # parts (the Polo's), which would hang in the air by the doors
+            # a dashboard's top reaches over the front axle in a modern car (the Polo's, 6 cm past it): a wide
+            # piece that high is the dash, not the engine bay's
+            dash_top = b0[1] > .55 * roof and b1[0] - b0[0] > .8 * half and b1[2] < zf + .12
+            if b0[2] < zr - .15 or (b1[2] > zf - .08 and not dash_top) or b0[1] < .08:
                 continue
             if b1[1] > .78 * roof:
                 continue                            # follows this car's own glasshouse: the pillar
                                                     # trims, the mirror, the visors, the grab handles
-            if b1[2] - b0[2] > .55 * wb and b1[0] - b0[0] > 1.2 * half:
-                continue                            # a shell: the roof lining, the floor pan
+            if b1[2] - b0[2] > .55 * wb and b1[0] - b0[0] > 1.2 * half and (b1[1] > .78 * roof or b0[1] < .15):
+                continue                            # a shell: the roof lining, the floor pan (not the Polo's dash,
+                                                    # tunnel and carpet in one piece, clear of the floor and roof)
             mi = int(np.bincount(np.maximum(ms[c["ix"]], 0)).argmax())
             mt = car.mats[mi] if mi < len(car.mats) else {}
             nm = mt.get("name", "")
@@ -112,7 +119,7 @@ def pick(car, m):
     return {pi: np.unique(np.array(t)) for pi, t in take.items()}
 
 
-def extract(src, out, credit):
+def extract(src, out, credit, make=None, years=None):
     import rig                                  # here, not at load: finish.py and rig.py borrow
     car = rig.Car(src)                          # dense_points and roof_of without the rigger
     m = measures(car)
@@ -122,6 +129,7 @@ def extract(src, out, credit):
     used = sorted({car.prims[pi]["mat"] for pi in sel if car.prims[pi]["mat"] is not None})
     mmap = {mi: k for k, mi in enumerate(used)}
     meshes, nodes, ntris = [], [], 0
+    low_area = {}                               # each material's area down on the floor (m2)
     for pi, t in sorted(sel.items()):
         pr = car.prims[pi]
         p = pr["prim"]
@@ -141,6 +149,9 @@ def extract(src, out, credit):
                                                                atype="SCALAR", target=34963)}
         if pr["mat"] is not None:
             prim["material"] = mmap[pr["mat"]]
+            T3 = P[inv.reshape(-1, 3)]
+            a3 = np.linalg.norm(np.cross(T3[:, 1] - T3[:, 0], T3[:, 2] - T3[:, 0]), axis=1) / 2
+            low_area[mmap[pr["mat"]]] = low_area.get(mmap[pr["mat"]], 0.0) + float(a3[T3[:, :, 1].mean(1) < .45].sum())
         meshes.append({"name": f"cabin_{len(meshes)}", "primitives": [prim]})
         nodes.append({"name": f"cabin_{len(nodes)}", "mesh": len(meshes) - 1})
         ntris += len(I)
@@ -154,10 +165,27 @@ def extract(src, out, credit):
     for t in texs:
         for ref in _img_refs(t):
             ref["source"] = imap[ref["source"]]
+    # a SketchUp export writes its colours as the screen shows them (sRGB) where glTF wants light (linear):
+    # the Polo's carpet came out near white, its seats chalk. Those colours are put back into light
+    srgb = any("skp" in (j["materials"][mi].get("name") or "").lower() for mi in used)
     for mt in mats:
         for v in _tex_refs(mt):
             v["index"] = tmap[v["index"]]
         mt["name"] = "cabin_" + mt.get("name", "")
+        pbr = mt.get("pbrMetallicRoughness") or {}
+        if srgb and "baseColorTexture" not in pbr and "baseColorFactor" in pbr:
+            c = pbr["baseColorFactor"]
+            pbr["baseColorFactor"] = [float(_linear(x)) for x in c[:3]] + list(c[3:])
+    # a big plain-white sheet down on the floor is a modeller's placeholder, not a white carpet (the Polo's
+    # 2.6 m2 of it): it gets a dark carpet's colour
+    carpet = []
+    for k, mt in enumerate(mats):
+        pbr = mt.setdefault("pbrMetallicRoughness", {})
+        c = pbr.get("baseColorFactor", [1, 1, 1, 1])
+        if "baseColorTexture" not in pbr and min(c[:3]) > .9 and low_area.get(k, 0) > .5:
+            pbr["baseColorFactor"] = [0.022, 0.022, 0.024, 1.0]
+            pbr["roughnessFactor"], pbr["metallicFactor"] = 1.0, 0.0
+            carpet.append(mt["name"])
     j["materials"], j["textures"] = mats, texs
     j["images"] = [j["images"][ii] for ii in img_used]
     if not j["textures"]:
@@ -168,13 +196,24 @@ def extract(src, out, credit):
     for k in ("animations", "skins", "cameras"):
         j.pop(k, None)
     info = dict(m, front_axle_z=m["front_axle_z"] - zmid, rear_axle_z=m["rear_axle_z"] - zmid,
-                wheelbase=m["front_axle_z"] - m["rear_axle_z"], triangles=int(ntris), credit=credit)
+                wheelbase=m["front_axle_z"] - m["rear_axle_z"], triangles=int(ntris), credit=credit,
+                colours="sRGB factors put into linear (a SketchUp export)" if srgb else "as the file has them",
+                carpet_from_white=carpet)
+    if make:
+        info["make"] = make.lower()                 # the finisher fits a car with a pack of its own make
+    if years:
+        info["years"] = [int(y) for y in years if y]
     j.setdefault("asset", {})["extras"] = {"cabin_pack": info}
     if credit:
         j["asset"]["copyright"] = (f"Cabin: '{credit.get('title')}'" + (f" by {credit['author']}" if credit.get("author") else "")
                                    + f", {credit.get('licence')}" + (f", {credit['url']}" if credit.get("url") else ""))
     info["bytes"] = g.save(out)
     return info
+
+
+def _linear(c):
+    """An sRGB channel (0-1) as linear light."""
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
 
 
 def _img_refs(t):
@@ -209,7 +248,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("src")
     ap.add_argument("out")
-    for k in ("title", "author", "licence", "url"):
+    for k in ("title", "author", "licence", "url", "make"):
         ap.add_argument("--" + k)
+    ap.add_argument("--years", nargs="*", type=int)
     a = ap.parse_args()
-    print(json.dumps(extract(a.src, a.out, {k: getattr(a, k) for k in ("title", "author", "licence", "url")}), indent=1))
+    print(json.dumps(extract(a.src, a.out, {k: getattr(a, k) for k in ("title", "author", "licence", "url")}, a.make, a.years),
+                     indent=1))

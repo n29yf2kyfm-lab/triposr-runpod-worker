@@ -584,3 +584,62 @@ def test_no_cabin_record_forces_the_cabin_pack(tmp_path, monkeypatch):
     assert rec["noCabin"] is True
     rec, _ = glbmachine.add_model("x.glb", "Volkswagen", "Golf", "1997-2006", "CC BY-SA 4.0", 5, "hatchback")
     assert "noCabin" not in rec
+
+
+def test_outline_split_cuts_faces_on_the_line_and_keeps_the_area():
+    # a flat sheet facing X (a door skin) cut by a door outline: no face is left half in, half out
+    import trimesh as tm
+    import ai_parts
+    g = np.linspace(0, 1, 9)
+    zz, yy = np.meshgrid(g, g)
+    V = np.column_stack([np.full(zz.size, 0.8), yy.ravel(), zz.ravel()])
+    F = []
+    for i in range(8):
+        for k in range(8):
+            a = i * 9 + k
+            F += [[a, a + 1, a + 9], [a + 1, a + 10, a + 9]]
+    m = tm.Trimesh(V, np.array(F), process=False, visual=tm.visual.TextureVisuals(uv=V[:, 1:]))
+    o = {"door_front": [[0.13, 0.17], [0.81, 0.23], [0.77, 0.86], [0.2, 0.79]]}
+    out, n = ai_parts.split_on_outlines(m, o, 1.0, 1.0, np.zeros(3))
+    assert n > 0
+    assert abs(out.area - m.area) < 1e-9
+    Q = out.triangles_center
+    inner = ai_parts.inside(o["door_front"], Q[:, 2], Q[:, 1])
+    # cut on the line exactly: the faces inside add up to the outline's own area, none straddles it
+    assert abs(out.area_faces[inner].sum() - 0.38965) < 1e-9
+
+
+def test_cabin_pack_of_the_cars_own_make_nearest_in_years(monkeypatch):
+    import batch
+    packs = [("/p/polo.glb", {"make": "volkswagen", "years": [2009, 2017], "credit": {"commercial": True}}),
+             ("/p/fox.glb", {"make": "volkswagen", "years": [2004, 2004], "credit": {"commercial": True}}),
+             ("/p/nc.glb", {"make": "volkswagen", "years": [1999, 1999], "credit": {"commercial": False}}),
+             ("/p/yaris.glb", {"make": "toyota", "years": [2001, 2001], "credit": {"commercial": True}})]
+    monkeypatch.setattr(batch, "_cabin_packs", lambda: packs)
+    assert batch.cabin_for({"make": "volkswagen", "yearStart": 1997}) == "/p/fox.glb"
+    assert batch.cabin_for({"make": "volkswagen", "yearStart": 2012}) == "/p/polo.glb"
+    assert batch.cabin_for({"make": "ford", "yearStart": 2000}) == batch.CABIN_PACK
+
+
+def test_engine_bay_fits_the_cars_own_engine_and_year():
+    import page
+    diesel = {"spec": {"fuel": "diesel"}}
+    fit = page.bay_fit(diesel, 1999)
+    assert "bay:dgea_coils" in fit["hide"] and page.DIESEL_KIT in fit["add"] and fit["diesel"]
+    assert set(page.DSG_PARTS) <= set(fit["hide"])                    # no twin-clutch gearbox before 2003
+    fit = page.bay_fit({"spec": {"fuel": "petrol"}}, 2015)
+    assert fit["hide"] == [] and fit["add"] == []
+    cat = [{"title": "Engine bay", "drill": "engine_bay",
+            "items": [{"id": "bay:blk", "label": "Engine block"}, {"id": "bay:dgea_coils", "label": "Ignition coils"},
+                      {"id": "bay:gearbox-case", "label": "Gearbox"}]}]
+    page.fit_catalogue(cat, page.bay_fit(diesel, 1999))
+    ids = [it["id"] for it in cat[0]["items"]]
+    assert "bay:dgea_coils" not in ids and ids[-1] == page.DIESEL_KIT
+    assert [it["n"] for it in cat[0]["items"]] == [1, 2, 3]
+    assert cat[0]["items"][1]["label"] == "Gearbox (manual)"
+
+
+def test_sketchup_colours_read_as_srgb():
+    import cabin_pack
+    assert abs(cabin_pack._linear(0.176) - 0.026) < 0.001             # the Polo's carpet: dark, not near white
+    assert cabin_pack._linear(0.0) == 0.0 and abs(cabin_pack._linear(1.0) - 1.0) < 1e-9

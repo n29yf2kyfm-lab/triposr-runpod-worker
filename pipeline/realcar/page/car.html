@@ -665,6 +665,7 @@ function onCar(gltf) {
   $('hint').hidden = false;
   labSetup(root);
   labRestore();
+  bayFit(root);
   benchSetup();
   styleSetup();
   engineSetup();
@@ -1540,13 +1541,90 @@ function applyStance() {
 function saveStyle() { store.set(CAR.key + '-style', { design: ST.design, inch: ST.inch, ride: ST.ride, offset: ST.offset }); }
 
 // ── Engine: lift it out on a hoist, and its parts by name ────────────────────
+// ── the engine pack fitted to this car's own engine and year (page.py's bay_fit): the parts it has not got
+// are taken away (a diesel's ignition coils, a twin-clutch gearbox's control unit on a car from before
+// 2003), and a diesel gets its injection pump, the four steel pipes and the injectors where the coils stood,
+// with the glow plugs' feed along the head ──
+function bayFit(root) {
+  const fit = (CAR.engine && CAR.engine.fit) || {};
+  const byName = new Map();
+  root.traverse(o => { if (o.name && !byName.has(o.name)) byName.set(o.name, o); });
+  const find = id => byName.get(id) || byName.get(loaderName(id));
+  const coils = find('bay:dgea_coils');
+  if (fit.diesel && coils && (fit.add || []).includes('bay:diesel_injection')) {
+    root.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(coils);
+    const tc = find('bay:timing_cover');
+    const tcc = tc ? new THREE.Box3().setFromObject(tc).getCenter(new THREE.Vector3()) : null;
+    const size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    const alongX = size.x >= size.z;                       // the row of cylinders across the car (or along it)
+    const len = Math.max(size.x, size.z) * 0.92;
+    const axis = alongX ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 0, 1);
+    const side = alongX ? new THREE.Vector3(0, 0, 1) : new THREE.Vector3(1, 0, 0);
+    // the pump at the timing belt's end of the head, a little down and forward of it
+    let endSign = 1;
+    if (tcc) endSign = Math.sign(tcc.clone().sub(c).dot(axis)) || 1;
+    const alu = new THREE.MeshStandardMaterial({ color: 0xb9bdc2, metalness: 0.75, roughness: 0.38 });
+    const steel = new THREE.MeshStandardMaterial({ color: 0x9da4ab, metalness: 1, roughness: 0.28 });
+    const black = new THREE.MeshStandardMaterial({ color: 0x161718, metalness: 0.1, roughness: 0.6 });
+    const brass = new THREE.MeshStandardMaterial({ color: 0xb08d57, metalness: 0.9, roughness: 0.35 });
+    const kit = new THREE.Group();
+    kit.name = 'bay:diesel_injection';
+    const y0 = box.min.y + size.y * 0.35;
+    const tops = [];
+    for (let i = 0; i < 4; i++) {
+      const p = c.clone().addScaledVector(axis, (i - 1.5) * len / 4);
+      p.y = y0;
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.011, 0.009, 0.075, 16), alu);
+      body.position.copy(p).add(new THREE.Vector3(0, 0.03, 0));
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.0125, 0.0125, 0.016, 16), black);
+      cap.position.copy(p).add(new THREE.Vector3(0, 0.074, 0));
+      const nut = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.012, 6), brass);
+      nut.position.copy(p).add(new THREE.Vector3(0, 0.088, 0));
+      kit.add(body, cap, nut);
+      tops.push(p.clone().add(new THREE.Vector3(0, 0.094, 0)));
+    }
+    const pumpAt = c.clone().addScaledVector(axis, endSign * (len / 2 + 0.07)).addScaledVector(side, 0.06);
+    pumpAt.y = box.min.y - 0.02;
+    const pump = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.15, 24), alu);
+    pump.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), side);
+    pump.position.copy(pumpAt);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.06, 0.07), alu);
+    head.position.copy(pumpAt).add(new THREE.Vector3(0, 0.06, 0));
+    const lever = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.008, 0.012), black);
+    lever.position.copy(pumpAt).add(new THREE.Vector3(0, 0.095, 0));
+    kit.add(pump, head, lever);
+    // four steel pipes from the pump's head, up and along to each injector
+    tops.forEach((t, i) => {
+      const from = pumpAt.clone().add(new THREE.Vector3(0, 0.09, 0)).addScaledVector(axis, -endSign * 0.012 * (i - 1.5));
+      const mid = from.clone().lerp(t, 0.5).add(new THREE.Vector3(0, 0.05 + 0.006 * i, 0)).addScaledVector(side, 0.012 * (i - 1.5));
+      const curve = new THREE.CatmullRomCurve3([from, from.clone().add(new THREE.Vector3(0, 0.04, 0)), mid,
+        t.clone().add(new THREE.Vector3(0, 0.03, 0)), t]);
+      kit.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 48, 0.0032, 8, false), steel));
+    });
+    // the glow plugs' feed: a bus wire along the head, a drop to each plug
+    const glow = [];
+    for (let i = 0; i < 4; i++) glow.push(c.clone().addScaledVector(axis, (i - 1.5) * len / 4).addScaledVector(side, -0.05).setY(y0 - 0.02));
+    const bus = new THREE.CatmullRomCurve3([glow[0].clone().addScaledVector(axis, -0.05), ...glow, glow[3].clone().addScaledVector(axis, 0.12)]);
+    kit.add(new THREE.Mesh(new THREE.TubeGeometry(bus, 64, 0.0028, 6, false), black));
+    for (const g of glow) {
+      const plug = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.02, 10), brass);
+      plug.position.copy(g).add(new THREE.Vector3(0, -0.012, 0));
+      kit.add(plug);
+    }
+    kit.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    coils.parent.attach(kit);                               // into the bay group: it rides out with the engine
+  }
+  for (const id of fit.hide || []) { const n = find(id); if (n) n.visible = false; }
+}
+
 // Up and clear of the bay first, then out over the nose (over the tail on a
 // rear-engined car), as a workshop crane takes it; a chain to the hook.
 const ENGINE_IDS = ['bay:blk', 'bay:head', 'bay:cam_cover', 'bay:timing_cover', 'bay:sump', 'bay:coolant_pump', 'bay:dgea_coils',
   'bay:dgea_filler', 'bay:dgea_intake', 'bay:dgea_chargepipe', 'bay:dgea_turbo', 'bay:dgea_pulley', 'bay:dgea_thermo', 'bay:dgea_oilfilter',
   'bay:dgea_epump', 'bay:dgea_loom', 'bay:dgea_mount', 'bay:gearbox-case', 'bay:bellhousing', 'bay:mechatronic-cover',
   'bay:transmission-oil-filter', 'bay:transmission-oil-cooler', 'bay:integrated-front-differential', 'bay:cv-output-left',
-  'bay:cv-output-right', 'bay:exhaust_front'];
+  'bay:cv-output-right', 'bay:exhaust_front', 'bay:diesel_injection'];
 B.lift = { on: false, p: 0, nodes: [], set: null, ghost: false, up: new Map(), out: new Map(), chain: null, top: null, dir: 1 };
 function engineSetup() {
   const ids = ENGINE_IDS.filter(id => B.node.has(id));
@@ -2261,7 +2339,10 @@ function runSetup() {
   if (own) {
     $('engineCard').querySelector('b').textContent = own.words.charAt(0).toUpperCase() + own.words.slice(1);
     const p = $('engineCard').querySelector('.note');
-    if (p) p.textContent = `This car’s engine, from your parts catalogue (${own.part_count} parts listed for it). The engine in the bay is the machine’s representative engine, sized to the bay; the one under “See it run” is built to this car’s own layout.`;
+    const fit = (CAR.engine && CAR.engine.fit) || {};
+    const fitted = [fit.diesel ? 'fitted as a diesel (an injection pump, its pipes and injectors and the glow plugs’ feed; no ignition coils)' : '',
+      (fit.hide || []).includes('bay:mechatronic-cover') ? 'with a manual gearbox (no twin-clutch unit: those came in 2003)' : ''].filter(Boolean).join(', ');
+    if (p) p.textContent = `This car’s engine, from your parts catalogue (${own.part_count} parts listed for it). The engine in the bay is the machine’s representative engine, sized to the bay${fitted ? ' and ' + fitted : ''}; the one under “See it run” is built to this car’s own layout.`;
   }
   $('runEngine').addEventListener('click', () => runView(!RUN.on));
   document.querySelectorAll('#runMode button').forEach(b => b.addEventListener('click', () => runMode(b.dataset.m)));

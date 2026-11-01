@@ -34,6 +34,217 @@ def inside(poly, a, b):
     return hit
 
 
+# each outline: the plane it is drawn in (two of X, Y, Z in the car's metres) and the axis a face must look
+# along to be cut by it (a face seen edge-on in that plane is not cut: its pieces could not be placed)
+SPLIT = {"window_front": ("ZY", 0), "window_rear": ("ZY", 0), "window_rear_quarter": ("ZY", 0),
+         "door_front": ("ZY", 0), "door_rear": ("ZY", 0), "rear_window": ("XY", 2), "tailgate": ("XY", 2),
+         "bonnet": ("ZX", 1), "bonnet_front": ("XY", 2, lambda Q: Q[:, 2] > 1.6)}
+
+
+def _car_frame(P, s, f, lo):
+    return np.column_stack([f * P[:, 0] / s, (P[:, 1] - lo[1]) / s, f * P[:, 2] / s])
+
+
+def split_on_outlines(m, o, s, f, lo):
+    """The faces an outline crosses, cut along it: each such triangle becomes the pieces inside and outside
+    the outline (with their texture places and normals), so a door, the bonnet or a window comes away on its
+    shut line instead of along the triangles' saw-teeth. Returns a new mesh and how many faces were cut."""
+    import shapely
+    from shapely.geometry import Polygon
+    V = np.array(m.vertices, np.float64)
+    F = np.array(m.faces)                       # a copy: the cut faces are struck out of it, not out of M
+    UV = np.array(m.visual.uv, np.float64)
+    VN = np.asarray(m.vertex_normals, np.float64)
+    ncut = 0
+    for key, (plane, along, *where) in SPLIT.items():
+        if key not in o:
+            continue
+        poly = Polygon(o[key])
+        if not poly.is_valid:
+            poly = poly.buffer(0)
+        a, b = "XYZ".index(plane[0]), "XYZ".index(plane[1])
+        Q = _car_frame(V, s, f, lo)
+        ins = inside(o[key], Q[:, a], Q[:, b])
+        k = ins[F].sum(1)
+        T = Q[F]
+        n = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0])
+        n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
+        # and the faces an outline's corner pokes into with all three of their own corners outside it
+        t2all = T[:, :, [a, b]]
+        e0, e1 = t2all[:, 1] - t2all[:, 0], t2all[:, 2] - t2all[:, 0]
+        det = e0[:, 0] * e1[:, 1] - e0[:, 1] * e1[:, 0]
+        corner = np.zeros(len(F), bool)
+        for pc in np.asarray(o[key], float):
+            d = pc - t2all[:, 0]
+            with np.errstate(divide="ignore", invalid="ignore"):
+                u = (d[:, 0] * e1[:, 1] - d[:, 1] * e1[:, 0]) / det
+                w = (e0[:, 0] * d[:, 1] - e0[:, 1] * d[:, 0]) / det
+            corner |= (u > 0) & (w > 0) & (u + w < 1)
+        ok = (((k > 0) & (k < 3)) | corner) & (np.abs(n[:, along]) > 0.3)
+        if where:
+            ok &= where[0](T.mean(1))
+        todo = np.where(ok)[0]
+        if not len(todo):
+            continue
+        newV, newUV, newN, newF = [V], [UV], [VN], []
+        nv = len(V)
+        for fi in todo:
+            t2 = T[fi][:, [a, b]]
+            A = np.array([[t2[0, 0] - t2[2, 0], t2[1, 0] - t2[2, 0]], [t2[0, 1] - t2[2, 1], t2[1, 1] - t2[2, 1]]])
+            if abs(np.linalg.det(A)) < 1e-14:
+                continue
+            Ai = np.linalg.inv(A)
+            tri = Polygon(t2)
+            sign = np.sign(np.linalg.det(A))
+            vid = F[fi]
+            pieces = []
+            for g in (tri.intersection(poly), tri.difference(poly)):
+                if g.is_empty:
+                    continue
+                for t in shapely.get_parts(shapely.constrained_delaunay_triangles(g)):
+                    c = np.asarray(t.exterior.coords)[:3]
+                    if abs(Polygon(c).area) < 1e-12:
+                        continue
+                    pieces.append(c)
+            if len(pieces) < 2:
+                continue
+            for c in pieces:
+                l01 = (c - t2[2]) @ Ai.T                            # barycentric weights of the piece's corners
+                w = np.column_stack([l01, 1 - l01.sum(1)])
+                P3, U3, N3 = w @ V[vid], w @ UV[vid], w @ VN[vid]
+                d = (c[1, 0] - c[0, 0]) * (c[2, 1] - c[0, 1]) - (c[1, 1] - c[0, 1]) * (c[2, 0] - c[0, 0])
+                order = [0, 1, 2] if np.sign(d) == sign else [0, 2, 1]
+                newV.append(P3[order]), newUV.append(U3[order]), newN.append(N3[order])
+                newF.append([nv, nv + 1, nv + 2])
+                nv += 3
+            F[fi] = -1
+            ncut += 1
+        V = np.vstack(newV)
+        UV = np.vstack(newUV)
+        VN = np.vstack(newN)
+        F = np.vstack([F[F[:, 0] >= 0]] + ([np.array(newF)] if newF else []))
+    out = trimesh.Trimesh(vertices=V, faces=F, vertex_normals=VN, process=False,
+                          visual=trimesh.visual.TextureVisuals(uv=UV, material=m.visual.material))
+    return out, ncut
+
+
+# glTF colours are linear: anthracite trim plastic (sRGB ~ 46,47,51), mid-grey cloth (~ 78,79,84), satin chrome
+CARD = {"plastic": ([0.027, 0.028, 0.032, 1.0], 0.0, 0.6), "fabric": ([0.075, 0.078, 0.087, 1.0], 0.0, 0.95),
+        "handle": ([0.55, 0.56, 0.57, 1.0], 0.9, 0.28)}
+
+
+def _box(c, half):
+    """A box's twelve triangles round centre C with half-sizes HALF (car frame)."""
+    b = trimesh.creation.box(extents=2 * np.asarray(half, float))
+    return b.vertices + c, b.faces
+
+
+def door_cards(Q, Nq, labels, o, step=0.04):
+    """A trim card on the inside of each door (the generator moulds only the outer skin, so an open door was a
+    hollow shell): the door's outline less its window, held a door's depth in from the skin it follows, a
+    fabric insert, an armrest with a pull cup, the release handle and a speaker grille, and a strip round the
+    card's edge back to the skin. Car frame (metres, X left +, Y up, Z nose +). Returns {door: {material:
+    (vertices, faces)}}."""
+    import shapely
+    from scipy.spatial import cKDTree
+    from shapely.geometry import Polygon, box
+    out = {}
+    for door in sorted({str(x) for x in labels if str(x).startswith("door_")}):
+        _, end, side = door.split("_")
+        sg = 1.0 if side == "left" else -1.0
+        ix = np.where((labels == door) & (np.abs(Nq[:, 0]) > 0.4) & (np.sign(Nq[:, 0]) == sg))[0]
+        if len(ix) < 50:
+            continue
+        skin = cKDTree(Q[ix][:, [2, 1]])
+        sx = np.abs(Q[ix, 0])
+
+        def skin_x(zy):
+            d, k = skin.query(zy, k=8)
+            w = 1 / np.maximum(d, 1e-3)
+            return (sx[k] * w).sum(1) / w.sum(1)
+        outline = Polygon(o[f"door_{end}"])
+        wins = [Polygon(o[k]) for k in (("window_front",) if end == "front" else ("window_rear", "window_rear_quarter")) if k in o]
+        belt = min(np.asarray(w.exterior.coords)[:, 1].min() for w in wins) if wins else 0.95
+        card = outline.buffer(-0.015)
+        for w in wins:
+            card = card.difference(w.buffer(0.012))
+        z0, y0, z1, y1 = card.bounds
+
+        def depth(zy):                                  # deep below the window line, a slim frame round the glass
+            t = np.clip((zy[:, 1] - (belt - 0.03)) / 0.05, 0, 1)
+            return 0.085 * (1 - t) + 0.035 * t
+
+        def place(zy, extra=0.0):
+            x = skin_x(zy) - depth(zy) - extra
+            return np.column_stack([sg * x, zy[:, 1], zy[:, 0]])
+
+        def sheet(poly, extra=0.0):
+            V, F = [], []
+            gz = np.arange(z0, z1 + step, step)
+            gy = np.arange(y0, y1 + step, step)
+            for za in gz:
+                for ya in gy:
+                    piece = poly.intersection(box(za, ya, za + step, ya + step))
+                    if piece.is_empty or piece.area < 1e-7:
+                        continue
+                    for t in shapely.get_parts(shapely.constrained_delaunay_triangles(piece)):
+                        c = np.asarray(t.exterior.coords)[:3]
+                        V.append(place(c, extra))
+                        F.append(np.arange(3) + 3 * (len(F)))
+            if not V:
+                return np.zeros((0, 3)), np.zeros((0, 3), int)
+            return np.vstack(V), np.vstack(F)
+
+        parts = {"plastic": [], "fabric": [], "handle": []}
+        parts["plastic"].append(sheet(card))
+        # the edge: a strip from the skin to the card all the way round, and round the window opening
+        polys = [g for g in shapely.get_parts(card) if g.geom_type == "Polygon" and g.area > 1e-4]
+        for ring in [r for g in polys for r in [g.exterior, *g.interiors]]:
+            ring = ring.segmentize(0.03)
+            zy = np.asarray(ring.coords)
+            xs, xc = skin_x(zy), skin_x(zy) - depth(zy)
+            a = np.column_stack([sg * xs, zy[:, 1], zy[:, 0]])
+            b = np.column_stack([sg * xc, zy[:, 1], zy[:, 0]])
+            n = len(zy) - 1
+            V = np.vstack([a, b])
+            F = np.vstack([[i, i + 1, n + 1 + i] for i in range(n)] + [[i + 1, n + 2 + i, n + 1 + i] for i in range(n)])
+            parts["plastic"].append((V, F))
+        # the fabric insert: a band across the card's middle, 6 mm proud of it
+        band = card.intersection(box(z0 + 0.07, 0.56, z1 - 0.07, min(0.84, belt - 0.1)))
+        if not band.is_empty:
+            parts["fabric"].append(sheet(band, 0.006))
+        # armrest along the door at elbow height, with the pull cup; the release handle up at the front;
+        # a speaker grille low at the front
+        zf_, zr_ = (z1 - 0.12, z0 + 0.10) if end == "front" else (z1 - 0.08, z0 + 0.32)
+        zf_, zr_ = (zf_, max(zr_, zf_ - 0.55))
+        zm = (zf_ + zr_) / 2
+        x_at = lambda z, y: skin_x(np.array([[z, y]]))[0] - depth(np.array([[z, y]]))[0]   # noqa: E731
+        xa = x_at(zm, 0.72)
+        parts["plastic"].append(_box(np.array([sg * (xa - 0.045), 0.72, zm]), [0.045, 0.028, (zf_ - zr_) / 2]))
+        parts["plastic"].append(_box(np.array([sg * (xa - 0.05), 0.79, zm + 0.05]), [0.03, 0.04, 0.07]))
+        zh = z1 - 0.10
+        xh = x_at(zh, min(0.88, belt - 0.07))
+        parts["handle"].append(_box(np.array([sg * (xh - 0.012), min(0.88, belt - 0.07), zh]), [0.012, 0.016, 0.06]))
+        zs = z1 - 0.16 if end == "front" else z1 - 0.14
+        if card.contains(shapely.Point(zs, 0.42)):
+            xs_ = x_at(zs, 0.42)
+            cyl = trimesh.creation.cylinder(radius=0.075, height=0.012, sections=28)
+            cyl.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+            parts["plastic"].append((cyl.vertices + [sg * (xs_ - 0.008), 0.42, zs], cyl.faces))
+        res = {}
+        for mat, lst in parts.items():
+            lst = [t for t in lst if len(t[1])]
+            if not lst:
+                continue
+            V, F, off = [], [], 0
+            for v_, f_ in lst:
+                V.append(v_), F.append(np.asarray(f_) + off)
+                off += len(v_)
+            res[mat] = (np.vstack(V), np.vstack(F))
+        out[door] = res
+    return out
+
+
 def cut(src, outlines, dst):
     o = json.load(open(outlines))
     m = trimesh.load(src, force="mesh", process=False)
@@ -45,13 +256,20 @@ def cut(src, outlines, dst):
     s = (hi[2] - lo[2]) / o["length"]
     # the rear: where the red of the tail lights is (texture at each face's centre)
     tex = np.asarray(m.visual.material.baseColorTexture.convert("RGB"), np.float32) / 255
-    uv = np.asarray(m.visual.uv)[F].mean(1)
     H, W = tex.shape[:2]
-    col = tex[np.clip(((1 - uv[:, 1] % 1) * (H - 1)).astype(int), 0, H - 1), np.clip((uv[:, 0] % 1 * (W - 1)).astype(int), 0, W - 1)]
-    v = col.max(1)
+
+    def colours(F, uvs):
+        uv = uvs[F].mean(1)
+        return tex[np.clip(((1 - uv[:, 1] % 1) * (H - 1)).astype(int), 0, H - 1), np.clip((uv[:, 0] % 1 * (W - 1)).astype(int), 0, W - 1)]
+    col = colours(F, np.asarray(m.visual.uv))
     C = V[F].mean(1)
     red = (col[:, 0] > 0.45) & (col[:, 1] < 0.25) & (col[:, 2] < 0.25)
     f = -1.0 if C[red, 2].mean() > (lo[2] + hi[2]) / 2 else 1.0        # nose to +Z (a half turn keeps it right-handed)
+    m, n_split = split_on_outlines(m, o, s, f, lo)
+    V, F = np.asarray(m.vertices), np.asarray(m.faces)
+    col = colours(F, np.asarray(m.visual.uv))
+    v = col.max(1)
+    C = V[F].mean(1)
     X, Y, Z = f * C[:, 0] / s, (C[:, 1] - lo[1]) / s, f * C[:, 2] / s
     N = np.asarray(m.face_normals) * [f, 1, f]
     label = np.array(["body"] * len(F), dtype=object)
@@ -95,7 +313,10 @@ def cut(src, outlines, dst):
     for key, nm in (("door_front", "door_front"), ("door_rear", "door_rear")):
         sel = free() & (np.abs(X) > 0.5) & inside(o[key], Z, Y)
         label[sel] = [f"{nm}_{sd}" for sd in side_of[sel]]
-    sel = free() & (N[:, 1] > 0.25) & (Y > o["bonnet_low"]) & inside(o["bonnet"], Z, X)
+    # the bonnet: its top (facing up), and at the nose its lip curling down to the grille and the headlights,
+    # down to the line where the silver meets their black (bonnet_front, seen from the front)
+    lip = (Z > 1.7) & (N[:, 1] > -0.1) & inside(o["bonnet_front"], X, Y) if "bonnet_front" in o else np.zeros(len(Z), bool)
+    sel = free() & ((N[:, 1] > 0.25) | lip) & (Y > o["bonnet_low"]) & inside(o["bonnet"], Z, X)
     label[sel] = "bonnet"
     sel = free() & (N[:, 2] < -0.15) & (Z < -1.5) & inside(o["tailgate"], X, Y)
     label[sel] = "tailgate"
@@ -120,8 +341,27 @@ def cut(src, outlines, dst):
                 glass = trimesh.visual.material.PBRMaterial(**GLASS)
             sub.visual = trimesh.visual.TextureVisuals(uv=sub.visual.uv, material=glass)
         scene.add_geometry(sub, node_name=nm, geom_name=nm)
+    # a trim card inside each door, as a child of the door's node: the rigger reads the door's name up the chain,
+    # so the card opens with its door (the names say nothing a rule would read as a wheel, lamp or cabin)
+    Qv = np.column_stack([X, Y, Z])
+    cards = door_cards(Qv, N, label, o) if o.get("door_cards", True) else {}
+    ab = {"front_left": "fl", "front_right": "fr", "rear_left": "rl", "rear_right": "rr"}
+    mats = {}
+    for door, res in cards.items():
+        k = ab[door[5:]]
+        for mat, (Vc, Fc) in res.items():
+            if mat not in mats:
+                c, met, rough = CARD[mat]
+                mats[mat] = trimesh.visual.material.PBRMaterial(name=f"door_card_{mat}", baseColorFactor=c, metallicFactor=met,
+                                                                roughnessFactor=rough, doubleSided=True)
+            P = np.column_stack([f * Vc[:, 0] * s, Vc[:, 1] * s + lo[1], f * Vc[:, 2] * s])   # back to the file's frame
+            g = trimesh.Trimesh(vertices=P, faces=Fc, process=False,
+                                visual=trimesh.visual.TextureVisuals(uv=np.zeros((len(P), 2)), material=mats[mat]))
+            nm = {"plastic": "card", "fabric": "cardcloth", "handle": "cardpull"}[mat] + "_" + k
+            scene.add_geometry(g, node_name=nm, geom_name=nm, parent_node_name=door)
+            counts[nm] = int(len(Fc))
     scene.export(dst, include_normals=True)              # the file's own normals: without them the paint renders as streaky chrome
-    return {"scale_per_m": round(float(s), 4), "nose": "+Z" if f > 0 else "-Z (turned)",
+    return {"scale_per_m": round(float(s), 4), "nose": "+Z" if f > 0 else "-Z (turned)", "faces_cut_on_outlines": n_split,
             "wheelbase_m": round(float(axles[0] - axles[1]), 3), "parts": counts, "cabin_left_out": dropped, "wrote": dst}
 
 

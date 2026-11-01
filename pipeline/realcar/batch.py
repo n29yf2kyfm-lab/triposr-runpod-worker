@@ -584,6 +584,39 @@ PASSENGER_VAN = re.compile(r"kombi|combi\b|shuttle|minibus|\bbus\b|caravelle|mul
                            r"v-class|viano|marco polo|westfalia|\bmpv\b|people ?carrier|\bwindow van", re.I)
 
 
+def _cabin_packs():
+    """The cabin packs cut with `glbmachine cabin` ($GLBMACHINE_HOME/cabins): (path, measures and credit)."""
+    home = os.environ.get("GLBMACHINE_HOME")
+    d = home and os.path.join(os.path.expanduser(home), "cabins")
+    if not d or not os.path.isdir(d):
+        return []
+    import cabin_pack
+    out = []
+    for f in sorted(os.listdir(d)):
+        if f.endswith(".glb"):
+            try:
+                out.append((os.path.join(d, f), cabin_pack.info(os.path.join(d, f))))
+            except Exception:                   # a pack being written, or broken: not this one
+                continue
+    return out
+
+
+def cabin_for(item):
+    """The cabin pack a model with no cabin gets: one cut from a car of its own make (a Golf gets a VW's
+    seats, dash and badged wheel, not a Toyota's), the nearest in years; the stock pack when there is none."""
+    make = (item.get("make") or "").lower()
+    y = item.get("yearStart") or item.get("year")
+    best = None
+    for path, info in _cabin_packs():
+        if not make or info.get("make") != make or not (info.get("credit") or {}).get("commercial", True):
+            continue
+        ys = info.get("years") or []
+        gap = min(abs(y - v) for v in ys) if (y and ys) else 50
+        if best is None or gap < best[0]:
+            best = (gap, path)
+    return best[1] if best else CABIN_PACK
+
+
 def rig_cache(item, body):
     """The shared folder a catalogue model's rig is kept in for every request
     after the first: $GLBMACHINE_HOME/rigs/<model>/<2|4> (the rigger cuts a
@@ -776,7 +809,7 @@ def one(target, item, args, out):
     rec["credit"] = cr
     spec = {"name": f"{item['make'].title()} {item.get('modelFamily') or item['model']}",
             "engine_pack": args.engine_pack,
-            "cabin_pack": getattr(args, "cabin_pack", None) or CABIN_PACK,
+            "cabin_pack": getattr(args, "cabin_pack", None) or cabin_for(item),
             "force_cabin": bool(item.get("noCabin")),
             "credit": f"Body, cabin and wheels: '{cr['title']}'" + (f" by {cr['author']}" if cr["author"] else "")
                       + f", {cr['licence']}" + (f", {cr['url']}" if cr["url"] else "") + ". "

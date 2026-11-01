@@ -180,6 +180,53 @@ def catalogue(j):
     return groups
 
 
+# the engine pack is a modern turbo petrol with a twin-clutch gearbox; a car's own engine and year change
+# what is under the bonnet: a diesel has no ignition coils (an injection pump, its pipes and injectors are
+# fitted where they stood), and a car from before 2003 had no twin-clutch gearbox (DSG came in 2003) nor an
+# electric coolant pump
+DSG_PARTS = ("bay:mechatronic-cover", "bay:transmission-oil-filter", "bay:transmission-oil-cooler")
+DIESEL_KIT = "bay:diesel_injection"
+
+
+def bay_fit(own, year):
+    """What the page hides and adds in the engine pack for this car: {"hide": [...], "add": [...],
+    "label": {...}, "diesel": bool}."""
+    fit = {"hide": [], "add": [], "label": {}, "diesel": False}
+    if own and (own.get("spec") or {}).get("fuel") == "diesel":
+        fit["diesel"] = True
+        fit["hide"].append("bay:dgea_coils")
+        fit["add"].append(DIESEL_KIT)
+        fit["label"][DIESEL_KIT] = "Injection pump, pipes and injectors"
+        fit["label"]["bay:dgea_loom"] = "Engine wiring loom and glow plug feed"
+    try:
+        y = int(year) if year else None
+    except (TypeError, ValueError):
+        y = None
+    if y and y < 2003:
+        fit["hide"] += list(DSG_PARTS) + ["bay:dgea_epump"]
+        fit["label"]["bay:gearbox-case"] = "Gearbox (manual)"
+    return fit
+
+
+def fit_catalogue(cat, fit):
+    """The parts list with the engine pack's parts this car has not got taken out, its own added to the bay's
+    group, renamed where it says so, and numbered through again."""
+    hide = set(fit["hide"])
+    for g in cat:
+        g["items"] = [it for it in g["items"] if it["id"] not in hide]
+        for it in g["items"]:
+            it["label"] = fit["label"].get(it["id"], it["label"])
+        if g.get("drill") == "engine_bay":
+            g["items"] += [{"id": a, "label": fit["label"].get(a, part_label(a))} for a in fit["add"]]
+    cat[:] = [g for g in cat if g["items"]]
+    k = 0
+    for g in cat:
+        for it in g["items"]:
+            k += 1
+            it["n"] = k
+    return cat
+
+
 def procedures(cat, opens, rear_engine=False, electric=False):
     """Step-by-step checks over the car, as a maintenance manual walks a
     procedure: each step says what to look at, which parts to open and
@@ -219,6 +266,8 @@ def procedures(cat, opens, rear_engine=False, electric=False):
         step("Air box and intake: clips in place, no split ducting.", "part", ["bay:dgea_airbox", "bay:dgea_intake"], [lid]),
         step("Belt and pulley: belt not glazed or cracked.", "part", ["bay:dgea_pulley"], [lid]),
         step("Engine mount and wiring loom: mount rubber whole, loom tidy and clipped.", "part", ["bay:dgea_mount", "bay:dgea_loom"], [lid]),
+        step("Injection pump and pipes: no diesel weeping at the unions, every pipe in its clips, the pump's "
+             "seals dry.", "part", [DIESEL_KIT], [lid]),
     ]
     label = {it["id"]: it["label"] for g in cat for it in g["items"]}
 
@@ -395,6 +444,8 @@ def write(report, out):
         shutil.copyfile(sheet, os.path.join(out, "views.jpg"))
     cat = catalogue(j)
     own = own_engine(asked, electric)
+    fit = bay_fit(None if electric else own, year)
+    fit_catalogue(cat, fit)
     if own:
         m = own["matched"]
         ev = bool(own["spec"].get("electric"))
@@ -411,7 +462,7 @@ def write(report, out):
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear, electric),
            "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {}),
-                      **({"own": own} if own else {})},
+                      **({"own": own} if own else {}), "fit": fit},
            "start": start_finish(asked, finish, srgb),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),

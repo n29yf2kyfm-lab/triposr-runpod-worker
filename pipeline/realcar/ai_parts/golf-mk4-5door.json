@@ -1,6 +1,6 @@
 {
  "car": "Volkswagen Golf Mk4 (1J) 5-door hatchback",
- "about": "Outlines traced from the shut lines, window seals and pillars printed in the texture of an image-to-3D Mk4 (Tripo H3.1, from the photo 'Volkswagen Golf IV in Oostburg', Charles01, CC BY-SA 4.0). Metres, in the rigger's frame: Z along the car (nose +), Y up from the ground, X across (left +). Side outlines are [Z, Y] and serve both sides; end outlines are [X, Y]; the bonnet's is [Z, X] seen from above.",
+ "about": "Outlines traced from the shut lines, window seals and pillars printed in the texture of an image-to-3D Mk4 (Tripo H3.1, from the photo 'Volkswagen Golf IV in Oostburg', Charles01, CC BY-SA 4.0). Metres, in the rigger's frame: Z along the car (nose +), Y up from the ground, X across (left +). Side outlines are [Z, Y] and serve both sides; end outlines are [X, Y]; the bonnet's is [Z, X] seen from above. The bonnet's front edge and its lower edge seen from the front (bonnet_front, [X, Y]) follow the silver down to the black of the grille and the headlights' rims.",
  "length": 4.149,
  "tyre_radius": 0.3173,
  "track": 1.513,
@@ -13,7 +13,8 @@
  "windscreen": {"z": [-0.12, 0.83], "y": [0.97, 1.385], "half_width": 0.62},
  "tailgate": [[0.56, 1.39], [0.61, 1.25], [0.645, 1.05], [0.656, 0.98], [0.656, 0.65], [-0.65, 0.65], [-0.65, 0.98], [-0.64, 1.05], [-0.6, 1.25], [-0.55, 1.39]],
  "rear_window": [[0.54, 1.375], [0.6, 1.3], [0.635, 1.15], [0.64, 1.01], [-0.64, 1.01], [-0.635, 1.15], [-0.6, 1.3], [-0.54, 1.375]],
- "bonnet": [[0.93, 0.725], [1.77, 0.725], [1.89, 0.41], [1.89, 0.39], [1.786, 0.39], [1.786, -0.39], [1.89, -0.39], [1.89, -0.41], [1.77, -0.725], [0.93, -0.725], [0.96, -0.4], [0.975, 0.0], [0.96, 0.4]],
+ "bonnet": [[0.93, 0.725], [1.8, 0.725], [1.83, 0.68], [1.86, 0.45], [1.88, 0.39], [1.895, 0.0], [1.88, -0.39], [1.86, -0.45], [1.83, -0.68], [1.8, -0.725], [0.93, -0.725], [0.96, -0.4], [0.975, 0.0], [0.96, 0.4]],
  "bonnet_low": 0.74,
- "cabin": {"half_width": 0.66, "z": [-1.15, 0.8], "y": [0.3, 1.3]}
+ "cabin": {"half_width": 0.66, "z": [-1.15, 0.8], "y": [0.3, 1.3]},
+ "bonnet_front": [[-0.8, 0.818], [-0.68, 0.815], [-0.45, 0.8], [-0.39, 0.785], [-0.1, 0.785], [-0.085, 0.8], [0.085, 0.8], [0.1, 0.785], [0.39, 0.785], [0.45, 0.8], [0.68, 0.815], [0.8, 0.818], [0.8, 1.5], [-0.8, 1.5]]
 }

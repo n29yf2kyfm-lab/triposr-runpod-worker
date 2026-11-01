@@ -223,6 +223,28 @@ def add_model(src, make, model, years, licence, doors=None, body=None, title=Non
     return rec, info
 
 
+def cabin_from(asset, noncommercial=False):
+    """A cabin pack (seats, dashboard, steering wheel, console) cut from a catalogue model the machine has
+    rigged, kept in $GLBMACHINE_HOME/cabins: a model of that make with no cabin of its own gets it."""
+    import batch
+    import cabin_pack
+    item = _catalogue_item(asset)
+    if not item:
+        raise ValueError(f"{asset} is not in the catalogue")
+    cr = batch.credit_of(item)
+    if not cr["commercial"] and not noncommercial:
+        raise ValueError(f"{asset} is {cr['licence']}: not for commercial use (--allow-noncommercial for a demo)")
+    src = os.path.join(batch.rig_cache(item, "") or "", "src.glb")
+    if not os.path.exists(src):
+        raise ValueError(f"{asset} is not rigged yet: build a car from it once first")
+    os.makedirs(os.path.join(HOME, "cabins"), exist_ok=True)
+    out = os.path.join(HOME, "cabins", asset + ".glb")
+    credit = {"title": cr["title"], "author": cr["author"], "licence": cr["licence"], "url": cr["url"],
+              "commercial": cr["commercial"]}
+    info = cabin_pack.extract(src, out, credit, item.get("make"), [item.get("yearStart"), item.get("yearEnd")])
+    return dict(info, wrote=out)
+
+
 def remove_model(asset):
     import batch
     p = batch.local_catalogue_path()
@@ -709,6 +731,10 @@ def main():
     ph.add_argument("--status", action="store_true", help="what the library holds")
     ph.add_argument("--index", action="store_true",
                     help="once: index the open Flickr car photos (YFCC100M, from Hugging Face; ~10 GB streamed)")
+    cb = sub.add_parser("cabin", help="cut a cabin pack from a rigged catalogue model: cars of its make with "
+                                       "no cabin of their own get it")
+    cb.add_argument("asset")
+    cb.add_argument("--allow-noncommercial", action="store_true")
     sub.add_parser("models", help="list the models you added")
     rm = sub.add_parser("remove", help="take an added model out")
     rm.add_argument("asset")
@@ -764,6 +790,12 @@ def main():
             openphotos.build()
         else:
             photolib.run(a.top, a.since, a.hours, 30, 60)
+    elif a.cmd == "cabin":
+        try:
+            print(json.dumps(cabin_from(a.asset, a.allow_noncommercial), indent=1))
+        except ValueError as e:
+            print(json.dumps({"error": str(e)}))
+            sys.exit(1)
     elif a.cmd == "models":
         import batch
         for k, v in (_json(batch.local_catalogue_path()) or {}).items():
