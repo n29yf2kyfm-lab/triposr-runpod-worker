@@ -3,14 +3,17 @@
 painted on, nothing separate) cut into the parts the machine rigs: four wheels, the doors, bonnet and tailgate,
 and the glass as its own see-through material, so the doors open, the windows are clear and the cabin shows.
 
-    python3 pipeline/realcar/ai_parts.py IN.glb OUTLINES.json OUT.glb
+    node pipeline/realcar/slim.mjs RAW.glb IN.glb 0.15                  # first: a million vertices down to a phone's
+    python3 pipeline/realcar/ai_parts.py IN.glb OUTLINES.json OUT.glb [TEXTURE_PX]
     python3 pipeline/realcar/glbmachine.py add OUT.glb --make ... --model ... --years ... --doors 5 --licence ...
 
 OUTLINES (ai_parts/<car>.json) holds the car's panel and window outlines in metres, traced from the shut lines
 and seals the generator printed into its texture (see the Golf Mk4's). The parts are named the way the rigger
 reads them: door_front_left ..., bonnet, tailgate, wheel_*, window_* and windscreen (glazing: clear, and a door's
 window travels with its door), tailgate_rear_window (the rear glass, on the tailgate)."""
+import io
 import json
+import struct
 import sys
 
 import numpy as np
@@ -97,10 +100,18 @@ def cut(src, outlines, dst):
     sel = free() & (N[:, 2] < -0.15) & (Z < -1.5) & inside(o["tailgate"], X, Y)
     label[sel] = "tailgate"
 
+    # the cabin the generator moulded from what the photo showed through the glass (lumps for seats) is left
+    # out, so the machine fits its own cabin pack (it fits one only into an empty shell)
+    cab = o.get("cabin")
+    if cab:
+        sel = free() & (np.abs(X) < cab["half_width"]) & (Z > cab["z"][0]) & (Z < cab["z"][1]) & (Y > cab["y"][0]) & (Y < cab["y"][1])
+        label[sel] = "_drop"
+    label_kept = label != "_drop"
+    dropped = int((~label_kept).sum())
     scene = trimesh.Scene()
     counts = {}
     glass = None
-    for nm in sorted(set(label)):
+    for nm in sorted(set(label) - {"_drop"}):
         ix = np.where(label == nm)[0]
         counts[nm] = int(len(ix))
         sub = m.submesh([ix], append=True, repair=False)
@@ -109,12 +120,75 @@ def cut(src, outlines, dst):
                 glass = trimesh.visual.material.PBRMaterial(**GLASS)
             sub.visual = trimesh.visual.TextureVisuals(uv=sub.visual.uv, material=glass)
         scene.add_geometry(sub, node_name=nm, geom_name=nm)
-    scene.export(dst)
+    scene.export(dst, include_normals=True)              # the file's own normals: without them the paint renders as streaky chrome
     return {"scale_per_m": round(float(s), 4), "nose": "+Z" if f > 0 else "-Z (turned)",
-            "wheelbase_m": round(float(axles[0] - axles[1]), 3), "parts": counts, "wrote": dst}
+            "wheelbase_m": round(float(axles[0] - axles[1]), 3), "parts": counts, "cabin_left_out": dropped, "wrote": dst}
+
+
+def shrink_images(path, px=2048, quality=88):
+    """Every texture in the GLB at PATH down to PX on its longest side and stored as JPEG (a generator's three
+    4K maps are most of the file); the GLB is written back in place."""
+    from PIL import Image
+    b = open(path, "rb").read()
+    jl = struct.unpack("<I", b[12:16])[0]
+    j = json.loads(b[20:20 + jl])
+    bin0 = 20 + jl + 8
+    blob = b[bin0:bin0 + struct.unpack("<I", b[20 + jl:24 + jl])[0]]
+    views = j["bufferViews"]
+    # only a colour map may go to JPEG: its colour-subsampling would smear a metal/roughness map's separate
+    # channels (the paint turned to chrome) and a normal map's directions; those stay PNG, only smaller
+    colour = {j["textures"][m["pbrMetallicRoughness"]["baseColorTexture"]["index"]].get("source")
+              for m in j.get("materials", []) if "baseColorTexture" in m.get("pbrMetallicRoughness", {})}
+    # a generator's metal/roughness map reads its car as polished metal (roughness 0.25, metal 0.5): the
+    # silver came out chrome. Paint is rougher and less metallic: G (roughness) raised, B (metal) lowered
+    shine = {j["textures"][m["pbrMetallicRoughness"]["metallicRoughnessTexture"]["index"]].get("source")
+             for m in j.get("materials", []) if "metallicRoughnessTexture" in m.get("pbrMetallicRoughness", {})}
+    repl = {}
+    for ii, im in enumerate(j.get("images", [])):
+        if "bufferView" not in im:
+            continue
+        bv = views[im["bufferView"]]
+        raw = blob[bv.get("byteOffset", 0):bv.get("byteOffset", 0) + bv["byteLength"]]
+        img = Image.open(io.BytesIO(raw))
+        img.load()
+        img.thumbnail((px, px), Image.LANCZOS)
+        if ii in shine:
+            import numpy as np_
+            a_ = np_.asarray(img.convert("RGB"), np_.float32) / 255
+            a_[..., 1] = np_.clip(a_[..., 1] * 0.8 + 0.25, 0, 1)
+            a_[..., 2] = a_[..., 2] * 0.65
+            img = Image.fromarray((a_ * 255 + 0.5).astype("uint8"))
+        out = io.BytesIO()
+        if ii in colour:
+            img.convert("RGB").save(out, "JPEG", quality=quality)
+            im["mimeType"] = "image/jpeg"
+        else:
+            img.save(out, "PNG", optimize=True)
+            im["mimeType"] = "image/png"
+        repl[im["bufferView"]] = out.getvalue()
+    new = bytearray()
+    for i, bv in enumerate(views):
+        data = repl.get(i) or blob[bv.get("byteOffset", 0):bv.get("byteOffset", 0) + bv["byteLength"]]
+        while len(new) % 4:
+            new += b"\0"
+        bv["byteOffset"], bv["byteLength"] = len(new), len(data)
+        new += data
+    while len(new) % 4:
+        new += b"\0"
+    j["buffers"][0]["byteLength"] = len(new)
+    js = json.dumps(j, separators=(",", ":")).encode()
+    js += b" " * ((4 - len(js) % 4) % 4)
+    total = 12 + 8 + len(js) + 8 + len(new)
+    with open(path, "wb") as fh:
+        fh.write(struct.pack("<III", 0x46546C67, 2, total) + struct.pack("<I", len(js)) + b"JSON" + js
+                 + struct.pack("<I", len(new)) + b"BIN\0" + new)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) not in (4, 5):
         raise SystemExit(__doc__)
-    print(json.dumps(cut(*sys.argv[1:]), indent=1))
+    rep = cut(*sys.argv[1:4])
+    if len(sys.argv) == 5:
+        shrink_images(sys.argv[3], int(sys.argv[4]))
+        rep["textures_px"] = int(sys.argv[4])
+    print(json.dumps(rep, indent=1))

@@ -185,7 +185,8 @@ def warm(top=100, every=False, workers=2):
 
 
 # ── your own models: added to a local catalogue beside the shared one ──────
-def add_model(src, make, model, years, licence, doors=None, body=None, title=None, author=None, url=None):
+def add_model(src, make, model, years, licence, doors=None, body=None, title=None, author=None, url=None,
+              no_cabin=False):
     """A model bought or made outside (GLB, glTF or OBJ) into the catalogue,
     so a request finds it like any other. The file is converted once and
     kept in $GLBMACHINE_HOME/models; the record in catalogue_local.json."""
@@ -204,6 +205,10 @@ def add_model(src, make, model, years, licence, doors=None, body=None, title=Non
            "licence": licence, "sourceTitle": title or f"{make} {model} ({y0}-{y1})", "sourceCreator": author,
            "sourceUrl": url, "provenance": "owner-supplied", "publicationStatus": "approved", "qualityGrade": "A",
            "desktopGlbUrl": "file://" + dst, "addedFrom": os.path.basename(src), "addedAt": time.strftime("%Y-%m-%d")}
+    if no_cabin:
+        # an outer shell only (an AI model made from a photo): the finisher fits the cabin pack whatever its
+        # count of cabin-zone triangles says, since a shell's scuttle and inner panels look like a cabin to it
+        rec["noCabin"] = True
     p = batch.local_catalogue_path()
     cat = _json(p) or {}
     if slug in cat:
@@ -694,6 +699,8 @@ def main():
     ad.add_argument("--title")
     ad.add_argument("--author")
     ad.add_argument("--url")
+    ad.add_argument("--no-cabin", action="store_true",
+                    help="the model is an outer shell with no interior (e.g. made from a photo): fit the cabin pack")
     ad.add_argument("--build", action="store_true", help="build it straight away, with a check sheet")
     ph = sub.add_parser("photos", help="build the standby roofline library from licensed photos (photolib.py)")
     ph.add_argument("--top", type=int, default=100, help="how far down the UK licensing list")
@@ -738,7 +745,8 @@ def main():
         setup(quiet=True)
         print(json.dumps(warm(a.top, a.all, a.workers), indent=1))
     elif a.cmd == "add":
-        rec, info = add_model(a.file, a.make, a.model, a.years, a.licence, a.doors, a.body, a.title, a.author, a.url)
+        rec, info = add_model(a.file, a.make, a.model, a.years, a.licence, a.doors, a.body, a.title, a.author, a.url,
+                              a.no_cabin)
         print(json.dumps({"added": rec["assetId"], "converted": info, "record": rec}, indent=1))
         if a.build:
             req = f"{a.make} {a.model} {rec['yearStart']}" + (f" {a.doors} door" if a.doors else "")

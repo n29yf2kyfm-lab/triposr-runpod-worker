@@ -519,12 +519,14 @@ def ensure_tangents(g):
     return {"made": made, "maps_dropped": dropped}
 
 
-def cabin_count(recs, ground, wheel_top, zf, zr):
+def cabin_count(recs, ground, wheel_top, zf, zr, glass=()):
     """Triangles of the body (not the doors) in the cabin's middle: inboard,
     between the axles, from a little over the wheel centres to well over
     them. A modelled cabin has thousands; a shell with nothing in it (the
-    sourced 1998 Micra) a few dozen."""
-    body = [r for r in recs if not r["rig"].startswith(("door_", "wheel_"))]
+    sourced 1998 Micra) a few dozen. Glass is not cabin: a windscreen whose
+    foot reaches into that space (an image-to-3D Golf's, cut to its own
+    piece) counted as thousands of cabin triangles and kept the cabin out."""
+    body = [r for r in recs if not r["rig"].startswith(("door_", "wheel_")) and r.get("mat") not in glass]
     T = np.vstack([r["P"][r["I"]] for r in body])
     c = T.mean(1)
     half = float(np.abs(T[:, :, 0]).max())
@@ -2845,8 +2847,9 @@ def finish(src, spec, out, base_dir="."):
     # ── cabin: a model with nothing inside gets the cabin pack (the 1998
     # Micra: a shell), fitted between its axles; the pack's maker is credited
     if spec.get("cabin_pack") and spec.get("body_family") != "van" and "cabin" not in manual:
-        n_cab = cabin_count(recs, ground, wheel_top, zf, zr)
-        if n_cab < 300:
+        n_cab = cabin_count(recs, ground, wheel_top, zf, zr, glass)
+        log["cabin_triangles"] = n_cab
+        if n_cab < 300 or spec.get("force_cabin"):
             root, log["cabin_pack"] = fit_cabin(g, recs, spec["cabin_pack"], to_out, s, ground, zf, zr)
             log["cabin_pack"]["cabin_triangles_before"] = n_cab
             nodes[0]["children"].append(root)

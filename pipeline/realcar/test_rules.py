@@ -560,3 +560,27 @@ def test_generation_words_read_as_that_generations_years():
     assert "gen" not in make.parse("golf 2008")
     y, span = make._gen_year("volkswagen", "golf", 4)
     assert span[0] == 1997 and 1997 < y <= 2004
+
+
+def test_named_licence_wins_over_owner_words():
+    # a model the owner made from a CC BY-SA photo stays share-alike in its credit
+    import batch
+    assert batch._licence_name("CC BY-SA 4.0 (generated on the owner's account from a photo by Charles01)") == "CC BY-SA"
+    assert batch._licence_name("CC BY-NC 4.0, owner's copy") == "CC BY-NC"
+    assert batch._licence_name("owner-supplied") == "owner-supplied"
+    assert batch._licence_name("own work") == "owner-supplied"
+    assert batch._licence_name("royalty-free, CGTrader standard") == "royalty-free"
+
+
+def test_no_cabin_record_forces_the_cabin_pack(tmp_path, monkeypatch):
+    # a shell made from a photo has no interior, whatever its cabin-zone count says: add --no-cabin marks it
+    import glbmachine
+    import batch
+    import importer
+    monkeypatch.setattr(glbmachine, "HOME", str(tmp_path))
+    monkeypatch.setattr(batch, "local_catalogue_path", lambda: str(tmp_path / "catalogue_local.json"))
+    monkeypatch.setattr(importer, "to_glb", lambda src, dst, tools: {"ok": True})
+    rec, _ = glbmachine.add_model("x.glb", "Volkswagen", "Golf", "1997-2006", "CC BY-SA 4.0", 5, "hatchback", no_cabin=True)
+    assert rec["noCabin"] is True
+    rec, _ = glbmachine.add_model("x.glb", "Volkswagen", "Golf", "1997-2006", "CC BY-SA 4.0", 5, "hatchback")
+    assert "noCabin" not in rec

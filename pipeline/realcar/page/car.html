@@ -235,6 +235,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
         <span class="sep" aria-hidden="true"></span>
         <button type="button" id="flip" disabled aria-pressed="false">Flip over</button>
         <button type="button" id="ramp" disabled aria-pressed="false">On the ramp</button>
+        <button type="button" id="cabinOut" hidden aria-pressed="false">Take the interior out</button>
         <button type="button" id="wheelOff" hidden aria-pressed="false">Take a wheel off</button>
         <button type="button" id="reset" disabled>Reset view</button>
       </div>
@@ -667,6 +668,7 @@ function onCar(gltf) {
   benchSetup();
   styleSetup();
   engineSetup();
+  cabinSetup();
   runSetup();
   rampSetup();
   redraw();
@@ -1112,6 +1114,7 @@ function view(name) {
     case 'boot': t.add(new THREE.Vector3(0, H * .2, -e * L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -e * L * .7).multiplyScalar(far)); break;
     case 'cabin': t.add(new THREE.Vector3(0, H * .1, 0)); p.copy(t).add(new THREE.Vector3(W * 1.2, H * .9, L * .05).multiplyScalar(far)); break;
     case 'under': p.add(new THREE.Vector3(L * .3, L * 1.1, L * .5).multiplyScalar(far)); break;
+    case 'cabinOut': t.add(new THREE.Vector3(W * .65, -H * .15, 0)); p.copy(t).add(new THREE.Vector3(L * 1.05, L * .75, L * 1.15).multiplyScalar(far)); break;
     case 'hoist': t.add(new THREE.Vector3(0, H * .7, e * L * .55)); p.copy(t).add(new THREE.Vector3(L * 1.1, L * .45, e * L * .55).multiplyScalar(far)); break;
     default:
       if (name.startsWith('door:') || name.startsWith('wheel:')) {
@@ -1597,6 +1600,44 @@ function liftEngine(on) {
   if (!on) $('explode').disabled = false;
   $('liftEngine').setAttribute('aria-pressed', String(on));
   $('liftEngine').textContent = on ? 'Put the engine back' : 'Lift the engine out';
+}
+// ── the interior out: the doors open, then the seats, dash and wheel rise
+// clear of the roof, swing out to the near side and are set down on the
+// floor beside the car, as a trim shop lifts a cabin out in one; again puts
+// it back ──
+const CAB = { on: false, p: 0, n: null, up: null, out: null, down: null };
+function cabinSetup() {
+  const n = B.node.get('cabin');
+  if (!n || !B.base.has(n)) return;
+  CAB.n = n;
+  $('cabinOut').hidden = false;
+  $('cabinOut').addEventListener('click', () => cabinOut(!CAB.on));
+}
+function cabinOut(on) {
+  redraw();
+  if (on) {
+    setExplode(0);
+    for (const id of Object.keys(S.actions)) if (/^door_/.test(id)) setOpen(id, true);
+    syncAll();
+    const { size } = S.box;
+    CAB.up = carDelta(CAB.n, new THREE.Vector3(0, size.y * 0.95, 0));
+    CAB.out = carDelta(CAB.n, new THREE.Vector3(size.x * 1.3, 0, 0));
+    CAB.down = carDelta(CAB.n, new THREE.Vector3(0, -size.y * 0.9, 0));
+    view('cabinOut');
+  }
+  CAB.on = on;
+  $('cabinOut').setAttribute('aria-pressed', String(on));
+  $('cabinOut').textContent = on ? 'Put the interior back' : 'Take the interior out';
+}
+function stepCabin(dt) {
+  if (!CAB.n) return false;
+  const goal = CAB.on ? 1 : 0;
+  if (CAB.p === goal) return false;
+  CAB.p = reduced ? goal : Math.max(0, Math.min(1, CAB.p + Math.sign(goal - CAB.p) * dt / 2.2));
+  const u = ease(CAB.p / 0.35), f = ease((CAB.p - 0.3) / 0.45), d = ease((CAB.p - 0.7) / 0.3);
+  B.liftD.set(CAB.n, CAB.up.clone().multiplyScalar(u).add(CAB.out.clone().multiplyScalar(f)).add(CAB.down.clone().multiplyScalar(d)));
+  place(CAB.n);
+  return CAB.p !== goal;
 }
 function onHoist(o) { for (let p = o; p; p = p.parent) if (B.lift.set && B.lift.set.has(p)) return true; return o.name === '_hoist' || (o.parent && o.parent.name === '_hoist'); }
 function stepLift(dt) {
@@ -2438,6 +2479,7 @@ renderer.setAnimationLoop(() => {
     if (k >= 1) S.camTo = null; else moving = true;
   }
   if (S.root && stepLift(Math.min(raw, 0.5))) moving = true;
+  if (S.root && stepCabin(Math.min(raw, 0.5))) moving = true;
   if (rampStep(dt)) moving = true;
   if (RUN.on) {
     runUpdate(dt);

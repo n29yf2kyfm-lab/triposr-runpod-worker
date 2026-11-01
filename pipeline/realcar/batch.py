@@ -421,9 +421,11 @@ def auto_wheelbase(item, rep, rec, year=None):
     return get
 
 
-LICENCE = [(r"royalty[- ]free", "royalty-free"), (r"own work|owner", "owner-supplied"),
+# a named licence wins over "owner": "CC BY-SA 4.0 (made on the owner's account from a photo ...)" is share-alike
+LICENCE = [(r"royalty[- ]free", "royalty-free"),
            (r"non-?commercial.*share-?alike|by-nc-sa", "CC BY-NC-SA"), (r"non-?commercial|by-nc", "CC BY-NC"),
-           (r"share-?alike|by-sa", "CC BY-SA"), (r"cc0|public domain", "CC0"), (r"attribution|cc-by|cc by", "CC BY")]
+           (r"share-?alike|by-sa", "CC BY-SA"), (r"cc0|public domain", "CC0"), (r"attribution|cc-by|cc by", "CC BY"),
+           (r"own work|owner", "owner-supplied")]
 
 
 COMMERCIAL = ("CC BY", "CC BY-SA", "CC0", "owner-supplied", "royalty-free")
@@ -775,6 +777,7 @@ def one(target, item, args, out):
     spec = {"name": f"{item['make'].title()} {item.get('modelFamily') or item['model']}",
             "engine_pack": args.engine_pack,
             "cabin_pack": getattr(args, "cabin_pack", None) or CABIN_PACK,
+            "force_cabin": bool(item.get("noCabin")),
             "credit": f"Body, cabin and wheels: '{cr['title']}'" + (f" by {cr['author']}" if cr["author"] else "")
                       + f", {cr['licence']}" + (f", {cr['url']}" if cr["url"] else "") + ". "
                       + (f"Reshaped to the size of the {st['name']} (a stand-in: not that car's own model), r" if st else "R")
@@ -876,7 +879,7 @@ def one(target, item, args, out):
         return rec
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
-                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
+                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_triangles", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
                                               "powertrain", "sliding", "cracks_closed", "paint", "paint_side_m2",
                                               "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "paint_also", "normals_mended", "smoothed", "wheels_in_paint", "roof_in_paint", "roof_glass_dark", "trim_black", "tyres_black")}
