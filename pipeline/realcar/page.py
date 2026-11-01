@@ -141,6 +141,28 @@ def part_label(name):
     return n[:1].upper() + n[1:]
 
 
+# panels cut as their own parts (ai_parts.py) keep their own material, "panel_<name>", whichever node they
+# are filed under; the page takes each off by itself as "panel:<name>"
+PANEL_LABEL = {"bumper_front": "Front bumper", "bumper_rear": "Rear bumper", "grille": "Grille",
+               "lamp_front_left": "Headlamp, left", "lamp_front_right": "Headlamp, right",
+               "lamp_rear_left": "Tail lamp, left", "lamp_rear_right": "Tail lamp, right",
+               "wing_front_left": "Front wing, left", "wing_front_right": "Front wing, right"}
+PANEL_ORDER = list(PANEL_LABEL)
+
+
+def panel_names(j):
+    """The bolted-on panels the body node carries, by their material: ["bumper_front", ...]."""
+    nodes, mats = j.get("nodes") or [], j.get("materials") or []
+    out = set()
+    for n in nodes:
+        if n.get("name") == "body" and "mesh" in n:
+            for pr in j["meshes"][n["mesh"]]["primitives"]:
+                nm = mats[pr["material"]].get("name") or "" if pr.get("material") is not None else ""
+                if nm.startswith("panel_"):
+                    out.add(nm[len("panel_"):])
+    return sorted(out, key=lambda k: PANEL_ORDER.index(k) if k in PANEL_ORDER else 99)
+
+
 def catalogue(j):
     """The car's parts as the page lists them: groups of items, each item a
     node of the file (its name is how the page finds it), numbered through
@@ -165,6 +187,11 @@ def catalogue(j):
     body = [n for n in ("body", "bonnet", "door_fl", "door_fr", "door_rl", "door_rr", "door_bl", "door_br", "tailgate")
             if n in top or n + "_hinge" in top]
     group("Body and openings", body)
+    pan = panel_names(j)
+    if pan:
+        groups.append({"title": "Panels, lamps and trim", "drill": None,
+                       "items": [{"id": "panel:" + k, "label": PANEL_LABEL.get(k, k.replace("_", " ").capitalize())}
+                                 for k in pan]})
     group("Wheels", [n for n in ("wheel_fl", "wheel_fr", "wheel_rl", "wheel_rr") if n in top])
     bay = [n for n in kids("engine_bay") if not str(n).startswith("bay:engine-bay-structure")]
     group("Engine bay", bay, drill="engine_bay")
@@ -459,7 +486,8 @@ def write(report, out):
     cfg = {"title": title, "eyebrow": "ExpertCarCheck GLB machine · built " + time.strftime("%-d %b %Y"),
            "sub": f"{name}" + (f", {colour}" if colour else "") + ".", "swatch": f"rgb({srgb[0]}, {srgb[1]}, {srgb[2]})" if srgb else None,
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
-           "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
+           "lab": lab_parts(j, list(paint_names) + (["panel_" + k for k in panel_names(j) if k.startswith(("bumper", "wing"))]
+                                                    if paint_names else [])), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear, electric),
            "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {}),
                       **({"own": own} if own else {}), "fit": fit},

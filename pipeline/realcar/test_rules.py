@@ -643,3 +643,23 @@ def test_sketchup_colours_read_as_srgb():
     import cabin_pack
     assert abs(cabin_pack._linear(0.176) - 0.026) < 0.001             # the Polo's carpet: dark, not near white
     assert cabin_pack._linear(0.0) == 0.0 and abs(cabin_pack._linear(1.0) - 1.0) < 1e-9
+
+
+def test_panels_cut_as_their_own_parts_are_listed_to_take_off():
+    # a panel keeps its own material ("panel_<name>") through the rigger and the finisher; the page lists it
+    import page
+    j = {"materials": [{"name": "body_paint"}, {"name": "panel_wing_front_left"}, {"name": "panel_bumper_front"},
+                       {"name": "panel_grille"}],
+         "meshes": [{"primitives": [{"material": 0}, {"material": 1}, {"material": 2}, {"material": 3}]}],
+         "nodes": [{"name": "car", "children": [1]}, {"name": "body", "mesh": 0}], "scenes": [{"nodes": [0]}]}
+    assert page.panel_names(j) == ["bumper_front", "grille", "wing_front_left"]          # a workshop's order
+    groups = page.catalogue(j)
+    pan = next(g for g in groups if g["title"].startswith("Panels"))
+    assert [it["id"] for it in pan["items"]] == ["panel:bumper_front", "panel:grille", "panel:wing_front_left"]
+    assert pan["items"][0]["label"] == "Front bumper"
+
+
+def test_web_encode_keeps_materials_apart():
+    # gltf-transform's dedup would merge the panels' look-alike materials into one: the page could not find them
+    src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "encode.mjs")).read()
+    assert "PropertyType.MATERIAL" not in src and "propertyTypes" in src

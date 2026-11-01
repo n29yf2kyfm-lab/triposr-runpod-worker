@@ -41,6 +41,31 @@ SPLIT = {"window_front": ("ZY", 0), "window_rear": ("ZY", 0), "window_rear_quart
          "bonnet": ("ZX", 1), "bonnet_front": ("XY", 2, lambda Q: Q[:, 2] > 1.6)}
 
 
+# the panels a mechanic unbolts (lamps, grille, bumpers, front wings): outline, plane, axis, which faces, and
+# whether the outline is one side's ([|X|, Y]) and stands for both
+PANEL_SPLIT = {"lamp_front": ("XY", 2, lambda Q: Q[:, 2] > 1.7, True),
+               "lamp_rear": ("XY", 2, lambda Q: Q[:, 2] < -1.7, True),
+               "grille": ("XY", 2, lambda Q: Q[:, 2] > 1.75, False),
+               "bumper_front": ("ZY", 0, lambda Q: Q[:, 2] > 1.5, False),
+               "bumper_front_face": ("XY", 2, lambda Q: Q[:, 2] > 1.6, False),
+               "bumper_rear": ("ZY", 0, lambda Q: Q[:, 2] < -1.5, False),
+               "bumper_rear_face": ("XY", 2, lambda Q: Q[:, 2] < -1.6, False),
+               "wing": ("ZY", 0, lambda Q: (np.abs(Q[:, 0]) > 0.5) & (Q[:, 2] > 0.6), False)}
+PANELS = ("lamp_front_left", "lamp_front_right", "lamp_rear_left", "lamp_rear_right", "grille", "bumper_front",
+          "bumper_rear", "wing_front_left", "wing_front_right")
+
+
+def _split_jobs(o):
+    for key, (plane, along, *where) in SPLIT.items():
+        if key in o:
+            yield o[key], plane, along, (where[0] if where else None)
+    for key, (plane, along, where, both) in PANEL_SPLIT.items():
+        if key in o:
+            yield o[key], plane, along, where
+            if both:
+                yield [[-p[0], p[1]] for p in o[key]], plane, along, where
+
+
 def _car_frame(P, s, f, lo):
     return np.column_stack([f * P[:, 0] / s, (P[:, 1] - lo[1]) / s, f * P[:, 2] / s])
 
@@ -56,15 +81,13 @@ def split_on_outlines(m, o, s, f, lo):
     UV = np.array(m.visual.uv, np.float64)
     VN = np.asarray(m.vertex_normals, np.float64)
     ncut = 0
-    for key, (plane, along, *where) in SPLIT.items():
-        if key not in o:
-            continue
-        poly = Polygon(o[key])
+    for pts, plane, along, where in _split_jobs(o):
+        poly = Polygon(pts)
         if not poly.is_valid:
             poly = poly.buffer(0)
         a, b = "XYZ".index(plane[0]), "XYZ".index(plane[1])
         Q = _car_frame(V, s, f, lo)
-        ins = inside(o[key], Q[:, a], Q[:, b])
+        ins = inside(pts, Q[:, a], Q[:, b])
         k = ins[F].sum(1)
         T = Q[F]
         n = np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0])
@@ -74,15 +97,15 @@ def split_on_outlines(m, o, s, f, lo):
         e0, e1 = t2all[:, 1] - t2all[:, 0], t2all[:, 2] - t2all[:, 0]
         det = e0[:, 0] * e1[:, 1] - e0[:, 1] * e1[:, 0]
         corner = np.zeros(len(F), bool)
-        for pc in np.asarray(o[key], float):
+        for pc in np.asarray(pts, float):
             d = pc - t2all[:, 0]
             with np.errstate(divide="ignore", invalid="ignore"):
                 u = (d[:, 0] * e1[:, 1] - d[:, 1] * e1[:, 0]) / det
                 w = (e0[:, 0] * d[:, 1] - e0[:, 1] * d[:, 0]) / det
             corner |= (u > 0) & (w > 0) & (u + w < 1)
         ok = (((k > 0) & (k < 3)) | corner) & (np.abs(n[:, along]) > 0.3)
-        if where:
-            ok &= where[0](T.mean(1))
+        if where is not None:
+            ok &= where(T.mean(1))
         todo = np.where(ok)[0]
         if not len(todo):
             continue
@@ -323,6 +346,24 @@ def cut(src, outlines, dst):
 
     # the cabin the generator moulded from what the photo showed through the glass (lumps for seats) is left
     # out, so the machine fits its own cabin pack (it fits one only into an empty shell)
+    # the panels a mechanic unbolts: the lamps and the grille first, then the bumpers, then the front wings
+    ax_ = np.abs(X)
+    if "lamp_front" in o:
+        sel = free() & (Z > 1.7) & (N[:, 2] > -0.2) & inside(o["lamp_front"], ax_, Y)
+        label[sel] = [f"lamp_front_{sd}" for sd in side_of[sel]]
+    if "lamp_rear" in o:
+        sel = free() & (Z < -1.7) & (N[:, 2] < 0.2) & inside(o["lamp_rear"], ax_, Y)
+        label[sel] = [f"lamp_rear_{sd}" for sd in side_of[sel]]
+    if "grille" in o:
+        sel = free() & (Z > 1.75) & (N[:, 2] > -0.2) & inside(o["grille"], X, Y)
+        label[sel] = "grille"
+    for key in ("bumper_front", "bumper_rear"):
+        if key in o:
+            label[free() & inside(o[key], Z, Y)] = key
+    if "wing" in o:
+        sel = free() & (ax_ > 0.5) & inside(o["wing"], Z, Y)
+        label[sel] = [f"wing_front_{sd}" for sd in side_of[sel]]
+
     cab = o.get("cabin")
     if cab:
         sel = free() & (np.abs(X) < cab["half_width"]) & (Z > cab["z"][0]) & (Z < cab["z"][1]) & (Y > cab["y"][0]) & (Y < cab["y"][1])
@@ -340,6 +381,12 @@ def cut(src, outlines, dst):
             if glass is None:
                 glass = trimesh.visual.material.PBRMaterial(**GLASS)
             sub.visual = trimesh.visual.TextureVisuals(uv=sub.visual.uv, material=glass)
+        elif nm in PANELS:
+            # its own material (the same texture): the rigger and the finisher keep a material whatever part it
+            # is filed under, so the page finds the panel by it and takes it off on its own
+            pm = sub.visual.material.copy()
+            pm.name = "panel_" + nm
+            sub.visual = trimesh.visual.TextureVisuals(uv=sub.visual.uv, material=pm)
         scene.add_geometry(sub, node_name=nm, geom_name=nm)
     # a trim card inside each door, as a child of the door's node: the rigger reads the door's name up the chain,
     # so the card opens with its door (the names say nothing a rule would read as a wheel, lamp or cabin)
@@ -406,9 +453,41 @@ def shrink_images(path, px=2048, quality=88):
             img.save(out, "PNG", optimize=True)
             im["mimeType"] = "image/png"
         repl[im["bufferView"]] = out.getvalue()
+    # one copy of each picture: a panel's material copies the body's, and the exporter wrote the same maps once
+    # per material (thirty images for three)
+    first, img_map = {}, {}
+    for ii, im in enumerate(j.get("images", [])):
+        if "bufferView" not in im:
+            continue
+        data = repl.get(im["bufferView"])
+        if data is None:
+            bv = views[im["bufferView"]]
+            data = blob[bv.get("byteOffset", 0):bv.get("byteOffset", 0) + bv["byteLength"]]
+        img_map[ii] = first.setdefault(hash(data), ii)
+    keep_img = sorted(set(img_map.values()) | {ii for ii, im in enumerate(j.get("images", [])) if "bufferView" not in im})
+    new_img = {ii: k for k, ii in enumerate(keep_img)}
+    for t in j.get("textures", []):
+        if "source" in t:
+            t["source"] = new_img[img_map.get(t["source"], t["source"])]
+    dropped_views = {j["images"][ii]["bufferView"] for ii in img_map if ii not in new_img} \
+        - {j["images"][ii]["bufferView"] for ii in keep_img if "bufferView" in j["images"][ii]}
+    j["images"] = [j["images"][ii] for ii in keep_img]
+    keep_view = [i for i in range(len(views)) if i not in dropped_views]
+    new_view = {i: k for k, i in enumerate(keep_view)}
+    for acc in j.get("accessors", []):
+        if "bufferView" in acc:
+            acc["bufferView"] = new_view[acc["bufferView"]]
+    for im in j["images"]:
+        if "bufferView" in im:
+            im["bufferView"] = new_view[im["bufferView"]]
+    repl = {new_view[i]: d for i, d in repl.items() if i in new_view}
+    old_views = views
+    views = j["bufferViews"] = [old_views[i] for i in keep_view]
+    old_off = {k: (old_views[i].get("byteOffset", 0), old_views[i]["byteLength"]) for k, i in enumerate(keep_view)}
     new = bytearray()
     for i, bv in enumerate(views):
-        data = repl.get(i) or blob[bv.get("byteOffset", 0):bv.get("byteOffset", 0) + bv["byteLength"]]
+        o0, n0 = old_off[i]
+        data = repl.get(i) or blob[o0:o0 + n0]
         while len(new) % 4:
             new += b"\0"
         bv["byteOffset"], bv["byteLength"] = len(new), len(data)

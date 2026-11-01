@@ -2300,7 +2300,10 @@ def finish(src, spec, out, base_dir="."):
                 on = r["tri_part"] == "bonnet"
                 if r["mat"] in paint_ids or not on.any():
                     continue
-                if str(r.get("rig") or "").startswith("lamps"):     # the rigger's own lamps: never the bonnet's
+                own_panel = r["mat"] is not None and (mats[r["mat"]].get("name") or "").startswith("panel_")
+                if str(r.get("rig") or "").startswith("lamps") or own_panel:
+                    # the rigger's own lamps, and a panel cut as its own part (ai_parts.py's grille, lamps,
+                    # wings: each comes off by itself): never the bonnet's
                     r["tri_part"] = np.where(on, "body", r["tri_part"])
                     moved += int(on.sum())
                     continue

@@ -115,6 +115,8 @@ button:disabled { opacity: .45; cursor: default; }
 .row .acts button { min-height: 36px; min-width: 36px; padding: 2px 6px; font-size: 13px; border-color: transparent; background: transparent; }
 .row .acts button:hover { border-color: var(--line); background: var(--surface); }
 .row .acts button.fl[aria-pressed="true"] { color: var(--flag); border-color: var(--flag); background: transparent; }
+.row .acts button.off { min-width: 0; padding: 2px 8px; font-size: 12px; border-color: var(--line); }
+.row .acts button.off[aria-pressed="true"] { border-color: var(--accent, #2f6fdf); }
 .row.missing { opacity: .4; cursor: default; }
 .ctl { display: grid; gap: 6px; }
 .ctl .lbl, .lbl { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
@@ -230,6 +232,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 
       <div class="bar controls" id="controls" aria-label="Open and close parts">
         <button type="button" id="all" disabled>Open everything</button>
+        <button type="button" id="strip" disabled aria-pressed="false" title="Take every panel, the wheels and the interior off, then lift the engine out">Strip it down</button>
         <span class="sep" aria-hidden="true"></span>
         <span id="parts" style="display:contents"></span>
         <span class="sep" aria-hidden="true"></span>
@@ -660,12 +663,13 @@ function onCar(gltf) {
   controls.update();
   S.home = { pos: camera.position.clone(), target: controls.target.clone() };
 
-  for (const id of ['all', 'flip', 'reset']) $(id).disabled = false;
+  for (const id of ['all', 'flip', 'reset', 'strip']) $(id).disabled = false;
   status.hidden = true;
   $('hint').hidden = false;
   labSetup(root);
   labRestore();
   bayFit(root);
+  panelSetup(root);
   benchSetup();
   styleSetup();
   engineSetup();
@@ -869,6 +873,13 @@ function partRow(it, where) {
     fl.addEventListener('click', e => { e.stopPropagation(); setFlag(it.id, !B.flags[it.id]); });
     acts.append(fl);
   }
+  if (!where && it.id !== 'body' && !(it.id in TOP_GROUPS && it.id !== 'cabin') && B.node.has(it.id)) {
+    const off = el('button', 'Take off', 'off'); off.type = 'button'; off.setAttribute('aria-pressed', 'false');
+    off.title = 'Unbolt it and set it down by the car'; off.setAttribute('aria-label', 'Take off ' + it.label);
+    off.addEventListener('click', e => { e.stopPropagation(); takeOff(it.id, !isOff(it.id)); });
+    OFF.btn.set(it.id, off);
+    acts.prepend(off);
+  }
   r.append(acts);
   if (!B.node.has(it.id)) { r.classList.add('missing'); r.title = 'Not in this file'; }
   else {
@@ -884,7 +895,7 @@ function mover(id) { return B.hinge.get(id) || B.node.get(id) || null; }
 function place(n) {
   const b = B.base.get(n); if (!b) return;
   n.position.copy(b);
-  for (const m of [B.explodeD, B.offsetD, B.liftD, B.rampD]) { const d = m.get(n); if (d) n.position.add(d); }
+  for (const m of [B.explodeD, B.offsetD, B.liftD, B.rampD, B.offD]) { const d = m.get(n); if (d) n.position.add(d); }
 }
 // a move given in the car's own frame (x across, y up, z along, metres), in
 // the node's parent's frame: the engine bay group is scaled to its car
@@ -1646,13 +1657,13 @@ function engineSetup() {
   $('lookBay').addEventListener('click', () => { if (B.lift.lid in S.actions) setOpen(B.lift.lid, true); syncAll(); view('bay'); });
   $('focusBay').addEventListener('click', () => { showTab('parts'); setLevel('engine_bay'); });
 }
-function liftEngine(on) {
+function liftEngine(on, keepView) {
   redraw();
   const L = B.lift;
   if (on) {
     setExplode(0);
     $('explode').disabled = true;
-    if (L.lid in S.actions) { setOpen(L.lid, true); syncAll(); }
+    if (L.lid in S.actions && !isOff(L.lid)) { setOpen(L.lid, true); syncAll(); }
     // the engine's top and middle in the car's frame, and which end it leaves by
     const box = new THREE.Box3(); for (const n of L.nodes) box.union(new THREE.Box3().setFromObject(n));
     const toCar = new THREE.Matrix4().copy(S.car.matrixWorld).invert();
@@ -1671,7 +1682,7 @@ function liftEngine(on) {
       L.chain.name = '_hoist';
       S.sprung.add(L.chain);
     }
-    view('hoist');
+    if (!keepView) view('hoist');
   }
   L.on = on;
   if (on && !(L.lid in S.actions)) { L.ghost = true; refreshLook(); }
@@ -1682,41 +1693,215 @@ function liftEngine(on) {
 // ── the interior out: the doors open, then the seats, dash and wheel rise
 // clear of the roof, swing out to the near side and are set down on the
 // floor beside the car, as a trim shop lifts a cabin out in one; again puts
-// it back ──
-const CAB = { on: false, p: 0, n: null, up: null, out: null, down: null };
+// it back (the take-off below moves it) ──
 function cabinSetup() {
   const n = B.node.get('cabin');
   if (!n || !B.base.has(n)) return;
-  CAB.n = n;
   $('cabinOut').hidden = false;
-  $('cabinOut').addEventListener('click', () => cabinOut(!CAB.on));
+  $('cabinOut').addEventListener('click', () => cabinOut(!isOff('cabin')));
 }
 function cabinOut(on) {
-  redraw();
   if (on) {
-    setExplode(0);
-    for (const id of Object.keys(S.actions)) if (/^door_/.test(id)) setOpen(id, true);
+    for (const id of Object.keys(S.actions)) if (/^door_/.test(id) && !isOff(id)) setOpen(id, true);
     syncAll();
-    const { size } = S.box;
-    CAB.up = carDelta(CAB.n, new THREE.Vector3(0, size.y * 0.95, 0));
-    CAB.out = carDelta(CAB.n, new THREE.Vector3(size.x * 1.3, 0, 0));
-    CAB.down = carDelta(CAB.n, new THREE.Vector3(0, -size.y * 0.9, 0));
-    view('cabinOut');
   }
-  CAB.on = on;
-  $('cabinOut').setAttribute('aria-pressed', String(on));
-  $('cabinOut').textContent = on ? 'Put the interior back' : 'Take the interior out';
+  takeOff('cabin', on, { side: 'left' });
+  if (on) frameOff(['cabin']);
 }
-function stepCabin(dt) {
-  if (!CAB.n) return false;
-  const goal = CAB.on ? 1 : 0;
-  if (CAB.p === goal) return false;
-  CAB.p = reduced ? goal : Math.max(0, Math.min(1, CAB.p + Math.sign(goal - CAB.p) * dt / 2.2));
-  const u = ease(CAB.p / 0.35), f = ease((CAB.p - 0.3) / 0.45), d = ease((CAB.p - 0.7) / 0.3);
-  B.liftD.set(CAB.n, CAB.up.clone().multiplyScalar(u).add(CAB.out.clone().multiplyScalar(f)).add(CAB.down.clone().multiplyScalar(d)));
-  place(CAB.n);
-  return CAB.p !== goal;
+
+// ── taking parts off, as a mechanic does: a part is unbolted, lifted clear
+// (over the wings and the roof when it comes out of the bay or the cabin)
+// and set down on the workshop floor round the car, by the side it came off,
+// packed so no two parts land on each other; again puts it back on. "Strip
+// it down" takes everything off in a workshop's order and lifts the engine
+// out; "Build it back" puts it all back ──
+const OFF = { st: new Map(), occ: new Map(), btn: new Map(), box: null, busy: false, stripped: false };
+B.offD = new Map();
+const isOff = id => !!(OFF.st.get(id) || {}).on;
+function panelSetup(root) {
+  let body = null;
+  root.traverse(o => { if (!body && o.name === 'body') body = o; });
+  if (!body) return;
+  const groups = new Map();
+  const meshes = [];
+  body.traverse(o => { if (o.isMesh && o.material && /^panel_/.test(o.material.name || '')) meshes.push(o); });
+  for (const m of meshes) {
+    const id = 'panel:' + m.material.name.slice(6);
+    let g = groups.get(id);
+    if (!g) {
+      g = new THREE.Group(); g.name = id;
+      m.parent.add(g); g.position.set(0, 0, 0);
+      groups.set(id, g);
+    }
+    g.attach(m);
+  }
 }
+function toCarM() { return new THREE.Matrix4().copy(S.car.matrixWorld).invert(); }
+function carBoxCar() {
+  if (OFF.box) return OFF.box;
+  S.car.updateMatrixWorld(true);
+  const b = new THREE.Box3().setFromObject(B.node.get('body') || S.car).applyMatrix4(toCarM());
+  // the floor is where the tyres stand, not the body's lowest point
+  const all = new THREE.Box3();
+  for (const k of ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']) { const w = B.node.get(k); if (w) all.union(new THREE.Box3().setFromObject(w)); }
+  OFF.sill = b.min.y;
+  if (!all.isEmpty()) b.min.y = all.applyMatrix4(toCarM()).min.y;
+  OFF.box = b;
+  return OFF.box;
+}
+// axle stands under the sills while a wheel is off: the shell is not left hanging in the air
+function stands(show) {
+  if (!OFF.stands && show) {
+    const cb = carBoxCar(), g = new THREE.Group(); g.name = '_stands';
+    const red = new THREE.MeshStandardMaterial({ color: 0xb3261e, metalness: 0.3, roughness: 0.55 });
+    const steel = new THREE.MeshStandardMaterial({ color: 0x8d949b, metalness: 0.9, roughness: 0.35 });
+    const h = Math.max(0.05, OFF.sill - cb.min.y);
+    const zs = [];
+    for (const k of ['wheel_fl', 'wheel_rl']) {
+      const w = B.node.get(k); if (!w) continue;
+      const c = new THREE.Box3().setFromObject(w).applyMatrix4(toCarM()).getCenter(new THREE.Vector3());
+      zs.push(c.z + (k === 'wheel_fl' ? -0.42 : 0.42));
+    }
+    for (const z of zs) for (const sx of [1, -1]) {
+      const x = sx * ((cb.max.x - cb.min.x) / 2 - 0.13) + (cb.max.x + cb.min.x) / 2;
+      const base = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.11, 0.05, 3), red); base.position.set(x, cb.min.y + 0.025, z);
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, h - 0.07, 12), red); post.position.set(x, cb.min.y + 0.05 + (h - 0.07) / 2, z);
+      const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, h * 0.6, 10), steel); pin.position.set(x, cb.min.y + h * 0.55, z);
+      const saddle = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.025, 0.09), steel); saddle.position.set(x, cb.min.y + h - 0.0125, z);
+      g.add(base, post, pin, saddle);
+    }
+    g.traverse(o => { if (o.isMesh) o.castShadow = true; });
+    S.car.add(g);
+    OFF.stands = g;
+  }
+  if (OFF.stands) OFF.stands.visible = show;
+}
+function sideOf(c, cb) {
+  const nx = (c.x - (cb.min.x + cb.max.x) / 2) / ((cb.max.x - cb.min.x) / 2);
+  const nz = (c.z - (cb.min.z + cb.max.z) / 2) / ((cb.max.z - cb.min.z) / 2);
+  return Math.abs(nz) > Math.abs(nx) * 1.15 ? (nz > 0 ? 'front' : 'back') : (nx > 0 ? 'left' : 'right');
+}
+function slotFor(id, pb, opts, row = 0) {
+  const cb = carBoxCar();
+  const c = pb.getCenter(new THREE.Vector3()), sz = pb.getSize(new THREE.Vector3());
+  const side = opts.side || sideOf(c, cb);
+  const along = side === 'front' || side === 'back' ? 'x' : 'z';
+  const across = along === 'x' ? 'z' : 'x';
+  const w = sz[along], d = sz[across], key = side + row;
+  const occ = OFF.occ.get(key) || [];
+  let pos;
+  for (let k = 0; k <= 48; k++) {                     // the nearest free place along that side, within 1.2 m
+    const a = c[along] + (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 0.05;
+    const lo = a - w / 2 - 0.1, hi = a + w / 2 + 0.1;
+    if (occ.every(([l, h]) => hi <= l || lo >= h)) { pos = a; occ.push([lo, hi, id]); break; }
+  }
+  if (pos === undefined) return slotFor(id, pb, opts, row + 1);      // a row further out
+  OFF.occ.set(key, occ);
+  const gap = 0.5 + row * 1.6;
+  const t = new THREE.Vector3();
+  t[along] = pos;
+  if (side === 'front') t.z = cb.max.z + gap + d / 2;
+  if (side === 'back') t.z = cb.min.z - gap - d / 2;
+  if (side === 'left') t.x = cb.max.x + gap + d / 2;
+  if (side === 'right') t.x = cb.min.x - gap - d / 2;
+  t.y = c.y + (cb.min.y - pb.min.y);                    // its lowest point down on the floor
+  // lifted clear first: over the wings and the scuttle when it comes out of the bay or the cabin
+  const inside = Math.abs(c.x - (cb.min.x + cb.max.x) / 2) < (cb.max.x - cb.min.x) * 0.36
+    && c.z > cb.min.z + 0.12 * (cb.max.z - cb.min.z) && c.z < cb.max.z - 0.12 * (cb.max.z - cb.min.z);
+  const clear = inside ? Math.max(0.25, cb.min.y + (cb.max.y - cb.min.y) * (id === 'cabin' ? 1.0 : 0.72) - pb.min.y + 0.05) : 0.12;
+  return { D: t.sub(c), key, clear };
+}
+function release(id) {
+  for (const [k, occ] of OFF.occ) OFF.occ.set(k, occ.filter(o => o[2] !== id));
+}
+function takeOff(id, on, opts = {}) {
+  const n = mover(id);
+  if (!n || !B.base.has(n)) return;
+  redraw();
+  let st = OFF.st.get(id);
+  if (on) {
+    if (st && st.on) return;
+    if (B.explode) setExplode(0);
+    if (!st) {
+      S.car.updateMatrixWorld(true);
+      const pb = new THREE.Box3().setFromObject(B.node.get(id) || n).applyMatrix4(toCarM());
+      st = Object.assign({ p: 0, n }, slotFor(id, pb, opts));
+    }
+    st.on = true;
+  } else {
+    if (!st) return;
+    st.on = false;
+  }
+  OFF.st.set(id, st);
+  syncOff(id);
+  stands([...OFF.st].some(([k, v]) => /^wheel_/.test(k) && v.on));
+}
+function syncOff(id) {
+  const on = isOff(id), b = OFF.btn.get(id);
+  if (b) { b.textContent = on ? 'Put back' : 'Take off'; b.setAttribute('aria-pressed', String(on)); }
+  if (id === 'cabin') {
+    $('cabinOut').setAttribute('aria-pressed', String(on));
+    $('cabinOut').textContent = on ? 'Put the interior back' : 'Take the interior out';
+  }
+}
+function stepOff(dt) {
+  let moving = false;
+  for (const [id, st] of OFF.st) {
+    const goal = st.on ? 1 : 0;
+    if (st.p === goal) continue;
+    st.p = reduced ? goal : Math.max(0, Math.min(1, st.p + Math.sign(goal - st.p) * dt / 1.5));
+    const u = ease(st.p / 0.3), f = ease((st.p - 0.25) / 0.5), g = ease((st.p - 0.7) / 0.3);
+    const v = new THREE.Vector3(st.D.x * f, st.clear * u + (st.D.y - st.clear) * g, st.D.z * f);
+    B.offD.set(st.n, carDelta(st.n, v));
+    place(st.n);
+    if (st.p === 0 && !st.on) { B.offD.delete(st.n); place(st.n); release(id); OFF.st.delete(id); }
+    else if (st.p !== goal) moving = true;
+  }
+  return moving;
+}
+// the camera back far enough to see the car and every part on the floor round it
+function frameOff(ids) {
+  const cb = carBoxCar().clone();
+  for (const id of ids) {
+    const st = OFF.st.get(id); if (!st) continue;
+    S.car.updateMatrixWorld(true);
+    const pb = new THREE.Box3().setFromObject(B.node.get(id) || st.n).applyMatrix4(toCarM());
+    pb.translate(st.D.clone().multiplyScalar(st.on ? 1 - st.p : 0));      // where it will come to rest
+    cb.union(pb);
+  }
+  const box = cb.clone().applyMatrix4(S.car.matrixWorld);
+  const c = box.getCenter(new THREE.Vector3()), r = box.getSize(new THREE.Vector3()).length() / 2;
+  const dist = r / Math.sin(THREE.MathUtils.degToRad(camera.fov) / 2) * (phone ? 1.05 : 0.85);
+  moveCam(c.clone().add(new THREE.Vector3(0.55, 0.62, 0.78).normalize().multiplyScalar(dist)), c);
+}
+// a workshop's order: the bonnet, the front end, the wings, the doors, the back, the wheels, the interior,
+// then the engine out on the crane
+const STRIP_ORDER = ['bonnet', 'panel:grille', 'panel:lamp_front_left', 'panel:lamp_front_right', 'panel:bumper_front',
+  'panel:wing_front_left', 'panel:wing_front_right', 'door_fl', 'door_rl', 'door_fr', 'door_rr', 'tailgate',
+  'panel:bumper_rear', 'panel:lamp_rear_left', 'panel:lamp_rear_right', 'wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr', 'cabin'];
+const nap = ms => new Promise(r => setTimeout(r, reduced ? 0 : ms));
+async function strip(on) {
+  if (OFF.busy) return;
+  OFF.busy = true; $('strip').disabled = true;
+  const ids = STRIP_ORDER.filter(id => B.node.has(id) && B.base.has(mover(id)));
+  if (on) {
+    for (const id of Object.keys(S.actions)) if (S.open[id]) setOpen(id, false);
+    syncAll();
+    for (const id of ids) { takeOff(id, true, id === 'cabin' ? { side: 'left' } : {}); await nap(420); }
+    if (B.lift && B.lift.nodes.length && !B.lift.on) { liftEngine(true, true); }
+    await nap(300);
+    frameOff(ids);
+  } else {
+    if (B.lift && B.lift.on) liftEngine(false, true);
+    for (const id of ids.slice().reverse()) { takeOff(id, false); await nap(260); }
+    if (S.home) moveCam(S.home.pos, S.home.target);
+  }
+  OFF.stripped = on;
+  $('strip').textContent = on ? 'Build it back' : 'Strip it down';
+  $('strip').setAttribute('aria-pressed', String(on));
+  OFF.busy = false; $('strip').disabled = false;
+}
+$('strip').addEventListener('click', () => strip(!OFF.stripped));
 function onHoist(o) { for (let p = o; p; p = p.parent) if (B.lift.set && B.lift.set.has(p)) return true; return o.name === '_hoist' || (o.parent && o.parent.name === '_hoist'); }
 function stepLift(dt) {
   const L = B.lift;
@@ -2560,7 +2745,7 @@ renderer.setAnimationLoop(() => {
     if (k >= 1) S.camTo = null; else moving = true;
   }
   if (S.root && stepLift(Math.min(raw, 0.5))) moving = true;
-  if (S.root && stepCabin(Math.min(raw, 0.5))) moving = true;
+  if (S.root && stepOff(Math.min(raw, 0.5))) moving = true;
   if (rampStep(dt)) moving = true;
   if (RUN.on) {
     runUpdate(dt);
