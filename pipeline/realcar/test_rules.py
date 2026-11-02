@@ -689,3 +689,53 @@ def test_workshop_jobs_follow_the_cars_own_parts_and_make_up_no_figures():
     assert corner["steps"][-1].get("reset")                                      # refitted at the end
     bench = next(j for j in jobs if "on the crane" in j["title"])
     assert all(st.get("hoist") for st in bench["steps"]) and bench["steps"][-1].get("teardown")
+
+
+# ── exact parts (exact.py): only the car they belong to gets them ──
+def _exact_index(tmp_path, monkeypatch, parts):
+    import exact
+    monkeypatch.setattr(exact, "DIR", str(tmp_path))
+    monkeypatch.setattr(exact, "INDEX", str(tmp_path / "parts.json"))
+    (tmp_path / "parts.json").write_text(json.dumps({"parts": parts}))
+    return exact
+
+
+MK4 = {"make": "Volkswagen", "model": "Golf", "years": [1998, 2006], "generation": ["mark 4", "mk4", "iv"],
+       "engines": ["1.9", "2.0"]}
+
+
+def test_exact_parts_go_on_the_right_golf_only(tmp_path, monkeypatch):
+    (tmp_path / "C.glb").write_bytes(b"glTF")
+    exact = _exact_index(tmp_path, monkeypatch, [
+        {"kind": "disc", "oem": "D", "fits": MK4, "dims": {}},
+        {"kind": "caliper", "oem": "C", "fits": MK4, "file": "C.glb"},
+        {"kind": "caliper", "oem": "GONE", "fits": MK4, "file": "missing.glb"}])
+    assert set(exact.look("Volkswagen", "golf", 2001, "golf 1.9 tdi 2001")) == {"disc", "caliper"}
+    assert exact.look("Volkswagen", "golf", 2001, "golf 1.9 tdi")["caliper"]["oem"] == "C"   # never the missing file
+    assert set(exact.look("Volkswagen", "golf mark 4 5 door 1.9 tdi", None, "golf mark 4 5 door 1.9 tdi")) == {"disc", "caliper"}
+    assert exact.look("Volkswagen", "golf 1.9 tdi", None, "golf 1.9 tdi") == {}            # a Golf of any age: no
+    assert exact.look("Volkswagen", "golf", 2015, "golf 2.0 tdi 2015") == {}               # a Mk7
+    assert exact.look("Volkswagen", "golf", 2001, "golf gti 1.8t 2001", "1.8L L4 - Gas") == {}   # bigger brakes
+    assert exact.look("Volkswagen", "golf", 2001, "golf 2001", "1.9L L4 - Diesel")             # the car's engine
+    assert exact.look("Seat", "leon", 2001, "leon 1.9 tdi") == {}
+
+
+def test_the_room_inside_a_wheel():
+    import exact
+    w = exact._wheel("6x15", 38, 37, 22)                      # the Golf IV's 6J x 15 ET38 round a 37 mm-high disc
+    assert w["r_in"] == pytest.approx(0.1855) and w["inboard"] == pytest.approx(0.0882)
+
+
+def test_no_caliper_on_the_page_without_its_disc(tmp_path, monkeypatch):
+    import page
+    (tmp_path / "C.glb").write_bytes(b"glTF")
+    _exact_index(tmp_path, monkeypatch, [{"kind": "caliper", "oem": "C", "fits": MK4, "file": "C.glb", "side": "right",
+                                          "fit": {}, "label": "x", "source": "x"}])
+    cfg, files, notes = page.exact_parts({"make": "Volkswagen", "model_words": "golf", "year": 2001, "text": "golf 1.9"},
+                                         None, str(tmp_path))
+    assert cfg == {} and files == [] and notes == []
+
+
+def test_the_page_has_no_one_cars_brake_sizes():
+    s = open(os.path.join(HERE, "page", "car.html")).read()
+    assert "const DISC" not in s and "function exactDisc(D," in s     # the sizes come from the car's own parts

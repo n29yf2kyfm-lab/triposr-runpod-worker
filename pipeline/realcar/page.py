@@ -570,6 +570,47 @@ def own_engine(asked, electric):
     return hit
 
 
+def exact_parts(asked, own, out):
+    """The car's own brake parts, exact (exact.py): the disc's published sizes, and the caliper's 3D model
+    (from its catalogue photo) written beside the page as part_<OEM>.json. Returns (config, files, notes)."""
+    try:
+        import exact
+        hit = exact.look(asked.get("make"), asked.get("model_words") or "", asked.get("year"),
+                         asked.get("text") or "", ((own or {}).get("engine") or ""))
+    except Exception:                                   # no parts index: the page's own shapes
+        return {}, [], []
+    if "caliper" in hit and "disc" not in hit:          # a caliper is placed by its disc
+        hit.pop("caliper")
+    cfg, files, notes = {}, [], []
+    d = hit.get("disc")
+    if d:
+        cfg["disc"] = {"oem": d["oem"], "label": d["label"], "dims": d["dims"], "wheel_offset": d["wheel_offset"],
+                       "source": d["source"]}
+        D = d["dims"]
+        notes.append(f"Brake discs: {d['oem']}, built to its published sizes ({D['R'] * 2000:.0f} x {D['T'] * 1000:.0f} mm"
+                     f"{' vented' if D.get('vented') else ''}, {D['H'] * 1000:.0f} mm high, {D['bolts']} x "
+                     f"{D['pcd'] * 2000:.0f}), its face where the "
+                     f"{((d.get('wheel') or {}).get('size') or '').replace('x', 'J x ') + ' ' if d.get('wheel') else ''}"
+                     f"wheel (ET{d['wheel_offset'] * 1000:.0f}) bolts on.")
+    c = hit.get("caliper")
+    if c:
+        data = open(os.path.join(exact.DIR, c["file"]), "rb").read()
+        f = "part_" + re.sub(r"[^0-9A-Z]", "", c["oem"].upper()) + ".json"
+        json.dump({"part": 1, "of": 1, "glb_base64": base64.b64encode(data).decode()}, open(os.path.join(out, f), "w"))
+        files.append(f)
+        cfg["caliper"] = {"oem": c["oem"], "label": c["label"], "side": c["side"], "file": f, "fit": c["fit"],
+                          "source": c["source"], "maker": c.get("maker")}
+        ck = c["fit"].get("check_mm") or {}
+        notes.append(f"Brake calipers: {c['oem']} ({c['side']}; the other side its mirror), a 3D model from its catalogue "
+                     f"photo, sized to the disc and wheel it fits ({c['fit'].get('fitted_by', 'by its disc')}): "
+                     f"{ck.get('size', [0, 0, 0])[1]:.0f} mm along its pins, its piston "
+                     f"{ck.get('piston_radius', 0):.0f} mm from the axle."
+                     + ("" if c["fit"].get("fits_wheel", True) else
+                        f" One photo leaves its depth a guess: its outer corners reach {ck.get('reach_in_wheel', 0):.0f} mm "
+                        f"from the axle, a little past the inside of the wheel ({c['fit'].get('wheel_r_in_mm', 0):.0f} mm)."))
+    return cfg, files, notes
+
+
 def write(report, out):
     """REPORT: make.build's. Writes the page into OUT; returns its files."""
     t0 = time.time()
@@ -678,6 +719,7 @@ def write(report, out):
     own = own_engine(asked, electric)
     fit = bay_fit(None if electric else own, year)
     fit_catalogue(cat, fit)
+    exact_cfg, exact_files, exact_notes = ({}, [], []) if electric else exact_parts(asked, own, out)
     if own:
         m = own["matched"]
         ev = bool(own["spec"].get("electric"))
@@ -690,7 +732,8 @@ def write(report, out):
                         "lists for it are left out: an electric car has none." if own.get("left_out") else ""))
     cfg = {"title": title, "eyebrow": "ExpertCarCheck GLB machine · built " + time.strftime("%-d %b %Y"),
            "sub": f"{name}" + (f", {colour}" if colour else "") + ".", "swatch": f"rgb({srgb[0]}, {srgb[1]}, {srgb[2]})" if srgb else None,
-           "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
+           "facts": facts, "notes": notes + exact_notes, "parts": parts, "files": files, "exact": exact_cfg,
+           "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, list(paint_names) + (["panel_" + k for k in panel_names(j) if k.startswith(("bumper", "wing"))]
                                                     if paint_names else [])), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear, electric) + (
@@ -707,8 +750,8 @@ def write(report, out):
     page = page.replace("{{TITLE}}", html.escape(title)).replace(
         "{{CONFIG}}", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/"))
     open(os.path.join(out, "index.html"), "w").write(page)
-    return {"dir": os.path.abspath(out), "files": ["index.html"] + files + (["views.jpg"] if cfg["sheet"] else []),
-            "seconds": round(time.time() - t0, 1), "title": title, "notes": notes,
+    return {"dir": os.path.abspath(out), "files": ["index.html"] + files + exact_files + (["views.jpg"] if cfg["sheet"] else []),
+            "seconds": round(time.time() - t0, 1), "title": title, "notes": notes + exact_notes,
             "summary": f"{title}: {facts[4]['v']}, " + ", ".join(n for _, n in parts).lower()
                        + f" open; file in {secs} s"}
 

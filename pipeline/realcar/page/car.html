@@ -611,8 +611,24 @@ function progress(ev) {
 
 fetchGlb(CAR.files)
   .then(buf => new Promise((res, rej) => loader.parse(buf, '', res, rej)))
+  .then(async g => { await loadExact(); return g; })
   .then(onCar)
   .catch(err => fail(err && err.message ? err.message : String(err)));
+
+// the car's own parts made from their catalogue photos (a caliper), beside the page as part_<OEM>.json;
+// a part that does not load leaves the page's own shape in its place
+async function loadExact() {
+  const c = CAR.exact && CAR.exact.caliper;
+  if (!c) return;
+  try {
+    status.textContent = 'Loading the brake calipers…';
+    const r = await fetch(c.file);
+    if (!r.ok) throw new Error(r.status);
+    const bin = atob((await r.json()).glb_base64), buf = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+    S.exactCaliper = (await new Promise((res, rej) => loader.parse(buf.buffer, '', res, rej))).scene;
+  } catch (e) { console.warn('the caliper model did not load', e); }
+}
 
 function onCar(gltf) {
   const root = gltf.scene;
@@ -1919,7 +1935,9 @@ function frameOff(ids) {
   moveCam(c.clone().add(new THREE.Vector3(0.55, 0.62, 0.78).normalize().multiplyScalar(dist)), c);
 }
 // ── the front brakes: a vented disc on each front hub and its caliper on a carrier at the back of the disc,
-// modelled here (the car's own file has them inside its wheels), so a brake job takes them off in turn ──
+// modelled here (the car's own file has them inside its wheels), so a brake job takes them off in turn. A car
+// with its own parts listed (CAR.exact) gets them: the disc built to its published sizes, its hat face where
+// the wheel bolts on (the wheel's offset), and the caliper's model from its catalogue photo ──
 function brakesSetup(root) {
   S.corner = {};
   const byName = new Map();
@@ -1930,41 +1948,123 @@ function brakesSetup(root) {
   const face = new THREE.MeshStandardMaterial({ color: 0xa3a7ab, metalness: 0.85, roughness: 0.3 });
   const hat = new THREE.MeshStandardMaterial({ color: 0x55585c, metalness: 0.5, roughness: 0.6 });
   const paint = new THREE.MeshStandardMaterial({ color: 0x2b2d30, metalness: 0.35, roughness: 0.55 });
+  const X = CAR.exact || {}, D = X.disc && X.disc.dims;
+  const wpos = id => { const o = find(id); return o && new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()); };
+  const pfl = wpos('wheel_fl'), pfr = wpos('wheel_fr'), prl = wpos('wheel_rl');
+  const sR = pfl && pfr ? Math.sign(pfr.x - pfl.x) || -1 : -1;                         // the car's right, in x
+  const fwd = pfl && prl ? Math.sign(pfl.z - prl.z) || 1 : 1;                           // the car's front, in z
   for (const c of ['fl', 'fr']) {
     const w = find('wheel_' + c), kn = find('bay:knuckle_' + c);
     if (!w || !kn) continue;
     const wb = new THREE.Box3().setFromObject(w), wc = wb.getCenter(new THREE.Vector3()), ws = wb.getSize(new THREE.Vector3());
     S.corner[c] = wc.clone();
     const sx = Math.sign(wc.x - S.car.getWorldPosition(new THREE.Vector3()).x) || 1;   // outboard
-    const r = Math.min(0.142, ws.y * 0.23), t = 0.022;
-    const at = wc.clone(); at.x -= sx * Math.min(0.03, ws.x * 0.15);                    // just inboard of the hub face
-    const disc = new THREE.Group(); disc.name = 'bay:disc_' + c;
-    const ring = new THREE.Mesh(new THREE.CylinderGeometry(r, r, t, 48, 1, true), iron);
-    const f1 = new THREE.Mesh(new THREE.RingGeometry(r * 0.52, r, 48), face), f2 = f1.clone();
-    f1.position.y = t / 2; f1.rotation.x = -Math.PI / 2; f2.position.y = -t / 2; f2.rotation.x = Math.PI / 2;
-    const top = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.52, r * 0.52, t + 0.03, 32), hat);
-    top.position.y = -sx * 0.012;                                                       // the hat towards the wheel
-    disc.add(ring, f1, f2, top);
-    disc.rotation.z = Math.PI / 2;
+    const r = D ? D.R : Math.min(0.142, ws.y * 0.23), t = D ? D.T : 0.022;
+    const at = wc.clone();
+    if (D) at.x += sx * (X.disc.wheel_offset - (D.H - D.T / 2));                    // its hat face on the hub's face
+    else at.x -= sx * Math.min(0.03, ws.x * 0.15);                                    // just inboard of the hub face
+    const disc = D ? exactDisc(D, sx, iron, face, hat) : plainDisc(r, t, sx, iron, face, hat);
+    disc.name = 'bay:disc_' + c;
     disc.position.copy(at);
     // the caliper astride the disc's rim, at the back of it and a little up; its carrier behind it
-    const cal = new THREE.Group(); cal.name = 'bay:caliper_' + c;
-    const a = Math.PI * 0.8;                                                            // towards the rear (-Z), up
-    const cy = at.y + Math.sin(a) * (r - 0.02), cz = at.z + Math.cos(a) * (r - 0.02);
-    const body = new THREE.Mesh(new THREE.BoxGeometry(t + 0.05, 0.11, 0.075), paint);
-    body.position.set(at.x - sx * 0.004, cy, cz);
-    body.rotation.x = a - Math.PI / 2;
-    const piston = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.026, 0.028, 20), paint);
-    piston.rotation.z = Math.PI / 2; piston.position.set(at.x - sx * 0.04, cy, cz);
-    const carrier = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.13, 0.03), iron);
-    carrier.position.set(at.x - sx * 0.03, cy, cz - 0.01); carrier.rotation.x = a - Math.PI / 2;
-    cal.add(body, piston, carrier);
+    const el = THREE.MathUtils.degToRad(D ? 25 : 36);                                   // above the axle's level
+    const u = new THREE.Vector3(0, Math.sin(el), -fwd * Math.cos(el));                  // from the disc's centre
+    let cal;
+    if (S.exactCaliper && X.caliper) {
+      cal = exactCaliper(S.exactCaliper, X.caliper, sx, sR, at, u);
+    } else {
+      cal = new THREE.Group();
+      const cy = at.y + u.y * (r - 0.02), cz = at.z + u.z * (r - 0.02), a = Math.atan2(u.y, u.z);
+      const body = new THREE.Mesh(new THREE.BoxGeometry(t + 0.05, 0.11, 0.075), paint);
+      body.position.set(at.x - sx * 0.004, cy, cz);
+      body.rotation.x = a - Math.PI / 2;
+      const piston = new THREE.Mesh(new THREE.CylinderGeometry(0.026, 0.026, 0.028, 20), paint);
+      piston.rotation.z = Math.PI / 2; piston.position.set(at.x - sx * 0.04, cy, cz);
+      const carrier = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.13, 0.03), iron);
+      carrier.position.set(at.x - sx * 0.03, cy, cz - 0.01); carrier.rotation.x = a - Math.PI / 2;
+      cal.add(body, piston, carrier);
+    }
+    cal.name = 'bay:caliper_' + c;
     for (const g of [disc, cal]) {
       g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
       g.updateMatrixWorld(true);                 // placed in the world's frame, then hung beside the hub carrier
       kn.parent.attach(g);                       // (each comes off by itself)
     }
   }
+}
+// a caliper's model (from its catalogue photo) in place: exact.py found in it the disc's slot (FIT.axial, the
+// fingers towards FIT.axial_out), the way to the disc's centre (FIT.radial, FIT.to_centre), where that centre
+// is (FIT.centre) and the scale. Its axle points outboard, its bridge out along U from the disc's centre AT;
+// the model is of one side's part (SPEC.side), the other side's is its mirror across the car
+function exactCaliper(src, spec, sx, sR, at, u) {
+  const F = spec.fit, k = F.scale, e = i => new THREE.Vector3().setComponent(i, 1);
+  const ea = e(F.axial).multiplyScalar(F.axial_out), ec = e(F.radial).multiplyScalar(F.to_centre), et = e(F.tangential);
+  const h = Math.sign(ea.dot(ec.clone().cross(et))) || 1;                              // the model's handedness
+  const own = spec.side === 'left' ? -sR : sR;                                        // the part's own side, in x
+  const A = new THREE.Vector3(own, 0, 0), C = u.clone().normalize().negate();
+  const T = new THREE.Vector3().crossVectors(A, C).multiplyScalar(h);
+  const cols = [];
+  cols[F.axial] = A.clone().multiplyScalar(F.axial_out);
+  cols[F.radial] = C.clone().multiplyScalar(F.to_centre);
+  cols[F.tangential] = T;
+  if (sx !== own) for (const v of cols) v.x = -v.x;                                  // the other side: mirrored
+  const M = new THREE.Matrix4().makeBasis(cols[0], cols[1], cols[2]).scale(new THREE.Vector3(k, k, k));
+  M.setPosition(at.clone().sub(new THREE.Vector3(...F.centre).applyMatrix4(M)));
+  const g = new THREE.Group(), o = src.clone(true);
+  M.decompose(o.position, o.quaternion, o.scale);
+  g.add(o);
+  return g;
+}
+function plainDisc(r, t, sx, iron, face, hat) {
+  const disc = new THREE.Group();
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(r, r, t, 48, 1, true), iron);
+  const f1 = new THREE.Mesh(new THREE.RingGeometry(r * 0.52, r, 48), face), f2 = f1.clone();
+  f1.position.y = t / 2; f1.rotation.x = -Math.PI / 2; f2.position.y = -t / 2; f2.rotation.x = Math.PI / 2;
+  const top = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.52, r * 0.52, t + 0.03, 32), hat);
+  top.position.y = -sx * 0.012;                                                       // the hat towards the wheel
+  disc.add(ring, f1, f2, top);
+  const g = new THREE.Group(); disc.rotation.z = Math.PI / 2; g.add(disc);
+  return g;
+}
+// a disc to its published sizes (D, metres: R across, T thick, H high from the inboard face to the hat's
+// mounting face, its bolts on a circle of pcd, the centre bore, the bolt holes; rIn, hatR and cheek are a vented
+// disc's usual proportions where the published sizes stop): two friction rings with the cooling vanes between
+// them, the hat and its mounting face. Built along z, then turned so its face looks along the axle; the hat
+// on the wheel's side
+function exactDisc(D, sx, iron, face, hat) {
+  const g = new THREE.Group(), o = sx >= 0 ? 1 : -1;
+  const annulus = (r0, r1) => {
+    const sh = new THREE.Shape(); sh.absarc(0, 0, r1, 0, Math.PI * 2, false);
+    const h = new THREE.Path(); h.absarc(0, 0, r0, 0, Math.PI * 2, true); sh.holes.push(h); return sh;
+  };
+  const ext = (sh, depth) => new THREE.ExtrudeGeometry(sh, { depth, bevelEnabled: false, curveSegments: 72 });
+  const cheek = D.vented ? D.cheek : D.T;
+  for (const z0 of D.vented ? [-D.T / 2, D.T / 2 - cheek] : [-D.T / 2]) {           // the friction ring(s)
+    const m = new THREE.Mesh(ext(annulus(D.rIn, D.R), cheek), face); m.position.z = z0; g.add(m);
+  }
+  if (D.vented) {                                                                      // 36 straight vanes
+    const vh = D.T - 2 * cheek, vl = D.R - D.rIn - 0.006;
+    for (let i = 0; i < 36; i++) {
+      const a = i / 36 * Math.PI * 2, v = new THREE.Mesh(new THREE.BoxGeometry(vl, 0.0045, vh), iron);
+      v.position.set(Math.cos(a) * (D.rIn + D.R) / 2, Math.sin(a) * (D.rIn + D.R) / 2, 0); v.rotation.z = a; g.add(v);
+    }
+  }
+  // the hat: a flange from the ring to the hat's wall, the wall, and the mounting face H from the ring's
+  // inboard face, with its centre bore and the bolt holes
+  const fl = new THREE.Mesh(ext(annulus(D.hatR, D.rIn + 0.001), cheek), hat);
+  fl.position.z = o > 0 ? D.T / 2 - cheek : -D.T / 2; g.add(fl);
+  const zFace = o * (D.H - D.T / 2), wallLen = Math.abs(zFace) - 0.007;
+  const wall = new THREE.Mesh(new THREE.CylinderGeometry(D.hatR, D.hatR, wallLen, 64, 1, true), hat);
+  wall.rotation.x = Math.PI / 2; wall.position.z = o * wallLen / 2; g.add(wall);
+  const top = new THREE.Shape(); top.absarc(0, 0, D.hatR, 0, Math.PI * 2, false);
+  const bh = new THREE.Path(); bh.absarc(0, 0, D.bore, 0, Math.PI * 2, true); top.holes.push(bh);
+  for (let i = 0; i < D.bolts; i++) {
+    const a = Math.PI / 2 + i / D.bolts * Math.PI * 2, hp = new THREE.Path();
+    hp.absarc(Math.cos(a) * D.pcd, Math.sin(a) * D.pcd, D.hole, 0, Math.PI * 2, true); top.holes.push(hp);
+  }
+  const mf = new THREE.Mesh(ext(top, 0.007), hat); mf.position.z = o > 0 ? zFace - 0.007 : zFace; g.add(mf);
+  const out = new THREE.Group(); g.rotation.y = Math.PI / 2; out.add(g);             // its axis along the axle
+  return out;
 }
 // a part shown stripped: its pieces drawn apart along its length (a strut's top mount, spring, bump stop,
 // boot and damper), as a manual's exploded drawing
