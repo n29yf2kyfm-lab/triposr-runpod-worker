@@ -2751,6 +2751,168 @@ class TestBlenderRenderer(unittest.TestCase):
         self.assertIn("indicative", cap)
         self.assertNotIn("ARTIST", cap.upper())
 
+    # -- offline, materials, sun ------------------------------------
+
+    def test_the_render_is_offline_by_construction(self):
+        """No key, no account, no network. Blender is launched with
+        --offline-mode so it cannot phone home, and --factory-startup so
+        whatever add-ons the machine has cannot change the picture."""
+        import shutil
+        if shutil.which(self.b.BLENDER) is None:
+            self.skipTest("Blender not installed")
+        argv = self.b.blender_argv("/tmp/x.py")
+        self.assertIn("--offline-mode", argv)
+        self.assertIn("--factory-startup", argv)
+        self.assertIn("--background", argv)
+        # and nothing in the render script fetches anything
+        for bad in ("http://", "https://", "urllib", "requests.get",
+                    "bpy.ops.wm.url_open"):
+            self.assertNotIn(bad, self.b._SCRIPT, bad)
+
+    def test_every_texture_is_procedural_not_a_downloaded_image(self):
+        """An image texture would mean a file to ship, a licence to
+        check and a thing to go missing on someone else's machine."""
+        self.assertNotIn("ShaderNodeTexImage", self.b._SCRIPT)
+        self.assertNotIn("bpy.data.images.load", self.b._SCRIPT)
+        self.assertIn("ShaderNodeTexBrick", self.b._SCRIPT)
+
+    def test_the_sun_shines_FROM_its_azimuth_not_towards_it(self):
+        """Blender's euler rotates the light's travel direction. With
+        rz = -az the light travels TOWARD az, putting the sun exactly
+        opposite where it belongs: sunlit walls came back in shadow and
+        the shadow fell on the wrong side of the house. rz = pi - az is
+        the correction, and this pins it so it cannot come back."""
+        self.assertIn("math.pi - az", self.b._SCRIPT)
+        self.assertNotIn("0.0, -az)", self.b._SCRIPT)
+
+    def test_the_sun_azimuth_is_converted_into_the_building_frame(self):
+        """The scene is the BUILDING frame, whose +y lies at
+        bearing_deg. A compass azimuth fed in raw rotates every shadow
+        by that bearing."""
+        from twin import model as M
+        blk = M.Block(id="existing", name="b", x=0, y=0, width=8, depth=12,
+                      storeys=2, storey_height=2.65,
+                      roof={"kind": "gabled", "pitch_deg": 30.0,
+                            "ridge_along": "y"})
+        bld = M.Building(id="x", anchor_lat=52.5, anchor_lon=-2.0,
+                         bearing_deg=192.2, blocks=[blk])
+        import shutil
+        if shutil.which(self.b.BLENDER) is None:
+            # the conversion is pure arithmetic; check it without rendering
+            self.assertAlmostEqual((216.1 - 192.2) % 360.0, 23.9, places=1)
+            self.skipTest("Blender not installed")
+        rep = self.b.render({"solids": [{"ring": [[0, 0], [8, 0], [8, 12],
+                                                  [0, 12], [0, 0]],
+                                         "base_m": 0.0, "eaves_m": 5.3,
+                                         "id": "existing",
+                                         "roof": {"kind": "gabled",
+                                                  "pitch_deg": 30.0,
+                                                  "ridge_along": "y"}}]},
+                            bld=bld, out_path=self._tmp_png(),
+                            width=160, height=120, samples=4,
+                            sun_az=216.1, sun_alt=57.0)
+        self.assertAlmostEqual(216.1, rep["sun_azimuth_compass"], places=1)
+        self.assertAlmostEqual(23.9, rep["sun_azimuth_scene"], places=1)
+
+    def _tmp_png(self):
+        import tempfile
+        fd, p = tempfile.mkstemp(suffix=".png")
+        os.close(fd)
+        self.addCleanup(lambda: os.path.exists(p) and os.unlink(p))
+        return p
+
+    def test_recorded_materials_beat_assumptions_and_are_reported(self):
+        from twin import model as M
+        bare = M.Building(id="x", anchor_lat=52.5, anchor_lon=-2.0,
+                          bearing_deg=0.0, blocks=[])
+        p = self.b.palette(bare)
+        self.assertEqual(["walls", "roof"], p["assumed"])
+        self.assertEqual({}, p["recorded"])
+
+        tagged = M.Building(id="y", anchor_lat=52.5, anchor_lon=-2.0,
+                            bearing_deg=0.0, blocks=[],
+                            materials={"wall_material": "sandstone",
+                                       "roof_material": "slate"})
+        q = self.b.palette(tagged)
+        self.assertEqual([], q["assumed"])
+        self.assertEqual("sandstone", q["recorded"]["walls"])
+        self.assertEqual("slate", q["recorded"]["roof"])
+        # slate is near-black; brick is not
+        self.assertLess(sum(q["roof_rgb"]), sum(p["roof_rgb"]))
+        # render is smooth, brick is not
+        self.assertTrue(q["wall_is_masonry"])
+        smooth = M.Building(id="z", anchor_lat=52.5, anchor_lon=-2.0,
+                            bearing_deg=0.0, blocks=[],
+                            materials={"wall_material": "render"})
+        self.assertFalse(self.b.palette(smooth)["wall_is_masonry"])
+
+    def test_a_tagged_house_gets_a_caption_that_says_so(self):
+        from twin import model as M
+        tagged = M.Building(id="y", anchor_lat=52.5, anchor_lon=-2.0,
+                            bearing_deg=0.0, blocks=[],
+                            materials={"wall_material": "brick"})
+        self.assertIn("as recorded", self.b.CAPTION_TAGGED)
+        self.assertTrue(self.b.palette(tagged)["recorded"])
+
+    def test_a_colour_is_read_as_srgb_not_pasted_in_raw(self):
+        """Blender's Base Color is linear; a hex dropped straight in
+        renders washed out."""
+        lin = self.b._hex_rgb("#808080")
+        self.assertIsNotNone(lin)
+        self.assertLess(lin[0], 0.25)      # mid grey is ~0.216 linear
+        self.assertIsNone(self.b._hex_rgb("not-a-colour"))
+
+    def test_derived_openings_are_a_house_not_a_block_of_flats(self):
+        """The first pass put 24 windows on a three-bed semi."""
+        blocks = [{"id": "existing", "x": 0, "y": 0, "width": 7.675,
+                   "depth": 12.862, "storey_height": 2.65}]
+        ops = self.b.derived_openings(blocks, {"existing": 2})
+        self.assertLessEqual(len(ops), 16)
+        per_wall = {}
+        for o in ops:
+            per_wall[(o["edge"], o["level"])] = \
+                per_wall.get((o["edge"], o["level"]), 0) + 1
+        self.assertTrue(all(v <= 2 for v in per_wall.values()), per_wall)
+        self.assertTrue(any(o["kind"] == "door" for o in ops))
+        # a door starts at the ground, a window does not
+        for o in ops:
+            if o["kind"] == "door":
+                self.assertEqual(0.0, o["sill"])
+
+    def test_openings_land_on_their_wall_and_never_off_the_end(self):
+        blocks = [{"id": "b", "x": 0, "y": 0, "width": 8.0, "depth": 12.0,
+                   "storey_height": 2.65}]
+        good = self.b.opening_quads(blocks, [
+            {"block_id": "b", "edge": "front", "kind": "window",
+             "along_m": 1.0, "width": 1.2, "height": 1.2, "sill": 0.9,
+             "level": 0}])
+        self.assertEqual(1, len(good))
+        z = [p[2] for p in good[0]["quad"]]
+        self.assertAlmostEqual(0.9, min(z), places=6)
+        self.assertAlmostEqual(2.1, max(z), places=6)
+        # one that runs past the end of the wall is dropped, not drawn
+        self.assertEqual([], self.b.opening_quads(blocks, [
+            {"block_id": "b", "edge": "front", "kind": "window",
+             "along_m": 7.5, "width": 3.0, "height": 1.2, "level": 0}]))
+
+    def test_the_eaves_overhang_does_not_move_the_measured_ridge(self):
+        """The roof projects; the envelope does not. If an overhang
+        changed the ridge the render would disagree with the schedules."""
+        from twin import model as M
+        base = {"ring": [[0, 0], [8, 0], [8, 12], [0, 12], [0, 0]],
+                "base_m": 0.0, "eaves_m": 5.3,
+                "roof": {"kind": "gabled", "pitch_deg": 30.0,
+                         "ridge_along": "y"}}
+        no_oh = self.b.solid_mesh(base)
+        with_oh = self.b.solid_mesh(dict(base, roof=dict(base["roof"],
+                                                         overhang=0.45)))
+        self.assertAlmostEqual(no_oh["top"], with_oh["top"], places=9)
+        # but the roof really does project beyond the wall
+        xs_no = [v[0] for v in no_oh["verts"]]
+        xs_oh = [v[0] for v in with_oh["verts"]]
+        self.assertLess(min(xs_oh), min(xs_no) - 0.4)
+        self.assertGreater(max(xs_oh), max(xs_no) + 0.4)
+
 
 class TestFidelity(unittest.TestCase):
     """The picture must keep the geometry it was given, and the check

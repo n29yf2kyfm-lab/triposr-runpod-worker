@@ -233,6 +233,13 @@ class Building:
     address: Optional[str] = None
     ground_m_aod: Optional[float] = None
     notes: List[str] = field(default_factory=list)
+    # WHAT THIS HOUSE IS MADE OF, where anybody recorded it. Keys:
+    # wall_material, wall_colour, roof_material, roof_colour, each
+    # either a string from OpenStreetMap or absent. ABSENT MEANS
+    # NOBODY RECORDED IT, never "brick": the renderer falls back to an
+    # assumption and must say that it did. This is the difference
+    # between a render of a house and a render of THIS house.
+    materials: dict = field(default_factory=dict)
     # WHAT A PERSON HAS VOUCHED FOR. Two facts drive every quantity in
     # this model and neither is truly measured: the storey count (an OSM
     # tag, a LIDAR reading, or a guess) and the fitted rectangle (a best
@@ -445,6 +452,7 @@ class Building:
             "geojson": self.geojson(),
             "notes": self.notes,
             "confirmed": dict(self.confirmed or {}),
+            "materials": dict(self.materials or {}),
         }
 
 
@@ -542,7 +550,13 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
     bld = Building(id=uuid.uuid4().hex[:12], anchor_lat=alat, anchor_lon=alon,
                    bearing_deg=bearing, blocks=[blk], address=address,
                    source=props.get("provenance"),
-                   ground_m_aod=(lidar or {}).get("ground_m_aod"))
+                   ground_m_aod=(lidar or {}).get("ground_m_aod"),
+                   # Only what was actually tagged. A key missing here
+                   # is the renderer's cue to assume and say so.
+                   materials={k: props[k] for k in
+                              ("wall_material", "wall_colour",
+                               "roof_material", "roof_colour")
+                              if props.get(k)})
     bld.traced_ring = [list(bld.from_lonlat(p[0], p[1])) for p in ring_ll]
 
     traced = polygon_area_m(bld.traced_ring)

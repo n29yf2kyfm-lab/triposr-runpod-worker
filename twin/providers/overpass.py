@@ -173,6 +173,19 @@ class OverpassProvider(Provider):
                     "height_m": tags.get("height"),
                     "roof_shape": tags.get("roof:shape"),
                     "roof_levels": tags.get("roof:levels"),
+                    # WHAT THIS PARTICULAR HOUSE IS MADE OF. Rarely
+                    # tagged on British housing, but when it is, it is
+                    # the difference between a render of a house and a
+                    # render of THIS house — so it is carried through
+                    # as verified fact and the renderer prefers it over
+                    # any assumption. Absent stays absent: a null here
+                    # means "nobody recorded it", never "brick".
+                    "wall_material": tags.get("building:material"),
+                    "wall_colour": (tags.get("building:colour")
+                                    or tags.get("building:color")),
+                    "roof_material": tags.get("roof:material"),
+                    "roof_colour": (tags.get("roof:colour")
+                                    or tags.get("roof:color")),
                     "provenance": self._prov(el, cached).as_dict(),
                 },
             })
