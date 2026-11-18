@@ -79,9 +79,24 @@ RULES = {
     "guarding_stair": Rule(
         "guarding_stair", "K", "3.3", "Guarding to a stair", CRITICAL,
         minimum=0.900, note="Measured above the pitch line."),
+    # AD K Diagram 3.1 draws the line at the wall of the house: inside a
+    # single dwelling, a landing or gallery edge needs 900mm; step outside
+    # onto a balcony and it becomes 1100mm. One combined rule here used to
+    # hold every floor edge to the balcony figure, which reported a
+    # compliant 950mm internal landing as a critical life-safety breach —
+    # the ripping-out-compliant-work outcome this module exists to prevent.
     "guarding_floor": Rule(
-        "guarding_floor", "K", "3.3", "Guarding to a floor or balcony",
-        CRITICAL, minimum=1.100),
+        "guarding_floor", "K", "Diagram 3.1",
+        "Guarding to an internal floor edge or landing",
+        CRITICAL, minimum=0.900,
+        note="Internal floor edges, landings and galleries in a single "
+             "dwelling. External balconies are held to 1100mm — see "
+             "guarding_balcony."),
+    "guarding_balcony": Rule(
+        "guarding_balcony", "K", "Diagram 3.1",
+        "Guarding to an external balcony",
+        CRITICAL, minimum=1.100,
+        note="External balconies and accessible roof edges."),
     "guarding_gap": Rule(
         "guarding_gap", "K", "3.3", "Gap in guarding", CRITICAL,
         maximum=0.100,
@@ -89,26 +104,44 @@ RULES = {
 
     # --- Part B: fire safety ----------------------------------------------
     "escape_window_area": Rule(
-        "escape_window_area", "B1", "2.8", "Escape window clear openable area",
+        "escape_window_area", "B1", "2.10",
+        "Escape window clear openable area",
         CRITICAL, minimum=0.330, unit="m2",
         note="Unobstructed openable area for escape or rescue."),
     "escape_window_dim": Rule(
-        "escape_window_dim", "B1", "2.8",
+        "escape_window_dim", "B1", "2.10",
         "Escape window least dimension", CRITICAL, minimum=0.450,
         note="Both height and width of the openable area."),
+    # AD B sets ONLY a maximum on the cill: above 1100mm the window cannot
+    # be climbed out of. There is no minimum in the document — an invented
+    # 0.800m floor here was failing fully compliant low-cill windows as
+    # definite breaches. A low cill raises a Part K guarding question, not
+    # a Part B escape one, and this module does not get to make limits up.
     "escape_window_cill": Rule(
-        "escape_window_cill", "B1", "2.8", "Escape window cill height",
-        MAJOR, minimum=0.800, maximum=1.100,
+        "escape_window_cill", "B1", "2.10", "Escape window cill height",
+        MAJOR, maximum=1.100,
         note="Above floor level. Higher than 1100mm is not usable in escape."),
 
     # --- Part M: access ----------------------------------------------------
+    # The paragraph number for the 450-1200mm band was never verified
+    # against the document — the knowledge base records the provision
+    # without one — so the citation names the provision, not an invented
+    # clause. docs/UK_COMPLIANCE_KNOWLEDGE.md section 7.
     "socket_height": Rule(
-        "socket_height", "M", "8.4", "Socket outlet height", MAJOR,
+        "socket_height", "M", "switches and sockets 450-1200mm",
+        "Socket outlet height", MAJOR,
         minimum=0.450, maximum=1.200,
         note="Centre above finished floor level, new dwellings."),
+    # AD M puts switches, sockets and controls in ONE 450-1200mm band.
+    # A stricter 0.900m minimum here — presumably from the common practice
+    # of mounting switches at light-switch height — was directing the
+    # relocation of accessories the document explicitly permits.
     "switch_height": Rule(
-        "switch_height", "M", "8.4", "Switch height", MAJOR,
-        minimum=0.900, maximum=1.200),
+        "switch_height", "M", "switches and sockets 450-1200mm",
+        "Switch height", MAJOR,
+        minimum=0.450, maximum=1.200,
+        note="Centre above finished floor level, new dwellings. Same "
+             "450-1200mm band as sockets."),
     "door_clear_width": Rule(
         "door_clear_width", "M", "9.7", "Clear opening width of a door",
         MAJOR, minimum=0.750,

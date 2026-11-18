@@ -399,13 +399,18 @@ def find_edges(planes, cell_size):
 MATERIAL_DEFAULTS = {
     "covering": "concrete_interlocking",
     "coverings": {
-        # units per m2 of TRUE sloped area, and batten run in m per m2
-        "concrete_interlocking": {"units_per_m2": 10.0, "batten_m_per_m2": 3.33},
+        # units per m2 of TRUE sloped area, and batten run in m per m2.
+        # THE FIGURES ARE docs/ESTIMATING_RATES.md's, the same source
+        # quantities.py bills from — this table once carried its own
+        # (10.0/3.33 interlocking, 4.5 slate battens), so the survey
+        # take-off and the designed-model bill priced the same roof with
+        # different tiles.
+        "concrete_interlocking": {"units_per_m2": 10.5, "batten_m_per_m2": 2.9},
         "plain_tile":            {"units_per_m2": 60.0, "batten_m_per_m2": 10.0},
-        "natural_slate":         {"units_per_m2": 20.0, "batten_m_per_m2": 4.5},
+        "natural_slate":         {"units_per_m2": 20.0, "batten_m_per_m2": 4.9},
     },
     "membrane_overlap_factor": 1.15,   # laps and cutting
-    "ridge_units_per_m": 3.33,         # 300mm effective ridge tile
+    "ridge_units_per_m": 2.22,         # bedded ridge at 450mm, as the ledger
     "waste_factor": 1.10,              # cuts, breakages, hips and valleys
 }
 
@@ -454,6 +459,17 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
     pitched = [p for p in planes if not p.is_flat]
     pitch_values = [p.pitch_deg for p in pitched]
 
+    # TILES DO NOT GO ON FLAT ROOFS. `sloped` sums every plane, flat ones
+    # included, and the materials below used to derive from that total — so
+    # a house with a flat-roofed extension in the same footprint was billed
+    # tiles, battens and underlay over the flat area too (a 12 m2 flat roof
+    # is ~132 phantom interlocking tiles). A flat roof takes a built-up or
+    # single-ply covering under its own rules, so it is split out and the
+    # tile/batten/membrane figures cover the pitched planes only.
+    flat_area = sum(p.plan_area(cell_area) * scale * p.slope_factor
+                    for p in planes if p.is_flat)
+    pitched_sloped = max(0.0, sloped - flat_area)
+
     return {
         "plan_area_m2": round(plan, 2),
         "sloped_area_m2": round(sloped, 2),
@@ -469,9 +485,7 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
                                                 if round(x) == v)), 1)
                                   if pitch_values else None),
         "plane_count": len(planes),
-        "flat_area_m2": round(sum(p.plan_area(cell_area) * scale
-                                  * p.slope_factor
-                                  for p in planes if p.is_flat), 2),
+        "flat_area_m2": round(flat_area, 2),
         "ridge_m": round(by_kind.get("ridge", 0.0), 2),
         "hip_m": round(by_kind.get("hip", 0.0), 2),
         "valley_m": round(by_kind.get("valley", 0.0), 2),
@@ -479,9 +493,19 @@ def quantities(planes, edges, cell_area, cell_size, eaves_length_m=None,
                     if eaves_length_m is not None else None),
         "materials": {
             "covering": covering,
-            "covering_units": math.ceil(sloped * spec["units_per_m2"] * waste),
-            "battens_m": round(sloped * spec["batten_m_per_m2"] * waste, 1),
-            "membrane_m2": round(sloped * cfg["membrane_overlap_factor"], 1),
+            "covering_basis": (
+                "pitched planes only — the flat area takes a built-up or "
+                "single-ply covering priced separately, not tiles, battens "
+                "or tile underlay"),
+            "covering_units": math.ceil(
+                pitched_sloped * spec["units_per_m2"] * waste),
+            "battens_m": round(
+                pitched_sloped * spec["batten_m_per_m2"] * waste, 1),
+            "membrane_m2": round(
+                pitched_sloped * cfg["membrane_overlap_factor"], 1),
+            # The flat area to be covered by that separate system — stated,
+            # not priced: this module has no measured rate for it.
+            "flat_roof_m2": round(flat_area, 2),
             "ridge_units": math.ceil(
                 (by_kind.get("ridge", 0.0) + by_kind.get("hip", 0.0))
                 * cfg["ridge_units_per_m"] * waste),

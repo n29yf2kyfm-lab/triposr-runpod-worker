@@ -10,6 +10,7 @@ import os
 import sys
 import json
 import types
+import re as _re
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -166,6 +167,20 @@ for job_input, expected in cases:
 IMPLEMENTED = {m for m in H.PHASE_OF_MODE if H._pipeline_available(m)}
 check("8-0 roof is implemented", "roof" in IMPLEMENTED, str(IMPLEMENTED))
 
+# The handler docstring is the file's honesty statement, and it went stale
+# the slow way: "eleven of thirteen modes run for real" while sixteen were
+# defined and fourteen dispatched — model, scan, propose and render were
+# live surfaces the statement said did not exist, so nobody audited them.
+# It now names the exceptions instead of counting, and this pins those
+# exceptions to the dispatch table so the statement cannot rot silently.
+_unimplemented = {m for m in validation.MODES if not H._pipeline_available(m)}
+check("8-4 condition and design are the only unimplemented modes",
+      _unimplemented == {"condition", "design"}, str(_unimplemented))
+check("8-5 the docstring names those exceptions",
+      "condition and design" in H.__doc__, H.__doc__[:400])
+check("8-6 the stale hand count is gone from the claim",
+      "eleven of thirteen modes run for real" not in H.__doc__)
+
 for mode, (phase, _desc) in H.PHASE_OF_MODE.items():
     if mode in IMPLEMENTED:
         continue
@@ -262,6 +277,23 @@ check("11d large file undeliverable warns loudly", "warning" in d, str(d)[:160])
 check("11e warning names the risk",
       "lost when the worker recycles" in d.get("warning", ""))
 
+# The middle case the old `size > MAX_INLINE_BYTES` guard missed: SMALL,
+# but with no inline key and no storage. Every OBJ/GLB/IFC from model mode
+# and the services JSON ship inline_key=None, so with storage unconfigured
+# each came back {url: null} inside a success response and died with the
+# worker, silently — the exact loss the delivery header promises is loud.
+d = delivery.deliver(small, "test/small-nokey.obj")
+check("11f a small file with no inline key and no storage warns",
+      "warning" in d, str(d)[:160])
+check("11g that warning names the loss",
+      "lost when the worker recycles" in d.get("warning", ""))
+check("11h and does not claim the file was too large",
+      "too large" not in d.get("warning", ""), d.get("warning", ""))
+# Inline delivery IS retrieval: the small-with-key case must stay clean.
+d = delivery.deliver(small, "test/small.ply", inline_key="ply_b64")
+check("11i a small inlined file still carries no warning",
+      "warning" not in d, str(d)[:160])
+
 # ---- Test 12: content types for building formats -------------------------
 check("12a ifc content type",
       delivery.content_type_for("m.ifc") == "application/x-step")
@@ -283,11 +315,35 @@ p.stage("fetching")
 p.stage("poses")
 p.note("142 frames")
 check("14a stages advance", p.emitted[1]["step"] == 2, str(p.emitted[1]))
-check("14b step count exposed", p.emitted[0]["steps"] == 6)
+check("14b step count exposed",
+      p.emitted[0]["steps"] == len(progress.STAGE_PLANS["reconstruct"]))
 check("14c notes do not advance", p.emitted[2]["stage"] == "note")
 check("14d every mode has a stage plan",
       all(m in progress.STAGE_PLANS for m in validation.MODES),
       str(set(validation.MODES) - set(progress.STAGE_PLANS)))
+
+# A plan promising stages the module never emits is worse than no plan: the
+# progress bar jumps 1 -> 2 -> 4 and finishes at 5 of 5 having skipped one,
+# which reads as a stalled job. Four plans listed stages nothing reached —
+# reconstruct's "meshing", structure's "fitting_planes", services'
+# "connecting" and "building_ifc".
+_emitted_by_module = {}
+for _name in sorted(os.listdir(HERE)):
+    if not _name.endswith(".py") or _name.startswith("test_"):
+        continue
+    _emitted_by_module[_name[:-3]] = set(
+        _re.findall(r'prog\.stage\(\s*["\']([a-z_]+)["\']',
+                    open(os.path.join(HERE, _name)).read()))
+
+_MODULE_OF_MODE = {"price": "takeoff"}
+for _mode, _plan in sorted(progress.STAGE_PLANS.items()):
+    _module = _MODULE_OF_MODE.get(_mode, _mode)
+    _emitted = _emitted_by_module.get(_module)
+    if _emitted is None or not _emitted:
+        continue                    # mode not implemented yet
+    _phantom = [s for s in _plan if s not in _emitted]
+    check(f"14e {_mode}'s plan promises no stage it never emits",
+          not _phantom, f"planned but never emitted: {_phantom}")
 
 # ---- Test 15: errors never leak tracebacks without DEBUG -----------------
 def _boom(*a, **k):
@@ -334,7 +390,79 @@ check("16d own default bucket",
 s = parse_job({"mode": "price", "quantities": {"battens": 503.3}})
 check("18a quantities reach the spec", s["quantities"] == {"battens": 503.3},
       str(s["quantities"]))
-check("18b price mode is reachable from quantities alone", True)
+# 18b was `check("...", True)` — hardcoded, calling nothing. It was the test
+# guarding the very bug the author found in production: `quantities` was
+# missing from parse_job's whitelist, so Price Mode could not be reached
+# through the handler at all. A test that asserts a literal cannot catch
+# that, and it did not.
+#
+# The general property is what matters: every field a mode's run() reads out
+# of the spec must survive parse_job. Assert it for each mode, by name.
+_REQUIRED_FIELDS = {
+    "price": ["quantities", "rate_card", "roof", "notes"],
+    "roof": ["address", "gps", "roof_source", "drone_image_urls",
+             "allow_unclipped"],
+    "supply": ["price_list_csv", "price_list_url", "channel", "vat",
+               "supplier"],
+    "valuation": ["postcode", "property_type", "floor_area_m2", "region",
+                  "max_sales"],
+    "drawing": ["drawing_url", "drawing_path", "page", "page_size_pt",
+                "scale_ratio", "scale_note", "confirm_scale", "calibration",
+                "traced"],
+    "structure": ["point_cloud_path", "point_cloud_url", "voxel_m",
+                  "max_points"],
+    "services": ["point_cloud_url", "wall", "accessories", "stage"],
+    "reconstruct": ["image_urls", "video_url", "scale_source",
+                    "scale_reference_m", "scale_reference_units",
+                    "scale_observations"],
+    # render_python earns its place here the hard way: propose.py read
+    # spec.get("render_python") three times while parse_job never passed it
+    # through, so the field was documented, read, and unreachable — the
+    # exact dead-input pattern this block exists to catch.
+    "propose": ["extension", "render_python"],
+}
+_spec_keys = set(parse_job({"mode": "price",
+                            "quantities": {"battens": 1.0}}))
+for _mode, _fields in _REQUIRED_FIELDS.items():
+    for _field in _fields:
+        check(f"18b {_mode} mode's {_field} survives parse_job",
+              _field in _spec_keys,
+              f"{_field} is dropped — {_mode} mode can never see it")
+
+# The known-object anchor path, end to end through parse_job. This is how a
+# capture with no LiDAR gets a real dimension: UK brick coursing at four
+# courses to 300mm, Part M socket heights. scale_observations was not in the
+# whitelist, so reconstruct.py always read an empty list and told a caller
+# who HAD supplied observations to supply observations.
+_anchored = parse_job({
+    "mode": "reconstruct",
+    "image_urls": ["https://example.com/a.jpg"],
+    "scale_observations": [
+        {"kind": "brick_course", "measured_units": 0.031, "repeats": 4},
+        {"kind": "socket_height", "measured_units": 0.45},
+    ],
+})
+check("18b2 scale observations reach the spec",
+      len(_anchored["scale_observations"]) == 2,
+      str(_anchored.get("scale_observations")))
+check("18b3 with their repeats, defaulted to 1",
+      [o["repeats"] for o in _anchored["scale_observations"]] == [4, 1],
+      str(_anchored["scale_observations"]))
+
+for _bad, _label in [([{"measured_units": 0.03}], "no kind"),
+                     ([{"kind": "brick_course"}], "no measurement"),
+                     ([{"kind": "brick_course", "measured_units": -1}],
+                      "negative measurement"),
+                     ([{"kind": "b", "measured_units": float("nan")}],
+                      "NaN measurement"),
+                     ("not a list", "not a list")]:
+    try:
+        parse_job({"mode": "reconstruct",
+                   "image_urls": ["https://example.com/a.jpg"],
+                   "scale_observations": _bad})
+        check(f"18b4 a scale observation with {_label} is refused", False)
+    except InputError:
+        check(f"18b4 a scale observation with {_label} is refused", True)
 
 for bad, label in [({"battens": -5}, "negative"),
                    ({"battens": float("inf")}, "infinite"),
@@ -484,13 +612,137 @@ check("20c UnsafeURLError is an InputError, so the handler answers cleanly",
 _supply_src = open(os.path.join(HERE, "supply.py")).read()
 check("20d supply no longer reads local paths",
       "os.path.exists(url)" not in _supply_src)
-check("20e supply checks the URL before fetching",
-      "check_fetchable_url" in _supply_src)
+
+# 20e-20f were "check_fetchable_url appears in the source", which is not a
+# test of anything: it passed for a year while every one of these modules
+# followed redirects into private space, because requests.get defaults to
+# allow_redirects=True. Checking the first hop and then letting the client
+# chase a 302 to 169.254.169.254 is the whole attack, reinstated by a default
+# argument. Assert the property that actually matters instead — no module
+# fetches a caller-supplied URL through a bare requests.get.
+# register and scanin are in this list because they belong to it, not
+# because they were caught: register kept check_fetchable_url + a bare
+# requests.get while it was parked, then became a live dispatchable mode
+# with the hole intact, and this list — hand-maintained — did not name it.
+# Any module that fetches a caller-supplied URL goes here the day it does.
+_CALLER_URL_MODULES = ("supply", "structure", "services", "drawing",
+                       "reconstruct", "register", "scanin")
+for _mod in _CALLER_URL_MODULES:
+    _src = open(os.path.join(HERE, f"{_mod}.py")).read()
+    check(f"20e {_mod} fetches caller URLs through fetch_checked",
+          "validation.fetch_checked" in _src)
+    check(f"20f {_mod} makes no bare requests.get call",
+          "requests.get(" not in _src and "_requests().get(" not in _src,
+          f"{_mod} still calls requests.get directly")
+
+# And the redirect itself, behaviourally: a chain that ends in private space
+# must be refused at the hop that goes private, not followed.
+_hops = []
+
+
+class _FakeResponse:
+    def __init__(self, code, location=None):
+        self.status_code = code
+        self.headers = {"location": location} if location else {}
+        self.text = "SHOULD NOT BE REACHED"
+
+    def close(self):
+        pass
+
+
+def _fake_get(url, **kw):
+    _hops.append(url)
+    check("20h redirect target is never actually fetched",
+          "169.254.169.254" not in url, f"fetched {url}")
+    if url == "https://public.example/list.csv":
+        return _FakeResponse(302, "http://169.254.169.254/latest/meta-data/")
+    return _FakeResponse(200)
+
+
+_real_check = validation.check_fetchable_url
+validation.check_fetchable_url = (
+    lambda u, f="url": u if u.startswith("https://public.example")
+    else _real_check(u, f))
+_fake_requests = types.ModuleType("requests")
+_fake_requests.get = _fake_get
+sys.modules["requests"] = _fake_requests
+try:
+    validation.fetch_checked("https://public.example/list.csv", "price_list_url")
+    check("20i a redirect into private space is refused", False, "followed it")
+except validation.UnsafeURLError as e:
+    check("20i a redirect into private space is refused",
+          "169.254.169.254" in str(e), str(e))
+finally:
+    validation.check_fetchable_url = _real_check
+    sys.modules.pop("requests", None)
+
+check("20j the refusal happened before the second fetch", len(_hops) == 1,
+      f"hops: {_hops}")
+
 _recon_src = open(os.path.join(HERE, "reconstruct.py")).read()
-check("20f reconstruct checks its URLs too",
-      _recon_src.count("check_fetchable_url") >= 2)
 check("20g local capture is opt-in only",
       "BUILDING_ALLOW_LOCAL_CAPTURE" in _recon_src)
+
+
+# ---- Test 21: NaN must not clamp, and an id must not be a path -----------
+# max(lo, nan) returns lo and min(hi, lo) returns lo, so clamping a NaN
+# silently produced the BOTTOM of the range. A build_cost of NaN became £100
+# and the extension then "paid for itself" several times over. Neither bound
+# is an answer; there is no safe value to guess.
+for _bad, _label in [(float("nan"), "NaN"), (float("inf"), "inf"),
+                     (float("-inf"), "-inf")]:
+    try:
+        validation._float(_bad, "build_cost", None, 100.0, 5000.0)
+        check(f"21a {_label} build_cost is refused, not clamped", False,
+              "clamped silently")
+    except InputError:
+        check(f"21a {_label} build_cost is refused, not clamped", True)
+
+try:
+    validation._float(10 ** 400, "floor_area_m2", None, 5.0, 2000.0)
+    check("21b a JSON integer too large for a float is a clean error", False)
+except InputError:
+    check("21b a JSON integer too large for a float is a clean error", True)
+except OverflowError:
+    check("21b a JSON integer too large for a float is a clean error", False,
+          "OverflowError escaped as a traceback")
+
+check("21c an ordinary measurement still passes",
+      validation._float(120.0, "floor_area_m2", None, 5.0, 2000.0) == 120.0)
+
+# scan_id is interpolated into a filename by structure, reconstruct and
+# services, and into a delivery object key by all of them. "../../etc/x"
+# wrote outside the output directory — confirmed on disk, not reasoned about.
+for _bad in ["../../etc/x", "..\\..\\win", "a/b", "a b", ".hidden",
+             "x" * 200, "a\x00b"]:
+    # Checked on _identifier directly: routed through parse_job, an unrelated
+    # required-inputs error would satisfy the same except clause and the test
+    # would pass without the sanitiser doing anything.
+    try:
+        validation._identifier(_bad, "scan_id")
+        check(f"21d scan_id {_bad[:14]!r} is refused", False, "accepted")
+    except InputError:
+        check(f"21d scan_id {_bad[:14]!r} is refused", True)
+
+check("21e an ordinary scan_id still passes",
+      parse_job({"mode": "roof", "address": "1 Test St, Birmingham",
+                 "scan_id": "job-2026_08-02.v2"})["scan_id"]
+      == "job-2026_08-02.v2")
+
+# A quantity that is NaN one level down reached json.dump and produced a bare
+# NaN token, which is not RFC 8259 and most consumers reject outright.
+try:
+    validation._quantities({"sloped_area_m2": 100.0,
+                            "materials": {"battens_m": "nan"}})
+    check("21f a nested NaN never reaches the quote", False, "passed through")
+except InputError:
+    check("21f a nested NaN never reaches the quote", True)
+
+check("21g a legitimate nested materials block still passes",
+      validation._quantities(
+          {"sloped_area_m2": 100.0, "covering": "slate",
+           "materials": {"battens_m": 503.3}})["materials"]["battens_m"]
+      == 503.3)
 
 
 # ---- Test 19: the SDK progress call must stay opt-in ----------------------
@@ -543,7 +795,12 @@ finally:
 import ast as _ast
 
 _THIRD_PARTY = {"requests", "numpy", "torch", "cv2", "PIL", "mapanything",
-                "open3d", "ifcopenshell", "scipy", "sklearn", "transformers"}
+                "open3d", "ifcopenshell", "scipy", "sklearn", "transformers",
+                # pdfplumber, shapely and ezdxf were missing from this set,
+                # so nothing would have flagged a module-level import of
+                # them — and pdfplumber was missing from the Dockerfile too,
+                # which is how Drawing Mode's PDF half shipped dead.
+                "pdfplumber", "shapely", "ezdxf", "pyquaternion", "networkx"}
 _offenders = {}
 for _f in sorted(os.listdir(HERE)):
     if not _f.endswith(".py") or _f.startswith("test_"):
@@ -608,6 +865,362 @@ finally:
     sys.meta_path.remove(_blocker)
     if _saved is not None:
         sys.modules["requests"] = _saved
+
+
+# ---- 18. "no data here" is an ANSWER, not a failed job ---------------------
+# THIS IS WHY THE ENDPOINT READ 14 COMPLETED AGAINST 13 FAILED.
+#
+# Sent `valuation` at a postcode with no sale history, the worker raised
+# ValuationError("no recorded sales at ...") — which is true, useful, and
+# exactly what a caller needs to hear. It went out as {"error": ...}, RunPod
+# marked the job FAILED, and the app on the other end could not tell that
+# from a dead worker. So it either retries something that will never succeed,
+# or shows a builder a crash screen for a new-build with no history.
+#
+# A source having nothing is a completed job with status "no_data".
+
+class _Missing(validation.NoDataError):
+    pass
+
+
+_saved_dispatch = H._dispatch
+
+
+def _dispatch_raises(exc):
+    def _d(mode, spec, prog):
+        raise exc
+    return _d
+
+
+try:
+    H._dispatch = _dispatch_raises(_Missing("no recorded sales at ZZ1 1ZZ"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18a a source with no data completes, it does not fail",
+          r.get("status") == "no_data", str(r.get("status")))
+    check("18b the reason survives, so the app can show it",
+          "no recorded sales" in r.get("reason", ""), r.get("reason", ""))
+    check("18c the raising class is named, so it can be handled precisely",
+          r.get("source") == "_Missing", str(r.get("source")))
+    check("18d no_data carries no error key — it is not an error",
+          "error" not in r, str(r.get("error")))
+    check("18e the manifest still comes back", isinstance(r.get("manifest"), dict))
+
+    # The distinction has to hold in BOTH directions or it is worthless. A
+    # source that could not be REACHED is still a failure: "the planning
+    # register timed out" is not the same statement as "this site has no
+    # designations", and treating them alike is how someone builds without
+    # consent.
+    H._dispatch = _dispatch_raises(RuntimeError("planning register timed out"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18f an unreachable source is still a failure",
+          "error" in r and r.get("status") != "no_data", str(r)[:120])
+
+    # NoDataError subclasses ValueError, and several of the real ones also
+    # subclass their module's own error. If the no_data clause sat after the
+    # InputError clause it would be dead code for anything deriving from it.
+    class _BothWays(validation.InputError, validation.NoDataError):
+        pass
+
+    H._dispatch = _dispatch_raises(_BothWays("nothing at this address"))
+    r = run({"mode": "valuation", "address": "B1 1AA"})
+    check("18g no_data is checked before InputError, not after",
+          r.get("status") == "no_data", str(r.get("status")))
+finally:
+    H._dispatch = _saved_dispatch
+
+
+# ---- 19. the scale warning only fires where there is something to scale ----
+# It fired on EVERY response, including a roof take-off from a postcode,
+# telling the caller to "include a scale reference in frame" on a job with no
+# frame and no camera. A warning printed on every job is a warning nobody
+# reads, which costs exactly the times it matters.
+
+def _warned(res):
+    return any("scale reference in frame" in w for w in (res.get("warnings") or []))
+
+
+for _m in ("roof", "valuation", "planning", "price", "supply", "drawing",
+           "model", "design"):
+    _r = run({"mode": _m, "address": "B36 8AR"})
+    check(f"19a {_m} does not warn about a capture it never had",
+          not _warned(_r), str(_r.get("warnings"))[:160])
+
+# And it MUST still fire where it matters. reconstruct with no depth is the
+# case the warning exists for: an unscaled model is dangerous to quote or cut
+# from, and that has to stay loud.
+_r = run({"mode": "reconstruct", "video_url": "https://example.com/a.mp4"})
+check("19b reconstruct with no LiDAR still warns", _warned(_r),
+      str(_r.get("warnings"))[:200])
+_r = run({"mode": "services", "point_cloud_url": "https://example.com/a.ply",
+          "stage": "open"})
+check("19c the X-ray still warns — a mis-scaled cloud puts a pipe in the "
+      "wrong place", _warned(_r), str(_r.get("warnings"))[:200])
+# LiDAR depth is metric, so there is nothing to warn about.
+_r = run({"mode": "reconstruct", "video_url": "https://example.com/a.mp4",
+          "depth_url": "https://example.com/d.bin"})
+check("19d a LiDAR capture does not warn", not _warned(_r),
+      str(_r.get("warnings"))[:200])
+
+
+# ---- 20. a private bucket must not hand back a /public/ link --------------
+# THE BUG THIS PINS: on a successful upload, delivery returned
+#   {SUPABASE_URL}/storage/v1/object/public/{bucket}/{name}
+# for every artifact. That form only resolves on a PUBLIC bucket. This one
+# holds interior scans of people's homes, their addresses and their floor
+# plans, so it has to be private — and against a private bucket the link
+# 404s while the job still reports success with a `url` field. A dead link
+# presented as a delivered artifact is the same class of lie as returning
+# COMPLETED with no output at all.
+#
+# Caught before Supabase was ever wired up, by reading what the URL would
+# have to resolve against. Private buckets now get a signed, expiring URL.
+
+_saved = (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+          delivery.SUPABASE_PUBLIC_BUCKET)
+_calls = []
+
+
+class _Resp:
+    def __init__(self, code, payload=None, text=""):
+        self.status_code, self._payload, self.text = code, payload, text
+
+    def json(self):
+        return self._payload
+
+
+def _fake_requests(post_impl):
+    return types.SimpleNamespace(post=post_impl)
+
+
+try:
+    delivery.SUPABASE_URL = "https://proj.supabase.co"
+    delivery.SUPABASE_KEY = "service-role-key"
+    delivery.SUPABASE_BUCKET = "building-scans"
+    delivery.SUPABASE_PUBLIC_BUCKET = False
+
+    def _post(url, **kw):
+        _calls.append(url)
+        if "/object/sign/" in url:
+            return _Resp(200, {"signedURL":
+                               "/object/sign/building-scans/a.ply?token=abc"})
+        return _Resp(200, {})
+
+    delivery._requests = lambda: _fake_requests(_post)
+
+    _u = delivery.upload(small, "test/a.ply")
+    check("20a a private bucket returns a SIGNED url, never /object/public/",
+          _u and "/object/public/" not in _u, str(_u))
+    check("20b and the signed url is absolute, keeping the /storage/v1 prefix",
+          _u == "https://proj.supabase.co/storage/v1/object/sign/"
+                "building-scans/a.ply?token=abc", str(_u))
+    check("20c signing was actually requested",
+          any("/object/sign/" in c for c in _calls), str(_calls))
+
+    # A bucket deliberately made public still gets the public form — it is
+    # cheaper and does not expire. It just must not be the default.
+    delivery.SUPABASE_PUBLIC_BUCKET = True
+    _u = delivery.upload(small, "test/a.ply")
+    check("20d an explicitly public bucket still gets the public url",
+          _u and "/object/public/" in _u, str(_u))
+    delivery.SUPABASE_PUBLIC_BUCKET = False
+
+    # Signing can fail — an expired key, a missing bucket. The upload
+    # succeeded but the caller cannot reach the file, so this must NOT come
+    # back as a usable url.
+    def _post_signfail(url, **kw):
+        if "/object/sign/" in url:
+            return _Resp(400, {}, "Bucket not found")
+        return _Resp(200, {})
+
+    delivery._requests = lambda: _fake_requests(_post_signfail)
+    check("20e a failed signing yields no url rather than a broken one",
+          delivery.upload(small, "test/a.ply") is None)
+
+    # And the warning must not send someone to re-check env vars they have
+    # already set correctly. Configured-but-failing is a different problem
+    # from not-configured, and they get one message to act on.
+    d = delivery.deliver(big, "test/big.ply", inline_key="ply_b64")
+    check("20f a configured store that FAILED does not claim to be "
+          "unconfigured",
+          "is not configured" not in d.get("warning", ""), d.get("warning", ""))
+    check("20g and it points at the bucket and permissions instead",
+          "bucket exists" in d.get("warning", ""), d.get("warning", ""))
+finally:
+    (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+     delivery.SUPABASE_PUBLIC_BUCKET) = _saved
+    delivery._requests = lambda: __import__("requests")
+
+# The default is the safe one. A bucket of house interiors must not be
+# public because somebody forgot to set a flag.
+check("20h private is the DEFAULT, not something you opt into",
+      os.environ.get("SUPABASE_PUBLIC_BUCKET") is None
+      and not delivery.SUPABASE_PUBLIC_BUCKET)
+
+
+# ---- 22. a space in a bucket or scan name broke the upload silently -------
+# FOUND ON A REAL BUCKET. Supabase accepted "building-scans Pro" — a space is
+# legal and the dashboard gives no warning — and the unencoded URL this
+# module built was malformed, so the upload simply did not happen. Live:
+# the raw form returned nothing at all, the percent-encoded form returned a
+# Key.
+#
+# The bucket name is the live case: it comes from the environment and this
+# worker never validates it. Object names cannot actually carry a space —
+# parse_job restricts project_id and scan_id to letters, digits, dot, dash
+# and underscore, and a real job proved it by being refused at validation.
+# The object-name encoding below is belt and braces, not a live hole.
+
+check("22a a bucket name with a space is encoded",
+      delivery._seg("building-scans Pro") == "building-scans%20Pro",
+      delivery._seg("building-scans Pro"))
+check("22b slashes in an OBJECT name survive — they are the folder structure",
+      delivery._seg("roof/Plot 16 first fix.json", True)
+      == "roof/Plot%2016%20first%20fix.json",
+      delivery._seg("roof/Plot 16 first fix.json", True))
+check("22c but a slash in a BUCKET name is encoded, since it cannot be one",
+      delivery._seg("a/b") == "a%2Fb", delivery._seg("a/b"))
+check("22d other url-hostile characters are handled too",
+      delivery._seg("scan #2 (rear)") == "scan%20%232%20%28rear%29",
+      delivery._seg("scan #2 (rear)"))
+check("22e a plain name is left alone",
+      delivery._seg("building-scans") == "building-scans")
+
+_saved22=(delivery.SUPABASE_URL, delivery.SUPABASE_KEY, delivery.SUPABASE_BUCKET)
+_urls=[]
+try:
+    delivery.SUPABASE_URL="https://p.supabase.co"
+    delivery.SUPABASE_KEY="k"
+    delivery.SUPABASE_BUCKET="building-scans Pro"
+    delivery.SUPABASE_PUBLIC_BUCKET=False
+
+    def _post22(url, **kw):
+        _urls.append(url)
+        if "/object/sign/" in url:
+            return _Resp(200, {"signedURL":"/object/sign/x?token=t"})
+        return _Resp(200, {})
+    delivery._requests = lambda: types.SimpleNamespace(post=_post22)
+    delivery.upload(small, "roof/Plot 16 first fix.json")
+    check("22f the real upload URL carries no raw space",
+          _urls and " " not in _urls[0], str(_urls[:1]))
+    check("22g and encodes the bucket and the object together",
+          "building-scans%20Pro/roof/Plot%2016%20first%20fix.json" in _urls[0],
+          str(_urls[:1]))
+finally:
+    (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
+     delivery.SUPABASE_BUCKET) = _saved22
+    delivery._requests = lambda: __import__("requests")
+
+
+# ---- 23. module warnings must survive the handler-local ones ---------------
+# services.run returns its BS 7671 outside-every-zone count in
+# extra["warnings"]; model mode promotes NOT BUILDABLE / REGS FAIL the same
+# way, "so they cannot be missed by a caller that only reads those". The
+# success path did result.update(extra) and then assigned the handler-local
+# list over the top — so on any job that also had an anchor-scale or
+# delivery warning (essentially every services job) the hazard vanished
+# from the one key it was promoted into.
+_saved_dispatch23 = H._dispatch
+try:
+    def _d23(mode, spec, prog):
+        return [], {"services": {"ok": True},
+                    "warnings": ["1 cable run(s) sit outside every BS 7671 "
+                                 "permitted zone at less than 50mm depth"]}
+    H._dispatch = _d23
+    # services + point cloud + no depth -> scale_source "anchors" -> the
+    # handler-local warning fires, which is what used to do the clobbering.
+    _r = run({"mode": "services",
+              "point_cloud_url": "https://example.com/a.ply"})
+    _ws = _r.get("warnings", [])
+    check("23a the module's hazard warning survives",
+          any("BS 7671" in w for w in _ws), str(_ws)[:200])
+    check("23b the handler's own warning survives beside it",
+          any("scale reference in frame" in w for w in _ws), str(_ws)[:200])
+    check("23c the module's warning comes first — it is the louder one",
+          bool(_ws) and "BS 7671" in _ws[0], str(_ws[:1]))
+
+    # And a warning present in both lists appears once, not twice.
+    def _d23b(mode, spec, prog):
+        return [], {"warnings": [
+            "No LiDAR depth in this capture — scale will be derived from "
+            "known-object anchors (UK brick coursing outside, Part M socket "
+            "and switch heights inside). Include a scale reference in frame, "
+            "and treat exported dimensions as provisional until validated."]}
+    H._dispatch = _d23b
+    _r = run({"mode": "services",
+              "point_cloud_url": "https://example.com/a.ply"})
+    _ws = _r.get("warnings", [])
+    check("23d a warning stated by both sides is not duplicated",
+          len(_ws) == len(set(_ws)) == 1, str(_ws))
+finally:
+    H._dispatch = _saved_dispatch23
+
+
+# ---- 24. the extension brief gets the same refusals as every other number --
+# It used to pass on an isinstance-dict check alone, so a NaN ceiling
+# height sailed into propose's float() (NaN is truthy — the or-default
+# never applies), out through model3d.Room (which validates only
+# width/depth/area), and into json.dump as a bare NaN token. The brief
+# that DRIVES the designed geometry was the one input _float never saw.
+_ok = parse_job({"mode": "propose", "address": "12 Acacia Avenue",
+                 "extension": {"type": "rear", "depth_m": 4.0,
+                               "ceiling_height_m": 2.4, "storeys": 2,
+                               "side": "east", "facade": False}})
+check("24a a well-formed brief passes with its numbers intact",
+      _ok["extension"]["depth_m"] == 4.0
+      and _ok["extension"]["ceiling_height_m"] == 2.4
+      and _ok["extension"]["storeys"] == 2, str(_ok["extension"]))
+check("24b non-numeric flags ride through untouched",
+      _ok["extension"]["facade"] is False, str(_ok["extension"]))
+check("24c type and side are normalised to lowercase",
+      parse_job({"mode": "propose", "address": "x",
+                 "extension": {"type": "Rear"}})["extension"]["type"]
+      == "rear")
+
+for _bad, _label in [({"ceiling_height_m": "nan"}, "NaN ceiling"),
+                     ({"ceiling_height_m": float("inf")}, "infinite ceiling"),
+                     ({"ceiling_height_m": 1e6}, "kilometre-tall ceiling"),
+                     ({"ceiling_height_m": 2400}, "millimetre ceiling"),
+                     ({"depth_m": float("nan")}, "NaN depth"),
+                     ({"width_m": -3.0}, "negative width"),
+                     ({"bay_width_m": "nan"}, "NaN bay width"),
+                     ({"storeys": "two"}, "non-integer storeys"),
+                     ({"type": "granny_annex"}, "unknown type"),
+                     ({"side": "north"}, "unknown side")]:
+    try:
+        parse_job({"mode": "propose", "address": "12 Acacia Avenue",
+                   "extension": _bad})
+        check(f"24d a brief with a {_label} is refused", False, "accepted")
+    except InputError:
+        check(f"24d a brief with a {_label} is refused", True)
+
+# Absent fields stay absent — propose's own defaults must still apply.
+check("24e an empty brief is still a valid brief",
+      parse_job({"mode": "propose", "address": "x",
+                 "extension": {}})["extension"] == {})
+check("24f render_python reaches the spec",
+      parse_job({"mode": "propose", "address": "x",
+                 "render_python": "/opt/blender/python"})["render_python"]
+      == "/opt/blender/python")
+check("24g and defaults to None, not empty string",
+      parse_job({"mode": "propose", "address": "x"})["render_python"]
+      is None)
+
+
+# ---- 25. stated numbers in the docs are measured or absent -----------------
+# The README's Tests section twice shipped hardcoded totals that drifted
+# (a stated file count under half the real one), and the rates ledger
+# claimed a 3-bed brick figure nothing in the repo computed. Both now point
+# at the thing that measures them, and this keeps it that way.
+_readme = open(os.path.join(HERE, "README.md")).read()
+check("25a the README does not hardcode a suite total",
+      not _re.search(r"\d+\s+across\s+\d+\s+files", _readme))
+check("25b the README still says how to run the whole suite",
+      "for f in building/test_*.py" in _readme)
+_ledger = open(os.path.join(HERE, "docs", "ESTIMATING_RATES.md")).read()
+check("25c the rates ledger cites the test that enforces the brick anchor",
+      "TestBrickSanityAnchor" in _ledger)
+check("25d the unreproducible one-off figure is gone",
+      "7,969" not in _ledger)
 
 
 # ---- summary --------------------------------------------------------------

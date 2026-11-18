@@ -79,6 +79,61 @@ except ValueError as ex:
 bb = osgb.bbox_around(500000, 200000, 60)
 check("1h bbox spans 2x radius", bb == (499940, 199940, 500060, 200060), str(bb))
 
+# GOING BACK THE OTHER WAY. A DSM arrives on the National Grid, and every
+# cell has to become a lat/lon before imagery can be draped on it or it
+# can be handed to anything geographic. Solved by iterating the FORWARD
+# projection — the one checked against the OS worked example above — so
+# the inverse inherits that check instead of introducing a second set of
+# coefficients to get wrong.
+for _nm, _la, _lo in [("Caister", 52.658, 1.718),
+                      ("Trafalgar Square", 51.5078, -0.1280),
+                      ("Alum Rock", 52.4855909, -1.8474998),
+                      ("Edinburgh", 55.9533, -3.1883),
+                      ("Penzance", 50.1186, -5.5373)]:
+    _e, _n = osgb.latlon_to_easting_northing(_la, _lo)
+    _bla, _blo = osgb.easting_northing_to_latlon(_e, _n)
+    _err_mm = math.hypot((_bla - _la) * 111320,
+                         (_blo - _lo) * 111320 * math.cos(math.radians(_la))) * 1000
+    check(f"1l {_nm} round-trips through the grid to under a millimetre",
+          _err_mm < 1.0, f"{_err_mm:.3f} mm")
+
+# A point that is not on the grid at all must not come back a plausible
+# lat/lon — a silent near-miss puts a building metres from where it is.
+try:
+    osgb.easting_northing_to_latlon(-9e6, -9e6)
+    check("1m an off-grid reference is refused, not approximated", False)
+except ValueError as _ex:
+    check("1m an off-grid reference is refused, not approximated",
+          "Great Britain" in str(_ex), str(_ex)[:80])
+
+# THE REAL HELMERT ERROR, MEASURED, NOT ASSUMED. osgb.py's header claims
+# ~5m and roof.py's clip-site note claims typically 1-3.5m against the
+# OSTN-registered raster. The OS guide's own control pair pins both: the
+# Caister tower's ETRS89 position 52°39'28.8282"N 1°42'57.8663"E
+# corresponds to OSGB36 E 651409.903 N 313177.270 through the full OSTN
+# transformation, so the distance between that truth and the single-Helmert
+# answer IS the datum residual the footprint clip carries. Measured here:
+# 3.58m — inside the documented ~5m, and real enough that pretending the
+# polygon and the raster share a datum would be a lie.
+_e_h, _n_h = osgb.latlon_to_easting_northing(52 + 39 / 60 + 28.8282 / 3600,
+                                             1 + 42 / 60 + 57.8663 / 3600)
+_helmert_err_m = math.hypot(_e_h - 651409.903, _n_h - 313177.270)
+check("1i the Helmert residual at the OS control point is within the "
+      "documented ~5m", _helmert_err_m < 5.0, f"{_helmert_err_m:.2f}m")
+check("1j and is genuinely metres, not noise — the offset the clip note "
+      "must disclose", 1.0 < _helmert_err_m, f"{_helmert_err_m:.2f}m")
+# The pin is the APPEND CALL on a code line, not the constant's name
+# anywhere in the source — a comment mentioning the constant satisfied
+# the old check even with the append deleted.
+_run_code_lines = [ln.split("#", 1)[0] for ln in
+                   __import__("inspect").getsource(roof.run).splitlines()]
+check("1k the clipped result carries that disclosure",
+      "Helmert" in roof.FOOTPRINT_DATUM_NOTE
+      and "1-3.5m" in roof.FOOTPRINT_DATUM_NOTE
+      and any("notes.append(FOOTPRINT_DATUM_NOTE)" in ln
+              for ln in _run_code_lines),
+      roof.FOOTPRINT_DATUM_NOTE)
+
 
 # ==========================================================================
 # Roof geometry
@@ -251,6 +306,47 @@ check("5l plain tile needs ~6x the units",
 check("5m area unchanged by covering",
       q2["sloped_area_m2"] == q["sloped_area_m2"])
 
+# TILES DO NOT GO ON FLAT ROOFS. A pitched plane and a flat one in the same
+# footprint (house + flat-roofed extension) must not be tiled together.
+# Hand-worked with cell_area = 1: 40 pitched samples at 35 degrees give
+# sloped 40/cos(35) = 48.83 m2, 12 flat samples give 12.00 m2.
+#   covering_units = ceil(48.83 * 10.5 * 1.1) = 564   (was over both)
+#   battens_m      = 48.83 * 2.9 * 1.1       = 155.8  (was over both)
+#   membrane_m2    = 48.83 * 1.15            = 56.2   (was 70.0)
+_pit = rg.Plane(math.tan(PITCH), 0.0, 3.0,
+                points=[(i, 0, 0) for i in range(40)])
+_flt = rg.Plane(0.0, 0.0, 3.0, points=[(i, 5, 0) for i in range(12)])
+q3 = rg.quantities([_pit, _flt], [], 1.0, 1.0)
+_ps = 40.0 / math.cos(PITCH)
+check("5n tiles cover the pitched planes only",
+      q3["materials"]["covering_units"] == math.ceil(_ps * 10.5 * 1.1),
+      f'{q3["materials"]["covering_units"]} vs {math.ceil(_ps * 11.0)}')
+check("5o battens too",
+      abs(q3["materials"]["battens_m"] - round(_ps * 2.9 * 1.1, 1)) < 0.05,
+      str(q3["materials"]["battens_m"]))
+check("5p and tile underlay",
+      abs(q3["materials"]["membrane_m2"] - round(_ps * 1.15, 1)) < 0.05,
+      str(q3["materials"]["membrane_m2"]))
+check("5q the flat area is split out for its own covering, not priced as "
+      "tiles",
+      q3["materials"]["flat_roof_m2"] == 12.0
+      and q3["flat_area_m2"] == 12.0,
+      str(q3["materials"]["flat_roof_m2"]))
+check("5r and the basis says so",
+      "pitched planes only" in q3["materials"]["covering_basis"],
+      q3["materials"]["covering_basis"])
+# The total sloped area still reports the whole roof — only the tile
+# figures narrow to the pitched part.
+check("5s sloped_area_m2 still covers the whole roof",
+      abs(q3["sloped_area_m2"] - (_ps + 12.0)) < 0.05,
+      str(q3["sloped_area_m2"]))
+# A pure gable is unchanged by the split.
+check("5t a roof with no flat plane bills exactly as before",
+      abs(q["materials"]["covering_units"]
+          - q["sloped_area_m2"] * 10.5 * 1.1) < 1.5
+      and q["materials"]["flat_roof_m2"] == 0.0,
+      str(q["materials"]))
+
 # --- uncertainty ----------------------------------------------------------
 check("6a pitch uncertainty over 4m run",
       3 < rg.pitch_uncertainty_deg(0.15, 4.0) < 6,
@@ -377,36 +473,56 @@ check("8f plan area is foreshortened from sloped",
       seg["plan_area_m2"] < seg["sloped_area_m2"], str(seg))
 check("8g foreshortening uses the pitch",
       abs(seg["plan_area_m2"] - 28.7 * math.cos(math.radians(34.9))) < 0.02)
-check("8h predominant pitch is the largest pitched segment",
+# PITCH IS AREA-WEIGHTED, NOT THE LARGEST PLANE. This assertion used to
+# demand the largest segment's pitch, which is the same thing the bug did —
+# a test can enforce a fault as easily as it can catch one. On the reference building that
+# rule picked a 57.8-degree dormer cheek for a 34-degree roof. Here the
+# weighted median lands on the same 34.9 anyway, because these six segments
+# genuinely are one roof; that agreement is the point, not the number.
+check("8h pitch is the area-weighted median, not the biggest plane",
       parsed["predominant_pitch_deg"] == 34.9,
       str(parsed["predominant_pitch_deg"]))
+check("8h-2 and the mean is reported alongside it",
+      parsed["mean_pitch_deg"] is not None
+      and abs(parsed["mean_pitch_deg"] - 29.6) < 1.0,
+      str(parsed["mean_pitch_deg"]))
+check("8h-3 a six-plane roof spanning 28 degrees is flagged complex",
+      parsed["complex"] is True, str(parsed["pitch_spread_deg"]))
 check("8i no segment here is flat",
       not any(p["flat"] for p in parsed["planes"]),
       str([p["pitch_deg"] for p in parsed["planes"]]))
 
-# The comparison must NOT measure our full roof against Solar's analysed
-# roof: Solar only reports panel-suitable area, which was 93.6 m2 against a
-# 116.6 m2 footprint here — physically impossible for a 35-degree roof, and
-# it produced a 48% false alarm before this was fixed.
+# BOTH SOLAR AREAS ARE SURFACES, and one is a subset of the other:
+# wholeRoofStats is the part broken into planes, buildingStats is the whole
+# building's roof. 93.6 being smaller than 116.6 is a subset being smaller
+# than its superset — not, as this test previously asserted, something
+# "physically impossible" that needed working around. A real roof shows the
+# identical relationship at 277.81 against 308.01.
+#
+# So the comparison basis is buildingStats: measured, and whole.
 cmp = solar.compare({"predominant_pitch_deg": 32.0, "plan_area_m2": 121.09,
                      "sloped_area_m2": 138.82}, parsed)
-check("8j compares against implied full roof, not analysed area",
-      abs(cmp["sloped_area_m2"]["delta_pct"]) < 10,
+check("8j the basis is Solar's measured whole roof",
+      abs(cmp["sloped_area_m2"]["solar_measured"] - 116.61) < 0.05,
       str(cmp["sloped_area_m2"]))
-check("8k implied area exceeds the footprint",
-      cmp["sloped_area_m2"]["solar_implied"] > 116.6)
-# Solar's analysed roof (93.7) is SMALLER than the building footprint
-# (116.6) — impossible for a 35-degree roof, and exactly why it must not be
-# used as the comparison basis.
-check("8l analysed area still reported for transparency",
-      abs(cmp["sloped_area_m2"]["solar_analysed"] - 93.7) < 0.5,
-      str(cmp["sloped_area_m2"]["solar_analysed"]))
-check("8l-2 analysed area is below the footprint, proving it is partial",
-      cmp["sloped_area_m2"]["solar_analysed"] < 116.6)
+check("8k it is not derived from a pitch",
+      "solar_implied" not in cmp["sloped_area_m2"]
+      and "measured" in cmp["sloped_area_m2"]["basis"])
+check("8l the segmented subset is still reported for transparency",
+      abs(cmp["sloped_area_m2"]["solar_segmented"] - 93.59) < 0.05,
+      str(cmp["sloped_area_m2"]["solar_segmented"]))
+check("8l-2 and it is smaller than the whole, as a subset must be",
+      cmp["sloped_area_m2"]["solar_segmented"]
+      < cmp["sloped_area_m2"]["solar_measured"])
+# This mock predates the fixture and carries no groundAreaMeters2, so there
+# is no footprint to compare — which must be handled by omitting the
+# comparison, not by substituting a surface area for it.
+check("8l-3 with no groundAreaMeters2 there is no footprint comparison",
+      "plan_area_m2" not in cmp, str(cmp.get("plan_area_m2")))
 check("8m pitch disagreement is flagged",
       any("disagree" in n for n in cmp["notes"]), str(cmp["notes"]))
-check("8n no false alarm on area",
-      not any("Sloped area" in n for n in cmp["notes"]), str(cmp["notes"]))
+check("8n a 19% area gap IS reported rather than smoothed away",
+      any("Sloped area" in n for n in cmp["notes"]), str(cmp["notes"]))
 check("8o no solar result -> no comparison", solar.compare({}, None) is None)
 
 
@@ -485,12 +601,120 @@ try:
     cached = roof.fetch_footprint(52.5014, -1.8067)
     check("9i a cached footprint needs no network at all",
           cached is not None and _calls == [], str(_calls))
+
+    # THE CACHE MUST CARRY THE CHOICE DIAGNOSTICS TOO. The hit path used to
+    # return before _LAST_CHOICE was touched, so a warm worker's second job
+    # reported the FIRST property's candidate count and ambiguity flag as
+    # its own, and a cold-start hit reported none — silencing the "a
+    # postcode is not a building" warning. Poison the module global with a
+    # stale record and prove a cache hit replaces it with this property's.
+    roof._LAST_CHOICE.clear()
+    roof._LAST_CHOICE.update({"candidates": 99, "stale_marker": True})
+    roof.fetch_footprint(52.5014, -1.8067)
+    check("9j a cache hit restores THIS property's choice diagnostics",
+          roof._LAST_CHOICE.get("candidates") == 1
+          and "stale_marker" not in roof._LAST_CHOICE,
+          str(dict(roof._LAST_CHOICE)))
+
+    # An old-format cache file (a bare point list, from before the choice
+    # was stored) carries no diagnostics: report none rather than the
+    # previous job's.
+    import json as _json
+    _old = os.listdir(roof.FOOTPRINT_CACHE_DIR)[0]
+    with open(os.path.join(roof.FOOTPRINT_CACHE_DIR, _old), "w") as _f:
+        _json.dump([[413200.0, 289290.0], [413210.0, 289290.0],
+                    [413210.0, 289300.0], [413200.0, 289300.0]], _f)
+    roof._LAST_CHOICE.clear()
+    roof._LAST_CHOICE.update({"candidates": 99, "stale_marker": True})
+    _old_poly = roof.fetch_footprint(52.5014, -1.8067)
+    check("9k an old-format cache still returns its polygon",
+          _old_poly is not None and len(_old_poly) == 4, str(_old_poly))
+    check("9l but reports no diagnostics rather than the previous job's",
+          dict(roof._LAST_CHOICE) == {}, str(dict(roof._LAST_CHOICE)))
 finally:
     roof.FOOTPRINT_SOURCES = _saved_sources
     roof.FOOTPRINT_CACHE_DIR = _saved_cache
 
 
 # ==========================================================================
+# ---- 20. a postcode is not a building -------------------------------------
+# Roof Mode takes a postcode, geocodes it to a CENTROID, and measures the
+# building nearest that point. A UK postcode averages about fifteen
+# addresses; B36 8AR has fourteen mapped buildings within 30m — five houses
+# of 102-122 m2 and three garage blocks. The choice was made silently, so a
+# builder could be handed the neighbour's roof with nothing in the output to
+# say a choice had been made at all.
+
+def _sq(clat, clon, half=0.00004):
+    """A small square building centred on a point."""
+    return [{"lat": clat - half, "lon": clon - half},
+            {"lat": clat - half, "lon": clon + half},
+            {"lat": clat + half, "lon": clon + half},
+            {"lat": clat + half, "lon": clon - half}]
+
+
+_LAT, _LON = 52.5, -1.9
+_near = _sq(_LAT + 0.00002, _LON)
+_far = _sq(_LAT + 0.00050, _LON)
+_best, _info = roof._choose_building([_far, _near], _LAT, _LON)
+check("20a the nearest building is chosen", _best is _near)
+check("20b the alternatives are reported, not hidden",
+      _info["candidates"] == 2, str(_info))
+check("20c the offset from the query point is in METRES",
+      _info["chosen_offset_m"] < 5.0, str(_info["chosen_offset_m"]))
+check("20d the other areas come back so a builder can sanity-check",
+      len(_info["other_areas_m2"]) == 1, str(_info))
+
+# THE COS(LATITUDE) BUG. The old metric was (dlat**2 + dlon**2) on RAW
+# DEGREES. At 52.5N a degree of longitude is 61% of a degree of latitude, so
+# east-west separation was over-penalised about 2.7x and the choice tipped
+# toward whichever building was offset north-south.
+#
+# This case is built to expose exactly that: an EAST building genuinely
+# closer in metres than a NORTH one, but further in raw degrees. bbox_around
+# in the same module already scales longitude by cos(latitude); the
+# selection never did.
+_M_LAT = 1.0 / 111_320.0
+_M_LON = _M_LAT / math.cos(math.radians(_LAT))
+_east = _sq(_LAT, _LON + 10.0 * _M_LON)      # 10 m east
+_north = _sq(_LAT + 12.0 * _M_LAT, _LON)     # 12 m north — further away
+_best, _info = roof._choose_building([_north, _east], _LAT, _LON)
+check("20e the closer building in METRES wins, not in degrees",
+      _best is _east,
+      f"picked the 12m-north building over the 10m-east one: {_info}")
+check("20f and its measured offset is about 10m, not 16m",
+      abs(_info["chosen_offset_m"] - 10.0) < 1.0,
+      str(_info["chosen_offset_m"]))
+# Proof the old metric really would have got it wrong, so this test is
+# guarding a live fault rather than restating the implementation.
+_dn = ((_LAT + 12.0 * _M_LAT) - _LAT) ** 2
+_de = ((_LON + 10.0 * _M_LON) - _LON) ** 2
+check("20g (the degree metric genuinely preferred the further building)",
+      _dn < _de, f"north {_dn:.3e} vs east {_de:.3e}")
+
+# A semi-detached pair sits about 8m centre to centre, which a postcode
+# centroid cannot separate. That has to be called ambiguous rather than
+# quietly resolved.
+_a = _sq(_LAT + 2.0 * _M_LAT, _LON)
+_b = _sq(_LAT + 6.0 * _M_LAT, _LON)
+_best, _info = roof._choose_building([_a, _b], _LAT, _LON)
+check("20h two buildings a few metres apart are flagged ambiguous",
+      _info["ambiguous"] is True, str(_info))
+# A clear winner is not.
+_best, _info = roof._choose_building([_a, _sq(_LAT + 40.0 * _M_LAT, _LON)],
+                                     _LAT, _LON)
+check("20i a clear winner is not flagged", _info["ambiguous"] is False,
+      str(_info))
+# One building is not a choice at all.
+_best, _info = roof._choose_building([_a], _LAT, _LON)
+check("20j a single candidate is never ambiguous",
+      _info["candidates"] == 1 and _info["ambiguous"] is False, str(_info))
+check("20k no candidates yields no building rather than a crash",
+      roof._choose_building([], _LAT, _LON) == (None, {"candidates": 0}))
+check("20l an empty geometry is skipped, not divided by zero",
+      roof._choose_building([[], _a], _LAT, _LON)[0] is _a)
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

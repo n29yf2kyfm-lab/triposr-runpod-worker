@@ -149,14 +149,20 @@ class Line:
         self.description = description
         self.quantity = round(float(quantity), 2)
         self.unit = unit
-        self.rate = round(float(rate), 2)
+        # The rate is kept at FULL precision and rounded only for display.
+        # Rounding it to pence before multiplying looks tidy and is wrong at
+        # quantity: 500m of a material costing a true £0.855 billed £430.00
+        # against £427.50, and materials priced per metre or per square metre
+        # routinely land on fractions of a penny.
+        self.rate_exact = float(rate)
+        self.rate = round(self.rate_exact, 2)
         self.source = source
         self.is_default_rate = is_default_rate
         self.note = note
 
     @property
     def total(self):
-        return round(self.quantity * self.rate, 2)
+        return round(self.quantity * self.rate_exact, 2)
 
     def as_dict(self):
         d = {"key": self.key, "description": self.description,

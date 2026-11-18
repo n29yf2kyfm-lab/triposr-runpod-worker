@@ -47,15 +47,85 @@ far less than breaking a product that is earning. A test asserts this isolation 
 |---|---|---|
 | `reconstruct` | capture → registered metric point cloud | 1 |
 | `register` | align two scans (open↔closed, room↔room) | 1 / 4 |
-| `price` | IFC or RoomPlan → quantities → priced quote | 2 |
-| `supply` | quantities → merchant basket → RFQ → order | 2b |
-| `structure` | point cloud → IFC walls, slabs, openings, rooms | 3 |
-| `services` | open-scan cloud → pipe and cable runs → IFC systems | 4 |
+| `roof` | address → open LIDAR → planes, pitch, true sloped areas | 1b |
+| `price` | measured quantities → rate card → priced quote | 2 |
+| `supply` | price list → matched products → basket, supplier comparison | 2b |
+| `valuation` | address → Land Registry + EPC + UKHPI → value, extension uplift | 2c |
+| `planning` | address → site designations → is this permitted development? | 2d |
+| `structure` | point cloud → walls, slabs, storeys → IFC | 3 |
+| `model` | drawing's figured dimensions → walls, storeys, roof → GLB + OBJ + IFC | 3b |
+| `schedule` | (library) drawing's own room schedule → the areas Model Mode checks against | 3b |
+| `services` | open-scan cloud → pipe and cable runs, BS 7671 zones | 4 |
+| `drawing` | 2D PDF → confirmed scale → measured quantities | 7 |
 | `condition` | imagery + thermal → 3D-located, costed defects | 5 |
 | `design` | footprint + rules → massing + planning checks | 6 |
 
+**A postcode is not a building.** Geocoding returns the postcode CENTROID, and a UK postcode
+averages about fifteen addresses — B36 8AR has fourteen mapped buildings within 30 m, five
+houses of 102–122 m² and three garage blocks. Roof Mode measures the one nearest that
+centroid and now says so: `building_choice` reports how many candidates there were, which
+was taken, how far it sat from the centre and what the others measure. Where two are within
+6 m — a semi-detached pair is about 8 m centre to centre — the choice is flagged **ambiguous**
+and the output says not to order off it. Pass `gps` to remove the ambiguity entirely.
+
+`price` takes quantities directly, or a whole `roof` result. It does **not** yet parse
+RoomPlan or IFC — `structure` writes IFC but nothing reads one back in.
+
+`structure` emits IFC walls and storey slabs with real placements and swept solids. It does
+**not** emit openings or spaces: nothing in the segmentation detects a door, a window or a
+room boundary, so there is nothing honest to write for them.
+
+It emits **GLB, OBJ and IFC**. GLB is the one an app can actually show — a single file
+carrying PBR materials that opens in a browser, in QuickLook on an iPhone and in every 3D
+tool; an OBJ needs a viewer that understands `.mtl` and carries no materials on its own, and
+IFC needs software to read. It is written with the **standard library**: a GLB is a 12-byte
+header, a JSON chunk and a binary chunk. Putting Blender in the image to do that would cost
+around a gigabyte and a headless render stack for a serialisation job. What Blender would
+genuinely buy — baked lighting and ambient occlusion — belongs in a render step, not in a
+geometry export.
+
+`model` runs the opposite way to `structure`: a plan in, a building out. It takes the
+**figured dimensions** off a drawing — never the linework — because every UK sheet carries
+"do not scale from this drawing" and means it: the dimension string is the contract and the
+printed geometry illustrates it. Give it rooms and it returns walls with real thickness,
+storeys, a pitched roof, an OBJ and an IFC, and a take-off.
+
+A footprint too deep to span in one go becomes several parallel **ranges** with valley gutters
+between them, which is what a double-pile roof is and why a Victorian pub reads as an M from
+the end. Roofing 14 m in a single hip put the ridge 5 m above the wall head on a building with
+2.75 m storeys — a roof nearly two storeys tall — and left the valley gutter off the quote
+entirely.
+
+Two things make it trustworthy rather than merely plausible. It **checks itself against the
+drawing's own room schedule** — the areas the architect printed in each room, which the model
+never saw — so a dimension read wrong shows up as a percentage rather than propagating
+silently. And it measures the roof on the **true slope**: at 35° that is 22% more covering
+than the footprint, and ordering off the footprint is how a re-roof comes up a fifth short on
+a job already priced.
+
+What it will **not** do is put a roof on a plan and stay quiet about it. The rooms get
+checked against the drawing's schedule; the rectangle drawn round them gets checked against
+nothing, so when the rooms fill less than 75% of their own bounding box the output says so.
+The reference sheet's first-floor plan fills 66% — it is one sheet of an L-shaped building that wraps a
+corner, and Google Solar measures the real footprint at 369.6 m² against the 229.9 m² that
+plan implies.
+
+What it refuses to do is invent a dimension. A room with no stated size is reported missing,
+not modelled at a guess. Rooms are rectangles; a bay or a splay is not in the model. And a
+width outside 0.3–200 m is refused rather than clamped, because a drawing is figured in
+millimetres and `4570` typed straight across is the commonest mistake there is.
+
 Unimplemented modes return `status: "not_implemented"` with the implementing phase and a
 validated manifest — never a bare 500.
+
+**A source with nothing in it is not a failed job.** "No recorded sales at this postcode"
+is true, useful, and the answer — Price Paid starts in 1995 and a new-build genuinely has
+no history. Returning it as an error made RunPod mark the job FAILED, which is most of why
+the endpoint read 14 completed against 13 failed with nothing broken, and left the app
+unable to tell a dead worker from an honest "nothing here". Those return
+`status: "no_data"` with the reason and the raising class. A source that could not be
+REACHED is still a failure and stays one: a timed-out planning register is not the same
+statement as "this site has no designations".
 
 ### Key fields
 
@@ -108,6 +178,9 @@ claiming success.
 | `OFFLINE=1` | Forbid runtime downloads; pair with `preload_models.py` |
 | `DEBUG=1` | Include tracebacks in responses (bring-up only — they leak paths) |
 | `GOOGLE_SOLAR_API_KEY` | Optional. Enables the Google Solar cross-check on Roof Mode. **Never commit a key** — set it on the endpoint, as with `SUPABASE_KEY` |
+| `BUILDING_EPC_API_KEY` | Optional but it changes the answer. Bearer token for the EPC register, free from [get-energy-performance-data.communities.gov.uk](https://get-energy-performance-data.communities.gov.uk). Land Registry publishes what a house **sold for** but not how **big** it was, so without this there is no price per square metre and Valuation Mode falls back to indexing the property's own last sale. With it, a measured scan can be valued against real £/m² — which is the entire advantage over an agent's estimate. **Never commit the token** — set it on the endpoint |
+| `SUPABASE_PUBLIC_BUCKET` | Defaults to **false**, and that default is the safe one. The bucket holds interior scans of people's homes, their addresses and their floor plans, and object names come from project and scan ids rather than being unguessable. A private bucket gets a **signed, expiring** link; the `/object/public/` form 404s against it while the job still reports success with a `url` — a dead link presented as a delivered artifact |
+| `SUPABASE_SIGNED_URL_TTL` | Seconds a delivered link stays valid (default 7 days — long enough to open a Friday quote on Monday) |
 | `FOOTPRINT_CACHE_DIR` | On-disk cache of OSM footprints (Overpass rate-limits and its mirrors time out) |
 
 ## Deployment
@@ -127,12 +200,32 @@ claiming success.
 python building/test_handler.py
 ```
 
-83 assertions, no GPU, no network, runs in seconds — same approach as the vehicle worker:
-stub the heavy modules, then test the contract logic. CI runs these **before** building the
-image, so a broken contract never reaches a deployable tag.
+That file is one harness of many; the suite is every `test_*.py` in this directory — run
+them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Totals are
+deliberately not written here: two hardcoded counts drifted from the code they described
+(the stated file count ended up under half the real one), and a stale number reads like
+lost test files. `ls building/test_*.py | wc -l` and the pass totals each harness prints
+are the measurement. Same approach as the vehicle worker: stub the heavy modules, then
+test the contract logic. CI runs these **before** building the image, so a broken
+contract never reaches a deployable tag.
+
+Almost network-free: `test_handler.py` makes a handful of live calls to `api.postcodes.io`
+while exercising geocoding failure paths. Every other file is offline, and the tests assert
+an error is returned either way, so a postcodes.io outage does not fail the build.
+
+CI installs `requests`, `ifcopenshell` and `pdfplumber` before running them. Without that the
+runner is a bare interpreter, every lazy third-party import takes its `ImportError` branch,
+and the suite validates the degraded path instead of the one that ships — which is exactly
+how a broken IFC writer reached the deployed image with 1231 tests green.
 
 ## Build
 
 `.github/workflows/building-docker-build.yml` — triggers only on `building/**`, tags
 `alamk123/building-scan:{sha,v1,latest}`. Dependencies install before the source `COPY`, so
 code edits reuse the cached layers.
+
+**Tests run on every branch and every pull request; the image is built only from `main`** (or
+a deliberate `workflow_dispatch`, which produces a SHA tag and never moves `v1` or `latest`).
+Gating the whole workflow on `main` meant the suite never ran in CI on the branch the work
+happens on — which is the same hole that let a `write_ifc` that had never once executed reach
+a deployed image with 1231 tests green.

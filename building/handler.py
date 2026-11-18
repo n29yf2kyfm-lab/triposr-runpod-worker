@@ -12,9 +12,19 @@ on trellis2/**, so this directory cannot rebuild the production vehicle
 image. The duplicated helpers in validation.py and delivery.py are that
 isolation, deliberately paid for.
 
-Phase 0 status: the job contract, routing, validation, progress and delivery
-are real and tested. The heavy stages report the phase that implements them
-rather than pretending to work.
+Status: every mode validation.MODES accepts dispatches to a real module —
+the table in _pipeline_available is the authoritative list — EXCEPT
+condition and design, which report the phase that implements them rather
+than pretending to work. reconstruct's orchestration is complete but its
+model call has never been run on a GPU. Counts are deliberately not written
+here: an earlier hand count ("eleven of thirteen") went stale as modes
+shipped and quietly told auditors that four live surfaces did not exist, so
+test_handler.py now pins the two exceptions to the dispatch table instead.
+
+That statement is kept honest deliberately. Three forensic audits of this
+code found a mode that crashed on every job, an X-ray that could not report
+a hazard, and wall lengths five times over — all behind green ticks, all
+found by executing rather than reading, with 1231 tests passing throughout.
 """
 import os
 import sys
@@ -37,7 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import runpod  # noqa: E402
 
-from validation import parse_job, InputError  # noqa: E402
+from validation import parse_job, InputError, NoDataError  # noqa: E402
 from progress import Progress  # noqa: E402
 import delivery  # noqa: E402
 import paths  # noqa: E402
@@ -49,6 +59,32 @@ import paths  # noqa: E402
 # worker writes kilobytes of JSON that must not depend on that being true.
 OUTPUT_DIR = paths.resolve("BUILDING_OUTPUT_DIR", "building-outputs",
                            "building-outputs")
+
+# Modes whose geometry comes off a camera or a depth sensor, and which
+# therefore have a scale that can be wrong.
+#
+# Everything else starts from something already dimensioned: a postcode, a
+# figured drawing, a list of quantities. Asking those to "include a scale
+# reference in frame" is nonsense, and printing it on every response is how
+# the one job that genuinely IS unscaled gets waved through.
+#
+# structure, services and register take a point cloud rather than a capture,
+# but that cloud carries whatever scale reconstruct gave it — so the warning
+# stays relevant and they stay in.
+CAPTURE_MODES = frozenset({
+    "reconstruct",   # video / images in
+    "structure",     # consumes a cloud whose scale it inherits
+    "services",      # same, and this one is the X-ray
+    "register",      # aligns two clouds; a scale error misaligns both
+    "condition",     # imagery and thermal
+    # A phone splat is a camera capture whose scale is exactly what this
+    # warning is about — scanin has a whole function to catch a splat that
+    # came back at 0.3x — and with no address to check it against, its own
+    # report can only say "scale checked against nothing". It was missing
+    # from this set, so the one job class that most needs the warning was
+    # the one that never got it.
+    "scan",
+})
 
 # Which phase implements each mode. Returned verbatim to callers hitting an
 # unimplemented mode, so the API is honest about what it can do today rather
@@ -73,6 +109,16 @@ PHASE_OF_MODE = {
     "valuation":   ("2c", "Land Registry Price Paid + UKHPI -> value, street "
                           "ceiling, extension uplift"),
     "drawing":     ("7", "2D PDF/DXF -> confirmed scale -> assisted takeoff"),
+    "planning":    ("2d", "Planning Data platform -> Article 4, conservation "
+                          "area, listed, green belt, flood zone, TPO -> is "
+                          "this permitted development?"),
+    "model":       ("3b", "drawing's figured dimensions -> walls, storeys, "
+                          "roof -> OBJ + IFC + take-off"),
+    "scan":        ("1", "phone splat export -> verified, oriented, "
+                         "scale-checked against the mapped footprint"),
+    "propose":     ("6", "address -> OSM outline + Solar roof + Street View "
+                         "orientation + measured clearances -> existing house "
+                         "and designed extension as GLB/OBJ/IFC"),
 }
 
 
@@ -88,6 +134,9 @@ def _pipeline_available(mode):
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
+        "planning": "planning", "model": "model3d",
+        "render": "sitevisual", "propose": "propose",
+        "scan": "scanin",
     }.get(mode)
     if not module:
         return False
@@ -193,8 +242,14 @@ def handler(job):
 
     warnings = list(spec.get("warnings", []))
 
-    # An unscaled model is the one failure that must never pass silently.
-    if scale_source == "anchors":
+    # An unscaled model is the one failure that must never pass silently —
+    # but only where there is something to scale. This fired on EVERY job,
+    # including a roof take-off from a postcode and a valuation from an
+    # address, telling the caller to "include a scale reference in frame" on
+    # a job that has no frame and no camera. A warning that appears on every
+    # response is a warning nobody reads, which costs exactly the times it
+    # matters.
+    if scale_source == "anchors" and mode in CAPTURE_MODES:
         warnings.append(
             "No LiDAR depth in this capture — scale will be derived from "
             "known-object anchors (UK brick coursing outside, Part M socket "
@@ -243,8 +298,46 @@ def handler(job):
             "artifacts": delivered,
         }
         result.update(extra or {})
+        # MERGE the module's warnings with the handler's, never replace.
+        # `extra` carries the warnings the mode module promoted precisely so
+        # a caller reading only result["warnings"] cannot miss them — NOT
+        # BUILDABLE and REGS FAIL from model mode, the BS 7671
+        # outside-every-zone count from services. Assigning the handler-local
+        # list over the top erased them on any job that also had an
+        # anchor-scale or delivery warning, which for services is essentially
+        # every job. Module warnings come first: they are the louder ones.
+        module_warnings = list((extra or {}).get("warnings") or [])
+        merged = module_warnings + [w for w in warnings
+                                    if w not in module_warnings]
+        if merged:
+            result["warnings"] = merged
+        # On EVERY path, as the comment below _fail says. It was persisted
+        # only on the two failure paths, so the successful scans — the ones
+        # actually worth keeping — got no durable record at all.
+        _persist_manifest(manifest, job_id, result)
+        return result
+
+    except NoDataError as e:
+        # NOT a failure. The input was valid, the work ran, and the answer is
+        # that the source holds nothing for this address. Returning it as an
+        # error made RunPod mark the job FAILED, which is most of why this
+        # endpoint reads 14 completed against 13 failed with nothing broken —
+        # and it left the app unable to tell a dead worker from a new-build
+        # with no sale history, so it would retry forever or show a crash.
+        #
+        # Checked BEFORE InputError and Exception: NoDataError subclasses
+        # ValueError, and several of these also subclass their module's own
+        # error, so an earlier clause would swallow them.
+        result = {
+            "status": "no_data",
+            "mode": mode,
+            "reason": str(e),
+            "source": type(e).__name__,
+            "manifest": manifest,
+        }
         if warnings:
             result["warnings"] = warnings
+        _persist_manifest(manifest, job_id, result)
         return result
 
     except InputError as e:
@@ -288,6 +381,9 @@ def _dispatch(mode, spec, prog):
         "roof": "roof", "price": "takeoff", "supply": "supply",
         "condition": "condition", "design": "design",
         "valuation": "valuation", "drawing": "drawing",
+        "planning": "planning", "model": "model3d",
+        "render": "sitevisual", "propose": "propose",
+        "scan": "scanin",
     }[mode]
     module = __import__(module_name)
     return module.run(spec, prog, OUTPUT_DIR)
@@ -309,6 +405,12 @@ def _persist_manifest(manifest, job_id, result):
                               "application/json")
         if url:
             result["manifest_url"] = url
+            # Written twice deliberately. The URL is only known after the
+            # upload, and without this the stored record is the one copy
+            # that does not carry its own address.
+            with open(path, "w") as f:
+                json.dump({"manifest": manifest, "result": result}, f,
+                          indent=2)
     except Exception as e:
         print(f"manifest persist skipped: {e}", file=sys.stderr)
 

@@ -71,6 +71,21 @@ r = S.estimate_scale([BRICK20, SOCKET, DOOR_W,
 check("2d a single tight outlier cannot drag the answer",
       abs(r["scale_m_per_unit"] - TRUE) < 1e-6, str(r["scale_m_per_unit"]))
 
+# The weight cap must hold against a tight reference that disagrees WITHIN
+# its outlier allowance. The old cap — half the raw total — shrank the
+# total as it clipped, so a door reading 1% high (doors are specified to
+# 0.5%, so 1% survives the 2x allowance) still held two thirds of the
+# final weight and the median sat exactly on the door, against a socket
+# and a ceiling that agreed. Hand-worked: door weight ~198 clips to
+# socket+ceiling = 18 + 4 = 22 of a 44 total; the cumulative weight
+# reaches half inside the agreeing pair, so the answer is 0.0100.
+HIGH_DOOR = obs("door_internal_h", 1.981 / 0.0101)     # reads 1% high
+r = S.estimate_scale([HIGH_DOOR, SOCKET, obs("ceiling_height", 2.400 / TRUE)])
+check("2e a within-allowance disagreement is kept, not rejected",
+      r["observations_rejected"] == 0, str(r["rejected"]))
+check("2f but a single tight reference cannot dictate the median",
+      abs(r["scale_m_per_unit"] - TRUE) < 1e-9, str(r["scale_m_per_unit"]))
+
 
 # ---- 3. refusals ----------------------------------------------------------
 # Each of these MUST raise. A silently-wrong scale is the worst failure the
@@ -96,16 +111,29 @@ except S.ScaleError as e:
     check("3d wild disagreement refused", "span" in str(e))
     check("3e refusal says re-capture", "Re-capture" in str(e), str(e))
 
-# Enough outliers to leave too few survivors must refuse, not shrug.
+# Three consistent misdetections outvote the two true references. The
+# module cannot know which cluster is real — a majority of agreeing
+# observations IS the evidence — so the majority wins. What it must not do
+# is shrug: the answer must sit wholly on the winning cluster (an average
+# across both clusters here would be ~0.016, a number NO reference
+# supports), and the outvoted references must be visibly counted as
+# rejected. This check used to pass True unconditionally on the success
+# branch, so a silent blend would have sailed through.
 try:
-    S.estimate_scale([BRICK20, SOCKET,
-                      obs("door_internal_h", 1.981 / 0.02),
-                      obs("plasterboard_h", 2.400 / 0.02),
-                      obs("switch_height", 1.200 / 0.02)])
-    check("3f majority-outlier case handled", True)  # either outcome is sound
+    r = S.estimate_scale([BRICK20, SOCKET,
+                          obs("door_internal_h", 1.981 / 0.02),
+                          obs("plasterboard_h", 2.400 / 0.02),
+                          obs("switch_height", 1.200 / 0.02)])
+    check("3f the majority cluster wins whole, never a blend",
+          abs(r["scale_m_per_unit"] - 0.02) < 1e-9,
+          str(r["scale_m_per_unit"]))
+    check("3f2 the outvoted references are reported rejected",
+          r["observations_rejected"] == 2
+          and set(r["rejected"]) == {"brick_course", "socket_height"},
+          str(r["rejected"]))
 except S.ScaleError as e:
-    check("3f majority-outlier case handled", "disagree" in str(e) or
-          "span" in str(e), str(e))
+    check("3f majority-outlier refusal names the disagreement",
+          "disagree" in str(e) or "span" in str(e), str(e))
 
 try:
     S.Observation("banana", 1.0)

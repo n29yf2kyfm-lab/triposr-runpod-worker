@@ -38,6 +38,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # The handler exports the splat via building/splat.py, but the build
+      # context is trellis/ and Docker cannot COPY across it — stage the one
+      # file into the context so the import that works in the repo also
+      # works in the image.
+      - name: Stage splat exporter into build context
+        run: mkdir -p trellis/building && cp building/splat.py trellis/building/splat.py
+
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:

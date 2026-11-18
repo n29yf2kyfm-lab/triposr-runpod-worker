@@ -292,6 +292,69 @@ check("7b sharpness degrades gracefully without opencv",
       len(R.sharpness_scores([os.path.join(TMP, "nope.jpg")])) == 1)
 
 
+# ---- weights are a separate thing from the package -----------------------
+# model_available() only proves the pip package imports. The CHECKPOINT is
+# fetched from Hugging Face at first use, and on the live endpoint three
+# settings combined to make that impossible: no weights baked into the image
+# (CI passes no PRELOAD_MODELS), HF_HOME pointing at a network volume that
+# is not attached, and OFFLINE=1 forbidding the download.
+#
+# Each is survivable alone. Together, from_pretrained fails on a cache miss
+# AFTER the worker has accepted the job, fetched the video and extracted
+# frames — so a builder loses a first-fix capture, which cannot be retaken
+# once the wall is boarded, to a configuration error.
+import types as _types  # noqa: E402
+
+_had = sys.modules.get("mapanything")
+sys.modules["mapanything"] = _types.ModuleType("mapanything")
+_saved = {k: os.environ.get(k) for k in ("OFFLINE", "HF_HUB_OFFLINE", "HF_HOME")}
+try:
+    for k in _saved:
+        os.environ.pop(k, None)
+    os.environ["OFFLINE"] = "1"
+    os.environ["HF_HOME"] = "/nonexistent-volume/building_hf_cache"
+    _ok, _why = R.weights_available()
+    check("W1 OFFLINE with no cached weights is caught", not _ok, _why[:80])
+    check("W2 and the message names all three ways out",
+          "unset OFFLINE" in _why and "network volume" in _why
+          and "PRELOAD_MODELS" in _why, _why)
+    check("W3 and says which modes still work without the model",
+          "roof" in _why.lower() and "planning" in _why.lower(), _why)
+
+    # The check must run BEFORE anything is fetched — that is the whole point.
+    _fetched = []
+    _real_fetch = R.fetch_capture
+    R.fetch_capture = lambda *a, **k: _fetched.append(1) or []
+    try:
+        class _P:
+            def stage(self, *a, **k): pass
+            def note(self, *a, **k): pass
+        R.run({"video_url": "https://example.test/x.mp4", "scan_id": "w"},
+              _P(), TMP)
+        check("W4 the job is refused before the capture is fetched", False,
+              "ran on")
+    except R.ReconstructError as e:
+        check("W4 the job is refused before the capture is fetched",
+              not _fetched, f"fetch_capture was called {len(_fetched)} times")
+        check("W5 with the configuration reason, not a model error",
+              "OFFLINE" in str(e), str(e)[:90])
+    finally:
+        R.fetch_capture = _real_fetch
+
+    os.environ.pop("OFFLINE")
+    _ok, _why = R.weights_available()
+    check("W6 without OFFLINE the weights download on first use", _ok, _why)
+finally:
+    for k, v in _saved.items():
+        os.environ.pop(k, None)
+        if v is not None:
+            os.environ[k] = v
+    if _had is None:
+        sys.modules.pop("mapanything", None)
+    else:
+        sys.modules["mapanything"] = _had
+
+
 # ==========================================================================
 print()
 for f in FAILED:

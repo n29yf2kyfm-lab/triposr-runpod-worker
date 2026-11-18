@@ -355,8 +355,13 @@ try:
     _o, _s = S.to_observations([_bad], channel="trade_account", when=TODAY)
     check("8f2 a price the engine rejects is skipped, not raised",
           len(_o) == 0 and len(_s) == 1, f"{len(_o)}/{len(_s)}")
+    # A reason must be recorded, whichever gate caught it. The plausibility
+    # band now catches a negative brick price before the engine sees it —
+    # defence in depth, and a clearer message — so this asserts that SOME
+    # gate explained itself rather than naming one of them.
     check("8f3 and the reason is recorded on the line",
-          any("price engine" in n for n in _s[0].notes), str(_s[0].notes))
+          any("price engine" in n or "plausibly cost" in n
+              for n in _s[0].notes), str(_s[0].notes))
 except prices.PriceError as e:
     check("8f2 a price the engine rejects is skipped, not raised", False,
           f"PriceError escaped: {e}")
@@ -500,6 +505,218 @@ except S.SupplyError:
 except ImportError as e:
     check("11f bad input refused before any network work", False,
           f"imported before validating: {e}")
+
+
+# ---- Test 12: money forms that produced confident wrong prices -----------
+# Every one of these was live while all 150 tests above passed. They are
+# grouped here because they share a cause: a numeric token was salvaged out
+# of a cell the parser did not actually understand.
+
+# ".50" is a routine Excel rendering of fifty pence. The old pattern required
+# a leading digit, skipped the dot and read £50.00 — a 100x overprice. On a
+# 1,000-tile roof that is £50,000 of tiles instead of £500.
+check("12a a leading decimal point is fifty pence, not fifty pounds",
+      S.parse_money(".50") == 0.5, str(S.parse_money(".50")))
+
+# Space-grouped thousands: Excel's "# ##0.00" and several European locales.
+# The old pattern stopped at the space and read £1.00 out of £1,234.56.
+check("12b space-grouped thousands read whole",
+      S.parse_money("1 234,56") == 1234.56, str(S.parse_money("1 234,56")))
+check("12c space-grouped thousands with a decimal point too",
+      S.parse_money("1 234.56") == 1234.56, str(S.parse_money("1 234.56")))
+
+# Refusals. The module's stated policy is that a cell it cannot read is
+# refused rather than salvaged for a prefix, and these were the exceptions.
+check("12d scientific notation is a mangled export, not a price",
+      S.parse_money("1.5e3") is None, str(S.parse_money("1.5e3")))
+check("12e a malformed comma group is refused, not read as thousands",
+      S.parse_money("1,2345") is None, str(S.parse_money("1,2345")))
+check("12f the original mangled-cell case still refuses",
+      S.parse_money("12.50.60") is None)
+
+# Everything that already worked must keep working.
+for _text, _want in [("£12.50", 12.5), ("1,234.56", 1234.56),
+                     ("1.234,56", 1234.56), ("12,50", 12.5),
+                     ("85p", 0.85), ("4.99", 4.99), ("GBP 4.99", 4.99)]:
+    check(f"12g {_text!r} still reads as {_want}",
+          S.parse_money(_text) == _want, str(S.parse_money(_text)))
+
+# "per 4.8m" is a LENGTH. Read as a pack of 4 it quartered a £28.50 joist to
+# £7.13, and the report's warnings list came back empty.
+check("12h 'per 4.8m' is a length, not a pack of four",
+      S.parse_pack("Timber C24 47x225 per 4.8m") == 1,
+      str(S.parse_pack("Timber C24 47x225 per 4.8m")))
+check("12i 'per 2.4m' likewise",
+      S.parse_pack("C16 studwork per 2.4m") == 1)
+check("12j a bracketed board dimension is not a pack of 2400",
+      S.parse_pack("Gyproc WallBoard 2400x1200 (2400)") == 1,
+      str(S.parse_pack("Gyproc WallBoard 2400x1200 (2400)")))
+check("12k a real pack is still read", S.parse_pack("Screws box of 200") == 200)
+check("12l 'per 24' with no unit after it is still a pack",
+      S.parse_pack("Roof tiles per 24") == 24)
+check("12m a bracketed count with no dimension on the line is still a pack",
+      S.parse_pack("Galvanised nails (500)") == 500)
+
+# A pack division cuts the price by the pack count, so it has to be visible.
+_packed = S.normalise_line(S.Line(
+    description="Roof tile pack of 24", price=48.0, unit="pack",
+    vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12n a pack division carries the phrase the report escalates on",
+      any("check this line" in n for n in _packed.notes),
+      str(_packed.notes))
+
+# ex-VAT is this module's own spelling throughout its docstrings, and it read
+# as unknown. With a file-level vat='inc', a line saying "excludes VAT" was
+# divided by 1.2 anyway, putting two identical tiles 16.7% apart.
+for _text, _want in [("ex-VAT", S.VAT_EX), ("excludes VAT", S.VAT_EX),
+                     ("exclusive of VAT", S.VAT_EX),
+                     ("VAT excluded", S.VAT_EX), ("before VAT", S.VAT_EX),
+                     ("inc-VAT", S.VAT_INC), ("includes VAT", S.VAT_INC),
+                     ("inclusive of VAT", S.VAT_INC),
+                     ("VAT included", S.VAT_INC)]:
+    check(f"12o {_text!r} reads as {_want}",
+          S.vat_basis_of(_text) == _want, S.vat_basis_of(_text))
+
+check("12p silence still means unknown",
+      S.vat_basis_of("Roof tile 420x330") == S.VAT_UNKNOWN)
+check("12q the forms that already worked still work",
+      S.vat_basis_of("ex VAT") == S.VAT_EX
+      and S.vat_basis_of("12.50+VAT") == S.VAT_EX
+      and S.vat_basis_of("inc vat") == S.VAT_INC)
+
+# An accessory names the product it is for. Filed under that product, its
+# price corrupts the tier: £0.0156/m2 for screws against £3.40 for board.
+for _acc in ["Drywall screws for plasterboard 38mm box of 200",
+             "Plasterboard adhesive bag", "Copper pipe clips 15mm",
+             "Jointing tape for plasterboard 90m"]:
+    check(f"12r accessory refused: {_acc[:30]!r}",
+          S.match_product(_acc)[0] is None, str(S.match_product(_acc)))
+
+# The COVERAGE trap the module docstring has always named, and which nothing
+# implemented — TILES_PER_M2 and COVERAGE_NOTE were referenced only by their
+# own definitions. A merchant quoting slate by the covered square metre is
+# not quoting what the catalogue prices, which is per tile.
+for _desc, _per_m2 in [("Natural slate 500x250 roofing", 20.0),
+                       ("Concrete interlocking roof tile", 10.5),
+                       ("Concrete plain roof tile", 60.0)]:
+    _line = S.normalise_line(
+        S.Line(description=_desc, price=48.50, unit="m2", vat=S.VAT_EX),
+        S.UK_VAT_RATE)
+    check(f"12u {_desc[:28]!r} converts per m2 to per tile",
+          abs(_line.unit_price_ex_vat - 48.50 / _per_m2) < 1e-6,
+          str(_line.unit_price_ex_vat))
+    check(f"12v and flags the gauge as an assumption: {_desc[:22]!r}",
+          any("ASSUMED" in n and "check this line" in n
+              for n in _line.notes), str(_line.notes))
+
+# Interlocking is 10.5 per m2 and plain is 60 — a factor of six. Where the
+# description does not say which, nothing is converted.
+_vague = S.normalise_line(
+    S.Line(description="Roof tile", price=48.50, unit="m2", vat=S.VAT_EX),
+    S.UK_VAT_RATE)
+check("12w an unidentifiable covering is NOT converted",
+      not any("per m2 -> per tile" in n for n in _vague.notes),
+      str(_vague.notes))
+check("12x and says why, with the numbers",
+      any("factor of six" in n for n in _vague.notes), str(_vague.notes))
+# And because £48.50 cannot be a per-tile price either, the plausibility
+# band stops it reaching the engine at all rather than passing it through.
+check("12x2 and the unconverted figure is not filed as a price",
+      _vague.unit_price_ex_vat is None, str(_vague.unit_price_ex_vat))
+
+# THE GUARD THAT WAS MISSING, found by importing the government's own DBT
+# building-materials tables as a price list. They are an INDEX (2015 = 100),
+# not pounds. 29 of 30 lines were correctly refused as unmatched, but
+# "Precast concrete: blocks, bricks, tiles and flagstones" matched `bricks`
+# and its index value of 173.1 was filed as £173.10 PER BRICK, with no note.
+# Every earlier check passed: each asks "is this line well-formed", none
+# asked "is this number possible".
+_index = S.normalise_line(
+    S.Line(description="Cement and concrete - Precast concrete: blocks, "
+                       "bricks, tiles and flagstones",
+           price=173.1, unit="each", vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12y an index value is not filed as a price",
+      _index.unit_price_ex_vat is None, str(_index.unit_price_ex_vat))
+check("12z and the line says what it probably was",
+      any("index or a rate" in n for n in _index.notes), str(_index.notes))
+
+# Pence read as pounds is the same class of error in the other direction.
+_pence = S.normalise_line(
+    S.Line(description="Facing brick", price=0.004, unit="each",
+           vat=S.VAT_EX), S.UK_VAT_RATE)
+check("12z2 an implausibly LOW price is refused too",
+      _pence.unit_price_ex_vat is None, str(_pence.unit_price_ex_vat))
+
+# The band must not reject real prices. These are ordinary UK trade figures.
+for _desc, _price, _unit in [("Facing brick", 0.62, "each"),
+                             ("Handmade facing brick", 3.20, "each"),
+                             ("Gyproc plasterboard 12.5mm", 3.40, "m2"),
+                             ("Roofing batten 25x50 treated", 0.95, "m"),
+                             ("Concrete interlocking roof tile", 1.10, "each"),
+                             ("Breathable roofing membrane", 1.80, "m2")]:
+    _ok = S.normalise_line(
+        S.Line(description=_desc, price=_price, unit=_unit, vat=S.VAT_EX),
+        S.UK_VAT_RATE)
+    check(f"12z3 a real price passes: {_desc[:26]!r} at £{_price}",
+          _ok.unit_price_ex_vat is not None,
+          f"refused: {_ok.notes}")
+
+check("12s the real product still matches",
+      S.match_product("Gyproc plasterboard 12.5mm 2400x1200")[0]
+      == "plasterboard")
+check("12t and so does a batten",
+      S.match_product("Roofing batten 25x50 treated")[0] == "battens")
+
+# The pence convention with a unit suffix. "85p ea" and "50p per m2" are
+# ordinary merchant shorthand; requiring "Np" to be the WHOLE cell read
+# them as POUNDS — a 100x overprice, and £50/m2 sits inside the insulation
+# plausibility band, so nothing downstream would have caught it.
+for _text, _want in [("85p ea", 0.85), ("50p per m2", 0.50),
+                     ("85p", 0.85)]:
+    check(f"13a {_text!r} is pence, not pounds",
+          abs(S.parse_money(_text) - _want) < 1e-9,
+          str(S.parse_money(_text)))
+# A count that merely starts with a p-word must not read as pence.
+check("13b '12 pack' is twelve pounds, not twelve pence",
+      S.parse_money("12 pack") == 12.0, str(S.parse_money("12 pack")))
+check("13c '85 pcs' likewise", S.parse_money("85 pcs") == 85.0,
+      str(S.parse_money("85 pcs")))
+check("13d '£85p' stays the typo it always was",
+      S.parse_money("£85p") == 85.0, str(S.parse_money("£85p")))
+check("13e a decimal keeps the pounds reading",
+      S.parse_money("2.50 per m2") == 2.50, str(S.parse_money("2.50 per m2")))
+
+# A row's price cell can also STATE the basis — "12.00 ex VAT" printed
+# beside the number is where merchants actually put it. Detecting the
+# basis from description+unit only ignored that statement, so a
+# file-level 'inc' divided an explicitly ex-VAT line by 1.2: the same
+# two-identical-tiles 16.7% error vat_basis_of itself already fixed once.
+_csv_pricecell = ("Description,Price\n"
+                  "Concrete Interlocking Roof Tile,\"1.32 ex VAT\"\n"
+                  "Concrete Plain Roof Tile,85p ea\n")
+_rows = S.read_csv(_csv_pricecell, vat=S.VAT_INC)
+check("13f 'ex VAT' beside the price overrides the file default",
+      _rows[0].vat == S.VAT_EX, str(_rows[0].vat))
+S.normalise_line(_rows[0])
+check("13g so the price is not divided by 1.2",
+      abs(_rows[0].unit_price_ex_vat - 1.32) < 1e-9,
+      str(_rows[0].unit_price_ex_vat))
+check("13h a pence-with-unit price cell reads as pence end to end",
+      abs(_rows[1].price - 0.85) < 1e-9, str(_rows[1].price))
+
+# ...and a file whose ONLY VAT statements live in the price column must
+# import, per read_csv's own contract that a row's text overrides the
+# default — it used to be refused as saying nothing about VAT.
+_rep = S.import_price_list(
+    "Description,Price\n"
+    "Concrete Interlocking Roof Tile,\"1.32 ex VAT\"\n"
+    "Concrete Plain Roof Tile,\"0.66 inc VAT\"\n", when=TODAY)
+check("13i VAT stated only beside the prices is enough to import",
+      _rep["matched"] == 2, str(_rep.get("warnings")))
+_plain = [o for o in _rep["observations"]
+          if o.tier == prices.STANDARD][0]
+check("13j and the inc-VAT line is stripped to ex: 0.66 / 1.2 = 0.55",
+      abs(_plain.price - 0.55) < 1e-6, str(_plain.price))
 
 
 # ==========================================================================

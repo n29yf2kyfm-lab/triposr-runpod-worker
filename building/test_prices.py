@@ -115,6 +115,14 @@ check("6b an old published price rates low",
 
 
 # ---- 7. three tiers, side by side -----------------------------------------
+# The roof tiers are DIFFERENT TILE TYPES laying 10.5, 60 and 20 to the
+# square metre, so the comparison must be per installed m2 — comparing the
+# per-tile prices showed plain tile as "cheapest" and interlocking at +118%
+# when a m2 of plain tile costs nearly three times a m2 of interlocking.
+# Hand-worked, at £1.20 / £0.55 / £2.40 a tile:
+#   economy   1.20 x 10.5 = £12.60/m2   <- the true cheapest
+#   standard  0.55 x 60   = £33.00/m2   (+161.9% vs cheapest)
+#   premium   2.40 x 20   = £48.00/m2   (+281.0% vs cheapest)
 roof = [obs("roof_covering", P.ECONOMY, 1.20),
         obs("roof_covering", P.STANDARD, 0.55),
         obs("roof_covering", P.PREMIUM, 2.40)]
@@ -124,15 +132,34 @@ check("7b each tier carries its spec",
       all(c["tiers"][t].get("spec") for t in P.TIERS))
 check("7c each tier is labelled for what it means",
       "shortest life" in c["tiers"][P.ECONOMY]["label"])
-check("7d compared against the cheapest",
-      c["tiers"][P.PREMIUM]["vs_cheapest_pct"] > 0)
+check("7d the comparison is per installed m2, not per tile",
+      abs(c["tiers"][P.ECONOMY]["price_per_m2"] - 12.60) < 1e-9
+      and abs(c["tiers"][P.STANDARD]["price_per_m2"] - 33.00) < 1e-9
+      and abs(c["tiers"][P.PREMIUM]["price_per_m2"] - 48.00) < 1e-9,
+      str({t: c["tiers"][t].get("price_per_m2") for t in P.TIERS}))
+check("7d2 the cheapest per m2 is the cheap-per-tile-LOOKING loser",
+      c["tiers"][P.ECONOMY]["vs_cheapest_pct"] == 0.0
+      and abs(c["tiers"][P.STANDARD]["vs_cheapest_pct"] - 161.9) < 0.05
+      and abs(c["tiers"][P.PREMIUM]["vs_cheapest_pct"] - 281.0) < 0.05,
+      str({t: c["tiers"][t].get("vs_cheapest_pct") for t in P.TIERS}))
+check("7d3 the basis states the coverage conversion",
+      "per m2" in c.get("comparison_basis", ""),
+      str(c.get("comparison_basis")))
 
-# The argument a customer actually responds to: premium slate at twice the
-# price and three times the life is CHEAPER per year than concrete.
+# Whole-life cost, on the same per-m2 basis. Hand-worked:
+#   economy   12.60 / 40  = 0.315 £/m2/yr
+#   standard  33.00 / 60  = 0.550 £/m2/yr
+#   premium   48.00 / 100 = 0.480 £/m2/yr
+# Premium slate beats plain tile on cost per year; at these per-tile
+# prices nothing beats interlocking.
 cpy = {t: c["tiers"][t].get("cost_per_year") for t in P.TIERS}
 check("7e whole-life cost computed", all(v for v in cpy.values()), str(cpy))
-check("7f premium can win on cost per year",
-      cpy[P.PREMIUM] < cpy[P.ECONOMY], str(cpy))
+check("7f whole-life cost is per m2 per year",
+      abs(cpy[P.ECONOMY] - 0.315) < 1e-9
+      and abs(cpy[P.STANDARD] - 0.550) < 1e-9
+      and abs(cpy[P.PREMIUM] - 0.480) < 1e-9, str(cpy))
+check("7f2 premium can still win a whole-life argument",
+      cpy[P.PREMIUM] < cpy[P.STANDARD], str(cpy))
 
 # Tier is about specification, not just price. Some economy choices are a
 # false economy and must say so.
@@ -150,6 +177,16 @@ try:
     check("7k unknown product refused", False)
 except P.PriceError:
     check("7k unknown product refused", True)
+
+# A product whose tiers ARE the same unit keeps the plain per-unit
+# comparison. Hand-worked: 0.60 / 0.45 - 1 = +33.3% vs cheapest.
+bricks = [obs("bricks", P.ECONOMY, 0.45),
+          obs("bricks", P.STANDARD, 0.60)]
+cb = P.compare_tiers(bricks, "bricks", TODAY)
+check("7m same-unit tiers still compare per unit",
+      abs(cb["tiers"][P.STANDARD]["vs_cheapest_pct"] - 33.3) < 0.05
+      and "comparison_basis" not in cb,
+      str(cb["tiers"][P.STANDARD].get("vs_cheapest_pct")))
 
 
 # ---- 8. index trend -------------------------------------------------------
@@ -251,6 +288,37 @@ check("skew-6 a stale discard explains itself differently",
 _r = P.estimate([], "battens", P.STANDARD, today=_today)
 check("skew-7 nothing supplied still reads as nothing supplied",
       "rate card" in _r["message"], _r["message"])
+
+# ---- confidence must test the SPREAD at every tier -----------------------
+# The "good" tier tested source and freshness only, so three observations of
+# the same product at £1, £5 and £1,000 — disagreeing by 20,000% — came back
+# labelled "good" because one of them was a recent invoice. Freshness says
+# nothing about whether the observations describe the same thing.
+_today = date(2026, 8, 1)
+_wild = [P.Observation("plasterboard", "standard", 1.0, P.INVOICE,
+                       date(2026, 7, 1)),
+         P.Observation("plasterboard", "standard", 1000.0, P.PUBLISHED,
+                       date(2026, 7, 1)),
+         P.Observation("plasterboard", "standard", 5.0, P.PUBLISHED,
+                       date(2026, 7, 1))]
+_e = P.estimate(_wild, "plasterboard", "standard", _today)
+check("C1 a wildly split price set is not called confident",
+      _e["confidence"] not in ("high", "good"),
+      f"{_e['confidence']} on spread {_e['spread_pct']}%")
+
+# A tight, fresh, invoice-backed set must still read high — the guard must
+# not have made the whole scale useless.
+_tight = [P.Observation("plasterboard", "standard", 3.40, P.INVOICE,
+                        date(2026, 7, 20)),
+          P.Observation("plasterboard", "standard", 3.50, P.INVOICE,
+                        date(2026, 7, 20)),
+          P.Observation("plasterboard", "standard", 3.45, P.QUOTE,
+                        date(2026, 7, 20))]
+check("C2 a tight fresh invoice-backed set is still high",
+      P.estimate(_tight, "plasterboard", "standard", _today)["confidence"]
+      == "high",
+      str(P.estimate(_tight, "plasterboard", "standard", _today)))
+
 
 # ==========================================================================
 print()

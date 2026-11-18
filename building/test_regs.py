@@ -54,12 +54,12 @@ check("2d the same value measured precisely fails",
       f.verdict == G.FAIL, f.message)
 
 # Minimums straddle the same way.
-f = G.check("guarding_floor", 1.095, 0.010)
+f = G.check("guarding_balcony", 1.095, 0.010)
 check("2e guarding just under the minimum is borderline",
       f.verdict == G.BORDERLINE, f.message)
-f = G.check("guarding_floor", 1.095, 0.001)
+f = G.check("guarding_balcony", 1.095, 0.001)
 check("2f measured precisely it fails", f.verdict == G.FAIL)
-f = G.check("guarding_floor", 1.150, 0.010)
+f = G.check("guarding_balcony", 1.150, 0.010)
 check("2g comfortably over passes", f.verdict == G.PASS)
 
 # Zero uncertainty must behave exactly like the classical check.
@@ -196,6 +196,49 @@ check("9a states it is guidance", "guidance, not the regulation" in d)
 check("9b covers existing work", "when it was built" in d)
 check("9c covers listed buildings", "historic or listed" in d)
 check("9d defers to building control", "Building control decides" in d)
+
+
+# ---- 10. limits that come from the document, not from habit ----------------
+# Each of these was once a stricter figure than the Approved Document asks
+# for, and a limit the document does not contain fails compliant work as a
+# definite breach — the ripping-out-a-compliant-staircase outcome, only
+# self-inflicted.
+
+# AD K Diagram 3.1: 900mm inside a single dwelling, 1100mm only once you
+# step outside onto a balcony. A 950mm internal landing guarding complies.
+f = G.check("guarding_floor", 0.950, 0.010)
+check("10a a 950mm internal landing guarding passes", f.verdict == G.PASS,
+      f.message)
+f = G.check("guarding_floor", 0.850, 0.010)
+check("10b but 850mm is below even the internal minimum",
+      f.verdict == G.FAIL)
+check("10c and it is life safety", f.severity == G.CRITICAL)
+f = G.check("guarding_balcony", 0.950, 0.010)
+check("10d the same 950mm on an external balcony fails",
+      f.verdict == G.FAIL, f.message)
+check("10e both guarding rules cite Diagram 3.1",
+      G.RULES["guarding_floor"].clause == "Diagram 3.1"
+      and G.RULES["guarding_balcony"].clause == "Diagram 3.1")
+
+# AD B puts NO minimum on an escape cill — only the 1100mm maximum above
+# which the window cannot be climbed out of. A 600mm cill complies.
+check("10f the cill rule carries no invented minimum",
+      G.RULES["escape_window_cill"].minimum is None,
+      str(G.RULES["escape_window_cill"].minimum))
+low = G.check_escape_window(0.900, 0.900, 0.600, 0.02)
+check("10g a compliant window with a 600mm cill passes throughout",
+      all(f.verdict == G.PASS for f in low),
+      str([(f.rule.code, f.verdict) for f in low]))
+check("10h escape windows cite para 2.10, where the doc puts them",
+      G.RULES["escape_window_cill"].cite() == "Approved Document B1, 2.10",
+      G.RULES["escape_window_cill"].cite())
+
+# AD M: switches, sockets and controls share ONE 450-1200mm band.
+f = G.check("switch_height", 0.600, 0.010)
+check("10i a switch at 600mm is inside the Part M band",
+      f.verdict == G.PASS, f.message)
+f = G.check("switch_height", 0.400, 0.005)
+check("10j and 400mm is below it", f.verdict == G.FAIL, f.message)
 
 
 # ==========================================================================

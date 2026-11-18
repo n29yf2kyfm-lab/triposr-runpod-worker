@@ -152,8 +152,40 @@ check("4f and confident", verdict["confidence"] == "good", str(verdict))
 check("4g the error is stated in millimetres", "mm" in verdict["note"])
 
 # Identical clouds are the easy case and must not somehow fail.
+#
+# This test used to check rmse_m ALONE, which is why it stayed green through
+# the whole period the module did not work. RMSE is measured over the points
+# that FOUND a match, so a source thinned down to two walls of four scored a
+# tidy RMSE on those two walls and said nothing about the two that were
+# missing. The ratio is what catches that, and it is the cheaper check.
 _t, same = G.align(ROOM, ROOM)
 check("4h a cloud aligns to itself", same["rmse_m"] < 1e-6, str(same["rmse_m"]))
+check("4h2 with EVERY point matched, not just a tidy RMSE on some of them",
+      same["inlier_ratio"] > 0.999, str(same["inlier_ratio"]))
+check("4h3 and to an identity transform",
+      abs(_t.as_dict()["yaw_deg"]) < 1e-6
+      and all(abs(v) < 1e-6 for v in _t.as_dict()["translation_m"]),
+      str(_t.as_dict()))
+
+# The sampler is the bug that parked this module. A cloud whose walls are
+# written in interleaved pairs — which is how a scanner sweeping a room
+# writes one — must survive thinning with all four walls intact. An even
+# stride keeps one member of every pair forever and deletes half the room.
+_interleaved = []
+for i in range(4000):
+    _interleaved.append((i * 0.001, 0.0, 1.0))       # wall A
+    _interleaved.append((i * 0.001, 4.0, 1.0))       # wall B, opposite
+_thinned = G._thin(_interleaved, 1000)
+_a = sum(1 for p in _thinned if p[1] == 0.0)
+_b = sum(1 for p in _thinned if p[1] == 4.0)
+check("4h4 thinning an interleaved cloud keeps BOTH walls",
+      _a > 300 and _b > 300, f"wall A {_a}, wall B {_b}")
+_strided = _interleaved[::len(_interleaved) // 1000]
+check("4h5 and a stride — the original bug — provably does not",
+      sum(1 for p in _strided if p[1] == 4.0) == 0,
+      "if this fails the fixture no longer reproduces the bug")
+check("4h6 thinning is reproducible, so a re-run gives the same answer",
+      G._thin(_interleaved, 1000) == _thinned)
 
 try:
     G.align([], ROOM)

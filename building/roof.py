@@ -20,13 +20,41 @@ number has to be exact, verify on site.
 """
 import os
 import sys
+import time
 import json
 import math
 
 import osgb
 import paths
+from validation import NoDataError
 import roof_geometry as rg
 import solar
+
+
+class NoCoverageError(RuntimeError, NoDataError):
+    """The open LIDAR programme does not reach this location.
+
+    England is covered at ~99%, so the 1% is real: Wales, Scotland, Northern
+    Ireland, and the odd English gap. That is a fact about the data, not a
+    fault in the worker, and the caller's next move is a drone flight or an
+    exported grid rather than a retry.
+    """
+
+
+class NoFootprintError(RuntimeError, NoDataError):
+    """OpenStreetMap has no building mapped here.
+
+    Refusing is still right — without a footprint the samples cover the whole
+    street, live-confirmed at 2,696 m2 for one house — but it is an absence in
+    somebody else's dataset, so the job completes and says which one.
+
+    NOTE the ambiguity this does NOT resolve: Overpass rate-limiting produces
+    the same empty result as a genuinely unmapped building, and the two want
+    opposite responses (retry vs. supply a footprint). The message says both.
+    Distinguishing them needs the fetch layer to report WHY it came back
+    empty, which it currently does not.
+    """
+
 
 # --- data sources ----------------------------------------------------------
 # There is no formal REST API for EA LIDAR tiles: the portal is manual and
@@ -106,6 +134,20 @@ def resolve_location(spec):
 
 def _geocode_uk(address):
     """Resolve a UK postcode (or the postcode inside an address) to lat/lon."""
+    res = _geocode_uk_full(address)
+    return float(res["latitude"]), float(res["longitude"])
+
+
+def _geocode_uk_full(address):
+    """As _geocode_uk, but hands back the whole postcodes.io record.
+
+    The record carries `country` — "England", "Wales", "Scotland", "Northern
+    Ireland" — which several modules need and which this function used to
+    throw away. Planning Mode reads an England-only register, and screening a
+    Cardiff postcode against it returned a confident "no constraints found"
+    for a site in a different planning jurisdiction. Guessing the nation from
+    the postcode area is a prefix heuristic; this is the answer.
+    """
     token = address.replace(",", " ").split()[-2:]
     candidates = [" ".join(token), address.split(",")[-1].strip(), address]
     for candidate in candidates:
@@ -124,7 +166,7 @@ def _geocode_uk(address):
             if r.status_code == 200:
                 res = r.json().get("result") or {}
                 if res.get("latitude") is not None:
-                    return float(res["latitude"]), float(res["longitude"])
+                    return res
         except Exception as e:
             print(f"geocode attempt failed: {e}", file=sys.stderr)
     raise ValueError(
@@ -216,6 +258,80 @@ FOOTPRINT_SOURCES = (
 )
 
 
+# Two candidate buildings whose centroids are within this of each other, as
+# measured from the query point, are not distinguishable by a postcode. A
+# semi-detached pair sits about 8m centre to centre.
+AMBIGUOUS_MARGIN_M = 6.0
+
+# Diagnostics from the most recent footprint choice, so run() can warn about
+# it. A return value would be cleaner, but fetch_footprint's list return is
+# used by callers and tests, and widening it to a tuple is a change with no
+# upside over this.
+_LAST_CHOICE = {}
+
+
+def _choose_building(geometries, lat, lon):
+    """Pick the building nearest the query point, and describe the choice.
+
+    A POSTCODE IS NOT A BUILDING, and this is where that bites. Geocoding
+    "B36 8AR" returns the postcode CENTROID; the real postcode holds five
+    mapped residential buildings of 102-122 m2 plus three garage blocks, and
+    this function silently returned whichever happened to sit nearest that
+    centroid. A builder typing their client's postcode could be handed the
+    neighbour's roof with nothing in the output to say so. UK postcodes
+    average about fifteen addresses.
+
+    That cannot be fixed here — the caller has to say which building — but it
+    can stop being invisible, so the alternatives are reported and an
+    ambiguous choice is flagged.
+
+    DISTANCE IS IN METRES, NOT DEGREES. The previous metric was
+    (dlat**2 + dlon**2) on raw degrees, and a degree of longitude at 52.5N is
+    only 61% of a degree of latitude — so east-west separation was
+    over-penalised about 2.7x and the choice was biased toward buildings
+    offset north-south. bbox_around twelve lines up already scales longitude
+    by cos(latitude); the selection never did.
+    """
+    scale = max(math.cos(math.radians(lat)), 1e-6)
+    scored = []
+    for geom in geometries:
+        if not geom:
+            continue
+        cy = sum(g["lat"] for g in geom) / len(geom)
+        cx = sum(g["lon"] for g in geom) / len(geom)
+        dy = (cy - lat) * 111_320.0
+        dx = (cx - lon) * 111_320.0 * scale
+        scored.append((math.hypot(dx, dy), geom))
+
+    if not scored:
+        return None, {"candidates": 0}
+
+    scored.sort(key=lambda s: s[0])
+    best_d, best = scored[0]
+
+    def _area(geom):
+        pts = [osgb.latlon_to_easting_northing(g["lat"], g["lon"])
+               for g in geom]
+        if len(pts) < 3:
+            return 0.0
+        if pts[0] != pts[-1]:
+            pts = pts + [pts[0]]
+        return round(abs(sum(a[0] * b[1] - b[0] * a[1]
+                             for a, b in zip(pts, pts[1:]))) / 2.0, 1)
+
+    choice = {
+        "candidates": len(scored),
+        "chosen_area_m2": _area(best),
+        "chosen_offset_m": round(best_d, 1),
+        "other_areas_m2": [_area(g) for _, g in scored[1:6]],
+        "ambiguous": False,
+    }
+    if len(scored) > 1:
+        choice["runner_up_offset_m"] = round(scored[1][0], 1)
+        choice["ambiguous"] = (scored[1][0] - best_d) < AMBIGUOUS_MARGIN_M
+    return best, choice
+
+
 def fetch_footprint(lat, lon, radius_m=30):
     """Building footprint polygon around a point, from OpenStreetMap.
 
@@ -237,7 +353,22 @@ def fetch_footprint(lat, lon, radius_m=30):
     if os.path.exists(cached):
         try:
             with open(cached) as f:
-                return [tuple(p) for p in json.load(f)]
+                data = json.load(f)
+            # THE CACHE HIT USED TO SKIP THE DIAGNOSTICS. Returning here
+            # without touching _LAST_CHOICE meant a warm worker attached the
+            # PREVIOUS property's building-choice record to this job — its
+            # candidate count, areas and ambiguity flag reported as if
+            # measured for this house — and a cold-start hit reported none,
+            # silencing the "a postcode is not a building" warning while the
+            # ambiguity it warns about was unchanged. The choice is now
+            # cached alongside the polygon and restored on every hit. An
+            # old-format cache (a bare point list) carries no diagnostics:
+            # report none rather than whatever the last job left behind.
+            _LAST_CHOICE.clear()
+            if isinstance(data, dict):
+                _LAST_CHOICE.update(data.get("choice") or {})
+                return [tuple(p) for p in data["polygon"]]
+            return [tuple(p) for p in data]
         except Exception:
             pass
 
@@ -260,13 +391,9 @@ def fetch_footprint(lat, lon, radius_m=30):
     if not geometries:
         return None
 
-    best, best_d = None, float("inf")
-    for geom in geometries:
-        cy = sum(g["lat"] for g in geom) / len(geom)
-        cx = sum(g["lon"] for g in geom) / len(geom)
-        d = (cy - lat) ** 2 + (cx - lon) ** 2
-        if d < best_d:
-            best, best_d = geom, d
+    best, choice = _choose_building(geometries, lat, lon)
+    _LAST_CHOICE.clear()
+    _LAST_CHOICE.update(choice)
 
     if not best:
         return None
@@ -276,7 +403,9 @@ def fetch_footprint(lat, lon, radius_m=30):
     try:
         paths.ensure(FOOTPRINT_CACHE_DIR)
         with open(cached, "w") as f:
-            json.dump(polygon, f)
+            # Polygon AND choice, so a cache hit can report which building
+            # was measured — see the hit path above for why.
+            json.dump({"polygon": polygon, "choice": choice}, f)
     except Exception as e:
         print(f"footprint cache write skipped: {e}", file=sys.stderr)
     return polygon
@@ -352,6 +481,26 @@ def distance_to_boundary(x, y, polygon):
 # only fewer samples, so this is the conservative end of a flat optimum.
 BOUNDARY_INSET_M = 1.0
 
+# THE FOOTPRINT AND THE RASTER ARE NOT ON THE SAME DATUM, AND THAT MUST BE
+# SAID. The OSM footprint arrives in WGS84 and is positioned on the National
+# Grid through osgb.py's single-Helmert shift — the transform whose own
+# header says ~5m accuracy and "NOT good enough to position a building
+# footprint". The EA raster it clips carries true (OSTN15-grade) OSGB
+# coordinates, so the polygon sits with a systematic offset against the 1m
+# cells: 3.6m measured at the OS control point in test_roof.py, worst in
+# western GB. The 1m boundary inset above budgets only for OSM digitisation
+# error, so on one side it can lose genuine eaves-row samples and on the
+# other admit wall-straddling cells the inset was measured to remove,
+# nudging the fitted pitch and eaves height. Fixing it needs an OSTN15 grid
+# this stdlib-only module deliberately does not carry; until then the
+# residual is stated on every clipped result rather than left silent.
+FOOTPRINT_DATUM_NOTE = (
+    "The building outline was positioned with a single-Helmert WGS84->OSGB "
+    "datum shift, which carries a systematic offset of typically 1-3.5m "
+    "(up to ~5m) against the LIDAR grid. Edge samples may be gained or lost "
+    "by that shift, so pitch and eaves height near the wall line carry a "
+    "small extra uncertainty beyond the stated vertical RMSE.")
+
 # Below this sampling density the roof is described by too few points for
 # edge topology to be trustworthy, even though pitch and area still are.
 MIN_SAMPLES_PER_M2 = 0.45
@@ -360,6 +509,20 @@ MIN_SAMPLES_PER_M2 = 0.45
 # --- elevation -------------------------------------------------------------
 
 _COVERAGE_CACHE = {}
+
+# The EA capabilities endpoint flaps. Measured live: 1 success in 10 calls
+# over 30 seconds, the rest connection resets, while the coverage data
+# itself served fine throughout.
+COVERAGE_RETRIES = 4
+COVERAGE_BACKOFF_S = 1.5
+
+# Coverage ids embed a dataset UUID and change when the EA republishes, so
+# the cache is aged out rather than kept forever. A week is far shorter than
+# the republication cycle and far longer than an outage.
+COVERAGE_CACHE_TTL_S = 7 * 24 * 3600
+COVERAGE_CACHE_DIR = paths.resolve(
+    "COVERAGE_CACHE_DIR", "building-outputs/coverage",
+    "building-outputs/coverage")
 
 
 def coverage_id(wcs_url):
@@ -378,21 +541,83 @@ def coverage_id(wcs_url):
     if wcs_url in _COVERAGE_CACHE:
         return _COVERAGE_CACHE[wcs_url]
 
+    disk = _coverage_from_disk(wcs_url)
+    if disk:
+        _COVERAGE_CACHE[wcs_url] = disk
+        return disk
+
     requests = _requests()
+    import re
+    import time
+
+    # RETRIED AND PERSISTED, because this endpoint is genuinely unreliable
+    # and a failure here fails a job that would otherwise have worked.
+    # Measured against the live service: ten GetCapabilities calls three
+    # seconds apart returned ONE 200 and nine connection resets. The
+    # coverage data itself was fine throughout — it is only the metadata
+    # document that flaps — so a single unlucky call was losing the whole
+    # roof job with "no elevation data", which reads as "no LIDAR here"
+    # rather than "the catalogue was briefly down".
+    last = None
+    for attempt in range(COVERAGE_RETRIES):
+        try:
+            r = requests.get(wcs_url, headers=HTTP_HEADERS,
+                             timeout=HTTP_TIMEOUT,
+                             params={"service": "WCS",
+                                     "request": "GetCapabilities"})
+            r.raise_for_status()
+            ids = re.findall(r"<wcs:CoverageId>([^<]+)</wcs:CoverageId>",
+                             r.text)
+            chosen = next((i for i in ids if "Elevation" in i),
+                          ids[0] if ids else None)
+            if chosen:
+                _COVERAGE_CACHE[wcs_url] = chosen
+                _coverage_to_disk(wcs_url, chosen)
+                return chosen
+            last = "no coverage ids in the capabilities document"
+        except Exception as e:
+            last = f"{type(e).__name__}: {e}"
+        if attempt < COVERAGE_RETRIES - 1:
+            time.sleep(COVERAGE_BACKOFF_S * (2 ** attempt))
+
+    print(f"WCS GetCapabilities failed after {COVERAGE_RETRIES} attempts "
+          f"({last})", file=sys.stderr)
+    return None
+
+
+def _coverage_cache_path(wcs_url):
+    import hashlib
+    key = hashlib.sha256(wcs_url.encode()).hexdigest()[:16]
+    return os.path.join(COVERAGE_CACHE_DIR, f"coverage_{key}.txt")
+
+
+def _coverage_from_disk(wcs_url):
+    """A previously discovered coverage id, if it is still fresh.
+
+    Persisted rather than held per-process: a serverless worker is a new
+    process on every cold start, so an in-memory cache never survives to be
+    used. Aged out because the ids embed a dataset UUID and do change when
+    the EA republishes — a stale one would fetch nothing and look like no
+    coverage.
+    """
+    path = _coverage_cache_path(wcs_url)
     try:
-        r = requests.get(wcs_url, headers=HTTP_HEADERS, timeout=HTTP_TIMEOUT,
-                         params={"service": "WCS",
-                                 "request": "GetCapabilities"})
-        r.raise_for_status()
-        import re
-        ids = re.findall(r"<wcs:CoverageId>([^<]+)</wcs:CoverageId>", r.text)
-    except Exception as e:
-        print(f"WCS GetCapabilities failed: {e}", file=sys.stderr)
+        age = time.time() - os.path.getmtime(path)
+        if age > COVERAGE_CACHE_TTL_S:
+            return None
+        with open(path) as f:
+            return f.read().strip() or None
+    except OSError:
         return None
 
-    chosen = next((i for i in ids if "Elevation" in i), ids[0] if ids else None)
-    _COVERAGE_CACHE[wcs_url] = chosen
-    return chosen
+
+def _coverage_to_disk(wcs_url, coverage):
+    try:
+        paths.ensure(COVERAGE_CACHE_DIR)
+        with open(_coverage_cache_path(wcs_url), "w") as f:
+            f.write(coverage)
+    except OSError as e:
+        print(f"coverage cache not written: {e}", file=sys.stderr)
 
 
 def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
@@ -404,6 +629,12 @@ def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
 
     The service publishes on EPSG:27700 with axis labels E and N, so the
     subset is given in National Grid metres directly — no reprojection.
+
+    RETRIED, for the same measured reason as coverage_id: the EA endpoint
+    resets connections under load. A single-shot fetch turned a transient
+    reset into "No elevation data… Coverage is England only", which tells a
+    builder their house is not covered when in fact the service blinked. A
+    wrong answer about coverage is worse than a slow one.
     """
     requests = _requests()
     cid = coverage_id(wcs_url)
@@ -418,17 +649,28 @@ def fetch_surface(bbox, wcs_url, cell_m=EA_CELL_M):
         ("coverageId", cid), ("format", "image/tiff"),
         ("subset", f"E({minx},{maxx})"), ("subset", f"N({miny},{maxy})"),
     ]
-    try:
-        r = requests.get(wcs_url, params=params, headers=HTTP_HEADERS,
-                         timeout=HTTP_TIMEOUT)
-        if r.status_code != 200 or not r.content:
-            print(f"WCS {wcs_url} returned {r.status_code}: "
-                  f"{r.text[:200]}", file=sys.stderr)
-            return None
-        return _decode_geotiff(r.content, bbox, cell_m)
-    except Exception as e:
-        print(f"WCS fetch failed: {e}", file=sys.stderr)
-        return None
+    last = None
+    for attempt in range(COVERAGE_RETRIES):
+        try:
+            r = requests.get(wcs_url, params=params, headers=HTTP_HEADERS,
+                             timeout=HTTP_TIMEOUT)
+            if r.status_code == 200 and r.content:
+                return _decode_geotiff(r.content, bbox, cell_m)
+            # 4xx is a real answer about this request — a bad bbox or an
+            # expired coverage id — and repeating it will not change it.
+            if 400 <= r.status_code < 500:
+                print(f"WCS {wcs_url} returned {r.status_code}: "
+                      f"{r.text[:200]}", file=sys.stderr)
+                return None
+            last = f"HTTP {r.status_code}"
+        except Exception as e:
+            last = f"{type(e).__name__}: {e}"
+        if attempt < COVERAGE_RETRIES - 1:
+            time.sleep(COVERAGE_BACKOFF_S * (2 ** attempt))
+
+    print(f"WCS fetch failed after {COVERAGE_RETRIES} attempts ({last})",
+          file=sys.stderr)
+    return None
 
 
 def _decode_geotiff(data, bbox, cell_m):
@@ -537,7 +779,7 @@ def run(spec, prog, output_dir):
         dtm = fetch_surface(bbox, EA_DTM_WCS) if points else None
 
     if not points:
-        raise RuntimeError(
+        raise NoCoverageError(
             "No elevation data. The Environment Agency LIDAR service could "
             "not be reached or returned nothing for this location. Coverage "
             "is England only (~99% at 1m). Supply point_cloud_url with an "
@@ -547,7 +789,33 @@ def run(spec, prog, output_dir):
 
     # --- footprint -----------------------------------------------------
     footprint = fetch_footprint(location["lat"], location["lon"])
+    choice = dict(_LAST_CHOICE)
     eaves_m = footprint_area = None
+
+    # WHICH BUILDING DID WE MEASURE? A postcode geocodes to a centroid, and
+    # a UK postcode averages about fifteen addresses — so on a street of
+    # semis this picked one of several mapped buildings and said nothing.
+    # The quantities were correct for A roof; nobody could tell whether it
+    # was THE roof.
+    if choice.get("candidates", 0) > 1 and not spec.get("gps"):
+        others = choice.get("other_areas_m2") or []
+        notes.append(
+            f"{choice['candidates']} mapped buildings sit within 30m of this "
+            f"postcode. Measured the one {choice['chosen_offset_m']}m from "
+            f"the postcode centre, at {choice['chosen_area_m2']} m2 on plan; "
+            f"the others are {', '.join(str(a) for a in others)} m2. "
+            f"A postcode is not a building — CONFIRM this is the right one, "
+            f"or pass gps: {{\"lat\": ..., \"lon\": ...}} for the actual "
+            f"property.")
+        if choice.get("ambiguous"):
+            notes.append(
+                f"The choice is genuinely ambiguous: the next building is "
+                f"only {choice['runner_up_offset_m']}m from the postcode "
+                f"centre against {choice['chosen_offset_m']}m for the one "
+                f"measured. On a semi-detached pair or a terrace the "
+                f"postcode cannot tell them apart. Do not order off this "
+                f"without confirming the building.")
+
     if footprint:
         before = len(points)
         inside = [p for p in points
@@ -567,6 +835,9 @@ def run(spec, prog, output_dir):
                 f"understated where 1m cells straddle the wall line.")
         eaves_m = polygon_perimeter(footprint)
         footprint_area = polygon_area(footprint)
+        # The polygon just used to clip the raster is Helmert-positioned;
+        # the raster is not. Say so — see FOOTPRINT_DATUM_NOTE.
+        notes.append(FOOTPRINT_DATUM_NOTE)
         prog.note(f"{before} -> {len(inside)} in footprint -> {len(points)} "
                   f"clear of the {BOUNDARY_INSET_M}m edge")
     elif not spec.get("allow_unclipped"):
@@ -575,7 +846,7 @@ def run(spec, prog, output_dir):
         # the same house returned 2,696 m2 and 29,669 tiles — the entire
         # street. A warning is not enough for a number that wrong, because a
         # quote carrying it is worse than no quote at all.
-        raise RuntimeError(
+        raise NoFootprintError(
             "No building footprint could be found for this location, so the "
             "roof cannot be separated from its neighbours. Refusing to "
             "produce quantities that would cover the whole street. "
@@ -638,9 +909,22 @@ def run(spec, prog, output_dir):
     # and its coverage is not universal.
     solar_result = cross_check = None
     if solar.available():
-        solar_result = solar.parse_segments(
-            solar.fetch_building_insights(location["lat"], location["lon"]))
-        cross_check = solar.compare(q, solar_result)
+        # The whole block degrades to a note on ANY failure. fetch is
+        # already None-on-failure, but the parse was unguarded, and a
+        # malformed response (a partial imageryDate did exactly this) took
+        # down a roof job the free path had already completed — the one
+        # thing the enhancement must never do. propose.py wraps its solar
+        # calls the same way.
+        try:
+            solar_result = solar.parse_segments(
+                solar.fetch_building_insights(location["lat"],
+                                              location["lon"]))
+            cross_check = solar.compare(q, solar_result)
+        except Exception as e:
+            solar_result = cross_check = None
+            notes.append(
+                f"Google Solar cross-check failed ({type(e).__name__}), so "
+                f"the LIDAR figures stand alone, not cross-checked.")
         if cross_check:
             notes.extend(cross_check.get("notes", []))
             prog.note("cross-checked against Google Solar",
@@ -662,6 +946,10 @@ def run(spec, prog, output_dir):
         "quantities": q,
         "solar": solar_result,
         "cross_check": cross_check,
+        # WHICH of the buildings at this postcode was measured. Machine
+        # readable so the app can put the alternatives in front of a builder
+        # and let them pick, rather than making them read a warning string.
+        "building_choice": choice or None,
         "notes": notes,
         "limits": [
             "1m sampling cannot resolve small dormers, porches or narrow "

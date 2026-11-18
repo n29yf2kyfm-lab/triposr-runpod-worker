@@ -69,8 +69,13 @@ RUN pip install --no-cache-dir \
 
 # BIM. ifcopenshell publishes manylinux wheels; shapely needs the geos
 # headers installed above.
+#
+# pdfplumber is Drawing Mode's PDF reader. It was in neither this file nor
+# requirements.txt, so the INSPECT half of that mode — reading a drawing,
+# which is the headline capability — raised "pdfplumber is not installed"
+# on every job while PLAN.md marked the mode done.
 RUN pip install --no-cache-dir \
-      ifcopenshell shapely ezdxf pyquaternion networkx
+      ifcopenshell shapely ezdxf pyquaternion networkx pdfplumber
 
 # Reconstruction. MapAnything is the primary engine — Apache 2.0, metric by
 # design, and a modular interface that runs VGGT/DUSt3R/MASt3R/Pi3-X as
